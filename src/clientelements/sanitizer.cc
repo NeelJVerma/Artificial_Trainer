@@ -5,7 +5,8 @@
 #include "sanitizer.h"
 
 namespace artificialtrainer {
-bool Sanitizer::CheckIntegerInput(const unsigned &lower, const unsigned &upper, const unsigned &check_var) {
+auto Sanitizer::CheckIntegerInput(const int &lower, const int
+&upper, const int &check_var) -> bool {
   return (check_var <= upper && check_var >= lower);
 }
 

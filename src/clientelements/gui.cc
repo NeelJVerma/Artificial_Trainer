@@ -6,18 +6,20 @@
 #include "../pokemon/species.h"
 
 namespace artificialtrainer {
-void Gui::DisplayWelcomeMessage() {
-  std::cout << "Welcome to Artificial Trainer, a Gen 1 battle simulator/AI!" << std::endl;
+auto Gui::DisplayWelcomeMessage() -> void {
+  std::cout << "Welcome to Artificial Trainer, a Gen 1 battle simulator/AI!"
+  << std::endl;
 }
 
-void Gui::DisplayPickTeamMessage(const bool &player_one) {
-  std::cout << "Player " << (player_one ? "one" : "two") << ", select your team" << std::endl;
+auto Gui::DisplayPickTeamMessage(const bool &player_one) -> void {
+  std::cout << "Player " << (player_one ? "one" : "two") << ", select your "
+                                                            "team" << std::endl;
 }
 
-void Gui::DisplayPokemonChoices() {
+auto Gui::DisplayPokemonChoices() -> void {
   std::cout << "Team choices:" << std::endl;
 
-  for (unsigned i = 0; i < kNumSpecies; ++i) {
+  for (int i = 0; i < kNumSpecies; ++i) {
     switch (static_cast<Species>(i)) {
       case Species::kBulbasaur:
         std::cout << "1. Bulbasaur" << std::endl;
@@ -474,16 +476,18 @@ void Gui::DisplayPokemonChoices() {
         break;
       default:
         std::cout << "Pokemon list display error" << std::endl;
-        break;
+        exit(1);
     };
   }
 }
 
-void Gui::DisplayPickPokemonMessage(const unsigned &num) {
-  std::cout << "Pick Pokemon number " << num << ". Enter a number between 1 and " << kNumSpecies << '.' << std::endl;
+auto Gui::DisplayPickPokemonMessage(const int &num) -> void {
+  std::cout << "Pick Pokemon number " << num << ". Enter a number between 1 "
+                                                "and " << kNumSpecies << '.'
+                                                << std::endl;
 }
 
-void Gui::DisplayInvalidChoiceMessage() {
+auto Gui::DisplayInvalidChoiceMessage() -> void {
   std::cout << "Invalid choice. Select again." << std::endl;
 }
 

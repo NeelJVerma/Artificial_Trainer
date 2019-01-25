@@ -10,11 +10,11 @@
 namespace artificialtrainer {
 class Gui {
  public:
-  static void DisplayWelcomeMessage();
-  static void DisplayPickTeamMessage(const bool &player_one);
-  static void DisplayPokemonChoices();
-  static void DisplayPickPokemonMessage(const unsigned &num);
-  static void DisplayInvalidChoiceMessage();
+  static auto DisplayWelcomeMessage() -> void;
+  static auto DisplayPickTeamMessage(const bool &player_one) -> void;
+  static auto DisplayPokemonChoices() -> void;
+  static auto DisplayPickPokemonMessage(const int &num) -> void;
+  static auto DisplayInvalidChoiceMessage() -> void;
 };
 
 } // namespace artificialtrainer

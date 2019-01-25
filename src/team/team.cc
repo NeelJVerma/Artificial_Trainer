@@ -5,16 +5,16 @@
 #include "team.h"
 
 namespace artificialtrainer {
-void Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) {
+auto Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void {
   team_.push_back(pokemon);
 }
 
-void Team::RemovePokemon(const unsigned &index) {
+auto Team::RemovePokemon(const int &index) -> void {
   team_.erase(team_.begin() + index);
 }
 
-auto Team::TeamSize() const -> unsigned {
-  return static_cast<unsigned>(team_.size());
+auto Team::TeamSize() const -> int {
+  return static_cast<int>(team_.size());
 }
 
 } //namespace artificialtrainer

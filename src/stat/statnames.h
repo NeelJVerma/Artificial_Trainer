@@ -6,7 +6,7 @@
 #define ARTIFICIAL_TRAINER_STATNAMES_H
 
 namespace artificialtrainer {
-enum class StatNames : unsigned {
+enum class StatNames : int {
   kHp,
   kAttack,
   kDefense,
@@ -16,7 +16,7 @@ enum class StatNames : unsigned {
   kEvasion
 };
 
-const unsigned kNumNormalStats = static_cast<unsigned>(StatNames::kSpeed);
+const int kNumNormalStats = static_cast<int>(StatNames::kSpeed);
 
 } //namespace artificialtrainer
 

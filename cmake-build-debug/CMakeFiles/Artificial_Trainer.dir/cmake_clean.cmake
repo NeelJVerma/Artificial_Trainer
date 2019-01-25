@@ -4,6 +4,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/clientelements/sanitizer.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/stat/hp.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/stat/iv.cc.o"
   "Artificial_Trainer.pdb"
   "Artificial_Trainer"
 )

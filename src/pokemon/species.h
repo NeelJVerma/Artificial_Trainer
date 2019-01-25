@@ -6,8 +6,8 @@
 #define ARTIFICIAL_TRAINER_SPECIES_H
 
 namespace artificialtrainer {
-enum class Species : unsigned {
-  // Gen 1
+enum class Species : int {
+  //Gen 1
   kBulbasaur,
   kIvysaur,
   kVenusaur,
@@ -161,7 +161,7 @@ enum class Species : unsigned {
   kMew
 };
 
-const unsigned kNumSpecies = static_cast<unsigned>(Species::kMew) + 1;
+const int kNumSpecies = static_cast<int>(Species::kMew) + 1;
 
 } //namespace artificialtrainer
 

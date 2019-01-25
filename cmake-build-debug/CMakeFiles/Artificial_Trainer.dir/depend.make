@@ -11,10 +11,35 @@ CMakeFiles/Artificial_Trainer.dir/src/clientelements/sanitizer.cc.o: ../src/clie
 CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/clientelements/gui.h
 CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/clientelements/sanitizer.h
 CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/main.cc
+CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/pokemon/species.h
+CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/stat/ev.h
+CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/stat/hp.h
+CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/stat/iv.h
+CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/stat/statnames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/pokemon/pokemon.cc
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/pokemon/pokemon.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/pokemon/species.h
+
+CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.o: ../src/stat/ev.cc
+CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.o: ../src/stat/ev.h
+
+CMakeFiles/Artificial_Trainer.dir/src/stat/hp.cc.o: ../src/pokemon/species.h
+CMakeFiles/Artificial_Trainer.dir/src/stat/hp.cc.o: ../src/stat/ev.h
+CMakeFiles/Artificial_Trainer.dir/src/stat/hp.cc.o: ../src/stat/hp.cc
+CMakeFiles/Artificial_Trainer.dir/src/stat/hp.cc.o: ../src/stat/hp.h
+CMakeFiles/Artificial_Trainer.dir/src/stat/hp.cc.o: ../src/stat/iv.h
+CMakeFiles/Artificial_Trainer.dir/src/stat/hp.cc.o: ../src/stat/statnames.h
+
+CMakeFiles/Artificial_Trainer.dir/src/stat/iv.cc.o: ../src/stat/iv.cc
+CMakeFiles/Artificial_Trainer.dir/src/stat/iv.cc.o: ../src/stat/iv.h
+
+CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.o: ../src/pokemon/species.h
+CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.o: ../src/stat/ev.h
+CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.o: ../src/stat/iv.h
+CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.o: ../src/stat/stat.cc
+CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.o: ../src/stat/stat.h
+CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.o: ../src/stat/statnames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/pokemon/pokemon.h
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/pokemon/species.h

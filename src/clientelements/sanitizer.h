@@ -8,7 +8,8 @@
 namespace artificialtrainer {
 class Sanitizer {
  public:
-  static bool CheckIntegerInput(const unsigned &lower, const unsigned &upper, const unsigned &check_var);
+  static auto CheckIntegerInput(const int &lower, const int &upper,
+      const int &check_var) -> bool;
 };
 
 } //namespace artificialtrainer

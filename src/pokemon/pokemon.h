@@ -10,18 +10,18 @@
 namespace artificialtrainer {
 class Pokemon {
  public:
-  Pokemon(const Pokemon &pokemon) = delete;
+  Pokemon(const Pokemon &pokemon) = default;
   Pokemon& operator=(const Pokemon &pokemon) = delete;
   Pokemon() = default;
 
  private:
-  unsigned hp_;
-  unsigned attack_;
-  unsigned defense_;
-  unsigned special_;
-  unsigned speed_;
-  unsigned accuracy_;
-  unsigned evasion_;
+  int hp_;
+  int attack_;
+  int defense_;
+  int special_;
+  int speed_;
+  int accuracy_;
+  int evasion_;
   Species species_;
   // moves
   // types

@@ -12,13 +12,15 @@
 namespace artificialtrainer {
 class Team {
  public:
+  static const int kMaxTeamSize = 6;
+
   Team(const Team &team) = delete;
   Team& operator=(const Team &team) = delete;
   Team() = default;
 
-  void RemovePokemon(const unsigned &index);
-  void AddPokemon(const std::shared_ptr<Pokemon> &pokemon);
-  auto TeamSize() const -> unsigned;
+  auto RemovePokemon(const int &index) -> void;
+  auto AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void;
+  auto TeamSize() const -> int;
 
  private:
   std::vector<std::shared_ptr<Pokemon>> team_;

@@ -231,6 +231,114 @@ src/pokemon/pokemon.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.s
 .PHONY : src/pokemon/pokemon.cc.s
 
+src/stat/ev.o: src/stat/ev.cc.o
+
+.PHONY : src/stat/ev.o
+
+# target to build an object file
+src/stat/ev.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.o
+.PHONY : src/stat/ev.cc.o
+
+src/stat/ev.i: src/stat/ev.cc.i
+
+.PHONY : src/stat/ev.i
+
+# target to preprocess a source file
+src/stat/ev.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.i
+.PHONY : src/stat/ev.cc.i
+
+src/stat/ev.s: src/stat/ev.cc.s
+
+.PHONY : src/stat/ev.s
+
+# target to generate assembly for a file
+src/stat/ev.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.s
+.PHONY : src/stat/ev.cc.s
+
+src/stat/hp.o: src/stat/hp.cc.o
+
+.PHONY : src/stat/hp.o
+
+# target to build an object file
+src/stat/hp.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/hp.cc.o
+.PHONY : src/stat/hp.cc.o
+
+src/stat/hp.i: src/stat/hp.cc.i
+
+.PHONY : src/stat/hp.i
+
+# target to preprocess a source file
+src/stat/hp.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/hp.cc.i
+.PHONY : src/stat/hp.cc.i
+
+src/stat/hp.s: src/stat/hp.cc.s
+
+.PHONY : src/stat/hp.s
+
+# target to generate assembly for a file
+src/stat/hp.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/hp.cc.s
+.PHONY : src/stat/hp.cc.s
+
+src/stat/iv.o: src/stat/iv.cc.o
+
+.PHONY : src/stat/iv.o
+
+# target to build an object file
+src/stat/iv.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/iv.cc.o
+.PHONY : src/stat/iv.cc.o
+
+src/stat/iv.i: src/stat/iv.cc.i
+
+.PHONY : src/stat/iv.i
+
+# target to preprocess a source file
+src/stat/iv.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/iv.cc.i
+.PHONY : src/stat/iv.cc.i
+
+src/stat/iv.s: src/stat/iv.cc.s
+
+.PHONY : src/stat/iv.s
+
+# target to generate assembly for a file
+src/stat/iv.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/iv.cc.s
+.PHONY : src/stat/iv.cc.s
+
+src/stat/stat.o: src/stat/stat.cc.o
+
+.PHONY : src/stat/stat.o
+
+# target to build an object file
+src/stat/stat.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.o
+.PHONY : src/stat/stat.cc.o
+
+src/stat/stat.i: src/stat/stat.cc.i
+
+.PHONY : src/stat/stat.i
+
+# target to preprocess a source file
+src/stat/stat.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.i
+.PHONY : src/stat/stat.cc.i
+
+src/stat/stat.s: src/stat/stat.cc.s
+
+.PHONY : src/stat/stat.s
+
+# target to generate assembly for a file
+src/stat/stat.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.s
+.PHONY : src/stat/stat.cc.s
+
 src/team/team.o: src/team/team.cc.o
 
 .PHONY : src/team/team.o
@@ -279,6 +387,18 @@ help:
 	@echo "... src/pokemon/pokemon.o"
 	@echo "... src/pokemon/pokemon.i"
 	@echo "... src/pokemon/pokemon.s"
+	@echo "... src/stat/ev.o"
+	@echo "... src/stat/ev.i"
+	@echo "... src/stat/ev.s"
+	@echo "... src/stat/hp.o"
+	@echo "... src/stat/hp.i"
+	@echo "... src/stat/hp.s"
+	@echo "... src/stat/iv.o"
+	@echo "... src/stat/iv.i"
+	@echo "... src/stat/iv.s"
+	@echo "... src/stat/stat.o"
+	@echo "... src/stat/stat.i"
+	@echo "... src/stat/stat.s"
 	@echo "... src/team/team.o"
 	@echo "... src/team/team.i"
 	@echo "... src/team/team.s"
