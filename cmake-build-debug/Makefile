@@ -285,6 +285,60 @@ src/move/accuracy.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.s
 .PHONY : src/move/accuracy.cc.s
 
+src/move/basepower.o: src/move/basepower.cc.o
+
+.PHONY : src/move/basepower.o
+
+# target to build an object file
+src/move/basepower.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.o
+.PHONY : src/move/basepower.cc.o
+
+src/move/basepower.i: src/move/basepower.cc.i
+
+.PHONY : src/move/basepower.i
+
+# target to preprocess a source file
+src/move/basepower.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.i
+.PHONY : src/move/basepower.cc.i
+
+src/move/basepower.s: src/move/basepower.cc.s
+
+.PHONY : src/move/basepower.s
+
+# target to generate assembly for a file
+src/move/basepower.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.s
+.PHONY : src/move/basepower.cc.s
+
+src/move/pp.o: src/move/pp.cc.o
+
+.PHONY : src/move/pp.o
+
+# target to build an object file
+src/move/pp.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.o
+.PHONY : src/move/pp.cc.o
+
+src/move/pp.i: src/move/pp.cc.i
+
+.PHONY : src/move/pp.i
+
+# target to preprocess a source file
+src/move/pp.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.i
+.PHONY : src/move/pp.cc.i
+
+src/move/pp.s: src/move/pp.cc.s
+
+.PHONY : src/move/pp.s
+
+# target to generate assembly for a file
+src/move/pp.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.s
+.PHONY : src/move/pp.cc.s
+
 src/pokemon/pokemon.o: src/pokemon/pokemon.cc.o
 
 .PHONY : src/pokemon/pokemon.o
@@ -528,6 +582,12 @@ help:
 	@echo "... src/move/accuracy.o"
 	@echo "... src/move/accuracy.i"
 	@echo "... src/move/accuracy.s"
+	@echo "... src/move/basepower.o"
+	@echo "... src/move/basepower.i"
+	@echo "... src/move/basepower.s"
+	@echo "... src/move/pp.o"
+	@echo "... src/move/pp.i"
+	@echo "... src/move/pp.s"
 	@echo "... src/pokemon/pokemon.o"
 	@echo "... src/pokemon/pokemon.i"
 	@echo "... src/pokemon/pokemon.s"

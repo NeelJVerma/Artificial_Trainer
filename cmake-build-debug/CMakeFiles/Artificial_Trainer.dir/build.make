@@ -239,6 +239,32 @@ CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/accuracy.cc -o CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.s
 
+CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.o: CMakeFiles/Artificial_Trainer.dir/flags.make
+CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.o: ../src/move/basepower.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.o -c /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/basepower.cc
+
+CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/basepower.cc > CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.i
+
+CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/basepower.cc -o CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.s
+
+CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.o: CMakeFiles/Artificial_Trainer.dir/flags.make
+CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.o: ../src/move/pp.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.o -c /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/pp.cc
+
+CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/pp.cc > CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.i
+
+CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/pp.cc -o CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.s
+
 # Object files for target Artificial_Trainer
 Artificial_Trainer_OBJECTS = \
 "CMakeFiles/Artificial_Trainer.dir/src/main.cc.o" \
@@ -254,7 +280,9 @@ Artificial_Trainer_OBJECTS = \
 "CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o" \
 "CMakeFiles/Artificial_Trainer.dir/src/stringconversions/stringconverter.cc.o" \
 "CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o" \
-"CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o"
+"CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o" \
+"CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.o" \
+"CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.o"
 
 # External object files for target Artificial_Trainer
 Artificial_Trainer_EXTERNAL_OBJECTS =
@@ -273,9 +301,11 @@ Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/stringconversions/stringconverter.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o
+Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.o
+Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/build.make
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable Artificial_Trainer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable Artificial_Trainer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Artificial_Trainer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

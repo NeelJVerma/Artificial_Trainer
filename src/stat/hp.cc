@@ -168,7 +168,7 @@ auto GetBaseHp(const Species &species) -> int {
 }
 
 auto CalculateActualHpStat(const int &base_hp, const int &level,
-    const Ev &ev_stat, const Iv &iv_stat) -> int {
+                           const Ev &ev_stat, const Iv &iv_stat) -> int {
   return static_cast<int>(10 + floor(static_cast<double>(level / 100 * (
       (base_hp * 2) + 2 * iv_stat.Value() + ev_stat.Value() / 1024))) + level);
 }
@@ -177,12 +177,15 @@ auto CalculateActualHpStat(const int &base_hp, const int &level,
 
 Hp::Hp(const Species &species, const int &level, const Ev &ev, const Iv
 &iv) : ev_stat_(ev), iv_stat_(iv), current_hp_(CalculateActualHpStat
-(GetBaseHp(species), level, ev, iv)) {
+                                                   (GetBaseHp(species),
+                                                    level,
+                                                    ev,
+                                                    iv)) {
   max_hp_ = current_hp_;
 }
 
 Hp::Hp(const int &current, const Ev &ev, const Iv &iv, const int &max_hp) :
-current_hp_(current), ev_stat_(ev), iv_stat_(iv), max_hp_(max_hp) {
+    current_hp_(current), ev_stat_(ev), iv_stat_(iv), max_hp_(max_hp) {
 }
 
 auto Hp::EvStat() const -> Ev {
@@ -205,14 +208,14 @@ auto Hp::HpAsPercent() const -> double {
   return 100 * (static_cast<double>(current_hp_) / max_hp_);
 }
 
-auto operator +=(Hp &lhs, const int &rhs) -> Hp& {
+auto operator+=(Hp &lhs, const int &rhs) -> Hp & {
   return lhs = Hp(lhs.CurrentHp() + rhs, lhs.EvStat(), lhs.IvStat(), lhs
-  .MaxHp());
+      .MaxHp());
 }
 
-auto operator -=(Hp &lhs, const int &rhs) -> Hp& {
+auto operator-=(Hp &lhs, const int &rhs) -> Hp & {
   return lhs = Hp(lhs.CurrentHp() - rhs, lhs.EvStat(), lhs.IvStat(), lhs
-  .MaxHp());
+      .MaxHp());
 }
 
 } //namespace artificialtrainer
