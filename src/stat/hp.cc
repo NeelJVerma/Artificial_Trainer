@@ -205,13 +205,6 @@ auto Hp::HpAsPercent() const -> double {
   return 100 * (static_cast<double>(current_hp_) / max_hp_);
 }
 
-auto Hp::operator=(const Hp &hp) -> Hp& {
-  current_hp_ = hp.CurrentHp();
-  max_hp_ = hp.MaxHp();
-  ev_stat_ = hp.EvStat();
-  iv_stat_ = hp.IvStat();
-}
-
 auto operator +=(Hp &lhs, const int &rhs) -> Hp& {
   return lhs = Hp(lhs.CurrentHp() + rhs, lhs.EvStat(), lhs.IvStat(), lhs
   .MaxHp());

@@ -15,15 +15,17 @@ class Team {
   static const int kMaxTeamSize = 6;
 
   Team(const Team &team) = delete;
-  Team& operator=(const Team &team) = delete;
+  Team& operator=(const Team &team) = default;
   Team() = default;
 
-  auto RemovePokemon(const int &index) -> void;
-  auto AddPokemon(const Pokemon &pokemon) -> void;
+  auto FaintPokemon(const int &index) -> void;
+  auto AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void;
   auto TeamSize() const -> int;
+  auto operator[](const int &index) -> std::shared_ptr<Pokemon>;
 
  private:
-  std::vector<Pokemon> team_;
+  std::vector<std::shared_ptr<Pokemon>> team_;
+  std::vector<std::shared_ptr<Pokemon>> fainted_team_;
 };
 
 } //namespace artificialtrainer

@@ -12,15 +12,18 @@ namespace artificialtrainer {
 class Pokemon {
  public:
   static const int kMaxLevel = 100;
-  
+
   Pokemon(const Pokemon &pokemon) = default;
-  Pokemon& operator=(const Pokemon &pokemon) = delete;
+  auto operator=(const Pokemon &pokemon) -> Pokemon & = default;
   Pokemon() = default;
-  Pokemon(const Species &species, const StatsContainer &statsContainer, const
+  Pokemon(const Species &species, const StatsContainer &stats_container, const
   int &level);
+  auto GetStatsContainer() const -> StatsContainer;
+  auto GetSpecies() const -> Species;
+  auto Level() const -> int;
 
  private:
-  StatsContainer statsContainer_;
+  StatsContainer stats_container_;
   Species species_;
   int level_;
   // moves

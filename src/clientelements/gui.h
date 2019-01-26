@@ -16,9 +16,10 @@ class Gui {
   static auto DisplayPokemonChoices() -> void;
   static auto DisplayPickPokemonMessage(const int &num) -> void;
   static auto DisplayInvalidChoiceMessage() -> void;
-  static auto DisplayPickEvMessage(StatNames stat_name) -> void;
-  static auto DisplayPickIvMessage(StatNames stat_name) -> void;
+  static auto DisplayPickEvMessage(const StatNames &stat_name) -> void;
+  static auto DisplayPickIvMessage(const StatNames &stat_name) -> void;
   static auto DisplayPickLevelMessage() -> void;
+  static auto DisplayPickMoveMessage(const bool &player_one) -> void;
 };
 
 } // namespace artificialtrainer

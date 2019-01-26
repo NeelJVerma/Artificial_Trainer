@@ -13,8 +13,4 @@ auto Ev::Value() const -> int {
   return value_;
 }
 
-auto Ev::operator=(const Ev &ev) -> Ev& {
-  value_ = ev.Value();
-}
-
 } //namespace artificialtrainer

@@ -12,6 +12,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/stringconversions/stringconverter.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o"
   "Artificial_Trainer.pdb"
   "Artificial_Trainer"
 )

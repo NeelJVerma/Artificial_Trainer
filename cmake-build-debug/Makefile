@@ -258,6 +258,33 @@ src/main.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/main.cc.s
 .PHONY : src/main.cc.s
 
+src/move/accuracy.o: src/move/accuracy.cc.o
+
+.PHONY : src/move/accuracy.o
+
+# target to build an object file
+src/move/accuracy.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o
+.PHONY : src/move/accuracy.cc.o
+
+src/move/accuracy.i: src/move/accuracy.cc.i
+
+.PHONY : src/move/accuracy.i
+
+# target to preprocess a source file
+src/move/accuracy.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.i
+.PHONY : src/move/accuracy.cc.i
+
+src/move/accuracy.s: src/move/accuracy.cc.s
+
+.PHONY : src/move/accuracy.s
+
+# target to generate assembly for a file
+src/move/accuracy.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.s
+.PHONY : src/move/accuracy.cc.s
+
 src/pokemon/pokemon.o: src/pokemon/pokemon.cc.o
 
 .PHONY : src/pokemon/pokemon.o
@@ -498,6 +525,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/move/accuracy.o"
+	@echo "... src/move/accuracy.i"
+	@echo "... src/move/accuracy.s"
 	@echo "... src/pokemon/pokemon.o"
 	@echo "... src/pokemon/pokemon.i"
 	@echo "... src/pokemon/pokemon.s"

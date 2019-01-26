@@ -13,8 +13,4 @@ auto Iv::Value() const -> int {
   return value_;
 }
 
-auto Iv::operator=(const Iv &iv) -> Iv& {
-  value_ = iv.Value();
-}
-
 } //namespace artificialtrainer

@@ -11,7 +11,7 @@ class Ev {
   static const int kMaxEv = 65535;
 
   Ev(const Ev &ev) = default;
-  auto operator=(const Ev &ev) -> Ev&;
+  auto operator=(const Ev &ev) -> Ev& = default;
   Ev() = default;
   explicit Ev(const int &value);
 

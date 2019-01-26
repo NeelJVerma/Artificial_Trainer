@@ -9,7 +9,7 @@
 namespace artificialtrainer {
 auto Gui::DisplayWelcomeMessage() -> void {
   std::cout << "Welcome to Artificial Trainer, a Gen 1 battle simulator/AI!"
-  << std::endl;
+            << std::endl;
 }
 
 auto Gui::DisplayPickTeamMessage(const bool &player_one) -> void {
@@ -22,7 +22,7 @@ auto Gui::DisplayPokemonChoices() -> void {
 
   for (int i = 0; i < kNumSpecies; ++i) {
     std::cout << std::to_string(i + 1) << ". " << SpeciesToString
-    (static_cast<Species>(i)) << std::endl;
+        (static_cast<Species>(i)) << std::endl;
   }
 }
 
@@ -34,16 +34,21 @@ auto Gui::DisplayInvalidChoiceMessage() -> void {
   std::cout << "Invalid choice. Select again." << std::endl;
 }
 
-auto Gui::DisplayPickEvMessage(StatNames stat_name) -> void {
+auto Gui::DisplayPickEvMessage(const StatNames &stat_name) -> void {
   std::cout << "Pick the " << StatToString(stat_name) << " ev." << std::endl;
 }
 
-auto Gui::DisplayPickIvMessage(StatNames stat_name) -> void {
+auto Gui::DisplayPickIvMessage(const StatNames &stat_name) -> void {
   std::cout << "Pick the " << StatToString(stat_name) << " iv." << std::endl;
 }
 
 auto Gui::DisplayPickLevelMessage() -> void {
   std::cout << "Pick this Pokemon's level." << std::endl;
+}
+
+auto Gui::DisplayPickMoveMessage(const bool &player_one) -> void {
+  std::cout << "Player " << (player_one ? "one" : "two") << ", select your "
+                                                            "move" << std::endl;
 }
 
 } //namespace artificialtrainer

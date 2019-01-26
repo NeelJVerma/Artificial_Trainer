@@ -670,10 +670,4 @@ auto Stat::BaseStat() const -> int {
   return base_stat_;
 }
 
-auto Stat::operator=(const Stat &stat) -> Stat& {
-  base_stat_ = stat.BaseStat();
-  ev_stat_ = stat.ev_stat_;
-  iv_stat_ = stat.iv_stat_;
-}
-
 } //nammespace artificialtrainer
