@@ -22,6 +22,7 @@ class Hp {
   auto IvStat() const -> Iv;
   auto CurrentHp() const -> int;
   auto MaxHp() const -> int;
+  auto HpAsPercent() const -> double;
 
  private:
   int max_hp_;

@@ -5,7 +5,7 @@
 #include "team.h"
 
 namespace artificialtrainer {
-auto Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void {
+auto Team::AddPokemon(const Pokemon &pokemon) -> void {
   team_.push_back(pokemon);
 }
 

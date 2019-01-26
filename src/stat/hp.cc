@@ -163,6 +163,7 @@ auto GetBaseHp(const Species &species) -> int {
     case Species::kDragonite: return 91;
     case Species::kMewtwo: return 106;
     case Species::kMew: return 100;
+    default: break;
   };
 }
 
@@ -198,6 +199,10 @@ auto Hp::CurrentHp() const -> int {
 
 auto Hp::MaxHp() const -> int {
   return max_hp_;
+}
+
+auto Hp::HpAsPercent() const -> double {
+  return 100 * (static_cast<double>(current_hp_) / max_hp_);
 }
 
 auto Hp::operator=(const Hp &hp) -> Hp& {

@@ -6,6 +6,7 @@
 #define ARTIFICIAL_TRAINER_GUI_H
 
 #include <iostream>
+#include "../stat/statnames.h"
 
 namespace artificialtrainer {
 class Gui {
@@ -15,6 +16,9 @@ class Gui {
   static auto DisplayPokemonChoices() -> void;
   static auto DisplayPickPokemonMessage(const int &num) -> void;
   static auto DisplayInvalidChoiceMessage() -> void;
+  static auto DisplayPickEvMessage(StatNames stat_name) -> void;
+  static auto DisplayPickIvMessage(StatNames stat_name) -> void;
+  static auto DisplayPickLevelMessage() -> void;
 };
 
 } // namespace artificialtrainer

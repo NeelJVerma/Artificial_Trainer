@@ -3,7 +3,9 @@
 //
 
 #include <cstdlib>
+#include <iostream>
 #include "stat.h"
+#include "../stringconversions/stringconverter.h"
 
 namespace artificialtrainer {
 namespace {
@@ -161,6 +163,7 @@ auto GetAttackFromSpecies(const Species &species) -> int {
     case Species::kDragonite: return 134;
     case Species::kMewtwo: return 110;
     case Species::kMew: return 100;
+    default: break;
   };
 }
 
@@ -318,6 +321,7 @@ auto GetDefenseFromSpecies(const Species &species) -> int {
     case Species::kDragonite: return 95;
     case Species::kMewtwo: return 90;
     case Species::kMew: return 100;
+    default: break;
   };
 }
 
@@ -475,6 +479,7 @@ auto GetSpecialFromSpecies(const Species &species) -> int {
     case Species::kDragonite: return 100;
     case Species::kMewtwo: return 154;
     case Species::kMew: return 100;
+    default: break;
   };
 }
 
@@ -632,6 +637,7 @@ auto GetSpeedFromSpecies(const Species &species) -> int {
     case Species::kDragonite: return 80;
     case Species::kMewtwo: return 130;
     case Species::kMew: return 100;
+    default: break;
   };
 }
 
@@ -641,15 +647,15 @@ auto GetBase(const Species &species, const StatNames &stat_name) -> int {
     case StatNames::kDefense: return GetDefenseFromSpecies(species);
     case StatNames::kSpecial: return GetSpecialFromSpecies(species);
     case StatNames::kSpeed: return GetSpeedFromSpecies(species);
-    default: exit(1);
+    default: break;
   };
 }
 
 } //namespace
 
-Stat::Stat(const Species &species,
-           const StatNames &stat_name) : base_stat_(GetBase(species,
-               stat_name)) {
+Stat::Stat(const Species &species, const StatNames &stat_name, const Ev &ev,
+    const Iv &iv) : base_stat_(GetBase(species, stat_name)), ev_stat_(ev),
+    iv_stat_(iv) {
 }
 
 auto Stat::EvStat() const -> Ev {
@@ -662,6 +668,12 @@ auto Stat::IvStat() const -> Iv {
 
 auto Stat::BaseStat() const -> int {
   return base_stat_;
+}
+
+auto Stat::operator=(const Stat &stat) -> Stat& {
+  base_stat_ = stat.BaseStat();
+  ev_stat_ = stat.ev_stat_;
+  iv_stat_ = stat.iv_stat_;
 }
 
 } //nammespace artificialtrainer

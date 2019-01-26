@@ -123,6 +123,33 @@ Artificial_Trainer/fast:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/build
 .PHONY : Artificial_Trainer/fast
 
+src/battle/battle.o: src/battle/battle.cc.o
+
+.PHONY : src/battle/battle.o
+
+# target to build an object file
+src/battle/battle.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o
+.PHONY : src/battle/battle.cc.o
+
+src/battle/battle.i: src/battle/battle.cc.i
+
+.PHONY : src/battle/battle.i
+
+# target to preprocess a source file
+src/battle/battle.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.i
+.PHONY : src/battle/battle.cc.i
+
+src/battle/battle.s: src/battle/battle.cc.s
+
+.PHONY : src/battle/battle.s
+
+# target to generate assembly for a file
+src/battle/battle.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.s
+.PHONY : src/battle/battle.cc.s
+
 src/clientelements/gui.o: src/clientelements/gui.cc.o
 
 .PHONY : src/clientelements/gui.o
@@ -149,6 +176,33 @@ src/clientelements/gui.s: src/clientelements/gui.cc.s
 src/clientelements/gui.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/clientelements/gui.cc.s
 .PHONY : src/clientelements/gui.cc.s
+
+src/clientelements/inputhandler.o: src/clientelements/inputhandler.cc.o
+
+.PHONY : src/clientelements/inputhandler.o
+
+# target to build an object file
+src/clientelements/inputhandler.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o
+.PHONY : src/clientelements/inputhandler.cc.o
+
+src/clientelements/inputhandler.i: src/clientelements/inputhandler.cc.i
+
+.PHONY : src/clientelements/inputhandler.i
+
+# target to preprocess a source file
+src/clientelements/inputhandler.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.i
+.PHONY : src/clientelements/inputhandler.cc.i
+
+src/clientelements/inputhandler.s: src/clientelements/inputhandler.cc.s
+
+.PHONY : src/clientelements/inputhandler.s
+
+# target to generate assembly for a file
+src/clientelements/inputhandler.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.s
+.PHONY : src/clientelements/inputhandler.cc.s
 
 src/clientelements/sanitizer.o: src/clientelements/sanitizer.cc.o
 
@@ -339,6 +393,60 @@ src/stat/stat.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.s
 .PHONY : src/stat/stat.cc.s
 
+src/stat/statscontainer.o: src/stat/statscontainer.cc.o
+
+.PHONY : src/stat/statscontainer.o
+
+# target to build an object file
+src/stat/statscontainer.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/statscontainer.cc.o
+.PHONY : src/stat/statscontainer.cc.o
+
+src/stat/statscontainer.i: src/stat/statscontainer.cc.i
+
+.PHONY : src/stat/statscontainer.i
+
+# target to preprocess a source file
+src/stat/statscontainer.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/statscontainer.cc.i
+.PHONY : src/stat/statscontainer.cc.i
+
+src/stat/statscontainer.s: src/stat/statscontainer.cc.s
+
+.PHONY : src/stat/statscontainer.s
+
+# target to generate assembly for a file
+src/stat/statscontainer.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/statscontainer.cc.s
+.PHONY : src/stat/statscontainer.cc.s
+
+src/stringconversions/stringconverter.o: src/stringconversions/stringconverter.cc.o
+
+.PHONY : src/stringconversions/stringconverter.o
+
+# target to build an object file
+src/stringconversions/stringconverter.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stringconversions/stringconverter.cc.o
+.PHONY : src/stringconversions/stringconverter.cc.o
+
+src/stringconversions/stringconverter.i: src/stringconversions/stringconverter.cc.i
+
+.PHONY : src/stringconversions/stringconverter.i
+
+# target to preprocess a source file
+src/stringconversions/stringconverter.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stringconversions/stringconverter.cc.i
+.PHONY : src/stringconversions/stringconverter.cc.i
+
+src/stringconversions/stringconverter.s: src/stringconversions/stringconverter.cc.s
+
+.PHONY : src/stringconversions/stringconverter.s
+
+# target to generate assembly for a file
+src/stringconversions/stringconverter.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stringconversions/stringconverter.cc.s
+.PHONY : src/stringconversions/stringconverter.cc.s
+
 src/team/team.o: src/team/team.cc.o
 
 .PHONY : src/team/team.o
@@ -375,9 +483,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Artificial_Trainer"
 	@echo "... edit_cache"
+	@echo "... src/battle/battle.o"
+	@echo "... src/battle/battle.i"
+	@echo "... src/battle/battle.s"
 	@echo "... src/clientelements/gui.o"
 	@echo "... src/clientelements/gui.i"
 	@echo "... src/clientelements/gui.s"
+	@echo "... src/clientelements/inputhandler.o"
+	@echo "... src/clientelements/inputhandler.i"
+	@echo "... src/clientelements/inputhandler.s"
 	@echo "... src/clientelements/sanitizer.o"
 	@echo "... src/clientelements/sanitizer.i"
 	@echo "... src/clientelements/sanitizer.s"
@@ -399,6 +513,12 @@ help:
 	@echo "... src/stat/stat.o"
 	@echo "... src/stat/stat.i"
 	@echo "... src/stat/stat.s"
+	@echo "... src/stat/statscontainer.o"
+	@echo "... src/stat/statscontainer.i"
+	@echo "... src/stat/statscontainer.s"
+	@echo "... src/stringconversions/stringconverter.o"
+	@echo "... src/stringconversions/stringconverter.i"
+	@echo "... src/stringconversions/stringconverter.s"
 	@echo "... src/team/team.o"
 	@echo "... src/team/team.i"
 	@echo "... src/team/team.s"

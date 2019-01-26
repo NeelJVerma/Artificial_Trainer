@@ -19,11 +19,11 @@ class Team {
   Team() = default;
 
   auto RemovePokemon(const int &index) -> void;
-  auto AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void;
+  auto AddPokemon(const Pokemon &pokemon) -> void;
   auto TeamSize() const -> int;
 
  private:
-  std::vector<std::shared_ptr<Pokemon>> team_;
+  std::vector<Pokemon> team_;
 };
 
 } //namespace artificialtrainer
