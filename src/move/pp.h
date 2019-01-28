@@ -8,7 +8,8 @@
 #include "moves.h"
 
 namespace artificialtrainer {
-  auto Pp(const Moves &move_name) -> int;
+auto Pp(const Moves &move_name) -> int;
+
 } //namespace artificialtrainer
 
 #endif //ARTIFICIAL_TRAINER_PP_H

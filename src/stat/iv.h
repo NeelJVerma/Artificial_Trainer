@@ -11,7 +11,7 @@ class Iv {
   static const int kMaxIv = 15;
 
   Iv(const Iv &iv) = default;
-  auto operator=(const Iv &iv) -> Iv& = default;
+  auto operator=(const Iv &iv) -> Iv & = default;
   Iv() = default;
   explicit Iv(const int &value);
 

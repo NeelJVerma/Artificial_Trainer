@@ -17,7 +17,6 @@ class Battle {
   Team team_one_;
   Team team_two_;
   auto BattleOver() const -> bool;
-  auto SelectTeam(const bool &team_one) -> void;
 };
 
 } //namespace artificialtrainer

@@ -15,6 +15,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/type/type.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/type/effectiveness.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o"
   "Artificial_Trainer.pdb"
   "Artificial_Trainer"
 )

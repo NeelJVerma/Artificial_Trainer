@@ -20,7 +20,7 @@ auto Pp(const Moves &move_name) -> int {
     case Moves::kBide: return 10;
     case Moves::kBind: return 20;
     case Moves::kBite: return 25;
-    case Moves::kBlizard: return 5;
+    case Moves::kBlizzard: return 5;
     case Moves::kBodySlam: return 15;
     case Moves::kBoneClub: return 20;
     case Moves::kBonemerang: return 10;
@@ -45,7 +45,7 @@ auto Pp(const Moves &move_name) -> int {
     case Moves::kDoubleSlap: return 10;
     case Moves::kDragonRage: return 10;
     case Moves::kDreamEater: return 15;
-    case Moves::kDrillPick: return 20;
+    case Moves::kDrillPeck: return 20;
     case Moves::kEarthquake: return 10;
     case Moves::kEggBomb: return 10;
     case Moves::kEmber: return 25;

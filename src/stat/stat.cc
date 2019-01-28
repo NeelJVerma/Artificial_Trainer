@@ -11,7 +11,6 @@ namespace artificialtrainer {
 namespace {
 auto GetAttackFromSpecies(const Species &species) -> int {
   switch (species) {
-    //Gen 1
     case Species::kBulbasaur: return 49;
     case Species::kIvysaur: return 62;
     case Species::kVenusaur: return 82;
@@ -655,7 +654,7 @@ auto GetBase(const Species &species, const StatNames &stat_name) -> int {
 
 Stat::Stat(const Species &species, const StatNames &stat_name, const Ev &ev,
     const Iv &iv) : base_stat_(GetBase(species, stat_name)), ev_stat_(ev),
-    iv_stat_(iv) {
+                    iv_stat_(iv) {
 }
 
 auto Stat::EvStat() const -> Ev {

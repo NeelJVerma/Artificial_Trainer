@@ -7,7 +7,6 @@
 
 namespace artificialtrainer {
 enum class Moves : int {
-  //Gen 1 moves
   kAbsorb,
   kAcid,
   kAcidArmor,
@@ -19,7 +18,7 @@ enum class Moves : int {
   kBide,
   kBind,
   kBite,
-  kBlizard,
+  kBlizzard,
   kBodySlam,
   kBoneClub,
   kBonemerang,
@@ -44,7 +43,7 @@ enum class Moves : int {
   kDoubleEdge,
   kDragonRage,
   kDreamEater,
-  kDrillPick,
+  kDrillPeck,
   kEarthquake,
   kEggBomb,
   kEmber,
@@ -173,8 +172,6 @@ enum class Moves : int {
   kWingAttack,
   kWithdraw,
   kWrap,
-
-  //Other moves
   kPass,
   kSwitch1,
   kSwitch2,

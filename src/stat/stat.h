@@ -14,10 +14,10 @@ namespace artificialtrainer {
 class Stat {
  public:
   Stat(const Stat &stat) = default;
-  auto operator=(const Stat &stat) -> Stat& = default;
+  auto operator=(const Stat &stat) -> Stat & = default;
   Stat() = default;
   Stat(const Species &species, const StatNames &stat_name, const Ev &ev,
-       const Iv &iv);
+      const Iv &iv);
   auto EvStat() const -> Ev;
   auto IvStat() const -> Iv;
   auto BaseStat() const -> int;

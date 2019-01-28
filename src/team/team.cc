@@ -25,4 +25,14 @@ auto Team::operator[](const int &index) -> std::shared_ptr<Pokemon> {
   return team_[index];
 }
 
+auto Team::SeenPokemon(const Species &species) -> bool {
+  for (const auto &in_team : team_) {
+    if (species == in_team->GetSpecies()) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 } //namespace artificialtrainer

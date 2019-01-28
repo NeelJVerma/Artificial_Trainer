@@ -168,19 +168,19 @@ auto GetBaseHp(const Species &species) -> int {
 }
 
 auto CalculateActualHpStat(const int &base_hp, const int &level,
-                           const Ev &ev_stat, const Iv &iv_stat) -> int {
+    const Ev &ev_stat, const Iv &iv_stat) -> int {
   return static_cast<int>(10 + floor(static_cast<double>(level / 100 * (
       (base_hp * 2) + 2 * iv_stat.Value() + ev_stat.Value() / 1024))) + level);
 }
 
 } //namespace
 
-Hp::Hp(const Species &species, const int &level, const Ev &ev, const Iv
-&iv) : ev_stat_(ev), iv_stat_(iv), current_hp_(CalculateActualHpStat
-                                                   (GetBaseHp(species),
-                                                    level,
-                                                    ev,
-                                                    iv)) {
+Hp::Hp(const Species &species, const int &level, const Ev &ev, const Iv &iv)
+    : ev_stat_(ev), iv_stat_(iv),
+      current_hp_(CalculateActualHpStat(GetBaseHp(species),
+          level,
+          ev,
+          iv)) {
   max_hp_ = current_hp_;
 }
 

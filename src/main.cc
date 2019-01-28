@@ -6,6 +6,7 @@
 #include "stat/hp.h"
 #include "stat/statscontainer.h"
 #include "battle/battle.h"
+#include "type/effectiveness.h"
 #include <cmath>
 
 int main() {

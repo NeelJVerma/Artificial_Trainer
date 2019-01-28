@@ -14,7 +14,7 @@ namespace artificialtrainer {
 class Hp {
  public:
   Hp(const Hp &hp) = default;
-  auto operator=(const Hp &hp) -> Hp& = default;
+  auto operator=(const Hp &hp) -> Hp & = default;
   Hp() = default;
   Hp(const Species &species, const int &level, const Ev &ev, const Iv &iv);
   Hp(const int &current, const Ev &ev, const Iv &iv, const int &max_hp);
@@ -31,8 +31,8 @@ class Hp {
   Iv iv_stat_;
 };
 
-auto operator +=(Hp &lhs, const int &rhs) -> Hp&;
-auto operator -=(Hp &lhs, const int &rhs) -> Hp&;
+auto operator+=(Hp &lhs, const int &rhs) -> Hp &;
+auto operator-=(Hp &lhs, const int &rhs) -> Hp &;
 
 } //namespace artificialtrainer
 

@@ -23,7 +23,7 @@ auto BasePower(const Moves &move_name) -> int {
     case Moves::kBide: return kVariable;
     case Moves::kBind: return 15;
     case Moves::kBite: return 60;
-    case Moves::kBlizard: return 120;
+    case Moves::kBlizzard: return 120;
     case Moves::kBodySlam: return 85;
     case Moves::kBoneClub: return 65;
     case Moves::kBonemerang: return 60;
@@ -48,7 +48,7 @@ auto BasePower(const Moves &move_name) -> int {
     case Moves::kDoubleSlap: return 15;
     case Moves::kDragonRage: return kUnchanged;
     case Moves::kDreamEater: return 100;
-    case Moves::kDrillPick: return 80;
+    case Moves::kDrillPeck: return 80;
     case Moves::kEarthquake: return 100;
     case Moves::kEggBomb: return 100;
     case Moves::kEmber: return 40;

@@ -14,8 +14,8 @@ class StatsContainer {
   StatsContainer() = default;
   StatsContainer(const Species &species, const Hp &hp_stat, const Stat
   stats[kNumNormalStats]);
-  auto operator=(const StatsContainer &stats_container) -> StatsContainer& =
-      default;
+  auto operator=(const StatsContainer &stats_container) -> StatsContainer &
+    = default;
   auto HpStat() -> Hp &;
   auto EvasionStat() const -> double;
   auto AccuracyStat() const -> double;

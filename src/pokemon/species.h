@@ -7,7 +7,6 @@
 
 namespace artificialtrainer {
 enum class Species : int {
-  //Gen 1
   kBulbasaur,
   kIvysaur,
   kVenusaur,
