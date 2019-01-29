@@ -3,6 +3,7 @@
 //
 
 #include "learnset.h"
+#include <cassert>
 
 namespace artificialtrainer {
 auto Learnset(const Species &species) -> std::vector<Moves> {
@@ -446,124 +447,1668 @@ auto Learnset(const Species &species) -> std::vector<Moves> {
                                 Moves::kCounter, Moves::kSeismicToss,
                                 Moves::kEarthquake, Moves::kFissure,
                                 Moves::kFireBlast, Moves::kRockSlide};
-    case Species::kClefairy: return 48;
-    case Species::kClefable: return 73;
-    case Species::kVulpix: return 40;
-    case Species::kNinetales: return 75;
-    case Species::kJigglypuff: return 20;
-    case Species::kWigglytuff: return 45;
-    case Species::kZubat: return 35;
-    case Species::kGolbat: return 70;
-    case Species::kOddish: return 55;
-    case Species::kGloom: return 70;
-    case Species::kVileplume: return 85;
-    case Species::kParas: return 55;
-    case Species::kParasect: return 80;
-    case Species::kVenonat: return 50;
-    case Species::kVenomoth: return 60;
-    case Species::kDiglett: return 25;
-    case Species::kDugtrio: return 50;
-    case Species::kMeowth: return 35;
-    case Species::kPersian: return 60;
-    case Species::kPsyduck: return 48;
-    case Species::kGolduck: return 78;
-    case Species::kMankey: return 35;
-    case Species::kPrimeape: return 60;
-    case Species::kGrowlithe: return 45;
-    case Species::kArcanine: return 80;
-    case Species::kPoliwag: return 40;
-    case Species::kPoliwhirl: return 65;
-    case Species::kPoliwrath: return 95;
-    case Species::kAbra: return 15;
-    case Species::kKadabra: return 30;
-    case Species::kAlakazam: return 45;
-    case Species::kMachop: return 50;
-    case Species::kMachoke: return 70;
-    case Species::kMachamp: return 80;
-    case Species::kBellsprout: return 35;
-    case Species::kWeepinbell: return 50;
-    case Species::kVictreebel: return 65;
-    case Species::kTentacool: return 35;
-    case Species::kTentacruel: return 65;
-    case Species::kGeodude: return 100;
-    case Species::kGraveler: return 115;
-    case Species::kGolem: return 130;
-    case Species::kPonyta: return 55;
-    case Species::kRapidash: return 70;
-    case Species::kSlowpoke: return 65;
-    case Species::kSlowbro: return 110;
-    case Species::kMagnemite: return 70;
-    case Species::kMagneton: return 95;
-    case Species::kFarfetchd: return 55;
-    case Species::kDoduo: return 45;
-    case Species::kDodrio: return 70;
-    case Species::kSeel: return 55;
-    case Species::kDewgong: return 80;
-    case Species::kGrimer: return 50;
-    case Species::kMuk: return 75;
-    case Species::kShellder: return 100;
-    case Species::kCloyster: return 180;
-    case Species::kGastly: return 30;
-    case Species::kHaunter: return 45;
-    case Species::kGengar: return 60;
-    case Species::kOnix: return 160;
-    case Species::kDrowzee: return 45;
-    case Species::kHypno: return 70;
-    case Species::kKrabby: return 90;
-    case Species::kKingler: return 115;
-    case Species::kVoltorb: return 50;
-    case Species::kElectrode: return 70;
-    case Species::kExeggcute: return 80;
-    case Species::kExeggutor: return 85;
-    case Species::kCubone: return 95;
-    case Species::kMarowak: return 110;
-    case Species::kHitmonlee: return 53;
-    case Species::kHitmonchan: return 79;
-    case Species::kLickitung: return 75;
-    case Species::kKoffing: return 95;
-    case Species::kWeezing: return 120;
-    case Species::kRhyhorn: return 95;
-    case Species::kRhydon: return 120;
-    case Species::kChansey: return 5;
-    case Species::kTangela: return 115;
-    case Species::kKangaskhan: return 80;
-    case Species::kHorsea: return 70;
-    case Species::kSeadra: return 95;
-    case Species::kGoldeen: return 60;
-    case Species::kSeaking: return 65;
-    case Species::kStaryu: return 55;
-    case Species::kStarmie: return 85;
-    case Species::kMrMime: return 65;
-    case Species::kScyther: return 80;
-    case Species::kJynx: return 35;
-    case Species::kElectabuzz: return 57;
-    case Species::kMagmar: return 57;
-    case Species::kPinsir: return 100;
-    case Species::kTauros: return 95;
-    case Species::kMagikarp: return 55;
-    case Species::kGyarados: return 79;
-    case Species::kLapras: return 80;
-    case Species::kDitto: return 48;
-    case Species::kEevee: return 50;
-    case Species::kVaporeon: return 60;
-    case Species::kJolteon: return 60;
-    case Species::kFlareon: return 60;
-    case Species::kPorygon: return 70;
-    case Species::kOmanyte: return 100;
-    case Species::kOmastar: return 125;
-    case Species::kKabuto: return 90;
-    case Species::kKabutops: return 105;
-    case Species::kAerodactyl: return 65;
-    case Species::kSnorlax: return 65;
-    case Species::kArticuno: return 100;
-    case Species::kZapdos: return 85;
-    case Species::kMoltres: return 90;
-    case Species::kDratini: return 45;
-    case Species::kDragonair: return 65;
-    case Species::kDragonite: return 95;
-    case Species::kMewtwo: return 90;
-    case Species::kMew: return 100;
-    default: break;
+    case Species::kClefairy:
+      return std::vector<Moves>{Moves::kGrowl, Moves::kPound, Moves::kSing,
+                                Moves::kDoubleSlap, Moves::kMinimize,
+                                Moves::kMetronome, Moves::kDefenseCurl,
+                                Moves::kLightScreen, Moves::kStrength,
+                                Moves::kFlash, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kBubbleBeam,
+                                Moves::kWaterGun, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kSolarBeam,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kPsychic, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kRest, Moves::kPsywave,
+                                Moves::kTriAttack, Moves::kSubstitute,
+                                Moves::kThunderWave};
+    case Species::kClefable:
+      return std::vector<Moves>{Moves::kGrowl, Moves::kPound, Moves::kSing,
+                                Moves::kDoubleSlap, Moves::kMinimize,
+                                Moves::kMetronome, Moves::kDefenseCurl,
+                                Moves::kLightScreen, Moves::kStrength,
+                                Moves::kFlash, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kBubbleBeam,
+                                Moves::kWaterGun, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kSolarBeam,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kPsychic, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kRest, Moves::kPsywave,
+                                Moves::kTriAttack, Moves::kSubstitute,
+                                Moves::kHyperBeam, Moves::kThunderWave};
+    case Species::kVulpix:
+      return std::vector<Moves>{Moves::kEmber, Moves::kTailWhip,
+                                Moves::kQuickAttack, Moves::kRoar,
+                                Moves::kConfuseRay, Moves::kFlamethrower,
+                                Moves::kFireSpin, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kNinetales:
+      return std::vector<Moves>{Moves::kEmber, Moves::kTailWhip,
+                                Moves::kQuickAttack, Moves::kRoar,
+                                Moves::kConfuseRay, Moves::kFlamethrower,
+                                Moves::kFireSpin, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kJigglypuff:
+      return std::vector<Moves>{Moves::kSing, Moves::kPound, Moves::kDisable,
+                                Moves::kDefenseCurl, Moves::kDoubleSlap,
+                                Moves::kRest, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kStrength,
+                                Moves::kFlash, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kBubbleBeam,
+                                Moves::kWaterGun, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kSolarBeam,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kPsychic, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kThunderWave, Moves::kPsywave,
+                                Moves::kTriAttack, Moves::kSubstitute};
+    case Species::kWigglytuff:
+      return std::vector<Moves>{Moves::kSing, Moves::kPound, Moves::kDisable,
+                                Moves::kDefenseCurl, Moves::kDoubleSlap,
+                                Moves::kRest, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kStrength,
+                                Moves::kFlash, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kBubbleBeam,
+                                Moves::kWaterGun, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kSolarBeam,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kPsychic, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kThunderWave, Moves::kPsywave,
+                                Moves::kTriAttack, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kZubat:
+      return std::vector<Moves>{Moves::kLeechLife, Moves::kSupersonic,
+                                Moves::kBite, Moves::kConfuseRay,
+                                Moves::kWingAttack, Moves::kHaze,
+                                Moves::kRazorWind, Moves::kWhirlwind,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kMegaDrain, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSwift, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kGolbat:
+      return std::vector<Moves>{Moves::kLeechLife, Moves::kSupersonic,
+                                Moves::kBite, Moves::kConfuseRay,
+                                Moves::kWingAttack, Moves::kHaze,
+                                Moves::kRazorWind, Moves::kWhirlwind,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kMegaDrain, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSwift, Moves::kRest,
+                                Moves::kSubstitute, Moves::kScreech};
+    case Species::kOddish:
+      return std::vector<Moves>{Moves::kAbsorb, Moves::kPoisonPowder,
+                                Moves::kStunSpore, Moves::kSleepPowder,
+                                Moves::kAcid, Moves::kPetalDance,
+                                Moves::kSolarBeam, Moves::kCut,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kGloom:
+      return std::vector<Moves>{Moves::kAbsorb, Moves::kPoisonPowder,
+                                Moves::kStunSpore, Moves::kSleepPowder,
+                                Moves::kAcid, Moves::kPetalDance,
+                                Moves::kSolarBeam, Moves::kCut,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kVileplume:
+      return std::vector<Moves>{Moves::kAbsorb, Moves::kPoisonPowder,
+                                Moves::kStunSpore, Moves::kSleepPowder,
+                                Moves::kAcid, Moves::kPetalDance,
+                                Moves::kSolarBeam, Moves::kCut,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kRest,
+                                Moves::kSubstitute, Moves::kHyperBeam};
+    case Species::kParas:
+      return std::vector<Moves>{Moves::kScratch, Moves::kStunSpore,
+                                Moves::kLeechLife, Moves::kSpore,
+                                Moves::kSlash, Moves::kGrowth, Moves::kCut,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kMegaDrain, Moves::kSolarBeam,
+                                Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kParasect:
+      return std::vector<Moves>{Moves::kScratch, Moves::kStunSpore,
+                                Moves::kLeechLife, Moves::kSpore,
+                                Moves::kSlash, Moves::kGrowth, Moves::kCut,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kMegaDrain, Moves::kSolarBeam,
+                                Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kVenonat:
+      return std::vector<Moves>{Moves::kDisable, Moves::kTackle,
+                                Moves::kPoisonPowder, Moves::kLeechLife,
+                                Moves::kStunSpore, Moves::kPsybeam,
+                                Moves::kSleepPowder, Moves::kPsychic,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kMegaDrain, Moves::kSolarBeam,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute};
+    case Species::kVenomoth:
+      return std::vector<Moves>{Moves::kDisable, Moves::kTackle,
+                                Moves::kPoisonPowder, Moves::kLeechLife,
+                                Moves::kStunSpore, Moves::kPsybeam,
+                                Moves::kSleepPowder, Moves::kPsychic,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kMegaDrain, Moves::kSolarBeam,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute,
+                                Moves::kRazorWind, Moves::kWhirlwind,
+                                Moves::kHyperBeam, Moves::kTeleport,
+                                Moves::kSwift};
+    case Species::kDiglett:
+      return std::vector<Moves>{Moves::kScratch, Moves::kGrowl, Moves::kDig,
+                                Moves::kSandAttack, Moves::kSlash,
+                                Moves::kEarthquake, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kFissure, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kRest, Moves::kRockSlide,
+                                Moves::kSubstitute};
+    case Species::kDugtrio:
+      return std::vector<Moves>{Moves::kScratch, Moves::kGrowl, Moves::kDig,
+                                Moves::kSandAttack, Moves::kSlash,
+                                Moves::kEarthquake, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kFissure, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kRest, Moves::kRockSlide,
+                                Moves::kSubstitute, Moves::kHyperBeam};
+    case Species::kMeowth:
+      return std::vector<Moves>{Moves::kGrowl, Moves::kScratch, Moves::kBite,
+                                Moves::kPayDay, Moves::kScreech,
+                                Moves::kFurySwipes, Moves::kSlash,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kRage, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kPersian:
+      return std::vector<Moves>{Moves::kGrowl, Moves::kScratch, Moves::kBite,
+                                Moves::kPayDay, Moves::kScreech,
+                                Moves::kFurySwipes, Moves::kSlash,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kHyperBeam, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kPsyduck:
+      return std::vector<Moves>{Moves::kScratch, Moves::kTailWhip,
+                                Moves::kDisable, Moves::kConfusion,
+                                Moves::kFurySwipes, Moves::kHydroPump,
+                                Moves::kSurf, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kPayDay, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kGolduck:
+      return std::vector<Moves>{Moves::kScratch, Moves::kTailWhip,
+                                Moves::kDisable, Moves::kConfusion,
+                                Moves::kFurySwipes, Moves::kHydroPump,
+                                Moves::kSurf, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kPayDay, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kMankey:
+      return std::vector<Moves>{Moves::kLeer, Moves::kScratch,
+                                Moves::kKarateChop, Moves::kFurySwipes,
+                                Moves::kFocusEnergy, Moves::kSeismicToss,
+                                Moves::kThrash, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kPayDay, Moves::kSubmission,
+                                Moves::kCounter, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kMetronome, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kRockSlide, Moves::kSubstitute};
+    case Species::kPrimeape:
+      return std::vector<Moves>{Moves::kLeer, Moves::kScratch,
+                                Moves::kKarateChop, Moves::kFurySwipes,
+                                Moves::kFocusEnergy, Moves::kSeismicToss,
+                                Moves::kThrash, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kPayDay, Moves::kSubmission,
+                                Moves::kCounter, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kMetronome, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kRockSlide, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kGrowlithe:
+      return std::vector<Moves>{Moves::kBite, Moves::kRoar, Moves::kEmber,
+                                Moves::kLeer, Moves::kTakeDown,
+                                Moves::kAgility, Moves::kFlamethrower,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kDragonRage, Moves::kDig,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kArcanine:
+      return std::vector<Moves>{Moves::kBite, Moves::kRoar, Moves::kEmber,
+                                Moves::kLeer, Moves::kTakeDown,
+                                Moves::kAgility, Moves::kFlamethrower,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kDragonRage, Moves::kDig,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute, Moves::kHyperBeam};
+    case Species::kPoliwag:
+      return std::vector<Moves>{Moves::kBubble, Moves::kHypnosis,
+                                Moves::kWaterGun, Moves::kDoubleSlap,
+                                Moves::kBodySlam, Moves::kAmnesia,
+                                Moves::kHydroPump, Moves::kSurf,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kBubbleBeam,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kPsychic, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute};
+    case Species::kPoliwhirl:
+      return std::vector<Moves>{Moves::kBubble, Moves::kHypnosis,
+                                Moves::kWaterGun, Moves::kDoubleSlap,
+                                Moves::kBodySlam, Moves::kAmnesia,
+                                Moves::kHydroPump, Moves::kSurf,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kBubbleBeam,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kPsychic, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute,
+                                Moves::kStrength, Moves::kMegaKick,
+                                Moves::kMegaPunch, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kEarthquake, Moves::kFissure,
+                                Moves::kMetronome};
+    case Species::kPoliwrath:
+      return std::vector<Moves>{Moves::kBubble, Moves::kHypnosis,
+                                Moves::kWaterGun, Moves::kDoubleSlap,
+                                Moves::kBodySlam, Moves::kAmnesia,
+                                Moves::kHydroPump, Moves::kSurf,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kBubbleBeam,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kPsychic, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute,
+                                Moves::kStrength, Moves::kMegaKick,
+                                Moves::kMegaPunch, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kEarthquake, Moves::kFissure,
+                                Moves::kMetronome, Moves::kHyperBeam};
+    case Species::kAbra:
+      return std::vector<Moves>{Moves::kTeleport, Moves::kFlash,
+                                Moves::kBodySlam, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kReflect,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kThunderWave,
+                                Moves::kRage, Moves::kPsychic, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute,
+                                Moves::kStrength, Moves::kMegaKick,
+                                Moves::kMegaPunch, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kMetronome, Moves::kHyperBeam,
+                                Moves::kTriAttack};
+    case Species::kKadabra:
+      return std::vector<Moves>{Moves::kTeleport, Moves::kFlash,
+                                Moves::kBodySlam, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kReflect,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kThunderWave,
+                                Moves::kRage, Moves::kPsychic, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute,
+                                Moves::kStrength, Moves::kMegaKick,
+                                Moves::kMegaPunch, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kMetronome, Moves::kHyperBeam,
+                                Moves::kTriAttack, Moves::kConfusion,
+                                Moves::kDisable, Moves::kPsybeam,
+                                Moves::kRecover, Moves::kDig};
+    case Species::kAlakazam:
+      return std::vector<Moves>{Moves::kTeleport, Moves::kFlash,
+                                Moves::kBodySlam, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kReflect,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kThunderWave,
+                                Moves::kRage, Moves::kPsychic, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute,
+                                Moves::kStrength, Moves::kMegaKick,
+                                Moves::kMegaPunch, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kMetronome, Moves::kHyperBeam,
+                                Moves::kTriAttack, Moves::kConfusion,
+                                Moves::kDisable, Moves::kPsybeam,
+                                Moves::kRecover, Moves::kDig,
+                                Moves::kHyperBeam};
+    case Species::kMachop:
+      return std::vector<Moves>{Moves::kKarateChop, Moves::kLowKick,
+                                Moves::kLeer, Moves::kFocusEnergy,
+                                Moves::kSeismicToss, Moves::kSubmission,
+                                Moves::kStrength, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kCounter,
+                                Moves::kRage, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kMetronome, Moves::kFireBlast,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kRockSlide, Moves::kSubstitute};
+    case Species::kMachoke:
+      return std::vector<Moves>{Moves::kKarateChop, Moves::kLowKick,
+                                Moves::kLeer, Moves::kFocusEnergy,
+                                Moves::kSeismicToss, Moves::kSubmission,
+                                Moves::kStrength, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kCounter,
+                                Moves::kRage, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kMetronome, Moves::kFireBlast,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kRockSlide, Moves::kSubstitute};
+    case Species::kMachamp:
+      return std::vector<Moves>{Moves::kKarateChop, Moves::kLowKick,
+                                Moves::kLeer, Moves::kFocusEnergy,
+                                Moves::kSeismicToss, Moves::kSubmission,
+                                Moves::kStrength, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kCounter,
+                                Moves::kRage, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kMetronome, Moves::kFireBlast,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kRockSlide, Moves::kSubstitute};
+    case Species::kBellsprout:
+      return std::vector<Moves>{Moves::kGrowth, Moves::kVineWhip,
+                                Moves::kWrap, Moves::kPoisonPowder,
+                                Moves::kSleepPowder, Moves::kStunSpore,
+                                Moves::kAcid, Moves::kRazorLeaf,
+                                Moves::kSlam, Moves::kCut,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kSolarBeam, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kRest, Moves::kSubstitute};
+    case Species::kWeepinbell:
+      return std::vector<Moves>{Moves::kGrowth, Moves::kVineWhip,
+                                Moves::kWrap, Moves::kPoisonPowder,
+                                Moves::kSleepPowder, Moves::kStunSpore,
+                                Moves::kAcid, Moves::kRazorLeaf,
+                                Moves::kSlam, Moves::kCut,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kSolarBeam, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kRest, Moves::kSubstitute};
+    case Species::kVictreebel:
+      return std::vector<Moves>{Moves::kGrowth, Moves::kVineWhip,
+                                Moves::kWrap, Moves::kPoisonPowder,
+                                Moves::kSleepPowder, Moves::kStunSpore,
+                                Moves::kAcid, Moves::kRazorLeaf,
+                                Moves::kSlam, Moves::kCut,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kSolarBeam, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kRest,
+                                Moves::kSubstitute, Moves::kBodySlam,
+                                Moves::kHyperBeam};
+    case Species::kTentacool:
+      return std::vector<Moves>{Moves::kAcid, Moves::kSupersonic,
+                                Moves::kWrap, Moves::kPoisonSting,
+                                Moves::kWaterGun, Moves::kConstrict,
+                                Moves::kBarrier, Moves::kScreech,
+                                Moves::kHydroPump, Moves::kCut, Moves::kSurf,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kRage,
+                                Moves::kMegaDrain, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kTentacruel:
+      return std::vector<Moves>{Moves::kAcid, Moves::kSupersonic,
+                                Moves::kWrap, Moves::kPoisonSting,
+                                Moves::kWaterGun, Moves::kConstrict,
+                                Moves::kBarrier, Moves::kScreech,
+                                Moves::kHydroPump, Moves::kCut, Moves::kSurf,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kRage,
+                                Moves::kMegaDrain, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kGeodude:
+      return std::vector<Moves>{Moves::kTackle, Moves::kDefenseCurl,
+                                Moves::kRockThrow, Moves::kSelfDestruct,
+                                Moves::kHarden, Moves::kEarthquake,
+                                Moves::kExplosion, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kFissure, Moves::kDig,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kMetronome,
+                                Moves::kFireBlast, Moves::kRest,
+                                Moves::kRockSlide, Moves::kSubstitute};
+    case Species::kGraveler:
+      return std::vector<Moves>{Moves::kTackle, Moves::kDefenseCurl,
+                                Moves::kRockThrow, Moves::kSelfDestruct,
+                                Moves::kHarden, Moves::kEarthquake,
+                                Moves::kExplosion, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kFissure, Moves::kDig,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kMetronome,
+                                Moves::kFireBlast, Moves::kRest,
+                                Moves::kRockSlide, Moves::kSubstitute};
+    case Species::kGolem:
+      return std::vector<Moves>{Moves::kTackle, Moves::kDefenseCurl,
+                                Moves::kRockThrow, Moves::kSelfDestruct,
+                                Moves::kHarden, Moves::kEarthquake,
+                                Moves::kExplosion, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kFissure, Moves::kDig,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kMetronome,
+                                Moves::kFireBlast, Moves::kRest,
+                                Moves::kRockSlide, Moves::kSubstitute,
+                                Moves::kMegaKick, Moves::kHyperBeam};
+    case Species::kPonyta:
+      return std::vector<Moves>{Moves::kEmber, Moves::kTailWhip,
+                                Moves::kStomp, Moves::kGrowl,
+                                Moves::kFireSpin, Moves::kTakeDown,
+                                Moves::kAgility, Moves::kToxic,
+                                Moves::kHornDrill, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kRapidash:
+      return std::vector<Moves>{Moves::kEmber, Moves::kTailWhip,
+                                Moves::kStomp, Moves::kGrowl,
+                                Moves::kFireSpin, Moves::kTakeDown,
+                                Moves::kAgility, Moves::kToxic,
+                                Moves::kHornDrill, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute, Moves::kHyperBeam};
+    case Species::kSlowpoke:
+      return std::vector<Moves>{Moves::kConfusion, Moves::kDisable,
+                                Moves::kHeadbutt, Moves::kGrowl,
+                                Moves::kWaterGun, Moves::kAmnesia,
+                                Moves::kPsychic, Moves::kSurf,
+                                Moves::kStrength, Moves::kFlash,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kPayDay,
+                                Moves::kRage, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kDig,
+                                Moves::kReflect, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kThunderWave,
+                                Moves::kPsywave, Moves::kTriAttack,
+                                Moves::kSubstitute};
+    case Species::kSlowbro:
+      return std::vector<Moves>{Moves::kConfusion, Moves::kDisable,
+                                Moves::kHeadbutt, Moves::kGrowl,
+                                Moves::kWaterGun, Moves::kAmnesia,
+                                Moves::kPsychic, Moves::kSurf,
+                                Moves::kStrength, Moves::kFlash,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kPayDay,
+                                Moves::kRage, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kDig,
+                                Moves::kReflect, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kThunderWave,
+                                Moves::kPsywave, Moves::kTriAttack,
+                                Moves::kSubstitute, Moves::kWithdraw,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kHyperBeam, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss};
+    case Species::kMagnemite:
+      return std::vector<Moves>{Moves::kTackle, Moves::kSonicBoom,
+                                Moves::kThunderShock, Moves::kSupersonic,
+                                Moves::kThunderWave, Moves::kSwift,
+                                Moves::kScreech, Moves::kFlash,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kTeleport, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSwift, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kMagneton:
+      return std::vector<Moves>{Moves::kTackle, Moves::kSonicBoom,
+                                Moves::kThunderShock, Moves::kSupersonic,
+                                Moves::kThunderWave, Moves::kSwift,
+                                Moves::kScreech, Moves::kFlash,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kTeleport, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSwift, Moves::kRest,
+                                Moves::kSubstitute, Moves::kHyperBeam};
+    case Species::kFarfetchd:
+      return std::vector<Moves>{Moves::kPeck, Moves::kSandAttack,
+                                Moves::kLeer, Moves::kFuryAttack,
+                                Moves::kSwordsDance, Moves::kAgility,
+                                Moves::kSlash, Moves::kCut, Moves::kFly,
+                                Moves::kRazorWind, Moves::kRage,
+                                Moves::kWhirlwind, Moves::kTakeDown,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kDoduo:
+      return std::vector<Moves>{Moves::kPeck, Moves::kGrowl,
+                                Moves::kFuryAttack, Moves::kDrillPeck,
+                                Moves::kRage, Moves::kTriAttack,
+                                Moves::kAgility, Moves::kFly,
+                                Moves::kWhirlwind, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSkullBash,
+                                Moves::kSkyAttack, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kDodrio:
+      return std::vector<Moves>{Moves::kPeck, Moves::kGrowl,
+                                Moves::kFuryAttack, Moves::kDrillPeck,
+                                Moves::kRage, Moves::kTriAttack,
+                                Moves::kAgility, Moves::kFly,
+                                Moves::kWhirlwind, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSkullBash,
+                                Moves::kSkyAttack, Moves::kRest,
+                                Moves::kSubstitute, Moves::kHyperBeam};
+    case Species::kSeel:
+      return std::vector<Moves>{Moves::kHeadbutt, Moves::kGrowl,
+                                Moves::kAuroraBeam, Moves::kRest,
+                                Moves::kTakeDown, Moves::kIceBeam,
+                                Moves::kSurf, Moves::kStrength,
+                                Moves::kToxic, Moves::kHornDrill,
+                                Moves::kBodySlam, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kBlizzard, Moves::kPayDay,
+                                Moves::kRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSkullBash, Moves::kSubstitute};
+    case Species::kDewgong:
+      return std::vector<Moves>{Moves::kHeadbutt, Moves::kGrowl,
+                                Moves::kAuroraBeam, Moves::kRest,
+                                Moves::kTakeDown, Moves::kIceBeam,
+                                Moves::kSurf, Moves::kStrength,
+                                Moves::kToxic, Moves::kHornDrill,
+                                Moves::kBodySlam, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kBlizzard, Moves::kPayDay,
+                                Moves::kRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSkullBash, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kGrimer:
+      return std::vector<Moves>{Moves::kDisable, Moves::kPound,
+                                Moves::kPoisonGas, Moves::kMinimize,
+                                Moves::kSludge, Moves::kHarden,
+                                Moves::kScreech, Moves::kAcidArmor,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kSelfDestruct,
+                                Moves::kFireBlast, Moves::kRest,
+                                Moves::kExplosion, Moves::kSubstitute};
+    case Species::kMuk:
+      return std::vector<Moves>{Moves::kDisable, Moves::kPound,
+                                Moves::kPoisonGas, Moves::kMinimize,
+                                Moves::kSludge, Moves::kHarden,
+                                Moves::kScreech, Moves::kAcidArmor,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kSelfDestruct,
+                                Moves::kFireBlast, Moves::kRest,
+                                Moves::kExplosion, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kShellder:
+      return std::vector<Moves>{Moves::kTackle, Moves::kWithdraw,
+                                Moves::kSupersonic, Moves::kClamp,
+                                Moves::kAuroraBeam, Moves::kLeer,
+                                Moves::kIceBeam, Moves::kSurf, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kBlizzard, Moves::kRage,
+                                Moves::kTeleport, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSelfDestruct,
+                                Moves::kSwift, Moves::kRest,
+                                Moves::kExplosion, Moves::kTriAttack,
+                                Moves::kSubstitute};
+    case Species::kCloyster:
+      return std::vector<Moves>{Moves::kTackle, Moves::kWithdraw,
+                                Moves::kSupersonic, Moves::kClamp,
+                                Moves::kAuroraBeam, Moves::kLeer,
+                                Moves::kIceBeam, Moves::kSurf, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kBlizzard, Moves::kRage,
+                                Moves::kTeleport, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSelfDestruct,
+                                Moves::kSwift, Moves::kRest,
+                                Moves::kExplosion, Moves::kTriAttack,
+                                Moves::kSubstitute, Moves::kSpikeCannon,
+                                Moves::kHyperBeam};
+    case Species::kGastly:
+      return std::vector<Moves>{Moves::kConfuseRay, Moves::kLick,
+                                Moves::kNightShade, Moves::kHypnosis,
+                                Moves::kDreamEater, Moves::kToxic,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kPsychic, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSelfDestruct, Moves::kRest,
+                                Moves::kPsywave, Moves::kExplosion,
+                                Moves::kSubstitute};
+    case Species::kHaunter:
+      return std::vector<Moves>{Moves::kConfuseRay, Moves::kLick,
+                                Moves::kNightShade, Moves::kHypnosis,
+                                Moves::kDreamEater, Moves::kToxic,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kPsychic, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSelfDestruct, Moves::kRest,
+                                Moves::kPsywave, Moves::kExplosion,
+                                Moves::kSubstitute};
+    case Species::kGengar:
+      return std::vector<Moves>{Moves::kConfuseRay, Moves::kLick,
+                                Moves::kNightShade, Moves::kHypnosis,
+                                Moves::kDreamEater, Moves::kToxic,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kPsychic, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSelfDestruct, Moves::kRest,
+                                Moves::kPsywave, Moves::kExplosion,
+                                Moves::kSubstitute, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kHyperBeam,
+                                Moves::kSubmission, Moves::kCounter,
+                                Moves::kSeismicToss, Moves::kMetronome,
+                                Moves::kSkullBash};
+    case Species::kOnix:
+      return std::vector<Moves>{Moves::kScreech, Moves::kTackle,
+                                Moves::kBind, Moves::kRockThrow,
+                                Moves::kRage, Moves::kSlam, Moves::kHarden,
+                                Moves::kStrength, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSelfDestruct, Moves::kSkullBash,
+                                Moves::kRest, Moves::kExplosion,
+                                Moves::kRockSlide, Moves::kSubstitute};
+    case Species::kDrowzee:
+      return std::vector<Moves>{Moves::kHypnosis, Moves::kPound,
+                                Moves::kDisable, Moves::kConfusion,
+                                Moves::kHeadbutt, Moves::kPoisonGas,
+                                Moves::kPsychic, Moves::kMeditate,
+                                Moves::kFlash, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kMetronome, Moves::kSkullBash,
+                                Moves::kDreamEater, Moves::kRest,
+                                Moves::kThunderWave, Moves::kPsywave,
+                                Moves::kTriAttack, Moves::kSubstitute};
+    case Species::kHypno:
+      return std::vector<Moves>{Moves::kHypnosis, Moves::kPound,
+                                Moves::kDisable, Moves::kConfusion,
+                                Moves::kHeadbutt, Moves::kPoisonGas,
+                                Moves::kPsychic, Moves::kMeditate,
+                                Moves::kFlash, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kMetronome, Moves::kSkullBash,
+                                Moves::kDreamEater, Moves::kRest,
+                                Moves::kThunderWave, Moves::kPsywave,
+                                Moves::kTriAttack, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kKrabby:
+      return std::vector<Moves>{Moves::kBubble, Moves::kLeer,
+                                Moves::kViceGrip, Moves::kGuillotine,
+                                Moves::kStomp, Moves::kCrabhammer,
+                                Moves::kHarden, Moves::kCut, Moves::kSurf,
+                                Moves::kStrength, Moves::kSwordsDance,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kKingler:
+      return std::vector<Moves>{Moves::kBubble, Moves::kLeer,
+                                Moves::kViceGrip, Moves::kGuillotine,
+                                Moves::kStomp, Moves::kCrabhammer,
+                                Moves::kHarden, Moves::kCut, Moves::kSurf,
+                                Moves::kStrength, Moves::kSwordsDance,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kRest, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kVoltorb:
+      return std::vector<Moves>{Moves::kScreech, Moves::kTackle,
+                                Moves::kSonicBoom, Moves::kSelfDestruct,
+                                Moves::kLightScreen, Moves::kSwift,
+                                Moves::kExplosion, Moves::kFlash,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kRage, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kRest,
+                                Moves::kThunderWave, Moves::kSubstitute};
+    case Species::kElectrode:
+      return std::vector<Moves>{Moves::kScreech, Moves::kTackle,
+                                Moves::kSonicBoom, Moves::kSelfDestruct,
+                                Moves::kLightScreen, Moves::kSwift,
+                                Moves::kExplosion, Moves::kFlash,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kRage, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kRest,
+                                Moves::kThunderWave, Moves::kSubstitute,
+                                Moves::kHyperBeam, Moves::kSkullBash};
+    case Species::kExeggcute:
+      return std::vector<Moves>{Moves::kBarrage, Moves::kHypnosis,
+                                Moves::kReflect, Moves::kLeechSeed,
+                                Moves::kStunSpore, Moves::kPoisonPowder,
+                                Moves::kSolarBeam, Moves::kSleepPowder,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kPsychic, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kSelfDestruct,
+                                Moves::kEggBomb, Moves::kRest,
+                                Moves::kPsywave, Moves::kExplosion,
+                                Moves::kSubstitute};
+    case Species::kExeggutor:
+      return std::vector<Moves>{Moves::kBarrage, Moves::kHypnosis,
+                                Moves::kReflect, Moves::kLeechSeed,
+                                Moves::kStunSpore, Moves::kPoisonPowder,
+                                Moves::kSolarBeam, Moves::kSleepPowder,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kPsychic, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kSelfDestruct,
+                                Moves::kEggBomb, Moves::kRest,
+                                Moves::kPsywave, Moves::kExplosion,
+                                Moves::kSubstitute, Moves::kStomp,
+                                Moves::kStrength, Moves::kHyperBeam,
+                                Moves::kMegaDrain};
+    case Species::kCubone:
+      return std::vector<Moves>{Moves::kBoneClub, Moves::kGrowl,
+                                Moves::kLeer, Moves::kFocusEnergy,
+                                Moves::kThrash, Moves::kBonemerang,
+                                Moves::kRage, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kSubmission, Moves::kCounter,
+                                Moves::kSeismicToss, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kMarowak:
+      return std::vector<Moves>{Moves::kBoneClub, Moves::kGrowl,
+                                Moves::kLeer, Moves::kFocusEnergy,
+                                Moves::kThrash, Moves::kBonemerang,
+                                Moves::kRage, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kSubmission, Moves::kCounter,
+                                Moves::kSeismicToss, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kHitmonlee:
+      return std::vector<Moves>{Moves::kDoubleKick, Moves::kMeditate,
+                                Moves::kRollingKick, Moves::kJumpKick,
+                                Moves::kFocusEnergy, Moves::kHighJumpKick,
+                                Moves::kMegaKick, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kMetronome,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kHitmonchan:
+      return std::vector<Moves>{Moves::kAgility, Moves::kCometPunch,
+                                Moves::kFirePunch, Moves::kIcePunch,
+                                Moves::kThunderPunch, Moves::kMegaPunch,
+                                Moves::kCounter, Moves::kStrength,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kSubmission,
+                                Moves::kSeismicToss, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kMetronome,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kLickitung:
+      return std::vector<Moves>{Moves::kSupersonic, Moves::kWrap,
+                                Moves::kStomp, Moves::kDisable,
+                                Moves::kDefenseCurl, Moves::kSlam,
+                                Moves::kScreech, Moves::kCut, Moves::kSurf,
+                                Moves::kStrength, Moves::kMegaPunch,
+                                Moves::kSwordsDance, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kHyperBeam, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kKoffing:
+      return std::vector<Moves>{Moves::kSmog, Moves::kTackle, Moves::kSludge,
+                                Moves::kSmokescreen, Moves::kSelfDestruct,
+                                Moves::kHaze, Moves::kExplosion,
+                                Moves::kToxic, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kWeezing:
+      return std::vector<Moves>{Moves::kSmog, Moves::kTackle, Moves::kSludge,
+                                Moves::kSmokescreen, Moves::kSelfDestruct,
+                                Moves::kHaze, Moves::kExplosion,
+                                Moves::kToxic, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kRest, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kRhyhorn:
+      return std::vector<Moves>{Moves::kHornAttack, Moves::kStomp,
+                                Moves::kTailWhip, Moves::kFuryAttack,
+                                Moves::kHornDrill, Moves::kLeer,
+                                Moves::kTakeDown, Moves::kStrength,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kEarthquake, Moves::kFissure,
+                                Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kRest, Moves::kRockSlide,
+                                Moves::kSubstitute};
+    case Species::kRhydon:
+      return std::vector<Moves>{Moves::kHornAttack, Moves::kStomp,
+                                Moves::kTailWhip, Moves::kFuryAttack,
+                                Moves::kHornDrill, Moves::kLeer,
+                                Moves::kTakeDown, Moves::kStrength,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kEarthquake, Moves::kFissure,
+                                Moves::kDig, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kRest, Moves::kRockSlide,
+                                Moves::kSubstitute, Moves::kSurf,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kHyperBeam, Moves::kPayDay,
+                                Moves::kSubmission, Moves::kCounter,
+                                Moves::kSeismicToss};
+    case Species::kChansey:
+      return std::vector<Moves>{Moves::kDoubleSlap, Moves::kPound,
+                                Moves::kSing, Moves::kGrowl,
+                                Moves::kMinimize, Moves::kDefenseCurl,
+                                Moves::kLightScreen, Moves::kDoubleEdge,
+                                Moves::kStrength, Moves::kFlash,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kBubbleBeam,
+                                Moves::kWaterGun, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kHyperBeam,
+                                Moves::kSubmission, Moves::kCounter,
+                                Moves::kSeismicToss, Moves::kRage,
+                                Moves::kSolarBeam, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kPsychic,
+                                Moves::kTeleport, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kMetronome,
+                                Moves::kEggBomb, Moves::kFireBlast,
+                                Moves::kSkullBash, Moves::kSoftBoiled,
+                                Moves::kRest, Moves::kThunderWave,
+                                Moves::kPsywave, Moves::kTriAttack,
+                                Moves::kSubstitute};
+    case Species::kTangela:
+      return std::vector<Moves>{Moves::kBind, Moves::kConstrict,
+                                Moves::kAbsorb, Moves::kPoisonPowder,
+                                Moves::kStunSpore, Moves::kSleepPowder,
+                                Moves::kSlam, Moves::kGrowth, Moves::kCut,
+                                Moves::kSwordsDance, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kHyperBeam,
+                                Moves::kRage, Moves::kMegaDrain,
+                                Moves::kSolarBeam, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kKangaskhan:
+      return std::vector<Moves>{Moves::kCometPunch, Moves::kRage,
+                                Moves::kBite, Moves::kTailWhip,
+                                Moves::kMegaPunch, Moves::kLeer,
+                                Moves::kDizzyPunch, Moves::kSurf,
+                                Moves::kStrength, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kHyperBeam, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kEarthquake, Moves::kFissure,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kRockSlide, Moves::kSubstitute};
+    case Species::kHorsea:
+      return std::vector<Moves>{Moves::kBubble, Moves::kSmokescreen,
+                                Moves::kLeer, Moves::kWaterGun,
+                                Moves::kAgility, Moves::kHydroPump,
+                                Moves::kSurf, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kSeadra:
+      return std::vector<Moves>{Moves::kBubble, Moves::kSmokescreen,
+                                Moves::kLeer, Moves::kWaterGun,
+                                Moves::kAgility, Moves::kHydroPump,
+                                Moves::kSurf, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kGoldeen:
+      return std::vector<Moves>{Moves::kPeck, Moves::kTailWhip,
+                                Moves::kSupersonic, Moves::kHornAttack,
+                                Moves::kFuryAttack, Moves::kWaterfall,
+                                Moves::kHornDrill, Moves::kAgility,
+                                Moves::kSurf, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kSeaking:
+      return std::vector<Moves>{Moves::kPeck, Moves::kTailWhip,
+                                Moves::kSupersonic, Moves::kHornAttack,
+                                Moves::kFuryAttack, Moves::kWaterfall,
+                                Moves::kHornDrill, Moves::kAgility,
+                                Moves::kSurf, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kStaryu:
+      return std::vector<Moves>{Moves::kTackle, Moves::kWaterGun,
+                                Moves::kHarden, Moves::kRecover,
+                                Moves::kSwift, Moves::kMinimize,
+                                Moves::kLightScreen, Moves::kHydroPump,
+                                Moves::kSurf, Moves::kFlash, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kPsychic, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kThunderWave, Moves::kPsywave,
+                                Moves::kTriAttack, Moves::kSubstitute};
+    case Species::kStarmie:
+      return std::vector<Moves>{Moves::kTackle, Moves::kWaterGun,
+                                Moves::kHarden, Moves::kRecover,
+                                Moves::kSwift, Moves::kMinimize,
+                                Moves::kLightScreen, Moves::kHydroPump,
+                                Moves::kSurf, Moves::kFlash, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kPsychic, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kThunderWave, Moves::kPsywave,
+                                Moves::kTriAttack, Moves::kSubstitute,
+                                Moves::kHyperBeam};
+    case Species::kMrMime:
+      return std::vector<Moves>{Moves::kBarrier, Moves::kConfusion,
+                                Moves::kLightScreen, Moves::kDoubleSlap,
+                                Moves::kMeditate, Moves::kSubstitute,
+                                Moves::kFlash, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kHyperBeam,
+                                Moves::kSubmission, Moves::kCounter,
+                                Moves::kSeismicToss, Moves::kRage,
+                                Moves::kSolarBeam, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kPsychic,
+                                Moves::kTeleport, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kMetronome,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kThunderWave, Moves::kPsywave,
+                                Moves::kSubstitute};
+    case Species::kScyther:
+      return std::vector<Moves>{Moves::kQuickAttack, Moves::kLeer,
+                                Moves::kFocusEnergy, Moves::kDoubleTeam,
+                                Moves::kSlash, Moves::kSwordsDance,
+                                Moves::kAgility, Moves::kCut, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kHyperBeam, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kJynx:
+      return std::vector<Moves>{Moves::kLovelyKiss, Moves::kPound,
+                                Moves::kLick, Moves::kDoubleSlap,
+                                Moves::kIcePunch, Moves::kBodySlam,
+                                Moves::kThrash, Moves::kBlizzard,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kBubbleBeam,
+                                Moves::kWaterGun, Moves::kIceBeam,
+                                Moves::kHyperBeam, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kPsychic,
+                                Moves::kTeleport, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kMetronome,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute};
+    case Species::kElectabuzz:
+      return std::vector<Moves>{Moves::kLeer, Moves::kQuickAttack,
+                                Moves::kThunderShock, Moves::kScreech,
+                                Moves::kThunderPunch, Moves::kLightScreen,
+                                Moves::kThunder, Moves::kStrength,
+                                Moves::kFlash, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kHyperBeam,
+                                Moves::kSubmission, Moves::kCounter,
+                                Moves::kSeismicToss, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kPsychic, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kMetronome, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kThunderWave, Moves::kPsywave,
+                                Moves::kSubstitute};
+    case Species::kMagmar:
+      return std::vector<Moves>{Moves::kEmber, Moves::kLeer,
+                                Moves::kConfuseRay, Moves::kFirePunch,
+                                Moves::kSmokescreen, Moves::kSmog,
+                                Moves::kFlamethrower, Moves::kStrength,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kHyperBeam, Moves::kSubmission,
+                                Moves::kCounter, Moves::kSeismicToss,
+                                Moves::kRage, Moves::kPsychic, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kMetronome, Moves::kFireBlast,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute};
+    case Species::kPinsir:
+      return std::vector<Moves>{Moves::kViceGrip, Moves::kSeismicToss,
+                                Moves::kGuillotine, Moves::kFocusEnergy,
+                                Moves::kHarden, Moves::kSlash,
+                                Moves::kSwordsDance, Moves::kCut,
+                                Moves::kStrength, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kHyperBeam,
+                                Moves::kSubmission, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kBide, Moves::kRest, Moves::kSubstitute};
+    case Species::kTauros:
+      return std::vector<Moves>{Moves::kTackle, Moves::kStomp,
+                                Moves::kTailWhip, Moves::kLeer, Moves::kRage,
+                                Moves::kTakeDown, Moves::kStrength,
+                                Moves::kToxic, Moves::kHornDrill,
+                                Moves::kBodySlam, Moves::kDoubleEdge,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kHyperBeam, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kMagikarp:
+      return std::vector<Moves>{Moves::kSplash, Moves::kTackle};
+    case Species::kGyarados:
+      return std::vector<Moves>{Moves::kBite, Moves::kDragonRage,
+                                Moves::kHydroPump, Moves::kLeer,
+                                Moves::kHyperBeam, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kBubbleBeam,
+                                Moves::kWaterGun, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kThunder,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kLapras:
+      return std::vector<Moves>{Moves::kGrowl, Moves::kWaterGun,
+                                Moves::kSing, Moves::kMist, Moves::kBodySlam,
+                                Moves::kConfuseRay, Moves::kIceBeam,
+                                Moves::kHydroPump, Moves::kSurf,
+                                Moves::kStrength, Moves::kToxic,
+                                Moves::kHornDrill, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kBubbleBeam,
+                                Moves::kBlizzard, Moves::kHyperBeam,
+                                Moves::kRage, Moves::kSolarBeam,
+                                Moves::kDragonRage, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kPsychic,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kPsywave, Moves::kSubstitute};
+    case Species::kDitto:
+      return std::vector<Moves>{Moves::kTransform};
+    case Species::kEevee:
+      return std::vector<Moves>{Moves::kSandAttack, Moves::kTackle,
+                                Moves::kQuickAttack, Moves::kTailWhip,
+                                Moves::kBite, Moves::kTakeDown,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kVaporeon:
+      return std::vector<Moves>{Moves::kSandAttack, Moves::kTackle,
+                                Moves::kQuickAttack, Moves::kTailWhip,
+                                Moves::kBite, Moves::kTakeDown,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute, Moves::kWaterGun,
+                                Moves::kAcidArmor, Moves::kHaze,
+                                Moves::kMist, Moves::kHydroPump,
+                                Moves::kSurf, Moves::kBubbleBeam,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kHyperBeam};
+    case Species::kJolteon:
+      return std::vector<Moves>{Moves::kSandAttack, Moves::kTackle,
+                                Moves::kQuickAttack, Moves::kTailWhip,
+                                Moves::kThunderShock, Moves::kThunderWave,
+                                Moves::kDoubleKick, Moves::kAgility,
+                                Moves::kPinMissile, Moves::kThunder,
+                                Moves::kBite, Moves::kTakeDown,
+                                Moves::kFlash, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kDoubleEdge,
+                                Moves::kHyperBeam, Moves::kRage,
+                                Moves::kThunderbolt, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kFlareon:
+      return std::vector<Moves>{Moves::kSandAttack, Moves::kTackle,
+                                Moves::kQuickAttack, Moves::kTailWhip,
+                                Moves::kEmber, Moves::kBite, Moves::kLeer,
+                                Moves::kFireSpin, Moves::kRage,
+                                Moves::kFlamethrower, Moves::kTakeDown,
+                                Moves::kBodySlam, Moves::kDoubleEdge,
+                                Moves::kHyperBeam, Moves::kRage,
+                                Moves::kMimic, Moves::kFireBlast,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kSubstitute, Moves::kToxic};
+    case Species::kPorygon:
+      return std::vector<Moves>{Moves::kConversion, Moves::kSharpen,
+                                Moves::kTackle, Moves::kPsybeam,
+                                Moves::kRecover, Moves::kAgility,
+                                Moves::kTriAttack, Moves::kFlash,
+                                Moves::kToxic, Moves::kTakeDown,
+                                Moves::kDoubleEdge, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kHyperBeam,
+                                Moves::kRage, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kPsychic,
+                                Moves::kTeleport, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kSwift,
+                                Moves::kSkullBash, Moves::kRest,
+                                Moves::kThunderWave, Moves::kPsywave,
+                                Moves::kSubstitute};
+    case Species::kOmanyte:
+      return std::vector<Moves>{Moves::kWaterGun, Moves::kWithdraw,
+                                Moves::kHornAttack, Moves::kLeer,
+                                Moves::kLeer, Moves::kSpikeCannon,
+                                Moves::kHydroPump, Moves::kSurf,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kOmastar:
+      return std::vector<Moves>{Moves::kWaterGun, Moves::kWithdraw,
+                                Moves::kHornAttack, Moves::kLeer,
+                                Moves::kLeer, Moves::kSpikeCannon,
+                                Moves::kHydroPump, Moves::kSurf,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kRest,
+                                Moves::kSubstitute, Moves::kHornDrill,
+                                Moves::kHyperBeam, Moves::kSubmission,
+                                Moves::kSeismicToss, Moves::kSkullBash};
+    case Species::kKabuto:
+      return std::vector<Moves>{Moves::kHarden, Moves::kScratch,
+                                Moves::kAbsorb, Moves::kSlash, Moves::kLeer,
+                                Moves::kHydroPump, Moves::kSurf,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kRest, Moves::kSubstitute};
+    case Species::kKabutops:
+      return std::vector<Moves>{Moves::kHarden, Moves::kScratch,
+                                Moves::kAbsorb, Moves::kSlash, Moves::kLeer,
+                                Moves::kHydroPump, Moves::kSurf,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kRest,
+                                Moves::kSubstitute, Moves::kRazorWind,
+                                Moves::kSwordsDance, Moves::kMegaKick,
+                                Moves::kHyperBeam, Moves::kSubmission,
+                                Moves::kSeismicToss, Moves::kSkullBash};
+    case Species::kAerodactyl:
+      return std::vector<Moves>{Moves::kAgility, Moves::kWingAttack,
+                                Moves::kSupersonic, Moves::kBite,
+                                Moves::kTakeDown, Moves::kHyperBeam,
+                                Moves::kFly, Moves::kRazorWind,
+                                Moves::kWhirlwind, Moves::kToxic,
+                                Moves::kDoubleEdge, Moves::kRage,
+                                Moves::kDragonRage, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kSwift, Moves::kSkyAttack,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kSnorlax:
+      return std::vector<Moves>{Moves::kAmnesia, Moves::kHeadbutt,
+                                Moves::kRest, Moves::kBodySlam,
+                                Moves::kHarden, Moves::kDoubleEdge,
+                                Moves::kHyperBeam, Moves::kSurf,
+                                Moves::kStrength, Moves::kMegaPunch,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kBubbleBeam,
+                                Moves::kWaterGun, Moves::kIceBeam,
+                                Moves::kBlizzard, Moves::kPayDay,
+                                Moves::kSubmission, Moves::kCounter,
+                                Moves::kSeismicToss, Moves::kRage,
+                                Moves::kSolarBeam, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kPsychic,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kMetronome, Moves::kSelfDestruct,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kPsywave, Moves::kRockSlide,
+                                Moves::kSubstitute};
+    case Species::kArticuno:
+      return std::vector<Moves>{Moves::kIceBeam, Moves::kPeck,
+                                Moves::kBlizzard, Moves::kAgility,
+                                Moves::kMist, Moves::kFly, Moves::kRazorWind,
+                                Moves::kWhirlwind, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kHyperBeam, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kSwift,
+                                Moves::kSkyAttack, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kZapdos:
+      return std::vector<Moves>{Moves::kThunderShock, Moves::kDrillPeck,
+                                Moves::kThunder, Moves::kAgility,
+                                Moves::kLightScreen, Moves::kFly,
+                                Moves::kFlash, Moves::kRazorWind,
+                                Moves::kWhirlwind, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kHyperBeam, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kSwift,
+                                Moves::kSkyAttack, Moves::kRest,
+                                Moves::kSubstitute, Moves::kThunderbolt,
+                                Moves::kThunderWave};
+    case Species::kMoltres:
+      return std::vector<Moves>{Moves::kFireSpin, Moves::kPeck,
+                                Moves::kLeer, Moves::kAgility,
+                                Moves::kSkyAttack, Moves::kFly,
+                                Moves::kRazorWind,
+                                Moves::kWhirlwind, Moves::kToxic,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kHyperBeam, Moves::kRage,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide, Moves::kSwift,
+                                Moves::kFireBlast, Moves::kRest,
+                                Moves::kSubstitute};
+    case Species::kDratini:
+      return std::vector<Moves>{Moves::kLeer, Moves::kWrap,
+                                Moves::kThunderWave, Moves::kAgility,
+                                Moves::kSlam, Moves::kDragonRage,
+                                Moves::kHyperBeam, Moves::kSurf,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute};
+    case Species::kDragonair:
+      return std::vector<Moves>{Moves::kLeer, Moves::kWrap,
+                                Moves::kThunderWave, Moves::kAgility,
+                                Moves::kSlam, Moves::kDragonRage,
+                                Moves::kHyperBeam, Moves::kSurf,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute,
+                                Moves::kHornDrill};
+    case Species::kDragonite:
+      return std::vector<Moves>{Moves::kLeer, Moves::kWrap,
+                                Moves::kThunderWave, Moves::kAgility,
+                                Moves::kSlam, Moves::kDragonRage,
+                                Moves::kHyperBeam, Moves::kSurf,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kRage, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kMimic,
+                                Moves::kDoubleTeam, Moves::kReflect,
+                                Moves::kBide, Moves::kFireBlast,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kRest, Moves::kSubstitute,
+                                Moves::kHornDrill, Moves::kStrength,
+                                Moves::kRazorWind};
+    case Species::kMewtwo:
+      return std::vector<Moves>{Moves::kConfusion, Moves::kDisable,
+                                Moves::kPsychic, Moves::kSwift,
+                                Moves::kBarrier, Moves::kRecover,
+                                Moves::kMist, Moves::kAmnesia,
+                                Moves::kStrength, Moves::kFlash,
+                                Moves::kMegaPunch, Moves::kMegaKick,
+                                Moves::kToxic, Moves::kBodySlam,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kHyperBeam, Moves::kPayDay,
+                                Moves::kSubmission, Moves::kCounter,
+                                Moves::kSeismicToss, Moves::kRage,
+                                Moves::kSolarBeam, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kTeleport,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kMetronome, Moves::kSelfDestruct,
+                                Moves::kFireBlast, Moves::kSkullBash,
+                                Moves::kRest, Moves::kThunderWave,
+                                Moves::kPsywave, Moves::kTriAttack,
+                                Moves::kSubstitute};
+    case Species::kMew:
+      return std::vector<Moves>{Moves::kPound, Moves::kTransform,
+                                Moves::kCut, Moves::kFly, Moves::kSurf,
+                                Moves::kStrength, Moves::kFlash,
+                                Moves::kMegaPunch, Moves::kRazorWind,
+                                Moves::kSwordsDance, Moves::kWhirlwind,
+                                Moves::kMegaKick, Moves::kToxic,
+                                Moves::kBodySlam, Moves::kHornDrill,
+                                Moves::kTakeDown, Moves::kDoubleEdge,
+                                Moves::kBubbleBeam, Moves::kWaterGun,
+                                Moves::kIceBeam, Moves::kBlizzard,
+                                Moves::kHyperBeam, Moves::kPayDay,
+                                Moves::kSubmission, Moves::kCounter,
+                                Moves::kSeismicToss, Moves::kRage,
+                                Moves::kMegaDrain, Moves::kSolarBeam,
+                                Moves::kDragonRage, Moves::kThunderbolt,
+                                Moves::kThunder, Moves::kEarthquake,
+                                Moves::kFissure, Moves::kDig,
+                                Moves::kTeleport, Moves::kPsychic,
+                                Moves::kMimic, Moves::kDoubleTeam,
+                                Moves::kReflect, Moves::kBide,
+                                Moves::kMetronome, Moves::kSelfDestruct,
+                                Moves::kEggBomb, Moves::kFireBlast,
+                                Moves::kSwift, Moves::kSkullBash,
+                                Moves::kSoftBoiled, Moves::kDreamEater,
+                                Moves::kSkyAttack, Moves::kRest,
+                                Moves::kThunderWave, Moves::kPsywave,
+                                Moves::kExplosion, Moves::kRockSlide,
+                                Moves::kTriAttack, Moves::kSubstitute};
+    default:
+      assert(false);
   };
 }
 

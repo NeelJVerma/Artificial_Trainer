@@ -6,6 +6,7 @@
 #define ARTIFICIAL_TRAINER_BASEPOWER_H
 
 #include "moves.h"
+
 namespace artificialtrainer {
 auto BasePower(const Moves &move_name) -> int;
 

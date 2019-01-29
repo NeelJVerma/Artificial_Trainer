@@ -83,7 +83,8 @@ auto Type(const Moves &move_name) -> Types {
     case Moves::kTriAttack:
     case Moves::kViceGrip:
     case Moves::kWhirlwind:
-    case Moves::kWrap:return Types::kNormal;
+    case Moves::kWrap:
+      return Types::kNormal;
     case Moves::kCounter:
     case Moves::kDoubleKick:
     case Moves::kHighJumpKick:
@@ -91,13 +92,15 @@ auto Type(const Moves &move_name) -> Types {
     case Moves::kLowKick:
     case Moves::kRollingKick:
     case Moves::kSeismicToss:
-    case Moves::kSubmission:return Types::kFighting;
+    case Moves::kSubmission:
+      return Types::kFighting;
     case Moves::kDrillPeck:
     case Moves::kFly:
     case Moves::kMirrorMove:
     case Moves::kPeck:
     case Moves::kSkyAttack:
-    case Moves::kWingAttack:return Types::kFlying;
+    case Moves::kWingAttack:
+      return Types::kFlying;
     case Moves::kAcid:
     case Moves::kAcidArmor:
     case Moves::kPoisonGas:
@@ -105,27 +108,33 @@ auto Type(const Moves &move_name) -> Types {
     case Moves::kPoisonPowder:
     case Moves::kSludge:
     case Moves::kSmog:
-    case Moves::kToxic:return Types::kPoison;
+    case Moves::kToxic:
+      return Types::kPoison;
     case Moves::kBoneClub:
     case Moves::kBonemerang:
     case Moves::kDig:
     case Moves::kEarthquake:
     case Moves::kFissure:
-    case Moves::kSandAttack:return Types::kGround;
+    case Moves::kSandAttack:
+      return Types::kGround;
     case Moves::kRockSlide:
-    case Moves::kRockThrow:return Types::kRock;
+    case Moves::kRockThrow:
+      return Types::kRock;
     case Moves::kLeechLife:
     case Moves::kPinMissile:
     case Moves::kStringShot:
-    case Moves::kTwineedle:return Types::kBug;
+    case Moves::kTwineedle:
+      return Types::kBug;
     case Moves::kConfuseRay:
     case Moves::kLick:
-    case Moves::kNightShade:return Types::kGhost;
+    case Moves::kNightShade:
+      return Types::kGhost;
     case Moves::kEmber:
     case Moves::kFireBlast:
     case Moves::kFirePunch:
     case Moves::kFireSpin:
-    case Moves::kFlamethrower:return Types::kFire;
+    case Moves::kFlamethrower:
+      return Types::kFire;
     case Moves::kBubble:
     case Moves::kBubbleBeam:
     case Moves::kClamp:
@@ -134,7 +143,8 @@ auto Type(const Moves &move_name) -> Types {
     case Moves::kSurf:
     case Moves::kWaterGun:
     case Moves::kWaterfall:
-    case Moves::kWithdraw:return Types::kWater;
+    case Moves::kWithdraw:
+      return Types::kWater;
     case Moves::kAbsorb:
     case Moves::kLeechSeed:
     case Moves::kMegaDrain:
@@ -144,12 +154,14 @@ auto Type(const Moves &move_name) -> Types {
     case Moves::kSolarBeam:
     case Moves::kSpore:
     case Moves::kStunSpore:
-    case Moves::kVineWhip:return Types::kGrass;
+    case Moves::kVineWhip:
+      return Types::kGrass;
     case Moves::kThunder:
     case Moves::kThunderWave:
     case Moves::kThunderbolt:
     case Moves::kThunderPunch:
-    case Moves::kThunderShock:return Types::kElectric;
+    case Moves::kThunderShock:
+      return Types::kElectric;
     case Moves::kAgility:
     case Moves::kAmnesia:
     case Moves::kBarrier:
@@ -164,15 +176,19 @@ auto Type(const Moves &move_name) -> Types {
     case Moves::kPsywave:
     case Moves::kReflect:
     case Moves::kRest:
-    case Moves::kTeleport:return Types::kPsychic;
+    case Moves::kTeleport:
+      return Types::kPsychic;
     case Moves::kAuroraBeam:
     case Moves::kBlizzard:
     case Moves::kHaze:
     case Moves::kIceBeam:
     case Moves::kIcePunch:
-    case Moves::kMist:return Types::kIce;
-    case Moves::kDragonRage:return Types::kDragon;
-    default:return Types::kNoType;
+    case Moves::kMist:
+      return Types::kIce;
+    case Moves::kDragonRage:
+      return Types::kDragon;
+    default:
+      return Types::kNoType;
   };
 }
 

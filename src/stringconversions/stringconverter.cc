@@ -2,173 +2,333 @@
 // Created by neel on //.
 //
 
+#include <cassert>
 #include "stringconverter.h"
 
 namespace artificialtrainer {
 auto SpeciesToString(const Species &species) -> std::string {
   switch (species) {
-    case Species::kBulbasaur: return "Bulbasaur";
-    case Species::kIvysaur: return "Ivysaur";
-    case Species::kVenusaur: return "Venusaur";
-    case Species::kCharmander: return "Charmander";
-    case Species::kCharmeleon: return "Charmeleon";
-    case Species::kCharizard: return "Charizard";
-    case Species::kSquirtle: return "Squirtle";
-    case Species::kWartortle: return "Wartortle";
-    case Species::kBlastoise: return "Blastoise";
-    case Species::kCaterpie: return "Caterpie";
-    case Species::kMetapod: return "Metapod";
-    case Species::kButterfree: return "Butterfree";
-    case Species::kWeedle: return "Weedle";
-    case Species::kKakuna: return "Kakuna";
-    case Species::kBeedrill: return "Beedrill";
-    case Species::kPidgey: return "Pidgey";
-    case Species::kPidgeotto: return "Pidgeotto";
-    case Species::kPidgeot: return "Pidgeot";
-    case Species::kRattata: return "Rattata";
-    case Species::kRaticate: return "Raticate";
-    case Species::kSpearow: return "Spearow";
-    case Species::kFearow: return "Fearow";
-    case Species::kEkans: return "Ekans";
-    case Species::kArbok: return "Arbok";
-    case Species::kPikachu: return "Pikachu";
-    case Species::kRaichu: return "Raichu";
-    case Species::kSandshrew: return "Sandshrew";
-    case Species::kSandslash: return "Sandslash";
-    case Species::kNidoranF: return "Nidoran (female)";
-    case Species::kNidorina: return "Nidorina";
-    case Species::kNidoqueen: return "Nidoqueen";
-    case Species::kNidoranM: return "Nidoran (male)";
-    case Species::kNidorino: return "Nidorino";
-    case Species::kNidoking: return "Nidoking";
-    case Species::kClefairy: return "Clefairy";
-    case Species::kClefable: return "Clefable";
-    case Species::kVulpix: return "Vulpix";
-    case Species::kNinetales: return "Ninetales";
-    case Species::kJigglypuff: return "Jigglypuff";
-    case Species::kWigglytuff: return "Wigglytuff";
-    case Species::kZubat: return "Zubat";
-    case Species::kGolbat: return "Golbat";
-    case Species::kOddish: return "Oddish";
-    case Species::kGloom: return "Gloom";
-    case Species::kVileplume: return "Vileplume";
-    case Species::kParas: return "Paras";
-    case Species::kParasect: return "Parasect";
-    case Species::kVenonat: return "Venonat";
-    case Species::kVenomoth: return "Venomoth";
-    case Species::kDiglett: return "Diglett";
-    case Species::kDugtrio: return "Dugtrio";
-    case Species::kMeowth: return "Meowth";
-    case Species::kPersian: return "Persian";
-    case Species::kPsyduck: return "Psyduck";
-    case Species::kGolduck: return "Golduck";
-    case Species::kMankey: return "Mankey";
-    case Species::kPrimeape: return "Primeape";
-    case Species::kGrowlithe: return "Growlithe";
-    case Species::kArcanine: return "Arcanine";
-    case Species::kPoliwag: return "Poliwag";
-    case Species::kPoliwhirl: return "Poliwhirl";
-    case Species::kPoliwrath: return "Poliwrath";
-    case Species::kAbra: return "Abra";
-    case Species::kKadabra: return "Kadabra";
-    case Species::kAlakazam: return "Alakazam";
-    case Species::kMachop: return "Machop";
-    case Species::kMachoke: return "Machoke";
-    case Species::kMachamp: return "Machamp";
-    case Species::kBellsprout: return "Bellsprout";
-    case Species::kWeepinbell: return "Weepinbell";
-    case Species::kVictreebel: return "Victreebell";
-    case Species::kTentacool: return "Tentacool";
-    case Species::kTentacruel: return "Tentacruel";
-    case Species::kGeodude: return "Geodude";
-    case Species::kGraveler: return "Graveler";
-    case Species::kGolem: return "Golem";
-    case Species::kPonyta: return "Ponyta";
-    case Species::kRapidash: return "Rapidash";
-    case Species::kSlowpoke: return "Slowpoke";
-    case Species::kSlowbro: return "Slowbro";
-    case Species::kMagnemite: return "Magnemite";
-    case Species::kMagneton: return "Magneton";
-    case Species::kFarfetchd: return "Farfetch'd";
-    case Species::kDoduo: return "Doduo";
-    case Species::kDodrio: return "Dodrio";
-    case Species::kSeel: return "Seel";
-    case Species::kDewgong: return "Dewgong";
-    case Species::kGrimer: return "Grimer";
-    case Species::kMuk: return "Muk";
-    case Species::kShellder: return "Shellder";
-    case Species::kCloyster: return "Cloyster";
-    case Species::kGastly: return "Gastly";
-    case Species::kHaunter: return "Haunter";
-    case Species::kGengar: return "Gengar";
-    case Species::kOnix: return "Onix";
-    case Species::kDrowzee: return "Drowzee";
-    case Species::kHypno: return "Hypno";
-    case Species::kKrabby: return "Krabby";
-    case Species::kKingler: return "Kingler";
-    case Species::kVoltorb: return "Voltorb";
-    case Species::kElectrode: return "Electrode";
-    case Species::kExeggcute: return "Exeggcute";
-    case Species::kExeggutor: return "Exeggutor";
-    case Species::kCubone: return "Cubone";
-    case Species::kMarowak: return "Marowak";
-    case Species::kHitmonlee: return "Hitmonlee";
-    case Species::kHitmonchan: return "Hitmonchan";
-    case Species::kLickitung: return "Lickitung";
-    case Species::kKoffing: return "Koffing";
-    case Species::kWeezing: return "Weezing";
-    case Species::kRhyhorn: return "Rhyhorn";
-    case Species::kRhydon: return "Rhydon";
-    case Species::kChansey: return "Chansey";
-    case Species::kTangela: return "Tangela";
-    case Species::kKangaskhan: return "Kangaskhan";
-    case Species::kHorsea: return "Horsea";
-    case Species::kSeadra: return "Seadra";
-    case Species::kGoldeen: return "Goldeen";
-    case Species::kSeaking: return "Seaking";
-    case Species::kStaryu: return "Staryu";
-    case Species::kStarmie: return "Starmie";
-    case Species::kMrMime: return "Mr. Mime";
-    case Species::kScyther: return "Scyther";
-    case Species::kJynx: return "Jynx";
-    case Species::kElectabuzz: return "Electabuzz";
-    case Species::kMagmar: return "Magmar";
-    case Species::kPinsir: return "Pinsir";
-    case Species::kTauros: return "Tauros";
-    case Species::kMagikarp: return "Magikarp";
-    case Species::kGyarados: return "Gyarados";
-    case Species::kLapras: return "Lapras";
-    case Species::kDitto: return "Ditto";
-    case Species::kEevee: return "Eevee";
-    case Species::kVaporeon: return "Vaporeon";
-    case Species::kJolteon: return "Jolteon";
-    case Species::kFlareon: return "Flareon";
-    case Species::kPorygon: return "Porygon";
-    case Species::kOmanyte: return "Omanyte";
-    case Species::kOmastar: return "Omastar";
-    case Species::kKabuto: return "Kabuto";
-    case Species::kKabutops: return "Kabutops";
-    case Species::kAerodactyl: return "Aerodactyl";
-    case Species::kSnorlax: return "Snorlax";
-    case Species::kArticuno: return "Articuno";
-    case Species::kZapdos: return "Zapdos";
-    case Species::kMoltres: return "Moltres";
-    case Species::kDratini: return "Dratini";
-    case Species::kDragonair: return "Dragonair";
-    case Species::kDragonite: return "Dragonite";
-    case Species::kMewtwo: return "Mewtwo";
-    case Species::kMew: return "Mew";
-    default: break;
+    case Species::kBulbasaur:
+      return "Bulbasaur";
+    case Species::kIvysaur:
+      return "Ivysaur";
+    case Species::kVenusaur:
+      return "Venusaur";
+    case Species::kCharmander:
+      return "Charmander";
+    case Species::kCharmeleon:
+      return "Charmeleon";
+    case Species::kCharizard:
+      return "Charizard";
+    case Species::kSquirtle:
+      return "Squirtle";
+    case Species::kWartortle:
+      return "Wartortle";
+    case Species::kBlastoise:
+      return "Blastoise";
+    case Species::kCaterpie:
+      return "Caterpie";
+    case Species::kMetapod:
+      return "Metapod";
+    case Species::kButterfree:
+      return "Butterfree";
+    case Species::kWeedle:
+      return "Weedle";
+    case Species::kKakuna:
+      return "Kakuna";
+    case Species::kBeedrill:
+      return "Beedrill";
+    case Species::kPidgey:
+      return "Pidgey";
+    case Species::kPidgeotto:
+      return "Pidgeotto";
+    case Species::kPidgeot:
+      return "Pidgeot";
+    case Species::kRattata:
+      return "Rattata";
+    case Species::kRaticate:
+      return "Raticate";
+    case Species::kSpearow:
+      return "Spearow";
+    case Species::kFearow:
+      return "Fearow";
+    case Species::kEkans:
+      return "Ekans";
+    case Species::kArbok:
+      return "Arbok";
+    case Species::kPikachu:
+      return "Pikachu";
+    case Species::kRaichu:
+      return "Raichu";
+    case Species::kSandshrew:
+      return "Sandshrew";
+    case Species::kSandslash:
+      return "Sandslash";
+    case Species::kNidoranF:
+      return "Nidoran (female)";
+    case Species::kNidorina:
+      return "Nidorina";
+    case Species::kNidoqueen:
+      return "Nidoqueen";
+    case Species::kNidoranM:
+      return "Nidoran (male)";
+    case Species::kNidorino:
+      return "Nidorino";
+    case Species::kNidoking:
+      return "Nidoking";
+    case Species::kClefairy:
+      return "Clefairy";
+    case Species::kClefable:
+      return "Clefable";
+    case Species::kVulpix:
+      return "Vulpix";
+    case Species::kNinetales:
+      return "Ninetales";
+    case Species::kJigglypuff:
+      return "Jigglypuff";
+    case Species::kWigglytuff:
+      return "Wigglytuff";
+    case Species::kZubat:
+      return "Zubat";
+    case Species::kGolbat:
+      return "Golbat";
+    case Species::kOddish:
+      return "Oddish";
+    case Species::kGloom:
+      return "Gloom";
+    case Species::kVileplume:
+      return "Vileplume";
+    case Species::kParas:
+      return "Paras";
+    case Species::kParasect:
+      return "Parasect";
+    case Species::kVenonat:
+      return "Venonat";
+    case Species::kVenomoth:
+      return "Venomoth";
+    case Species::kDiglett:
+      return "Diglett";
+    case Species::kDugtrio:
+      return "Dugtrio";
+    case Species::kMeowth:
+      return "Meowth";
+    case Species::kPersian:
+      return "Persian";
+    case Species::kPsyduck:
+      return "Psyduck";
+    case Species::kGolduck:
+      return "Golduck";
+    case Species::kMankey:
+      return "Mankey";
+    case Species::kPrimeape:
+      return "Primeape";
+    case Species::kGrowlithe:
+      return "Growlithe";
+    case Species::kArcanine:
+      return "Arcanine";
+    case Species::kPoliwag:
+      return "Poliwag";
+    case Species::kPoliwhirl:
+      return "Poliwhirl";
+    case Species::kPoliwrath:
+      return "Poliwrath";
+    case Species::kAbra:
+      return "Abra";
+    case Species::kKadabra:
+      return "Kadabra";
+    case Species::kAlakazam:
+      return "Alakazam";
+    case Species::kMachop:
+      return "Machop";
+    case Species::kMachoke:
+      return "Machoke";
+    case Species::kMachamp:
+      return "Machamp";
+    case Species::kBellsprout:
+      return "Bellsprout";
+    case Species::kWeepinbell:
+      return "Weepinbell";
+    case Species::kVictreebel:
+      return "Victreebell";
+    case Species::kTentacool:
+      return "Tentacool";
+    case Species::kTentacruel:
+      return "Tentacruel";
+    case Species::kGeodude:
+      return "Geodude";
+    case Species::kGraveler:
+      return "Graveler";
+    case Species::kGolem:
+      return "Golem";
+    case Species::kPonyta:
+      return "Ponyta";
+    case Species::kRapidash:
+      return "Rapidash";
+    case Species::kSlowpoke:
+      return "Slowpoke";
+    case Species::kSlowbro:
+      return "Slowbro";
+    case Species::kMagnemite:
+      return "Magnemite";
+    case Species::kMagneton:
+      return "Magneton";
+    case Species::kFarfetchd:
+      return "Farfetch'd";
+    case Species::kDoduo:
+      return "Doduo";
+    case Species::kDodrio:
+      return "Dodrio";
+    case Species::kSeel:
+      return "Seel";
+    case Species::kDewgong:
+      return "Dewgong";
+    case Species::kGrimer:
+      return "Grimer";
+    case Species::kMuk:
+      return "Muk";
+    case Species::kShellder:
+      return "Shellder";
+    case Species::kCloyster:
+      return "Cloyster";
+    case Species::kGastly:
+      return "Gastly";
+    case Species::kHaunter:
+      return "Haunter";
+    case Species::kGengar:
+      return "Gengar";
+    case Species::kOnix:
+      return "Onix";
+    case Species::kDrowzee:
+      return "Drowzee";
+    case Species::kHypno:
+      return "Hypno";
+    case Species::kKrabby:
+      return "Krabby";
+    case Species::kKingler:
+      return "Kingler";
+    case Species::kVoltorb:
+      return "Voltorb";
+    case Species::kElectrode:
+      return "Electrode";
+    case Species::kExeggcute:
+      return "Exeggcute";
+    case Species::kExeggutor:
+      return "Exeggutor";
+    case Species::kCubone:
+      return "Cubone";
+    case Species::kMarowak:
+      return "Marowak";
+    case Species::kHitmonlee:
+      return "Hitmonlee";
+    case Species::kHitmonchan:
+      return "Hitmonchan";
+    case Species::kLickitung:
+      return "Lickitung";
+    case Species::kKoffing:
+      return "Koffing";
+    case Species::kWeezing:
+      return "Weezing";
+    case Species::kRhyhorn:
+      return "Rhyhorn";
+    case Species::kRhydon:
+      return "Rhydon";
+    case Species::kChansey:
+      return "Chansey";
+    case Species::kTangela:
+      return "Tangela";
+    case Species::kKangaskhan:
+      return "Kangaskhan";
+    case Species::kHorsea:
+      return "Horsea";
+    case Species::kSeadra:
+      return "Seadra";
+    case Species::kGoldeen:
+      return "Goldeen";
+    case Species::kSeaking:
+      return "Seaking";
+    case Species::kStaryu:
+      return "Staryu";
+    case Species::kStarmie:
+      return "Starmie";
+    case Species::kMrMime:
+      return "Mr. Mime";
+    case Species::kScyther:
+      return "Scyther";
+    case Species::kJynx:
+      return "Jynx";
+    case Species::kElectabuzz:
+      return "Electabuzz";
+    case Species::kMagmar:
+      return "Magmar";
+    case Species::kPinsir:
+      return "Pinsir";
+    case Species::kTauros:
+      return "Tauros";
+    case Species::kMagikarp:
+      return "Magikarp";
+    case Species::kGyarados:
+      return "Gyarados";
+    case Species::kLapras:
+      return "Lapras";
+    case Species::kDitto:
+      return "Ditto";
+    case Species::kEevee:
+      return "Eevee";
+    case Species::kVaporeon:
+      return "Vaporeon";
+    case Species::kJolteon:
+      return "Jolteon";
+    case Species::kFlareon:
+      return "Flareon";
+    case Species::kPorygon:
+      return "Porygon";
+    case Species::kOmanyte:
+      return "Omanyte";
+    case Species::kOmastar:
+      return "Omastar";
+    case Species::kKabuto:
+      return "Kabuto";
+    case Species::kKabutops:
+      return "Kabutops";
+    case Species::kAerodactyl:
+      return "Aerodactyl";
+    case Species::kSnorlax:
+      return "Snorlax";
+    case Species::kArticuno:
+      return "Articuno";
+    case Species::kZapdos:
+      return "Zapdos";
+    case Species::kMoltres:
+      return "Moltres";
+    case Species::kDratini:
+      return "Dratini";
+    case Species::kDragonair:
+      return "Dragonair";
+    case Species::kDragonite:
+      return "Dragonite";
+    case Species::kMewtwo:
+      return "Mewtwo";
+    case Species::kMew:
+      return "Mew";
+    default:
+      assert(false);
   };
 }
 
 auto StatToString(const StatNames &stat_name) -> std::string {
   switch (stat_name) {
-    case StatNames::kAttack: return "attack";
-    case StatNames::kDefense: return "defense";
-    case StatNames::kSpecial: return "special";
-    case StatNames::kSpeed: return "speed";
-    case StatNames::kHp: return "hp";
+    case StatNames::kAttack:
+      return "attack";
+    case StatNames::kDefense:
+      return "defense";
+    case StatNames::kSpecial:
+      return "special";
+    case StatNames::kSpeed:
+      return "speed";
+    case StatNames::kHp:
+      return "hp";
+    default:
+      assert(false);
   };
 }
 
