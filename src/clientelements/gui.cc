@@ -5,6 +5,7 @@
 #include "gui.h"
 #include "../pokemon/speciesnames.h"
 #include "../stringconverter/stringconverter.h"
+#include "../move/basepower.h"
 
 namespace artificialtrainer {
 auto Gui::DisplayWelcomeMessage() -> void {
@@ -49,7 +50,7 @@ auto Gui::DisplayPickLevelMessage() -> void {
   std::cout << "Pick this Pokemon's level." << std::endl;
 }
 
-auto Gui::DisplayPokemonLearnsetMessage(
+auto Gui::DisplayPokemonLearnset(
     const std::vector<MoveNames> &moveset) -> void {
   std::cout << "Learned moves:" << std::endl;
 
@@ -64,9 +65,43 @@ auto Gui::DisplayPickMoveMessage(const int &move_number) -> void {
             << std::endl;
 }
 
+auto Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) -> void {
+  std::vector<Pokemon> active_team = team.ActiveTeam();
+  std::vector<Pokemon> fainted_team = team.FaintedTeam();
+
+  std::cout << "Active team " << (player_one ? "one" : "two") << ':'
+            << std::endl;
+  int i = 1;
+
+  for (const auto &pokemon : active_team) {
+    std::cout << i++ << ". "
+              << StringConverter::SpeciesToString(pokemon.SpeciesName())
+              << ": " << pokemon.GetStatsContainer().HpStat().CurrentHp()
+              << " hp." << std::endl;
+  }
+
+  std::cout << std::endl;
+  std::cout << "Fainted team " << (player_one ? "one" : "two") << ':'
+            << std::endl;
+  i = 1;
+
+  for (const auto &pokemon : fainted_team) {
+    std::cout << i++ << ". "
+              << StringConverter::SpeciesToString(pokemon.SpeciesName())
+              << '.' << std::endl;
+  }
+
+  std::cout << std::endl;
+}
+
+auto Gui::DisplayPickLeadingPokemonMessage(const bool &player_one) -> void {
+  std::cout << "Player " << (player_one ? "one" : "two")
+            << ", select your leading Pokemon" << std::endl;
+}
+
 auto Gui::DisplayPickInBattleMoveMessage(const bool &player_one) -> void {
-  std::cout << "Player " << (player_one ? "one" : "two") << ", select your "
-                                                            "move" << std::endl;
+  std::cout << "Player " << (player_one ? "one" : "two") << ", select your move"
+            << std::endl;
 }
 
 } //namespace artificialtrainer

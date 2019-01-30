@@ -318,8 +318,8 @@ auto BaseHp(const SpeciesNames &species) -> int {
   };
 }
 
-auto CalculateActualHpStat(const int &base_hp, const int &level,
-                           const Ev &ev_stat, const Iv &iv_stat) -> int {
+auto CalculateInBattleHpStat(const int &base_hp, const int &level,
+                             const Ev &ev_stat, const Iv &iv_stat) -> int {
   return static_cast<int>(10 + floor(static_cast<double>(level / 100 * (
       (base_hp * 2) + 2 * iv_stat.Value() + ev_stat.Value() / 1024))) + level);
 }
@@ -328,16 +328,20 @@ auto CalculateActualHpStat(const int &base_hp, const int &level,
 
 Hp::Hp(const SpeciesNames &species_name, const int &level, const Ev &ev,
        const Iv &iv)
-    : ev_stat_(ev), iv_stat_(iv),
-      current_hp_(CalculateActualHpStat(BaseHp(species_name),
-                                        level,
-                                        ev,
-                                        iv)) {
+    : ev_stat_(ev),
+      iv_stat_(iv),
+      current_hp_(CalculateInBattleHpStat(BaseHp(species_name),
+                                          level,
+                                          ev,
+                                          iv)) {
   max_hp_ = current_hp_;
 }
 
-Hp::Hp(const int &current, const Ev &ev, const Iv &iv, const int &max_hp) :
-    current_hp_(current), ev_stat_(ev), iv_stat_(iv), max_hp_(max_hp) {
+Hp::Hp(const int &current, const Ev &ev, const Iv &iv, const int &max_hp)
+    : current_hp_(current),
+      ev_stat_(ev),
+      iv_stat_(iv),
+      max_hp_(max_hp) {
 }
 
 auto Hp::EvStat() const -> Ev {
@@ -361,13 +365,13 @@ auto Hp::HpAsPercent() const -> double {
 }
 
 auto operator+=(Hp &lhs, const int &rhs) -> Hp & {
-  return lhs = Hp(lhs.CurrentHp() + rhs, lhs.EvStat(), lhs.IvStat(), lhs
-      .MaxHp());
+  return lhs = Hp(lhs.CurrentHp() + rhs, lhs.EvStat(), lhs.IvStat(),
+                  lhs.MaxHp());
 }
 
 auto operator-=(Hp &lhs, const int &rhs) -> Hp & {
-  return lhs = Hp(lhs.CurrentHp() - rhs, lhs.EvStat(), lhs.IvStat(), lhs
-      .MaxHp());
+  return lhs = Hp(lhs.CurrentHp() - rhs, lhs.EvStat(), lhs.IvStat(),
+                  lhs.MaxHp());
 }
 
 } //namespace artificialtrainer

@@ -63,7 +63,7 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
     }
 
     std::vector<MoveNames> learnset = Learnset(pokemon_species);
-    Gui::DisplayPokemonLearnsetMessage(learnset);
+    Gui::DisplayPokemonLearnset(learnset);
     MovesContainer moves_container{};
 
     for (int j = 0; j < learnset.size() && j < MovesContainer::kMaxMoves; j++) {
@@ -93,7 +93,7 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
 } //namespace
 
 auto Battle::BattleOver() const -> bool {
-  return !team_one_.TeamSize() || !team_two_.TeamSize();
+  return !team_one_.ActiveTeamSize() || !team_two_.ActiveTeamSize();
 }
 
 auto Battle::Play() -> void {
@@ -102,6 +102,10 @@ auto Battle::Play() -> void {
   SelectTeam(team_two_, false);
 
   while (!BattleOver()) {
+    Gui::DisplayPlayerTeam(team_one_, true);
+    Gui::DisplayPlayerTeam(team_two_, false);
+    Gui::DisplayPickLeadingPokemonMessage(true);
+    Gui::DisplayPickLeadingPokemonMessage(false);
     break;
   }
 }

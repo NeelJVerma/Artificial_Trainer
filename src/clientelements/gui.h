@@ -9,6 +9,7 @@
 #include <vector>
 #include "../stat/statnames.h"
 #include "../move/movenames.h"
+#include "../team/team.h"
 
 namespace artificialtrainer {
 class Gui {
@@ -21,9 +22,12 @@ class Gui {
   static auto DisplayPickEvMessage(const StatNames &stat_name) -> void;
   static auto DisplayPickIvMessage(const StatNames &stat_name) -> void;
   static auto DisplayPickLevelMessage() -> void;
-  static auto DisplayPokemonLearnsetMessage(
+  static auto DisplayPokemonLearnset(
       const std::vector<MoveNames> &moveset) -> void;
   static auto DisplayPickMoveMessage(const int &move_number) -> void;
+  static auto DisplayPlayerTeam(const Team &team,
+                                const bool &player_one) -> void;
+  static auto DisplayPickLeadingPokemonMessage(const bool &player_one) -> void;
   static auto DisplayPickInBattleMoveMessage(const bool &player_one) -> void;
 };
 

@@ -98,7 +98,7 @@ auto Learnset(const SpeciesNames &species_name) -> std::vector<MoveNames> {
                                     MoveNames::kFireSpin, MoveNames::kCut,
                                     MoveNames::kStrength, MoveNames::kRage,
                                     MoveNames::kMegaPunch,
-                                    MoveNames::kSwordsDance,
+                                    MoveNames::kSwordsDance, MoveNames::kFly,
                                     MoveNames::kMegaKick, MoveNames::kToxic,
                                     MoveNames::kBodySlam, MoveNames::kTakeDown,
                                     MoveNames::kDoubleEdge,

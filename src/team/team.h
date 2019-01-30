@@ -19,12 +19,14 @@ class Team {
 
   auto FaintPokemon(const int &index) -> void;
   auto AddPokemon(const Pokemon &pokemon) -> void;
-  auto TeamSize() const -> int;
+  auto ActiveTeamSize() const -> int;
+  auto FaintedTeamSize() const -> int;
+  auto ActiveTeam() const -> std::vector<Pokemon>;
+  auto FaintedTeam() const -> std::vector<Pokemon>;
   auto SeenPokemon(const SpeciesNames &species) -> bool;
-  auto operator[](const int &index) -> Pokemon;
 
  private:
-  std::vector<Pokemon> team_;
+  std::vector<Pokemon> active_team_;
   std::vector<Pokemon> fainted_team_;
 };
 
