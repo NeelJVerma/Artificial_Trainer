@@ -393,6 +393,33 @@ src/move/pp.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.s
 .PHONY : src/move/pp.cc.s
 
+src/move/priority.o: src/move/priority.cc.o
+
+.PHONY : src/move/priority.o
+
+# target to build an object file
+src/move/priority.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o
+.PHONY : src/move/priority.cc.o
+
+src/move/priority.i: src/move/priority.cc.i
+
+.PHONY : src/move/priority.i
+
+# target to preprocess a source file
+src/move/priority.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.i
+.PHONY : src/move/priority.cc.i
+
+src/move/priority.s: src/move/priority.cc.s
+
+.PHONY : src/move/priority.s
+
+# target to generate assembly for a file
+src/move/priority.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.s
+.PHONY : src/move/priority.cc.s
+
 src/pokemon/learnset.o: src/pokemon/learnset.cc.o
 
 .PHONY : src/pokemon/learnset.o
@@ -690,6 +717,33 @@ src/type/type.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/type/type.cc.s
 .PHONY : src/type/type.cc.s
 
+src/type/typecontainer.o: src/type/typecontainer.cc.o
+
+.PHONY : src/type/typecontainer.o
+
+# target to build an object file
+src/type/typecontainer.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o
+.PHONY : src/type/typecontainer.cc.o
+
+src/type/typecontainer.i: src/type/typecontainer.cc.i
+
+.PHONY : src/type/typecontainer.i
+
+# target to preprocess a source file
+src/type/typecontainer.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.i
+.PHONY : src/type/typecontainer.cc.i
+
+src/type/typecontainer.s: src/type/typecontainer.cc.s
+
+.PHONY : src/type/typecontainer.s
+
+# target to generate assembly for a file
+src/type/typecontainer.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.s
+.PHONY : src/type/typecontainer.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -729,6 +783,9 @@ help:
 	@echo "... src/move/pp.o"
 	@echo "... src/move/pp.i"
 	@echo "... src/move/pp.s"
+	@echo "... src/move/priority.o"
+	@echo "... src/move/priority.i"
+	@echo "... src/move/priority.s"
 	@echo "... src/pokemon/learnset.o"
 	@echo "... src/pokemon/learnset.i"
 	@echo "... src/pokemon/learnset.s"
@@ -762,6 +819,9 @@ help:
 	@echo "... src/type/type.o"
 	@echo "... src/type/type.i"
 	@echo "... src/type/type.s"
+	@echo "... src/type/typecontainer.o"
+	@echo "... src/type/typecontainer.i"
+	@echo "... src/type/typecontainer.s"
 .PHONY : help
 
 

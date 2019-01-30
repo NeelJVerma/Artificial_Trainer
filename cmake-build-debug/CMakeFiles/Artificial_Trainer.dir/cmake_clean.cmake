@@ -20,6 +20,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o"
   "Artificial_Trainer.pdb"
   "Artificial_Trainer"
 )

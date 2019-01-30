@@ -7,8 +7,8 @@
 
 namespace artificialtrainer {
 auto StringConverter::SpeciesToString(
-    const SpeciesNames &species) -> std::string {
-  switch (species) {
+    const SpeciesNames &species_name) -> std::string {
+  switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return "Bulbasaur";
     case SpeciesNames::kIvysaur:
@@ -679,6 +679,46 @@ auto StringConverter::MoveToString(const MoveNames &move_name) -> std::string {
     default:
       assert(false);
   };
+}
+
+auto StringConverter::TypeToString(const TypeNames &type_name) -> std::string {
+  switch (type_name) {
+    case TypeNames::kNormal:
+      return "Normal";
+    case TypeNames::kFighting:
+        return "Fighting";
+    case TypeNames::kFlying:
+      return "Flying";
+    case TypeNames::kPoison:
+      return "Poison";
+    case TypeNames::kGround:
+      return "Ground";
+    case TypeNames::kRock:
+      return "Rock";
+    case TypeNames::kBug:
+      return "Bug";
+    case TypeNames::kGhost:
+      return "Ghost";
+    case TypeNames::kFire:
+      return "Fire";
+    case TypeNames::kWater:
+      return "Water";
+    case TypeNames::kGrass:
+      return "Grass";
+    case TypeNames::kElectric:
+      return "Electric";
+    case TypeNames::kPsychic:
+      return "Psychic";
+    case TypeNames::kIce:
+      return "Ice";
+    case TypeNames::kDragon:
+      return "Dragon";
+    case TypeNames::kNoType:
+      return "No Type";
+    default:
+      assert(false);
+
+  }
 }
 
 } //namespace artificialtrainer

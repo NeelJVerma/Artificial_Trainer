@@ -29,7 +29,7 @@ auto Team::operator[](const int &index) -> Pokemon {
 
 auto Team::SeenPokemon(const SpeciesNames &species) -> bool {
   for (const auto &in_team : team_) {
-    if (species == in_team.GetSpecies()) {
+    if (species == in_team.SpeciesName()) {
       return true;
     }
   }

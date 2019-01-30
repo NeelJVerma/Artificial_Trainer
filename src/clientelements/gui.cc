@@ -49,8 +49,8 @@ auto Gui::DisplayPickLevelMessage() -> void {
   std::cout << "Pick this Pokemon's level." << std::endl;
 }
 
-auto Gui::DisplayPokemonMovesetMessage(const std::vector<MoveNames> &moveset)
--> void {
+auto Gui::DisplayPokemonLearnsetMessage(
+    const std::vector<MoveNames> &moveset) -> void {
   std::cout << "Learned moves:" << std::endl;
 
   for (MoveNames move_name : moveset) {

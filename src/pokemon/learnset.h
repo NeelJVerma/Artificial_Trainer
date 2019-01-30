@@ -10,7 +10,7 @@
 #include "../move/movenames.h"
 
 namespace artificialtrainer {
-auto Learnset(const SpeciesNames &species) -> std::vector<MoveNames>;
+auto Learnset(const SpeciesNames &species_name) -> std::vector<MoveNames>;
 
 } //namespace artificialtrainer
 

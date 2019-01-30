@@ -5,7 +5,7 @@
 #include "type.h"
 
 namespace artificialtrainer {
-auto Type(const MoveNames &move_name) -> TypesNames {
+auto Type(const MoveNames &move_name) -> TypeNames {
   switch (move_name) {
     case MoveNames::kBarrage:
     case MoveNames::kBide:
@@ -84,7 +84,7 @@ auto Type(const MoveNames &move_name) -> TypesNames {
     case MoveNames::kViceGrip:
     case MoveNames::kWhirlwind:
     case MoveNames::kWrap:
-      return TypesNames::kNormal;
+      return TypeNames::kNormal;
     case MoveNames::kCounter:
     case MoveNames::kDoubleKick:
     case MoveNames::kHighJumpKick:
@@ -93,14 +93,14 @@ auto Type(const MoveNames &move_name) -> TypesNames {
     case MoveNames::kRollingKick:
     case MoveNames::kSeismicToss:
     case MoveNames::kSubmission:
-      return TypesNames::kFighting;
+      return TypeNames::kFighting;
     case MoveNames::kDrillPeck:
     case MoveNames::kFly:
     case MoveNames::kMirrorMove:
     case MoveNames::kPeck:
     case MoveNames::kSkyAttack:
     case MoveNames::kWingAttack:
-      return TypesNames::kFlying;
+      return TypeNames::kFlying;
     case MoveNames::kAcid:
     case MoveNames::kAcidArmor:
     case MoveNames::kPoisonGas:
@@ -109,32 +109,32 @@ auto Type(const MoveNames &move_name) -> TypesNames {
     case MoveNames::kSludge:
     case MoveNames::kSmog:
     case MoveNames::kToxic:
-      return TypesNames::kPoison;
+      return TypeNames::kPoison;
     case MoveNames::kBoneClub:
     case MoveNames::kBonemerang:
     case MoveNames::kDig:
     case MoveNames::kEarthquake:
     case MoveNames::kFissure:
     case MoveNames::kSandAttack:
-      return TypesNames::kGround;
+      return TypeNames::kGround;
     case MoveNames::kRockSlide:
     case MoveNames::kRockThrow:
-      return TypesNames::kRock;
+      return TypeNames::kRock;
     case MoveNames::kLeechLife:
     case MoveNames::kPinMissile:
     case MoveNames::kStringShot:
     case MoveNames::kTwineedle:
-      return TypesNames::kBug;
+      return TypeNames::kBug;
     case MoveNames::kConfuseRay:
     case MoveNames::kLick:
     case MoveNames::kNightShade:
-      return TypesNames::kGhost;
+      return TypeNames::kGhost;
     case MoveNames::kEmber:
     case MoveNames::kFireBlast:
     case MoveNames::kFirePunch:
     case MoveNames::kFireSpin:
     case MoveNames::kFlamethrower:
-      return TypesNames::kFire;
+      return TypeNames::kFire;
     case MoveNames::kBubble:
     case MoveNames::kBubbleBeam:
     case MoveNames::kClamp:
@@ -144,7 +144,7 @@ auto Type(const MoveNames &move_name) -> TypesNames {
     case MoveNames::kWaterGun:
     case MoveNames::kWaterfall:
     case MoveNames::kWithdraw:
-      return TypesNames::kWater;
+      return TypeNames::kWater;
     case MoveNames::kAbsorb:
     case MoveNames::kLeechSeed:
     case MoveNames::kMegaDrain:
@@ -155,13 +155,13 @@ auto Type(const MoveNames &move_name) -> TypesNames {
     case MoveNames::kSpore:
     case MoveNames::kStunSpore:
     case MoveNames::kVineWhip:
-      return TypesNames::kGrass;
+      return TypeNames::kGrass;
     case MoveNames::kThunder:
     case MoveNames::kThunderWave:
     case MoveNames::kThunderbolt:
     case MoveNames::kThunderPunch:
     case MoveNames::kThunderShock:
-      return TypesNames::kElectric;
+      return TypeNames::kElectric;
     case MoveNames::kAgility:
     case MoveNames::kAmnesia:
     case MoveNames::kBarrier:
@@ -177,18 +177,18 @@ auto Type(const MoveNames &move_name) -> TypesNames {
     case MoveNames::kReflect:
     case MoveNames::kRest:
     case MoveNames::kTeleport:
-      return TypesNames::kPsychic;
+      return TypeNames::kPsychic;
     case MoveNames::kAuroraBeam:
     case MoveNames::kBlizzard:
     case MoveNames::kHaze:
     case MoveNames::kIceBeam:
     case MoveNames::kIcePunch:
     case MoveNames::kMist:
-      return TypesNames::kIce;
+      return TypeNames::kIce;
     case MoveNames::kDragonRage:
-      return TypesNames::kDragon;
+      return TypeNames::kDragon;
     default:
-      return TypesNames::kNoType;
+      return TypeNames::kNoType;
   };
 }
 

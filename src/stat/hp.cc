@@ -8,7 +8,7 @@
 
 namespace artificialtrainer {
 namespace {
-auto GetBaseHp(const SpeciesNames &species) -> int {
+auto BaseHp(const SpeciesNames &species) -> int {
   switch (species) {
     //Gen 1
     case SpeciesNames::kBulbasaur:
@@ -326,12 +326,10 @@ auto CalculateActualHpStat(const int &base_hp, const int &level,
 
 } //namespace
 
-Hp::Hp(const SpeciesNames &species,
-       const int &level,
-       const Ev &ev,
+Hp::Hp(const SpeciesNames &species_name, const int &level, const Ev &ev,
        const Iv &iv)
     : ev_stat_(ev), iv_stat_(iv),
-      current_hp_(CalculateActualHpStat(GetBaseHp(species),
+      current_hp_(CalculateActualHpStat(BaseHp(species_name),
                                         level,
                                         ev,
                                         iv)) {

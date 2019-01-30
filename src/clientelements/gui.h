@@ -21,8 +21,8 @@ class Gui {
   static auto DisplayPickEvMessage(const StatNames &stat_name) -> void;
   static auto DisplayPickIvMessage(const StatNames &stat_name) -> void;
   static auto DisplayPickLevelMessage() -> void;
-  static auto DisplayPokemonMovesetMessage(const std::vector<MoveNames> &moveset)
-  -> void;
+  static auto DisplayPokemonLearnsetMessage(
+      const std::vector<MoveNames> &moveset) -> void;
   static auto DisplayPickMoveMessage(const int &move_number) -> void;
   static auto DisplayPickInBattleMoveMessage(const bool &player_one) -> void;
 };

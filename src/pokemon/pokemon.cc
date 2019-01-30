@@ -5,14 +5,23 @@
 #include "pokemon.h"
 
 namespace artificialtrainer {
-Pokemon::Pokemon(const SpeciesNames &species,
+Pokemon::Pokemon(const SpeciesNames &species_name,
                  const StatsContainer &stats_container,
-                 const MovesContainer &moves_container,
-                 const int &level)
-    : species_(species),
+                 const MovesContainer &moves_container, const TypeContainer
+                 &type_container, const int &level)
+    : species_name_(species_name),
       stats_container_(stats_container),
       moves_container_(moves_container),
+      type_container_(type_container),
       level_(level) {
+}
+
+Pokemon::Pokemon()
+    : species_name_(SpeciesNames::kBulbasaur),
+      stats_container_{},
+      moves_container_{},
+      type_container_{},
+      level_(0) {
 }
 
 auto Pokemon::GetStatsContainer() const -> StatsContainer {
@@ -23,8 +32,12 @@ auto Pokemon::GetMovesContainer() const -> MovesContainer {
   return moves_container_;
 }
 
-auto Pokemon::GetSpecies() const -> SpeciesNames {
-  return species_;
+auto Pokemon::GetTypeContainer() const -> TypeContainer {
+  return type_container_;
+}
+
+auto Pokemon::SpeciesName() const -> SpeciesNames {
+  return species_name_;
 }
 
 auto Pokemon::Level() const -> int {

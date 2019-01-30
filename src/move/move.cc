@@ -25,14 +25,14 @@ auto Move::DecrementPp(const int &amount) -> void {
 
 auto IsPhysical(const MoveNames &move_name) -> bool {
   switch (Type(move_name)) {
-    case TypesNames::kNormal:
-    case TypesNames::kFighting:
-    case TypesNames::kPoison:
-    case TypesNames::kGround:
-    case TypesNames::kFlying:
-    case TypesNames::kBug:
-    case TypesNames::kRock:
-    case TypesNames::kGhost:
+    case TypeNames::kNormal:
+    case TypeNames::kFighting:
+    case TypeNames::kPoison:
+    case TypeNames::kGround:
+    case TypeNames::kFlying:
+    case TypeNames::kBug:
+    case TypeNames::kRock:
+    case TypeNames::kGhost:
       return true;
     default:
       return false;
@@ -41,13 +41,13 @@ auto IsPhysical(const MoveNames &move_name) -> bool {
 
 auto IsSpecial(const MoveNames &move_name) -> bool {
   switch (Type(move_name)) {
-    case TypesNames::kFire:
-    case TypesNames::kWater:
-    case TypesNames::kElectric:
-    case TypesNames::kGrass:
-    case TypesNames::kIce:
-    case TypesNames::kPsychic:
-    case TypesNames::kDragon:
+    case TypeNames::kFire:
+    case TypeNames::kWater:
+    case TypeNames::kElectric:
+    case TypeNames::kGrass:
+    case TypeNames::kIce:
+    case TypeNames::kPsychic:
+    case TypeNames::kDragon:
       return true;
     default:
       return false;

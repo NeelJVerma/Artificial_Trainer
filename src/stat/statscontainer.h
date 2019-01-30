@@ -12,11 +12,11 @@ namespace artificialtrainer {
 class StatsContainer {
  public:
   StatsContainer() = default;
-  StatsContainer(const SpeciesNames &species, const Hp &hp_stat,
+  StatsContainer(const SpeciesNames &species_name, const Hp &hp_stat,
                  const Stat stats[kNumNormalStats]);
   StatsContainer(const StatsContainer &stats_container) = default;
-  auto operator=(const StatsContainer &stats_container) -> StatsContainer &
-  = default;
+  auto operator=(
+      const StatsContainer &stats_container) -> StatsContainer & = default;
   auto HpStat() -> Hp &;
   auto EvasionStat() const -> double;
   auto AccuracyStat() const -> double;

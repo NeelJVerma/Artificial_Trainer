@@ -16,11 +16,11 @@ class MovesContainer {
 
   MovesContainer() = default;
   MovesContainer(const MovesContainer &moves_container) = default;
-  auto operator=(const MovesContainer &moves_container) -> MovesContainer &
-  = default;
+  auto operator=(
+      const MovesContainer &moves_container) -> MovesContainer & = default;
   auto AddMove(const Move &move) -> void;
-  auto GetCurrentMoves() const -> std::vector<Move>;
-  auto SeenMove(const MoveNames &move) -> bool;
+  auto CurrentMoves() const -> std::vector<Move>;
+  auto SeenMove(const MoveNames &move_name) -> bool;
   auto Size() const -> int;
   auto operator[](const int &index) -> Move &;
 

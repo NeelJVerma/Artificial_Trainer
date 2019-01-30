@@ -144,6 +144,12 @@
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/pp.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/priority.cc">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/priority.h">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/pokemon/learnset.cc">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
@@ -214,6 +220,12 @@
 			<Option target="Artificial_Trainer"/>
 		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/type/type.h">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/type/typecontainer.cc">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/type/typecontainer.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/CMakeLists.txt">

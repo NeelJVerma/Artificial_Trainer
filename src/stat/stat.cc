@@ -7,8 +7,8 @@
 
 namespace artificialtrainer {
 namespace {
-auto GetAttackFromSpecies(const SpeciesNames &species) -> int {
-  switch (species) {
+auto GetAttackFromSpecies(const SpeciesNames &species_name) -> int {
+  switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return 49;
     case SpeciesNames::kIvysaur:
@@ -316,8 +316,8 @@ auto GetAttackFromSpecies(const SpeciesNames &species) -> int {
   };
 }
 
-auto GetDefenseFromSpecies(const SpeciesNames &species) -> int {
-  switch (species) {
+auto GetDefenseFromSpecies(const SpeciesNames &species_name) -> int {
+  switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return 49;
     case SpeciesNames::kIvysaur:
@@ -625,8 +625,8 @@ auto GetDefenseFromSpecies(const SpeciesNames &species) -> int {
   };
 }
 
-auto GetSpecialFromSpecies(const SpeciesNames &species) -> int {
-  switch (species) {
+auto GetSpecialFromSpecies(const SpeciesNames &species_name) -> int {
+  switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return 65;
     case SpeciesNames::kIvysaur:
@@ -934,8 +934,8 @@ auto GetSpecialFromSpecies(const SpeciesNames &species) -> int {
   };
 }
 
-auto GetSpeedFromSpecies(const SpeciesNames &species) -> int {
-  switch (species) {
+auto GetSpeedFromSpecies(const SpeciesNames &species_name) -> int {
+  switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return 45;
     case SpeciesNames::kIvysaur:
@@ -1243,16 +1243,17 @@ auto GetSpeedFromSpecies(const SpeciesNames &species) -> int {
   };
 }
 
-auto GetBase(const SpeciesNames &species, const StatNames &stat_name) -> int {
+auto GetBase(const SpeciesNames &species_name,
+             const StatNames &stat_name) -> int {
   switch (stat_name) {
     case StatNames::kAttack:
-      return GetAttackFromSpecies(species);
+      return GetAttackFromSpecies(species_name);
     case StatNames::kDefense:
-      return GetDefenseFromSpecies(species);
+      return GetDefenseFromSpecies(species_name);
     case StatNames::kSpecial:
-      return GetSpecialFromSpecies(species);
+      return GetSpecialFromSpecies(species_name);
     case StatNames::kSpeed:
-      return GetSpeedFromSpecies(species);
+      return GetSpeedFromSpecies(species_name);
     default:
       assert(false);
   };
@@ -1260,12 +1261,12 @@ auto GetBase(const SpeciesNames &species, const StatNames &stat_name) -> int {
 
 } //namespace
 
-Stat::Stat(const SpeciesNames &species,
-           const StatNames &stat_name,
-           const Ev &ev,
-           const Iv &iv) : base_stat_(GetBase(species, stat_name)),
-                           ev_stat_(ev),
-                           iv_stat_(iv) {
+Stat::Stat(const SpeciesNames &species_name, const StatNames &stat_name,
+           const Ev &ev, const Iv &iv)
+    : base_stat_(GetBase(species_name,
+                         stat_name)),
+      ev_stat_(ev),
+      iv_stat_(iv) {
 }
 
 auto Stat::EvStat() const -> Ev {

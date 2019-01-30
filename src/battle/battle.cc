@@ -14,9 +14,9 @@
 
 namespace artificialtrainer {
 namespace {
-auto PokemonLearnsMove(const std::vector<MoveNames> &moveset,
+auto PokemonLearnsMove(const std::vector<MoveNames> &learnset,
                        const MoveNames &move_selected) -> bool {
-  for (MoveNames learned_move : moveset) {
+  for (MoveNames learned_move : learnset) {
     if (move_selected == learned_move) {
       return true;
     }
@@ -62,16 +62,16 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
       }
     }
 
-    std::vector<MoveNames> moveset = Learnset(pokemon_species);
-    Gui::DisplayPokemonMovesetMessage(moveset);
+    std::vector<MoveNames> learnset = Learnset(pokemon_species);
+    Gui::DisplayPokemonLearnsetMessage(learnset);
     MovesContainer moves_container{};
 
-    for (int j = 0; j < moveset.size() && j < MovesContainer::kMaxMoves; j++) {
+    for (int j = 0; j < learnset.size() && j < MovesContainer::kMaxMoves; j++) {
       Gui::DisplayPickMoveMessage(j + 1);
       int move_selection = InputHandler::GetIntInput(1, kNumMoves);
       auto move_name = static_cast<MoveNames>(move_selection);
 
-      if (!PokemonLearnsMove(moveset, move_name) ||
+      if (!PokemonLearnsMove(learnset, move_name) ||
           moves_container.SeenMove(move_name)) {
         Gui::DisplayInvalidChoiceMessage();
         j--;
@@ -85,6 +85,7 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
                             StatsContainer(pokemon_species,
                                            hp, stats),
                             moves_container,
+                            TypeContainer(pokemon_species),
                             level_selection));
   }
 }

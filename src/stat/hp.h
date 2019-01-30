@@ -16,7 +16,8 @@ class Hp {
   Hp(const Hp &hp) = default;
   auto operator=(const Hp &hp) -> Hp & = default;
   Hp() = default;
-  Hp(const SpeciesNames &species, const int &level, const Ev &ev, const Iv &iv);
+  Hp(const SpeciesNames &species_name, const int &level, const Ev &ev,
+     const Iv &iv);
   Hp(const int &current, const Ev &ev, const Iv &iv, const int &max_hp);
   auto EvStat() const -> Ev;
   auto IvStat() const -> Iv;

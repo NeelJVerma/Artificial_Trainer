@@ -8,6 +8,7 @@
 #include "speciesnames.h"
 #include "../stat/statscontainer.h"
 #include "../move/movescontainer.h"
+#include "../type/typecontainer.h"
 
 namespace artificialtrainer {
 class Pokemon {
@@ -16,22 +17,23 @@ class Pokemon {
 
   Pokemon(const Pokemon &pokemon) = default;
   auto operator=(const Pokemon &pokemon) -> Pokemon & = default;
-  Pokemon() = default;
-  Pokemon(const SpeciesNames &species, const StatsContainer &stats_container,
-          const MovesContainer &moves_container, const int &level);
+  Pokemon();
+  Pokemon(const SpeciesNames &species_name,
+          const StatsContainer &stats_container,
+          const MovesContainer &moves_container,
+          const TypeContainer &type_container, const int &level);
   auto GetStatsContainer() const -> StatsContainer;
   auto GetMovesContainer() const -> MovesContainer;
-  auto GetSpecies() const -> SpeciesNames;
+  auto GetTypeContainer() const -> TypeContainer;
+  auto SpeciesName() const -> SpeciesNames;
   auto Level() const -> int;
 
  private:
   StatsContainer stats_container_;
   MovesContainer moves_container_;
-  SpeciesNames species_;
+  TypeContainer type_container_;
+  SpeciesNames species_name_;
   int level_;
-  // moves
-  // types
-  // statuses
 };
 
 } //namespace artificialtrainer

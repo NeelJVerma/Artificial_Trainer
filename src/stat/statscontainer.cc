@@ -6,9 +6,11 @@
 #include "statscontainer.h"
 
 namespace artificialtrainer {
-StatsContainer::StatsContainer(const SpeciesNames &species, const Hp &hp_stat,
+StatsContainer::StatsContainer(const SpeciesNames &species_name,
+                               const Hp &hp_stat,
                                const Stat stats[kNumNormalStats])
-    : hp_stat_(hp_stat), evasion_stat_(1),
+    : hp_stat_(hp_stat),
+      evasion_stat_(1),
       accuracy_stat_(1) {
   for (int i = 0; i < kNumNormalStats; i++) {
     normal_stats_[i] = stats[i];

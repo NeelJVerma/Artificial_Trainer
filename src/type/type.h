@@ -8,7 +8,7 @@
 #include "../move/movenames.h"
 
 namespace artificialtrainer {
-enum class TypesNames : int {
+enum class TypeNames : int {
   kNormal,
   kFighting,
   kFlying,
@@ -27,8 +27,8 @@ enum class TypesNames : int {
   kNoType
 };
 
-const int kNumTypes = static_cast<int>(TypesNames::kNoType) + 1;
-auto Type(const MoveNames &move_name) -> TypesNames;
+const int kNumTypes = static_cast<int>(TypeNames::kNoType) + 1;
+auto Type(const MoveNames &move_name) -> TypeNames;
 
 } //namespace artificialtrainer
 

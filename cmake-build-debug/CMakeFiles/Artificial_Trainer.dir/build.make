@@ -330,6 +330,32 @@ CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/movescontainer.cc -o CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.s
 
+CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o: CMakeFiles/Artificial_Trainer.dir/flags.make
+CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o: ../src/move/priority.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o -c /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/priority.cc
+
+CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/priority.cc > CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.i
+
+CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/priority.cc -o CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.s
+
+CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: CMakeFiles/Artificial_Trainer.dir/flags.make
+CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/type/typecontainer.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o -c /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/type/typecontainer.cc
+
+CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/type/typecontainer.cc > CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.i
+
+CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/type/typecontainer.cc -o CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.s
+
 # Object files for target Artificial_Trainer
 Artificial_Trainer_OBJECTS = \
 "CMakeFiles/Artificial_Trainer.dir/src/main.cc.o" \
@@ -352,7 +378,9 @@ Artificial_Trainer_OBJECTS = \
 "CMakeFiles/Artificial_Trainer.dir/src/type/effectiveness.cc.o" \
 "CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o" \
 "CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o" \
-"CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.o"
+"CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.o" \
+"CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o" \
+"CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o"
 
 # External object files for target Artificial_Trainer
 Artificial_Trainer_EXTERNAL_OBJECTS =
@@ -378,9 +406,11 @@ Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/type/effectiveness.cc.
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.o
+Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o
+Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/build.make
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX executable Artificial_Trainer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable Artificial_Trainer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Artificial_Trainer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
