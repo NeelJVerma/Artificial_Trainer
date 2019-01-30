@@ -6,7 +6,7 @@
 #define ARTIFICIAL_TRAINER_MOVES_H
 
 namespace artificialtrainer {
-enum class Moves : int {
+enum class MoveNames : int {
   kAbsorb,
   kAcid,
   kAcidArmor,
@@ -182,7 +182,7 @@ enum class Moves : int {
   kHitSelf
 };
 
-const int kNumMoves = static_cast<int>(Moves::kWrap) + 1;
+const int kNumMoves = static_cast<int>(MoveNames::kWrap) + 1;
 
 } //namespace artificialtrainer
 

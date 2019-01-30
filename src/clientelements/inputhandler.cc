@@ -6,7 +6,7 @@
 #include <iostream>
 #include "inputhandler.h"
 #include "sanitizer.h"
-#include "../pokemon/species.h"
+#include "../pokemon/speciesnames.h"
 #include "gui.h"
 
 namespace artificialtrainer {

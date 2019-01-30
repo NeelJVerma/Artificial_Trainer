@@ -5,8 +5,9 @@
 #ifndef ARTIFICIAL_TRAINER_POKEMON_H
 #define ARTIFICIAL_TRAINER_POKEMON_H
 
-#include "species.h"
+#include "speciesnames.h"
 #include "../stat/statscontainer.h"
+#include "../move/movescontainer.h"
 
 namespace artificialtrainer {
 class Pokemon {
@@ -16,15 +17,17 @@ class Pokemon {
   Pokemon(const Pokemon &pokemon) = default;
   auto operator=(const Pokemon &pokemon) -> Pokemon & = default;
   Pokemon() = default;
-  Pokemon(const Species &species, const StatsContainer &stats_container, const
-  int &level);
+  Pokemon(const SpeciesNames &species, const StatsContainer &stats_container,
+          const MovesContainer &moves_container, const int &level);
   auto GetStatsContainer() const -> StatsContainer;
-  auto GetSpecies() const -> Species;
+  auto GetMovesContainer() const -> MovesContainer;
+  auto GetSpecies() const -> SpeciesNames;
   auto Level() const -> int;
 
  private:
   StatsContainer stats_container_;
-  Species species_;
+  MovesContainer moves_container_;
+  SpeciesNames species_;
   int level_;
   // moves
   // types

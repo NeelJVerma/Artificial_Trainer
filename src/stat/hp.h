@@ -5,7 +5,7 @@
 #ifndef ARTIFICIAL_TRAINER_HP_H
 #define ARTIFICIAL_TRAINER_HP_H
 
-#include "../pokemon/species.h"
+#include "../pokemon/speciesnames.h"
 #include "statnames.h"
 #include "iv.h"
 #include "ev.h"
@@ -16,7 +16,7 @@ class Hp {
   Hp(const Hp &hp) = default;
   auto operator=(const Hp &hp) -> Hp & = default;
   Hp() = default;
-  Hp(const Species &species, const int &level, const Ev &ev, const Iv &iv);
+  Hp(const SpeciesNames &species, const int &level, const Ev &ev, const Iv &iv);
   Hp(const int &current, const Ev &ev, const Iv &iv, const int &max_hp);
   auto EvStat() const -> Ev;
   auto IvStat() const -> Iv;

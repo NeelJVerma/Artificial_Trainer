@@ -2,14 +2,16 @@
 // Created by neel on 1/24/19.
 //
 
+#include <stdexcept>
 #include "team.h"
 
 namespace artificialtrainer {
-auto Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void {
+auto Team::AddPokemon(const Pokemon &pokemon) -> void {
   team_.push_back(pokemon);
 }
 
 auto Team::FaintPokemon(const int &index) -> void {
+  fainted_team_.push_back(team_[index]);
   team_.erase(team_.begin() + index);
 }
 
@@ -17,7 +19,7 @@ auto Team::TeamSize() const -> int {
   return static_cast<int>(team_.size());
 }
 
-auto Team::operator[](const int &index) -> std::shared_ptr<Pokemon> {
+auto Team::operator[](const int &index) -> Pokemon {
   if (index < 0 || index >= team_.size()) {
     throw std::out_of_range("Index doesn't exist");
   }
@@ -25,9 +27,9 @@ auto Team::operator[](const int &index) -> std::shared_ptr<Pokemon> {
   return team_[index];
 }
 
-auto Team::SeenPokemon(const Species &species) -> bool {
+auto Team::SeenPokemon(const SpeciesNames &species) -> bool {
   for (const auto &in_team : team_) {
-    if (species == in_team->GetSpecies()) {
+    if (species == in_team.GetSpecies()) {
       return true;
     }
   }

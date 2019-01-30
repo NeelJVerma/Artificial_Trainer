@@ -5,10 +5,10 @@
 #ifndef ARTIFICIAL_TRAINER_PP_H
 #define ARTIFICIAL_TRAINER_PP_H
 
-#include "moves.h"
+#include "movenames.h"
 
 namespace artificialtrainer {
-auto Pp(const Moves &move_name) -> int;
+auto Pp(const MoveNames &move_name) -> int;
 
 } //namespace artificialtrainer
 

@@ -5,10 +5,10 @@
 #ifndef ARTIFICIAL_TRAINER_BASEPOWER_H
 #define ARTIFICIAL_TRAINER_BASEPOWER_H
 
-#include "moves.h"
+#include "movenames.h"
 
 namespace artificialtrainer {
-auto BasePower(const Moves &move_name) -> int;
+auto BasePower(const MoveNames &move_name) -> int;
 
 } //namespace artificialtrainer
 

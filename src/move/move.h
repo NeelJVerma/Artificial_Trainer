@@ -5,7 +5,7 @@
 #ifndef ARTIFICIAL_TRAINER_MOVE_H
 #define ARTIFICIAL_TRAINER_MOVE_H
 
-#include "moves.h"
+#include "movenames.h"
 
 namespace artificialtrainer {
 class Move {
@@ -13,20 +13,20 @@ class Move {
   Move(const Move &move) = default;
   auto operator=(const Move &move) -> Move & = default;
   Move() = default;
-  Move(const Moves &move_name, const int &current_pp);
-  auto MoveName() const -> Moves;
+  Move(const MoveNames &move_name, const int &current_pp);
+  auto MoveName() const -> MoveNames;
   auto CurrentPp() const -> int;
   auto DecrementPp(const int &amount) -> void;
 
  private:
   int current_pp_;
-  Moves move_name_;
+  MoveNames move_name_;
 };
 
-auto IsPhysical(Moves &move_name) -> bool;
-auto IsSpecial(const Moves &move_name) -> bool;
-auto IsDamaging(const Moves &move_name) -> bool;
-auto IsUseless(const Moves &move_name) -> bool;
+auto IsPhysical(MoveNames &move_name) -> bool;
+auto IsSpecial(const MoveNames &move_name) -> bool;
+auto IsDamaging(const MoveNames &move_name) -> bool;
+auto IsUseless(const MoveNames &move_name) -> bool;
 
 } //namespace artificialtrainer
 

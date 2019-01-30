@@ -7,10 +7,24 @@
 #include "../clientelements/inputhandler.h"
 #include "../stat/ev.h"
 #include "../stat/iv.h"
-#include "../stringconversions/stringconverter.h"
+#include "../move/movenames.h"
+#include "../pokemon/learnset.h"
+#include "../move/movescontainer.h"
+#include "../move/pp.h"
 
 namespace artificialtrainer {
 namespace {
+auto PokemonLearnsMove(const std::vector<MoveNames> &moveset,
+                       const MoveNames &move_selected) -> bool {
+  for (MoveNames learned_move : moveset) {
+    if (move_selected == learned_move) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 auto SelectTeam(Team &team, const bool &team_one) -> void {
   Gui::DisplayPokemonChoices();
   Gui::DisplayPickTeamMessage(team_one);
@@ -18,7 +32,7 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
   for (int i = 0; i < Team::kMaxTeamSize; i++) {
     Gui::DisplayPickPokemonMessage(i + 1);
     int pokemon_selection = InputHandler::GetIntInput(1, kNumSpecies);
-    auto pokemon_species = static_cast<Species>(pokemon_selection - 1);
+    auto pokemon_species = static_cast<SpeciesNames>(pokemon_selection - 1);
 
     if (team.SeenPokemon(pokemon_species)) {
       Gui::DisplayInvalidChoiceMessage();
@@ -41,15 +55,37 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
 
       if (stat_name == StatNames::kHp) {
         hp = Hp(pokemon_species, level_selection, Ev(ev_selection),
-            Iv(iv_selection));
+                Iv(iv_selection));
       } else {
-        stats[normal_stats_count++] = stat(pokemon_species, stat_name,
-            Ev(ev_selection), Iv(iv_selection);
+        stats[normal_stats_count++] = Stat(pokemon_species, stat_name,
+                                           Ev(ev_selection), Iv(iv_selection));
       }
     }
 
-    team.AddPokemon(std::make_shared<Pokemon>(pokemon_species,
-        StatsContainer(pokemon_species, hp, stats), level_selection));
+    std::vector<MoveNames> moveset = Learnset(pokemon_species);
+    Gui::DisplayPokemonMovesetMessage(moveset);
+    MovesContainer moves_container{};
+
+    for (int j = 0; j < moveset.size() && j < MovesContainer::kMaxMoves; j++) {
+      Gui::DisplayPickMoveMessage(j + 1);
+      int move_selection = InputHandler::GetIntInput(1, kNumMoves);
+      auto move_name = static_cast<MoveNames>(move_selection);
+
+      if (!PokemonLearnsMove(moveset, move_name) ||
+          moves_container.SeenMove(move_name)) {
+        Gui::DisplayInvalidChoiceMessage();
+        j--;
+        continue;
+      }
+
+      moves_container.AddMove(Move(move_name, Pp(move_name)));
+    }
+
+    team.AddPokemon(Pokemon(pokemon_species,
+                            StatsContainer(pokemon_species,
+                                           hp, stats),
+                            moves_container,
+                            level_selection));
   }
 }
 

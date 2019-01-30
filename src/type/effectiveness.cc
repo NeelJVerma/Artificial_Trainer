@@ -27,7 +27,8 @@ const double kEffectivenessMatrix[kNumTypes][kNumTypes] = {
 
 } //namespace
 
-auto Effectiveness(const Types &attacking, const Types &defending) -> double {
+auto Effectiveness(const TypesNames &attacking,
+                   const TypesNames &defending) -> double {
   return kEffectivenessMatrix[static_cast<int>(attacking)][static_cast<int>
   (defending)];
 }

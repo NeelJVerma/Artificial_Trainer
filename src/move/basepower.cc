@@ -11,353 +11,353 @@ const int kVariable = 1;
 const int kOneHitKo = 2;
 const int kUnchanged = 3;
 
-auto BasePower(const Moves &move_name) -> int {
+auto BasePower(const MoveNames &move_name) -> int {
   switch (move_name) {
-    case Moves::kAbsorb:
+    case MoveNames::kAbsorb:
       return 20;
-    case Moves::kAcid:
+    case MoveNames::kAcid:
       return 40;
-    case Moves::kAcidArmor:
+    case MoveNames::kAcidArmor:
       return kNone;
-    case Moves::kAgility:
+    case MoveNames::kAgility:
       return kNone;
-    case Moves::kAmnesia:
+    case MoveNames::kAmnesia:
       return kNone;
-    case Moves::kAuroraBeam:
+    case MoveNames::kAuroraBeam:
       return 65;
-    case Moves::kBarrage:
+    case MoveNames::kBarrage:
       return 15;
-    case Moves::kBarrier:
+    case MoveNames::kBarrier:
       return kNone;
-    case Moves::kBide:
+    case MoveNames::kBide:
       return kVariable;
-    case Moves::kBind:
+    case MoveNames::kBind:
       return 15;
-    case Moves::kBite:
+    case MoveNames::kBite:
       return 60;
-    case Moves::kBlizzard:
+    case MoveNames::kBlizzard:
       return 120;
-    case Moves::kBodySlam:
+    case MoveNames::kBodySlam:
       return 85;
-    case Moves::kBoneClub:
+    case MoveNames::kBoneClub:
       return 65;
-    case Moves::kBonemerang:
+    case MoveNames::kBonemerang:
       return 60;
-    case Moves::kBubble:
+    case MoveNames::kBubble:
       return 20;
-    case Moves::kBubbleBeam:
+    case MoveNames::kBubbleBeam:
       return 65;
-    case Moves::kClamp:
+    case MoveNames::kClamp:
       return 35;
-    case Moves::kCometPunch:
+    case MoveNames::kCometPunch:
       return 18;
-    case Moves::kConfuseRay:
+    case MoveNames::kConfuseRay:
       return kNone;
-    case Moves::kConfusion:
+    case MoveNames::kConfusion:
       return 50;
-    case Moves::kConstrict:
+    case MoveNames::kConstrict:
       return 10;
-    case Moves::kConversion:
+    case MoveNames::kConversion:
       return kNone;
-    case Moves::kCounter:
+    case MoveNames::kCounter:
       return kVariable;
-    case Moves::kCrabhammer:
+    case MoveNames::kCrabhammer:
       return 90;
-    case Moves::kCut:
+    case MoveNames::kCut:
       return 50;
-    case Moves::kDefenseCurl:
+    case MoveNames::kDefenseCurl:
       return kNone;
-    case Moves::kDig:
+    case MoveNames::kDig:
       return 100;
-    case Moves::kDisable:
+    case MoveNames::kDisable:
       return kNone;
-    case Moves::kDizzyPunch:
+    case MoveNames::kDizzyPunch:
       return 70;
-    case Moves::kDoubleKick:
+    case MoveNames::kDoubleKick:
       return 30;
-    case Moves::kDoubleTeam:
+    case MoveNames::kDoubleTeam:
       return kNone;
-    case Moves::kDoubleEdge:
+    case MoveNames::kDoubleEdge:
       return 100;
-    case Moves::kDoubleSlap:
+    case MoveNames::kDoubleSlap:
       return 15;
-    case Moves::kDragonRage:
+    case MoveNames::kDragonRage:
       return kUnchanged;
-    case Moves::kDreamEater:
+    case MoveNames::kDreamEater:
       return 100;
-    case Moves::kDrillPeck:
+    case MoveNames::kDrillPeck:
       return 80;
-    case Moves::kEarthquake:
+    case MoveNames::kEarthquake:
       return 100;
-    case Moves::kEggBomb:
+    case MoveNames::kEggBomb:
       return 100;
-    case Moves::kEmber:
+    case MoveNames::kEmber:
       return 40;
-    case Moves::kExplosion:
+    case MoveNames::kExplosion:
       return 170;
-    case Moves::kFireBlast:
+    case MoveNames::kFireBlast:
       return 120;
-    case Moves::kFirePunch:
+    case MoveNames::kFirePunch:
       return 75;
-    case Moves::kFireSpin:
+    case MoveNames::kFireSpin:
       return 15;
-    case Moves::kFissure:
+    case MoveNames::kFissure:
       return kOneHitKo;
-    case Moves::kFlamethrower:
+    case MoveNames::kFlamethrower:
       return 95;
-    case Moves::kFlash:
+    case MoveNames::kFlash:
       return kNone;
-    case Moves::kFly:
+    case MoveNames::kFly:
       return 70;
-    case Moves::kFocusEnergy:
+    case MoveNames::kFocusEnergy:
       return kNone;
-    case Moves::kFuryAttack:
+    case MoveNames::kFuryAttack:
       return 15;
-    case Moves::kFurySwipes:
+    case MoveNames::kFurySwipes:
       return 10;
-    case Moves::kGlare:
+    case MoveNames::kGlare:
       return kNone;
-    case Moves::kGrowl:
+    case MoveNames::kGrowl:
       return kNone;
-    case Moves::kGrowth:
+    case MoveNames::kGrowth:
       return kNone;
-    case Moves::kGuillotine:
+    case MoveNames::kGuillotine:
       return kOneHitKo;
-    case Moves::kGust:
+    case MoveNames::kGust:
       return 40;
-    case Moves::kHarden:
+    case MoveNames::kHarden:
       return kNone;
-    case Moves::kHaze:
+    case MoveNames::kHaze:
       return kNone;
-    case Moves::kHeadbutt:
+    case MoveNames::kHeadbutt:
       return 70;
-    case Moves::kHighJumpKick:
+    case MoveNames::kHighJumpKick:
       return 85;
-    case Moves::kHornAttack:
+    case MoveNames::kHornAttack:
       return 65;
-    case Moves::kHornDrill:
+    case MoveNames::kHornDrill:
       return kOneHitKo;
-    case Moves::kHydroPump:
+    case MoveNames::kHydroPump:
       return 120;
-    case Moves::kHyperBeam:
+    case MoveNames::kHyperBeam:
       return 150;
-    case Moves::kHyperFang:
+    case MoveNames::kHyperFang:
       return 80;
-    case Moves::kHypnosis:
+    case MoveNames::kHypnosis:
       return kNone;
-    case Moves::kIceBeam:
+    case MoveNames::kIceBeam:
       return 95;
-    case Moves::kIcePunch:
+    case MoveNames::kIcePunch:
       return 75;
-    case Moves::kJumpKick:
+    case MoveNames::kJumpKick:
       return 70;
-    case Moves::kKarateChop:
+    case MoveNames::kKarateChop:
       return 55;
-    case Moves::kKinesis:
+    case MoveNames::kKinesis:
       return kNone;
-    case Moves::kLeechLife:
+    case MoveNames::kLeechLife:
       return 20;
-    case Moves::kLeechSeed:
+    case MoveNames::kLeechSeed:
       return kNone;
-    case Moves::kLeer:
+    case MoveNames::kLeer:
       return kNone;
-    case Moves::kLick:
+    case MoveNames::kLick:
       return 20;
-    case Moves::kLightScreen:
+    case MoveNames::kLightScreen:
       return kNone;
-    case Moves::kLovelyKiss:
+    case MoveNames::kLovelyKiss:
       return kNone;
-    case Moves::kLowKick:
+    case MoveNames::kLowKick:
       return 50;
-    case Moves::kMeditate:
+    case MoveNames::kMeditate:
       return kNone;
-    case Moves::kMegaDrain:
+    case MoveNames::kMegaDrain:
       return 40;
-    case Moves::kMegaKick:
+    case MoveNames::kMegaKick:
       return 120;
-    case Moves::kMegaPunch:
+    case MoveNames::kMegaPunch:
       return 80;
-    case Moves::kMetronome:
+    case MoveNames::kMetronome:
       return kNone;
-    case Moves::kMimic:
+    case MoveNames::kMimic:
       return kNone;
-    case Moves::kMinimize:
+    case MoveNames::kMinimize:
       return kNone;
-    case Moves::kMirrorMove:
+    case MoveNames::kMirrorMove:
       return kNone;
-    case Moves::kMist:
+    case MoveNames::kMist:
       return kNone;
-    case Moves::kNightShade:
+    case MoveNames::kNightShade:
       return kVariable;
-    case Moves::kPayDay:
+    case MoveNames::kPayDay:
       return 40;
-    case Moves::kPeck:
+    case MoveNames::kPeck:
       return 35;
-    case Moves::kPetalDance:
+    case MoveNames::kPetalDance:
       return 70;
-    case Moves::kPinMissile:
+    case MoveNames::kPinMissile:
       return 14;
-    case Moves::kPoisonGas:
+    case MoveNames::kPoisonGas:
       return kNone;
-    case Moves::kPoisonSting:
+    case MoveNames::kPoisonSting:
       return 15;
-    case Moves::kPoisonPowder:
+    case MoveNames::kPoisonPowder:
       return kNone;
-    case Moves::kPound:
+    case MoveNames::kPound:
       return 40;
-    case Moves::kPsybeam:
+    case MoveNames::kPsybeam:
       return 65;
-    case Moves::kPsychic:
+    case MoveNames::kPsychic:
       return 90;
-    case Moves::kPsywave:
+    case MoveNames::kPsywave:
       return kVariable;
-    case Moves::kQuickAttack:
+    case MoveNames::kQuickAttack:
       return 40;
-    case Moves::kRage:
+    case MoveNames::kRage:
       return 20;
-    case Moves::kRazorLeaf:
+    case MoveNames::kRazorLeaf:
       return 55;
-    case Moves::kRazorWind:
+    case MoveNames::kRazorWind:
       return 80;
-    case Moves::kRecover:
+    case MoveNames::kRecover:
       return kNone;
-    case Moves::kReflect:
+    case MoveNames::kReflect:
       return kNone;
-    case Moves::kRest:
+    case MoveNames::kRest:
       return kNone;
-    case Moves::kRoar:
+    case MoveNames::kRoar:
       return kNone;
-    case Moves::kRockSlide:
+    case MoveNames::kRockSlide:
       return 75;
-    case Moves::kRockThrow:
+    case MoveNames::kRockThrow:
       return 50;
-    case Moves::kRollingKick:
+    case MoveNames::kRollingKick:
       return 60;
-    case Moves::kSandAttack:
+    case MoveNames::kSandAttack:
       return kNone;
-    case Moves::kScratch:
+    case MoveNames::kScratch:
       return 40;
-    case Moves::kScreech:
+    case MoveNames::kScreech:
       return kNone;
-    case Moves::kSeismicToss:
+    case MoveNames::kSeismicToss:
       return kVariable;
-    case Moves::kSelfDestruct:
+    case MoveNames::kSelfDestruct:
       return 130;
-    case Moves::kSharpen:
+    case MoveNames::kSharpen:
       return kNone;
-    case Moves::kSing:
+    case MoveNames::kSing:
       return kNone;
-    case Moves::kSkullBash:
+    case MoveNames::kSkullBash:
       return 100;
-    case Moves::kSkyAttack:
+    case MoveNames::kSkyAttack:
       return 140;
-    case Moves::kSlam:
+    case MoveNames::kSlam:
       return 80;
-    case Moves::kSlash:
+    case MoveNames::kSlash:
       return 70;
-    case Moves::kSleepPowder:
+    case MoveNames::kSleepPowder:
       return kNone;
-    case Moves::kSludge:
+    case MoveNames::kSludge:
       return 65;
-    case Moves::kSmog:
+    case MoveNames::kSmog:
       return 20;
-    case Moves::kSmokescreen:
+    case MoveNames::kSmokescreen:
       return kNone;
-    case Moves::kSoftBoiled:
+    case MoveNames::kSoftBoiled:
       return kNone;
-    case Moves::kSolarBeam:
+    case MoveNames::kSolarBeam:
       return 120;
-    case Moves::kSonicBoom:
+    case MoveNames::kSonicBoom:
       return kUnchanged;
-    case Moves::kSpikeCannon:
+    case MoveNames::kSpikeCannon:
       return 20;
-    case Moves::kSplash:
+    case MoveNames::kSplash:
       return kNone;
-    case Moves::kSpore:
+    case MoveNames::kSpore:
       return kNone;
-    case Moves::kStomp:
+    case MoveNames::kStomp:
       return 65;
-    case Moves::kStrength:
+    case MoveNames::kStrength:
       return 80;
-    case Moves::kStringShot:
+    case MoveNames::kStringShot:
       return kNone;
-    case Moves::kStruggle:
+    case MoveNames::kStruggle:
       return 50;
-    case Moves::kStunSpore:
+    case MoveNames::kStunSpore:
       return kNone;
-    case Moves::kSubmission:
+    case MoveNames::kSubmission:
       return 80;
-    case Moves::kSubstitute:
+    case MoveNames::kSubstitute:
       return kNone;
-    case Moves::kSuperFang:
+    case MoveNames::kSuperFang:
       return kVariable;
-    case Moves::kSupersonic:
+    case MoveNames::kSupersonic:
       return kNone;
-    case Moves::kSurf:
+    case MoveNames::kSurf:
       return 95;
-    case Moves::kSwift:
+    case MoveNames::kSwift:
       return 60;
-    case Moves::kSwordsDance:
+    case MoveNames::kSwordsDance:
       return kNone;
-    case Moves::kTackle:
+    case MoveNames::kTackle:
       return 35;
-    case Moves::kTailWhip:
+    case MoveNames::kTailWhip:
       return kNone;
-    case Moves::kTakeDown:
+    case MoveNames::kTakeDown:
       return 90;
-    case Moves::kTeleport:
+    case MoveNames::kTeleport:
       return kNone;
-    case Moves::kThrash:
+    case MoveNames::kThrash:
       return 90;
-    case Moves::kThunder:
+    case MoveNames::kThunder:
       return 120;
-    case Moves::kThunderWave:
+    case MoveNames::kThunderWave:
       return kNone;
-    case Moves::kThunderbolt:
+    case MoveNames::kThunderbolt:
       return 95;
-    case Moves::kThunderPunch:
+    case MoveNames::kThunderPunch:
       return 75;
-    case Moves::kThunderShock:
+    case MoveNames::kThunderShock:
       return 40;
-    case Moves::kToxic:
+    case MoveNames::kToxic:
       return kNone;
-    case Moves::kTransform:
+    case MoveNames::kTransform:
       return kNone;
-    case Moves::kTriAttack:
+    case MoveNames::kTriAttack:
       return 80;
-    case Moves::kTwineedle:
+    case MoveNames::kTwineedle:
       return 25;
-    case Moves::kViceGrip:
+    case MoveNames::kViceGrip:
       return 55;
-    case Moves::kVineWhip:
+    case MoveNames::kVineWhip:
       return 35;
-    case Moves::kWaterGun:
+    case MoveNames::kWaterGun:
       return 40;
-    case Moves::kWaterfall:
+    case MoveNames::kWaterfall:
       return 80;
-    case Moves::kWhirlwind:
+    case MoveNames::kWhirlwind:
       return kNone;
-    case Moves::kWingAttack:
+    case MoveNames::kWingAttack:
       return 35;
-    case Moves::kWithdraw:
+    case MoveNames::kWithdraw:
       return kNone;
-    case Moves::kWrap:
+    case MoveNames::kWrap:
       return 15;
-    case Moves::kPass:
+    case MoveNames::kPass:
       return kNone;
-    case Moves::kSwitch1:
+    case MoveNames::kSwitch1:
       return kNone;
-    case Moves::kSwitch2:
+    case MoveNames::kSwitch2:
       return kNone;
-    case Moves::kSwitch3:
+    case MoveNames::kSwitch3:
       return kNone;
-    case Moves::kSwitch4:
+    case MoveNames::kSwitch4:
       return kNone;
-    case Moves::kSwitch5:
+    case MoveNames::kSwitch5:
       return kNone;
-    case Moves::kSwitch6:
+    case MoveNames::kSwitch6:
       return kNone;
-    case Moves::kHitSelf:
+    case MoveNames::kHitSelf:
       return 40;
     default:
       assert(false);

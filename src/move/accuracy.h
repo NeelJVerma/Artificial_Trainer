@@ -5,10 +5,10 @@
 #ifndef ARTIFICIAL_TRAINER_ACCURACY_H
 #define ARTIFICIAL_TRAINER_ACCURACY_H
 
-#include "moves.h"
+#include "movenames.h"
 
 namespace artificialtrainer {
-auto BaseAccuracy(const Moves &move_name) -> int;
+auto BaseAccuracy(const MoveNames &move_name) -> int;
 
 } //namespace artificialtrainer
 

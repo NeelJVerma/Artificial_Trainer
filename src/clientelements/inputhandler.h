@@ -8,7 +8,7 @@
 namespace artificialtrainer {
 class InputHandler {
  public:
-  static auto GetIntInput(const int lower, const int upper) -> int;
+  static auto GetIntInput(int lower, int upper) -> int;
 };
 
 } //namespace artificialtrainer

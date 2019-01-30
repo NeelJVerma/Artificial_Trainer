@@ -3,317 +3,315 @@
 //
 
 #include <cmath>
-#include <iostream>
-#include <memory>
 #include <cassert>
 #include "hp.h"
 
 namespace artificialtrainer {
 namespace {
-auto GetBaseHp(const Species &species) -> int {
+auto GetBaseHp(const SpeciesNames &species) -> int {
   switch (species) {
     //Gen 1
-    case Species::kBulbasaur:
+    case SpeciesNames::kBulbasaur:
       return 45;
-    case Species::kIvysaur:
+    case SpeciesNames::kIvysaur:
       return 60;
-    case Species::kVenusaur:
+    case SpeciesNames::kVenusaur:
       return 80;
-    case Species::kCharmander:
+    case SpeciesNames::kCharmander:
       return 39;
-    case Species::kCharmeleon:
+    case SpeciesNames::kCharmeleon:
       return 58;
-    case Species::kCharizard:
+    case SpeciesNames::kCharizard:
       return 78;
-    case Species::kSquirtle:
+    case SpeciesNames::kSquirtle:
       return 44;
-    case Species::kWartortle:
+    case SpeciesNames::kWartortle:
       return 59;
-    case Species::kBlastoise:
+    case SpeciesNames::kBlastoise:
       return 79;
-    case Species::kCaterpie:
+    case SpeciesNames::kCaterpie:
       return 45;
-    case Species::kMetapod:
+    case SpeciesNames::kMetapod:
       return 50;
-    case Species::kButterfree:
+    case SpeciesNames::kButterfree:
       return 60;
-    case Species::kWeedle:
+    case SpeciesNames::kWeedle:
       return 40;
-    case Species::kKakuna:
+    case SpeciesNames::kKakuna:
       return 45;
-    case Species::kBeedrill:
+    case SpeciesNames::kBeedrill:
       return 65;
-    case Species::kPidgey:
+    case SpeciesNames::kPidgey:
       return 40;
-    case Species::kPidgeotto:
+    case SpeciesNames::kPidgeotto:
       return 63;
-    case Species::kPidgeot:
+    case SpeciesNames::kPidgeot:
       return 83;
-    case Species::kRattata:
+    case SpeciesNames::kRattata:
       return 30;
-    case Species::kRaticate:
+    case SpeciesNames::kRaticate:
       return 55;
-    case Species::kSpearow:
+    case SpeciesNames::kSpearow:
       return 40;
-    case Species::kFearow:
+    case SpeciesNames::kFearow:
       return 65;
-    case Species::kEkans:
+    case SpeciesNames::kEkans:
       return 35;
-    case Species::kArbok:
+    case SpeciesNames::kArbok:
       return 60;
-    case Species::kPikachu:
+    case SpeciesNames::kPikachu:
       return 35;
-    case Species::kRaichu:
+    case SpeciesNames::kRaichu:
       return 60;
-    case Species::kSandshrew:
+    case SpeciesNames::kSandshrew:
       return 50;
-    case Species::kSandslash:
+    case SpeciesNames::kSandslash:
       return 75;
-    case Species::kNidoranF:
+    case SpeciesNames::kNidoranF:
       return 55;
-    case Species::kNidorina:
+    case SpeciesNames::kNidorina:
       return 70;
-    case Species::kNidoqueen:
+    case SpeciesNames::kNidoqueen:
       return 90;
-    case Species::kNidoranM:
+    case SpeciesNames::kNidoranM:
       return 46;
-    case Species::kNidorino:
+    case SpeciesNames::kNidorino:
       return 61;
-    case Species::kNidoking:
+    case SpeciesNames::kNidoking:
       return 81;
-    case Species::kClefairy:
+    case SpeciesNames::kClefairy:
       return 70;
-    case Species::kClefable:
+    case SpeciesNames::kClefable:
       return 95;
-    case Species::kVulpix:
+    case SpeciesNames::kVulpix:
       return 38;
-    case Species::kNinetales:
+    case SpeciesNames::kNinetales:
       return 73;
-    case Species::kJigglypuff:
+    case SpeciesNames::kJigglypuff:
       return 115;
-    case Species::kWigglytuff:
+    case SpeciesNames::kWigglytuff:
       return 140;
-    case Species::kZubat:
+    case SpeciesNames::kZubat:
       return 40;
-    case Species::kGolbat:
+    case SpeciesNames::kGolbat:
       return 75;
-    case Species::kOddish:
+    case SpeciesNames::kOddish:
       return 45;
-    case Species::kGloom:
+    case SpeciesNames::kGloom:
       return 60;
-    case Species::kVileplume:
+    case SpeciesNames::kVileplume:
       return 75;
-    case Species::kParas:
+    case SpeciesNames::kParas:
       return 35;
-    case Species::kParasect:
+    case SpeciesNames::kParasect:
       return 60;
-    case Species::kVenonat:
+    case SpeciesNames::kVenonat:
       return 60;
-    case Species::kVenomoth:
+    case SpeciesNames::kVenomoth:
       return 70;
-    case Species::kDiglett:
+    case SpeciesNames::kDiglett:
       return 10;
-    case Species::kDugtrio:
+    case SpeciesNames::kDugtrio:
       return 35;
-    case Species::kMeowth:
+    case SpeciesNames::kMeowth:
       return 40;
-    case Species::kPersian:
+    case SpeciesNames::kPersian:
       return 65;
-    case Species::kPsyduck:
+    case SpeciesNames::kPsyduck:
       return 50;
-    case Species::kGolduck:
+    case SpeciesNames::kGolduck:
       return 80;
-    case Species::kMankey:
+    case SpeciesNames::kMankey:
       return 40;
-    case Species::kPrimeape:
+    case SpeciesNames::kPrimeape:
       return 65;
-    case Species::kGrowlithe:
+    case SpeciesNames::kGrowlithe:
       return 55;
-    case Species::kArcanine:
+    case SpeciesNames::kArcanine:
       return 90;
-    case Species::kPoliwag:
+    case SpeciesNames::kPoliwag:
       return 40;
-    case Species::kPoliwhirl:
+    case SpeciesNames::kPoliwhirl:
       return 65;
-    case Species::kPoliwrath:
+    case SpeciesNames::kPoliwrath:
       return 90;
-    case Species::kAbra:
+    case SpeciesNames::kAbra:
       return 25;
-    case Species::kKadabra:
+    case SpeciesNames::kKadabra:
       return 40;
-    case Species::kAlakazam:
+    case SpeciesNames::kAlakazam:
       return 55;
-    case Species::kMachop:
+    case SpeciesNames::kMachop:
       return 70;
-    case Species::kMachoke:
+    case SpeciesNames::kMachoke:
       return 80;
-    case Species::kMachamp:
+    case SpeciesNames::kMachamp:
       return 90;
-    case Species::kBellsprout:
+    case SpeciesNames::kBellsprout:
       return 50;
-    case Species::kWeepinbell:
+    case SpeciesNames::kWeepinbell:
       return 65;
-    case Species::kVictreebel:
+    case SpeciesNames::kVictreebel:
       return 80;
-    case Species::kTentacool:
+    case SpeciesNames::kTentacool:
       return 40;
-    case Species::kTentacruel:
+    case SpeciesNames::kTentacruel:
       return 80;
-    case Species::kGeodude:
+    case SpeciesNames::kGeodude:
       return 40;
-    case Species::kGraveler:
+    case SpeciesNames::kGraveler:
       return 55;
-    case Species::kGolem:
+    case SpeciesNames::kGolem:
       return 80;
-    case Species::kPonyta:
+    case SpeciesNames::kPonyta:
       return 50;
-    case Species::kRapidash:
+    case SpeciesNames::kRapidash:
       return 65;
-    case Species::kSlowpoke:
+    case SpeciesNames::kSlowpoke:
       return 90;
-    case Species::kSlowbro:
+    case SpeciesNames::kSlowbro:
       return 95;
-    case Species::kMagnemite:
+    case SpeciesNames::kMagnemite:
       return 25;
-    case Species::kMagneton:
+    case SpeciesNames::kMagneton:
       return 50;
-    case Species::kFarfetchd:
+    case SpeciesNames::kFarfetchd:
       return 52;
-    case Species::kDoduo:
+    case SpeciesNames::kDoduo:
       return 35;
-    case Species::kDodrio:
+    case SpeciesNames::kDodrio:
       return 60;
-    case Species::kSeel:
+    case SpeciesNames::kSeel:
       return 65;
-    case Species::kDewgong:
+    case SpeciesNames::kDewgong:
       return 90;
-    case Species::kGrimer:
+    case SpeciesNames::kGrimer:
       return 80;
-    case Species::kMuk:
+    case SpeciesNames::kMuk:
       return 105;
-    case Species::kShellder:
+    case SpeciesNames::kShellder:
       return 30;
-    case Species::kCloyster:
+    case SpeciesNames::kCloyster:
       return 50;
-    case Species::kGastly:
+    case SpeciesNames::kGastly:
       return 30;
-    case Species::kHaunter:
+    case SpeciesNames::kHaunter:
       return 45;
-    case Species::kGengar:
+    case SpeciesNames::kGengar:
       return 60;
-    case Species::kOnix:
+    case SpeciesNames::kOnix:
       return 35;
-    case Species::kDrowzee:
+    case SpeciesNames::kDrowzee:
       return 60;
-    case Species::kHypno:
+    case SpeciesNames::kHypno:
       return 85;
-    case Species::kKrabby:
+    case SpeciesNames::kKrabby:
       return 30;
-    case Species::kKingler:
+    case SpeciesNames::kKingler:
       return 55;
-    case Species::kVoltorb:
+    case SpeciesNames::kVoltorb:
       return 40;
-    case Species::kElectrode:
+    case SpeciesNames::kElectrode:
       return 60;
-    case Species::kExeggcute:
+    case SpeciesNames::kExeggcute:
       return 60;
-    case Species::kExeggutor:
+    case SpeciesNames::kExeggutor:
       return 95;
-    case Species::kCubone:
+    case SpeciesNames::kCubone:
       return 50;
-    case Species::kMarowak:
+    case SpeciesNames::kMarowak:
       return 60;
-    case Species::kHitmonlee:
+    case SpeciesNames::kHitmonlee:
       return 50;
-    case Species::kHitmonchan:
+    case SpeciesNames::kHitmonchan:
       return 50;
-    case Species::kLickitung:
+    case SpeciesNames::kLickitung:
       return 90;
-    case Species::kKoffing:
+    case SpeciesNames::kKoffing:
       return 40;
-    case Species::kWeezing:
+    case SpeciesNames::kWeezing:
       return 65;
-    case Species::kRhyhorn:
+    case SpeciesNames::kRhyhorn:
       return 80;
-    case Species::kRhydon:
+    case SpeciesNames::kRhydon:
       return 105;
-    case Species::kChansey:
+    case SpeciesNames::kChansey:
       return 250;
-    case Species::kTangela:
+    case SpeciesNames::kTangela:
       return 65;
-    case Species::kKangaskhan:
+    case SpeciesNames::kKangaskhan:
       return 105;
-    case Species::kHorsea:
+    case SpeciesNames::kHorsea:
       return 30;
-    case Species::kSeadra:
+    case SpeciesNames::kSeadra:
       return 55;
-    case Species::kGoldeen:
+    case SpeciesNames::kGoldeen:
       return 45;
-    case Species::kSeaking:
+    case SpeciesNames::kSeaking:
       return 80;
-    case Species::kStaryu:
+    case SpeciesNames::kStaryu:
       return 30;
-    case Species::kStarmie:
+    case SpeciesNames::kStarmie:
       return 60;
-    case Species::kMrMime:
+    case SpeciesNames::kMrMime:
       return 40;
-    case Species::kScyther:
+    case SpeciesNames::kScyther:
       return 70;
-    case Species::kJynx:
+    case SpeciesNames::kJynx:
       return 65;
-    case Species::kElectabuzz:
+    case SpeciesNames::kElectabuzz:
       return 65;
-    case Species::kMagmar:
+    case SpeciesNames::kMagmar:
       return 65;
-    case Species::kPinsir:
+    case SpeciesNames::kPinsir:
       return 65;
-    case Species::kTauros:
+    case SpeciesNames::kTauros:
       return 75;
-    case Species::kMagikarp:
+    case SpeciesNames::kMagikarp:
       return 20;
-    case Species::kGyarados:
+    case SpeciesNames::kGyarados:
       return 95;
-    case Species::kLapras:
+    case SpeciesNames::kLapras:
       return 130;
-    case Species::kDitto:
+    case SpeciesNames::kDitto:
       return 48;
-    case Species::kEevee:
+    case SpeciesNames::kEevee:
       return 55;
-    case Species::kVaporeon:
+    case SpeciesNames::kVaporeon:
       return 130;
-    case Species::kJolteon:
+    case SpeciesNames::kJolteon:
       return 65;
-    case Species::kFlareon:
+    case SpeciesNames::kFlareon:
       return 65;
-    case Species::kPorygon:
+    case SpeciesNames::kPorygon:
       return 65;
-    case Species::kOmanyte:
+    case SpeciesNames::kOmanyte:
       return 35;
-    case Species::kOmastar:
+    case SpeciesNames::kOmastar:
       return 70;
-    case Species::kKabuto:
+    case SpeciesNames::kKabuto:
       return 30;
-    case Species::kKabutops:
+    case SpeciesNames::kKabutops:
       return 60;
-    case Species::kAerodactyl:
+    case SpeciesNames::kAerodactyl:
       return 80;
-    case Species::kSnorlax:
+    case SpeciesNames::kSnorlax:
       return 160;
-    case Species::kArticuno:
+    case SpeciesNames::kArticuno:
       return 90;
-    case Species::kZapdos:
+    case SpeciesNames::kZapdos:
       return 90;
-    case Species::kMoltres:
+    case SpeciesNames::kMoltres:
       return 90;
-    case Species::kDratini:
+    case SpeciesNames::kDratini:
       return 41;
-    case Species::kDragonair:
+    case SpeciesNames::kDragonair:
       return 61;
-    case Species::kDragonite:
+    case SpeciesNames::kDragonite:
       return 91;
-    case Species::kMewtwo:
+    case SpeciesNames::kMewtwo:
       return 106;
-    case Species::kMew:
+    case SpeciesNames::kMew:
       return 100;
     default:
       assert(false);
@@ -321,19 +319,22 @@ auto GetBaseHp(const Species &species) -> int {
 }
 
 auto CalculateActualHpStat(const int &base_hp, const int &level,
-    const Ev &ev_stat, const Iv &iv_stat) -> int {
+                           const Ev &ev_stat, const Iv &iv_stat) -> int {
   return static_cast<int>(10 + floor(static_cast<double>(level / 100 * (
       (base_hp * 2) + 2 * iv_stat.Value() + ev_stat.Value() / 1024))) + level);
 }
 
 } //namespace
 
-Hp::Hp(const Species &species, const int &level, const Ev &ev, const Iv &iv)
+Hp::Hp(const SpeciesNames &species,
+       const int &level,
+       const Ev &ev,
+       const Iv &iv)
     : ev_stat_(ev), iv_stat_(iv),
       current_hp_(CalculateActualHpStat(GetBaseHp(species),
-          level,
-          ev,
-          iv)) {
+                                        level,
+                                        ev,
+                                        iv)) {
   max_hp_ = current_hp_;
 }
 

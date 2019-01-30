@@ -339,6 +339,33 @@ src/move/move.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.s
 .PHONY : src/move/move.cc.s
 
+src/move/movescontainer.o: src/move/movescontainer.cc.o
+
+.PHONY : src/move/movescontainer.o
+
+# target to build an object file
+src/move/movescontainer.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.o
+.PHONY : src/move/movescontainer.cc.o
+
+src/move/movescontainer.i: src/move/movescontainer.cc.i
+
+.PHONY : src/move/movescontainer.i
+
+# target to preprocess a source file
+src/move/movescontainer.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.i
+.PHONY : src/move/movescontainer.cc.i
+
+src/move/movescontainer.s: src/move/movescontainer.cc.s
+
+.PHONY : src/move/movescontainer.s
+
+# target to generate assembly for a file
+src/move/movescontainer.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.s
+.PHONY : src/move/movescontainer.cc.s
+
 src/move/pp.o: src/move/pp.cc.o
 
 .PHONY : src/move/pp.o
@@ -555,32 +582,32 @@ src/stat/statscontainer.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/statscontainer.cc.s
 .PHONY : src/stat/statscontainer.cc.s
 
-src/stringconversions/stringconverter.o: src/stringconversions/stringconverter.cc.o
+src/stringconverter/stringconverter.o: src/stringconverter/stringconverter.cc.o
 
-.PHONY : src/stringconversions/stringconverter.o
+.PHONY : src/stringconverter/stringconverter.o
 
 # target to build an object file
-src/stringconversions/stringconverter.cc.o:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stringconversions/stringconverter.cc.o
-.PHONY : src/stringconversions/stringconverter.cc.o
+src/stringconverter/stringconverter.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.o
+.PHONY : src/stringconverter/stringconverter.cc.o
 
-src/stringconversions/stringconverter.i: src/stringconversions/stringconverter.cc.i
+src/stringconverter/stringconverter.i: src/stringconverter/stringconverter.cc.i
 
-.PHONY : src/stringconversions/stringconverter.i
+.PHONY : src/stringconverter/stringconverter.i
 
 # target to preprocess a source file
-src/stringconversions/stringconverter.cc.i:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stringconversions/stringconverter.cc.i
-.PHONY : src/stringconversions/stringconverter.cc.i
+src/stringconverter/stringconverter.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.i
+.PHONY : src/stringconverter/stringconverter.cc.i
 
-src/stringconversions/stringconverter.s: src/stringconversions/stringconverter.cc.s
+src/stringconverter/stringconverter.s: src/stringconverter/stringconverter.cc.s
 
-.PHONY : src/stringconversions/stringconverter.s
+.PHONY : src/stringconverter/stringconverter.s
 
 # target to generate assembly for a file
-src/stringconversions/stringconverter.cc.s:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stringconversions/stringconverter.cc.s
-.PHONY : src/stringconversions/stringconverter.cc.s
+src/stringconverter/stringconverter.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.s
+.PHONY : src/stringconverter/stringconverter.cc.s
 
 src/team/team.o: src/team/team.cc.o
 
@@ -696,6 +723,9 @@ help:
 	@echo "... src/move/move.o"
 	@echo "... src/move/move.i"
 	@echo "... src/move/move.s"
+	@echo "... src/move/movescontainer.o"
+	@echo "... src/move/movescontainer.i"
+	@echo "... src/move/movescontainer.s"
 	@echo "... src/move/pp.o"
 	@echo "... src/move/pp.i"
 	@echo "... src/move/pp.s"
@@ -720,9 +750,9 @@ help:
 	@echo "... src/stat/statscontainer.o"
 	@echo "... src/stat/statscontainer.i"
 	@echo "... src/stat/statscontainer.s"
-	@echo "... src/stringconversions/stringconverter.o"
-	@echo "... src/stringconversions/stringconverter.i"
-	@echo "... src/stringconversions/stringconverter.s"
+	@echo "... src/stringconverter/stringconverter.o"
+	@echo "... src/stringconverter/stringconverter.i"
+	@echo "... src/stringconverter/stringconverter.s"
 	@echo "... src/team/team.o"
 	@echo "... src/team/team.i"
 	@echo "... src/team/team.s"

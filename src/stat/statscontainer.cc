@@ -2,17 +2,17 @@
 // Created by neel on 1/25/19.
 //
 
+#include <stdexcept>
 #include "statscontainer.h"
-#include <map>
 
 namespace artificialtrainer {
-StatsContainer::StatsContainer(const Species &species, const Hp &hp_stat,
-    const Stat stats[kNumNormalStats]) : hp_stat_(
-    hp_stat), evasion_stat_(1), accuracy_stat_(1), normal_stats_{
-    stats[0],
-    stats[1],
-    stats[2],
-    stats[3]} {
+StatsContainer::StatsContainer(const SpeciesNames &species, const Hp &hp_stat,
+                               const Stat stats[kNumNormalStats])
+    : hp_stat_(hp_stat), evasion_stat_(1),
+      accuracy_stat_(1) {
+  for (int i = 0; i < kNumNormalStats; i++) {
+    normal_stats_[i] = stats[i];
+  }
 }
 
 auto StatsContainer::HpStat() -> Hp & {

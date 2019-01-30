@@ -9,7 +9,7 @@ namespace artificialtrainer {
 class Sanitizer {
  public:
   static auto CheckIntegerInput(const int &lower, const int &upper,
-      const int &check_var) -> bool;
+                                const int &check_var) -> bool;
 };
 
 } //namespace artificialtrainer

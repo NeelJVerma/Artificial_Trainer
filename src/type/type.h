@@ -5,10 +5,10 @@
 #ifndef ARTIFICIAL_TRAINER_TYPE_H
 #define ARTIFICIAL_TRAINER_TYPE_H
 
-#include "../move/moves.h"
+#include "../move/movenames.h"
 
 namespace artificialtrainer {
-enum class Types : int {
+enum class TypesNames : int {
   kNormal,
   kFighting,
   kFlying,
@@ -27,8 +27,8 @@ enum class Types : int {
   kNoType
 };
 
-const int kNumTypes = static_cast<int>(Types::kNoType) + 1;
-auto Type(const Moves &move_name) -> Types;
+const int kNumTypes = static_cast<int>(TypesNames::kNoType) + 1;
+auto Type(const MoveNames &move_name) -> TypesNames;
 
 } //namespace artificialtrainer
 

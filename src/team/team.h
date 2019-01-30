@@ -6,7 +6,6 @@
 #define ARTIFICIAL_TRAINER_TEAM_H
 
 #include <vector>
-#include <memory>
 #include "../pokemon/pokemon.h"
 
 namespace artificialtrainer {
@@ -19,14 +18,14 @@ class Team {
   Team() = default;
 
   auto FaintPokemon(const int &index) -> void;
-  auto AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void;
+  auto AddPokemon(const Pokemon &pokemon) -> void;
   auto TeamSize() const -> int;
-  auto SeenPokemon(const Species &species) -> bool;
-  auto operator[](const int &index) -> std::shared_ptr<Pokemon>;
+  auto SeenPokemon(const SpeciesNames &species) -> bool;
+  auto operator[](const int &index) -> Pokemon;
 
  private:
-  std::vector<std::shared_ptr<Pokemon>> team_;
-  std::vector<std::shared_ptr<Pokemon>> fainted_team_;
+  std::vector<Pokemon> team_;
+  std::vector<Pokemon> fainted_team_;
 };
 
 } //namespace artificialtrainer

@@ -8,7 +8,8 @@
 #include "type.h"
 
 namespace artificialtrainer {
-auto Effectiveness(const Types &attacking, const Types &defending) -> double;
+auto Effectiveness(const TypesNames &attacking,
+                   const TypesNames &defending) -> double;
 
 } //namespace artificialtrainer
 

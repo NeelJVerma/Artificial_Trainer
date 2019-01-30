@@ -6,11 +6,11 @@
 #define ARTIFICIAL_TRAINER_LEARNSET_H
 
 #include <vector>
-#include "species.h"
-#include "../move/moves.h"
+#include "speciesnames.h"
+#include "../move/movenames.h"
 
 namespace artificialtrainer {
-auto Learnset(const Species &species) -> std::vector<Moves>;
+auto Learnset(const SpeciesNames &species) -> std::vector<MoveNames>;
 
 } //namespace artificialtrainer
 

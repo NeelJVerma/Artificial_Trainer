@@ -7,11 +7,11 @@
 #include "basepower.h"
 
 namespace artificialtrainer {
-Move::Move(const Moves &move_name, const int &current_pp)
+Move::Move(const MoveNames &move_name, const int &current_pp)
     : move_name_(move_name), current_pp_(current_pp) {
 }
 
-auto Move::MoveName() const -> Moves {
+auto Move::MoveName() const -> MoveNames {
   return move_name_;
 }
 
@@ -23,47 +23,47 @@ auto Move::DecrementPp(const int &amount) -> void {
   current_pp_ -= amount;
 }
 
-auto IsPhysical(const Moves &move_name) -> bool {
+auto IsPhysical(const MoveNames &move_name) -> bool {
   switch (Type(move_name)) {
-    case Types::kNormal:
-    case Types::kFighting:
-    case Types::kPoison:
-    case Types::kGround:
-    case Types::kFlying:
-    case Types::kBug:
-    case Types::kRock:
-    case Types::kGhost:
+    case TypesNames::kNormal:
+    case TypesNames::kFighting:
+    case TypesNames::kPoison:
+    case TypesNames::kGround:
+    case TypesNames::kFlying:
+    case TypesNames::kBug:
+    case TypesNames::kRock:
+    case TypesNames::kGhost:
       return true;
     default:
       return false;
   };
 }
 
-auto IsSpecial(const Moves &move_name) -> bool {
+auto IsSpecial(const MoveNames &move_name) -> bool {
   switch (Type(move_name)) {
-    case Types::kFire:
-    case Types::kWater:
-    case Types::kElectric:
-    case Types::kGrass:
-    case Types::kIce:
-    case Types::kPsychic:
-    case Types::kDragon:
+    case TypesNames::kFire:
+    case TypesNames::kWater:
+    case TypesNames::kElectric:
+    case TypesNames::kGrass:
+    case TypesNames::kIce:
+    case TypesNames::kPsychic:
+    case TypesNames::kDragon:
       return true;
     default:
       return false;
   };
 }
 
-auto IsDamaging(const Moves &move_name) -> bool {
+auto IsDamaging(const MoveNames &move_name) -> bool {
   return BasePower(move_name) != 0;
 }
 
-auto IsUseless(const Moves &move_name) -> bool {
+auto IsUseless(const MoveNames &move_name) -> bool {
   switch (move_name) {
-    case Moves::kRoar:
-    case Moves::kSplash:
-    case Moves::kWhirlwind:
-    case Moves::kTeleport:
+    case MoveNames::kRoar:
+    case MoveNames::kSplash:
+    case MoveNames::kWhirlwind:
+    case MoveNames::kTeleport:
       return true;
     default:
       return false;
