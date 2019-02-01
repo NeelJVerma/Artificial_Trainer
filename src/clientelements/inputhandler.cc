@@ -4,6 +4,7 @@
 
 #include <string>
 #include <iostream>
+#include <algorithm>
 #include "inputhandler.h"
 #include "sanitizer.h"
 #include "../pokemon/speciesnames.h"
@@ -17,7 +18,8 @@ auto InputHandler::GetIntInput(const int lower, const int upper) -> int {
     std::string input;
     getline(std::cin, input);
 
-    if (!input.length()) {
+    if (!input.length() ||
+        !std::all_of(input.begin(), input.end(), ::isdigit)) {
       continue;
     }
 

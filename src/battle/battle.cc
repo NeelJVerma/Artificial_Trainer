@@ -100,7 +100,9 @@ auto Battle::StartBattle() -> void {
   Gui::DisplayPlayerTeam(team_one_, true);
   Gui::DisplayPlayerTeam(team_two_, false);
   Gui::DisplayPickLeadingPokemonMessage(true);
+  int ones_leading_index = InputHandler::GetIntInput(1, Team::kMaxTeamSize);
   Gui::DisplayPickLeadingPokemonMessage(false);
+  int twos_leading_index = InputHandler::GetIntInput(1, Team::kMaxTeamSize);
 }
 
 auto Battle::Play() -> void {

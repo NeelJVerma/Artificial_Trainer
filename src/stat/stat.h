@@ -23,7 +23,6 @@ class Stat {
   auto BaseStat() const -> int;
 
  private:
-  int actual_stat_;
   int base_stat_;
   Ev ev_stat_;
   Iv iv_stat_;

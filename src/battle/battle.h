@@ -6,6 +6,7 @@
 #define ARTIFICIAL_TRAINER_BATTLE_H
 
 #include "../team/team.h"
+#include "../pokemon/activepokemon.h"
 
 namespace artificialtrainer {
 class Battle {
@@ -16,6 +17,8 @@ class Battle {
  private:
   Team team_one_;
   Team team_two_;
+  ActivePokemon active_pokemon_one;
+  ActivePokemon activePokemon_two;
   auto BattleOver() const -> bool;
   auto StartBattle() -> void;
 };
