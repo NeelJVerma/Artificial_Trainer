@@ -19,8 +19,8 @@ CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stat/stat.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stat/statnames.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stat/statscontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/team/team.h
-CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/type/typecontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/gui.cc.o: ../src/clientelements/gui.cc
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/gui.cc.o: ../src/clientelements/gui.h
@@ -40,6 +40,7 @@ CMakeFiles/Artificial_Trainer.dir/src/clientelements/gui.cc.o: ../src/stringconv
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/gui.cc.o: ../src/team/team.h
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/gui.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/gui.cc.o: ../src/type/typecontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/clientelements/gui.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o: ../src/clientelements/gui.h
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o: ../src/clientelements/inputhandler.cc
@@ -57,8 +58,8 @@ CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o: ../src/s
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o: ../src/stat/statnames.h
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o: ../src/stat/statscontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o: ../src/team/team.h
-CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o: ../src/type/typecontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/clientelements/inputhandler.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/sanitizer.cc.o: ../src/clientelements/sanitizer.cc
 CMakeFiles/Artificial_Trainer.dir/src/clientelements/sanitizer.cc.o: ../src/clientelements/sanitizer.h
@@ -77,8 +78,8 @@ CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/stat/stat.h
 CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/stat/statnames.h
 CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/stat/statscontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/team/team.h
-CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/type/typecontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o: ../src/move/accuracy.cc
 CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o: ../src/move/movenames.h
@@ -92,6 +93,7 @@ CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o: ../src/move/move.cc
 CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o: ../src/move/move.h
 CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o: ../src/type/type.h
+CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.o: ../src/move/move.h
 CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.o: ../src/move/movenames.h
@@ -123,8 +125,8 @@ CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/iv.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/stat.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/statnames.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/statscontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/type/typecontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.o: ../src/stat/ev.cc
 CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.o: ../src/stat/ev.h
@@ -161,6 +163,7 @@ CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.o: ../s
 CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.o: ../src/stringconverter/stringconverter.cc
 CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.o: ../src/stringconverter/stringconverter.h
 CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.o: ../src/type/type.h
+CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/move/move.h
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/move/movenames.h
@@ -175,21 +178,22 @@ CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/stat/statnames.h
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/stat/statscontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/team/team.cc
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/team/team.h
-CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/type/typecontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/type/effectiveness.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/type/effectiveness.cc.o: ../src/type/effectiveness.cc
 CMakeFiles/Artificial_Trainer.dir/src/type/effectiveness.cc.o: ../src/type/effectiveness.h
 CMakeFiles/Artificial_Trainer.dir/src/type/effectiveness.cc.o: ../src/type/type.h
+CMakeFiles/Artificial_Trainer.dir/src/type/effectiveness.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/type/type.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/type/type.cc.o: ../src/type/type.cc
 CMakeFiles/Artificial_Trainer.dir/src/type/type.cc.o: ../src/type/type.h
+CMakeFiles/Artificial_Trainer.dir/src/type/type.cc.o: ../src/type/typenames.h
 
-CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/pokemon/speciesnames.h
-CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/type/typecontainer.cc
 CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/type/typecontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/type/typenames.h
 

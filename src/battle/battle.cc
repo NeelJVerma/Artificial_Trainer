@@ -96,17 +96,21 @@ auto Battle::BattleOver() const -> bool {
   return !team_one_.ActiveTeamSize() || !team_two_.ActiveTeamSize();
 }
 
+auto Battle::StartBattle() -> void {
+  Gui::DisplayPlayerTeam(team_one_, true);
+  Gui::DisplayPlayerTeam(team_two_, false);
+  Gui::DisplayPickLeadingPokemonMessage(true);
+  Gui::DisplayPickLeadingPokemonMessage(false);
+}
+
 auto Battle::Play() -> void {
   Gui::DisplayWelcomeMessage();
   SelectTeam(team_one_, true);
   SelectTeam(team_two_, false);
+  StartBattle();
 
   while (!BattleOver()) {
-    Gui::DisplayPlayerTeam(team_one_, true);
-    Gui::DisplayPlayerTeam(team_two_, false);
-    Gui::DisplayPickLeadingPokemonMessage(true);
-    Gui::DisplayPickLeadingPokemonMessage(false);
-    break;
+
   }
 }
 

@@ -6,8 +6,8 @@
 #define ARTIFICIAL_TRAINER_TYPECONTAINER_H
 
 #include <utility>
-#include "type.h"
 #include "../pokemon/speciesnames.h"
+#include "typenames.h"
 
 namespace artificialtrainer {
 class TypeContainer {
