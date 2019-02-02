@@ -11,6 +11,7 @@
 #include "../pokemon/learnset.h"
 #include "../move/movescontainer.h"
 #include "../move/pp.h"
+#include "../stringconverter/stringconverter.h"
 
 namespace artificialtrainer {
 namespace {
@@ -29,7 +30,8 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
   Gui::DisplayPokemonChoices();
   Gui::DisplayPickTeamMessage(team_one);
 
-  for (int i = 0; i < Team::kMaxTeamSize; i++) {
+  // TODO: CHANGE LOOP VARIABLE AFTER TESTING
+  for (int i = 0; i < 2; i++) {
     Gui::DisplayPickPokemonMessage(i + 1);
     int pokemon_selection = InputHandler::GetIntInput(1, kNumSpecies);
     auto pokemon_species = static_cast<SpeciesNames>(pokemon_selection - 1);
@@ -101,8 +103,17 @@ auto Battle::StartBattle() -> void {
   Gui::DisplayPlayerTeam(team_two_, false);
   Gui::DisplayPickLeadingPokemonMessage(true);
   int ones_leading_index = InputHandler::GetIntInput(1, Team::kMaxTeamSize);
+  team_one_.SetActiveMember(ones_leading_index - 1);
   Gui::DisplayPickLeadingPokemonMessage(false);
   int twos_leading_index = InputHandler::GetIntInput(1, Team::kMaxTeamSize);
+  team_two_.SetActiveMember(twos_leading_index - 1);
+}
+
+auto Battle::HandleTurn() -> void {
+  Gui::DisplayPlayerTeam(team_one_, true);
+  Gui::DisplayPlayerTeam(team_two_, false);
+  Gui::DisplayActivePokemonData(team_one_.FindActiveMember(), true);
+  Gui::DisplayActivePokemonData(team_two_.FindActiveMember(), false);
 }
 
 auto Battle::Play() -> void {
@@ -110,9 +121,11 @@ auto Battle::Play() -> void {
   SelectTeam(team_one_, true);
   SelectTeam(team_two_, false);
   StartBattle();
+  int num_turns_elapsed = 1;
 
-  while (!BattleOver()) {
-
+  while (num_turns_elapsed++ < kMaxNumTurns && !BattleOver()) {
+    HandleTurn();
+    break;
   }
 }
 

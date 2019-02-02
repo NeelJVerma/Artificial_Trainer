@@ -28,6 +28,8 @@ class Gui {
   static auto DisplayPlayerTeam(const Team &team,
                                 const bool &player_one) -> void;
   static auto DisplayPickLeadingPokemonMessage(const bool &player_one) -> void;
+  static auto DisplayActivePokemonData(const Pokemon &pokemon,
+                                       const bool &player_one) -> void;
   static auto DisplayPickInBattleMoveMessage(const bool &player_one) -> void;
 };
 

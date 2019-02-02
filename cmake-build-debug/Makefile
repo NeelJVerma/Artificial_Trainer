@@ -420,33 +420,6 @@ src/move/priority.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.s
 .PHONY : src/move/priority.cc.s
 
-src/pokemon/activepokemon.o: src/pokemon/activepokemon.cc.o
-
-.PHONY : src/pokemon/activepokemon.o
-
-# target to build an object file
-src/pokemon/activepokemon.cc.o:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/activepokemon.cc.o
-.PHONY : src/pokemon/activepokemon.cc.o
-
-src/pokemon/activepokemon.i: src/pokemon/activepokemon.cc.i
-
-.PHONY : src/pokemon/activepokemon.i
-
-# target to preprocess a source file
-src/pokemon/activepokemon.cc.i:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/activepokemon.cc.i
-.PHONY : src/pokemon/activepokemon.cc.i
-
-src/pokemon/activepokemon.s: src/pokemon/activepokemon.cc.s
-
-.PHONY : src/pokemon/activepokemon.s
-
-# target to generate assembly for a file
-src/pokemon/activepokemon.cc.s:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/activepokemon.cc.s
-.PHONY : src/pokemon/activepokemon.cc.s
-
 src/pokemon/learnset.o: src/pokemon/learnset.cc.o
 
 .PHONY : src/pokemon/learnset.o
@@ -813,9 +786,6 @@ help:
 	@echo "... src/move/priority.o"
 	@echo "... src/move/priority.i"
 	@echo "... src/move/priority.s"
-	@echo "... src/pokemon/activepokemon.o"
-	@echo "... src/pokemon/activepokemon.i"
-	@echo "... src/pokemon/activepokemon.s"
 	@echo "... src/pokemon/learnset.o"
 	@echo "... src/pokemon/learnset.i"
 	@echo "... src/pokemon/learnset.s"

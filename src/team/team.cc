@@ -41,4 +41,16 @@ auto Team::SeenPokemon(const SpeciesNames &species) -> bool {
   return false;
 }
 
+auto Team::SetActiveMember(const int &index) -> void {
+  active_team_[index].SetIsActive(true);
+}
+
+auto Team::FindActiveMember() -> Pokemon & {
+  for (auto &pokemon : active_team_) {
+    if (pokemon.IsActive()) {
+      return pokemon;
+    }
+  }
+}
+
 } //namespace artificialtrainer

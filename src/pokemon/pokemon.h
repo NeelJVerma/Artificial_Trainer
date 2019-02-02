@@ -11,6 +11,15 @@
 #include "../type/typecontainer.h"
 
 namespace artificialtrainer {
+struct InGameFlags {
+  bool digging = false;
+  bool flying = false;
+  bool biding = false;
+  bool is_recharing = false;
+  bool is_raging = false;
+  // TODO: ADD MORE WHEN NEEDED
+};
+
 class Pokemon {
  public:
   static const int kMaxLevel = 100;
@@ -27,13 +36,19 @@ class Pokemon {
   auto GetTypeContainer() const -> TypeContainer;
   auto SpeciesName() const -> SpeciesNames;
   auto Level() const -> int;
+  auto IsActive() const -> bool;
+  auto SetIsActive(const bool &is_active) -> void;
+
+  // TODO: ADD IN GAME FLAG ATTRIBUTES. SETTING/GETTING
 
  private:
   StatsContainer stats_container_;
   MovesContainer moves_container_;
   TypeContainer type_container_;
   SpeciesNames species_name_;
+  InGameFlags flags_;
   int level_;
+  bool is_active_;
 };
 
 } //namespace artificialtrainer

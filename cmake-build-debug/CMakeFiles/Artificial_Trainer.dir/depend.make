@@ -18,7 +18,9 @@ CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stat/iv.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stat/stat.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stat/statnames.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stat/statscontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stringconverter/stringconverter.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/team/team.h
+CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/type/typecontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/type/typenames.h
 

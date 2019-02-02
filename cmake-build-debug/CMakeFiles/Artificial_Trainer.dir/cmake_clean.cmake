@@ -22,7 +22,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o"
-  "CMakeFiles/Artificial_Trainer.dir/src/pokemon/activepokemon.cc.o"
   "Artificial_Trainer.pdb"
   "Artificial_Trainer"
 )

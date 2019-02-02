@@ -24,6 +24,8 @@ class Team {
   auto ActiveTeam() const -> std::vector<Pokemon>;
   auto FaintedTeam() const -> std::vector<Pokemon>;
   auto SeenPokemon(const SpeciesNames &species) -> bool;
+  auto SetActiveMember(const int &index) -> void;
+  auto FindActiveMember() -> Pokemon &;
 
  private:
   std::vector<Pokemon> active_team_;

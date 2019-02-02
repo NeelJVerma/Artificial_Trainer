@@ -13,7 +13,8 @@ Pokemon::Pokemon(const SpeciesNames &species_name,
       stats_container_(stats_container),
       moves_container_(moves_container),
       type_container_(type_container),
-      level_(level) {
+      level_(level),
+      is_active_(false) {
 }
 
 Pokemon::Pokemon()
@@ -21,7 +22,8 @@ Pokemon::Pokemon()
       stats_container_{},
       moves_container_{},
       type_container_{},
-      level_(0) {
+      level_(0),
+      is_active_(false) {
 }
 
 auto Pokemon::GetStatsContainer() const -> StatsContainer {
@@ -42,6 +44,14 @@ auto Pokemon::SpeciesName() const -> SpeciesNames {
 
 auto Pokemon::Level() const -> int {
   return level_;
+}
+
+auto Pokemon::IsActive() const -> bool {
+  return is_active_;
+}
+
+auto Pokemon::SetIsActive(const bool &is_active) -> void {
+  is_active_ = is_active;
 }
 
 } //namespace artificialtrainer
