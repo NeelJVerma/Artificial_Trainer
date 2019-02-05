@@ -4,19 +4,3 @@ project(Artificial_Trainer)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Artificial_Trainer src/main.cc src/clientelements/gui.cc src/clientelements/gui.h src/pokemon/speciesnames.h src/pokemon/pokemon.cc src/pokemon/pokemon.h src/stat/statnames.h src/clientelements/sanitizer.cc src/clientelements/sanitizer.h src/team/team.cc src/team/team.h src/stat/stat.cc src/stat/stat.h src/stat/hp.cc src/stat/hp.h src/stat/ev.cc src/stat/ev.h src/stat/iv.cc src/stat/iv.h src/stat/statscontainer.cc src/stat/statscontainer.h src/battle/battle.cc src/battle/battle.h src/stringconverter/stringconverter.h src/stringconverter/stringconverter.cc src/clientelements/inputhandler.cc src/clientelements/inputhandler.h src/move/movenames.h src/move/accuracy.h src/move/accuracy.cc src/move/basepower.h src/move/basepower.cc src/move/pp.h src/move/pp.cc src/type/type.h src/type/type.cc src/type/effectiveness.h src/type/effectiveness.cc src/move/move.cc src/move/move.h src/pokemon/learnset.h src/pokemon/learnset.cc src/move/movescontainer.cc src/move/movescontainer.h src/move/priority.h src/move/priority.cc src/type/typecontainer.cc src/type/typecontainer.h src/type/typenames.h)
-
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
-find_package(SFML REQUIRED graphics network audio window system)
-find_package(TGUI REQUIRED)
-
-if(SFML_FOUND)
-    include_directories(${SFML_INCLUDE_DIR})
-    target_link_libraries(Artificial_Trainer ${SFML_LIBRARIES}
-            ${SFML_DEPENDENCIES})
-endif()
-
-if(TGUI_FOUND)
-    include_directories(${TGUI_INCLUDE_DIR})
-    target_link_libraries(Artificial_Trainer ${SFML_LIBRARIES}
-            ${TGUI_LIBRARY})
-endif()

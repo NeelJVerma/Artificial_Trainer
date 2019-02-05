@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/58/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/61/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/58/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/61/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -409,17 +409,6 @@ Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/build.make
-Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
-Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-network.so
-Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-audio.so
-Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-window.so
-Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-system.so
-Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
-Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-network.so
-Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-audio.so
-Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-window.so
-Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-system.so
-Artificial_Trainer: /usr/lib/libtgui.so
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable Artificial_Trainer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Artificial_Trainer.dir/link.txt --verbose=$(VERBOSE)
