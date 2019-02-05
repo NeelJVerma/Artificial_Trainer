@@ -11,6 +11,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.13.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.13.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.13.2/CMakeSystem.cmake"
+  "../cmake_modules/FindSFML.cmake"
+  "../cmake_modules/FindTGUI.cmake"
   "/snap/clion/58/bin/cmake/linux/share/cmake-3.13/Modules/CMakeCInformation.cmake"
   "/snap/clion/58/bin/cmake/linux/share/cmake-3.13/Modules/CMakeCXXInformation.cmake"
   "/snap/clion/58/bin/cmake/linux/share/cmake-3.13/Modules/CMakeCommonLanguageInclude.cmake"

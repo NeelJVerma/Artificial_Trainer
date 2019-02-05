@@ -409,6 +409,17 @@ Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/build.make
+Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
+Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-network.so
+Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-audio.so
+Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-window.so
+Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-system.so
+Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
+Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-network.so
+Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-audio.so
+Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-window.so
+Artificial_Trainer: /usr/lib/x86_64-linux-gnu/libsfml-system.so
+Artificial_Trainer: /usr/lib/libtgui.so
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable Artificial_Trainer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Artificial_Trainer.dir/link.txt --verbose=$(VERBOSE)

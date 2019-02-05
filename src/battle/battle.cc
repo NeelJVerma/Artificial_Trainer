@@ -30,8 +30,7 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
   Gui::DisplayPokemonChoices();
   Gui::DisplayPickTeamMessage(team_one);
 
-  // TODO: CHANGE LOOP VARIABLE AFTER TESTING
-  for (int i = 0; i < 2; i++) {
+  for (int i = 0; i < Team::kMaxTeamSize; i++) {
     Gui::DisplayPickPokemonMessage(i + 1);
     int pokemon_selection = InputHandler::GetIntInput(1, kNumSpecies);
     auto pokemon_species = static_cast<SpeciesNames>(pokemon_selection - 1);
