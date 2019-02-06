@@ -6,17 +6,19 @@
 #define ARTIFICIAL_TRAINER_POKEMON_H
 
 #include "speciesnames.h"
-#include "../stat/statscontainer.h"
+#include "../stat/normalstatscontainer.h"
 #include "../move/movescontainer.h"
 #include "../type/typecontainer.h"
+#include "../stat/exclusiveingamestatscontainer.h"
 
 namespace artificialtrainer {
 struct InGameFlags {
   bool digging = false;
   bool flying = false;
   bool biding = false;
-  bool is_recharing = false;
-  bool is_raging = false;
+  bool recharing = false;
+  bool raging = false;
+  Move last_used_move = {};
   // TODO: ADD MORE WHEN NEEDED
 };
 
@@ -28,10 +30,12 @@ class Pokemon {
   auto operator=(const Pokemon &pokemon) -> Pokemon & = default;
   Pokemon();
   Pokemon(const SpeciesNames &species_name,
-          const StatsContainer &stats_container,
+          const NormalStatsContainer &stats_container,
           const MovesContainer &moves_container,
           const TypeContainer &type_container, const int &level);
-  auto GetStatsContainer() const -> StatsContainer;
+  auto GetNormalStatsContainer() const -> NormalStatsContainer;
+  auto GetExclusiveInGameStatsContainer() const
+    -> ExclusiveInGameStatsContainer;
   auto GetMovesContainer() const -> MovesContainer;
   auto GetTypeContainer() const -> TypeContainer;
   auto SpeciesName() const -> SpeciesNames;
@@ -42,7 +46,8 @@ class Pokemon {
   // TODO: ADD IN GAME FLAG ATTRIBUTES. SETTING/GETTING
 
  private:
-  StatsContainer stats_container_;
+  NormalStatsContainer normal_stats_container_;
+  ExclusiveInGameStatsContainer exclusive_in_game_stats_container_;
   MovesContainer moves_container_;
   TypeContainer type_container_;
   SpeciesNames species_name_;

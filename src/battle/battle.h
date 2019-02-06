@@ -19,7 +19,8 @@ class Battle {
   Team team_two_;
   auto BattleOver() const -> bool;
   auto StartBattle() -> void;
-  auto HandleTurn() -> void;
+  auto HandleTurn(const int &turn_number) -> void;
+  auto PlayerPicksMove(Team &team, const bool &team_one) -> Move;
 };
 
 } //namespace artificialtrainer

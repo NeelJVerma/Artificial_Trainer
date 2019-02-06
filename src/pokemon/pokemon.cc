@@ -6,28 +6,34 @@
 
 namespace artificialtrainer {
 Pokemon::Pokemon(const SpeciesNames &species_name,
-                 const StatsContainer &stats_container,
+                 const NormalStatsContainer &stats_container,
                  const MovesContainer &moves_container, const TypeContainer
                  &type_container, const int &level)
     : species_name_(species_name),
-      stats_container_(stats_container),
+      normal_stats_container_(stats_container),
+      exclusive_in_game_stats_container_{},
       moves_container_(moves_container),
       type_container_(type_container),
       level_(level),
       is_active_(false) {
 }
 
-Pokemon::Pokemon()
-    : species_name_(SpeciesNames::kBulbasaur),
-      stats_container_{},
-      moves_container_{},
-      type_container_{},
-      level_(0),
-      is_active_(false) {
+Pokemon::Pokemon() : species_name_(SpeciesNames::kBulbasaur),
+                     normal_stats_container_{},
+                     exclusive_in_game_stats_container_{},
+                     moves_container_{},
+                     type_container_{},
+                     level_(0),
+                     is_active_(false) {
 }
 
-auto Pokemon::GetStatsContainer() const -> StatsContainer {
-  return stats_container_;
+auto Pokemon::GetNormalStatsContainer() const -> NormalStatsContainer {
+  return normal_stats_container_;
+}
+
+auto Pokemon::GetExclusiveInGameStatsContainer() const
+  -> ExclusiveInGameStatsContainer {
+  return exclusive_in_game_stats_container_;
 }
 
 auto Pokemon::GetMovesContainer() const -> MovesContainer {

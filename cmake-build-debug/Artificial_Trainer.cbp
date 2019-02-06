@@ -171,6 +171,18 @@
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/ev.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/exclusiveingamestat.cc">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/exclusiveingamestat.h">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/exclusiveingamestatscontainer.cc">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/exclusiveingamestatscontainer.h">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/hp.cc">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
@@ -183,19 +195,19 @@
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/iv.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/stat.cc">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/normalstat.cc">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/stat.h">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/normalstat.h">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/normalstatscontainer.cc">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/normalstatscontainer.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/statnames.h">
-			<Option target="Artificial_Trainer"/>
-		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/statscontainer.cc">
-			<Option target="Artificial_Trainer"/>
-		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/statscontainer.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stringconverter/stringconverter.cc">

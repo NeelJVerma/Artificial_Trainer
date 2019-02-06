@@ -76,7 +76,7 @@ auto Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) -> void {
   for (const auto &pokemon : active_team) {
     std::cout << i++ << ". "
               << StringConverter::SpeciesToString(pokemon.SpeciesName())
-              << ": " << pokemon.GetStatsContainer().HpStat().CurrentHp()
+              << ": " << pokemon.GetNormalStatsContainer().HpStat().CurrentHp()
               << " hp." << std::endl;
   }
 
@@ -107,26 +107,46 @@ auto Gui::DisplayActivePokemonData(const Pokemon &pokemon,
             << std::endl;
   TypeContainer type_container = pokemon.GetTypeContainer();
   std::cout << "Types: "
-            << StringConverter::TypeToString(type_container.FirstType()) << ' '
+            << StringConverter::TypeToString(type_container.FirstType()) << ", "
             << StringConverter::TypeToString(type_container.SecondType())
             << std::endl;
-  StatsContainer stats_container = pokemon.GetStatsContainer();
+  NormalStatsContainer stats_container = pokemon.GetNormalStatsContainer();
   Hp hp_stat = stats_container.HpStat();
   std::cout << "Hp: " << hp_stat.HpAsPercent() << "% ("
             << hp_stat.CurrentHp() << '/' << hp_stat.MaxHp() << ')'
             << std::endl;
 
-  // TODO: CALCULATE AND ADD OTHER STATS
-
-  MovesContainer moves_container = pokemon.GetMovesContainer();
-  std::cout << "Moves: ";
-
-  for (int i = 0; i < moves_container.Size(); i++) {
-    std::cout << StringConverter::MoveToString(moves_container[i].MoveName())
-              << ' ';
+  for (int i = 0; i < kNumNormalStats; i++) {
+    auto stat_name = static_cast<StatNames>(i);
+    std::cout << StringConverter::StatToString(stat_name)
+              << ": " << stats_container[stat_name].InGameStat() << std::endl;
   }
 
-  std::cout << std::endl << std::endl;
+  ExclusiveInGameStatsContainer ex_stats_container =
+      pokemon.GetExclusiveInGameStatsContainer();
+
+  for (int i = kNumNormalStats + 1;
+       i <= kNumNormalStats + kNumExclusiveInGameStats; i++) {
+    auto stat_name = static_cast<StatNames>(i);
+    std::cout << StringConverter::StatToString(stat_name)
+              << ": " << ex_stats_container[stat_name].Numerator() << '/'
+              << ex_stats_container[stat_name].Denominator() << std::endl;
+  }
+
+  MovesContainer moves_container = pokemon.GetMovesContainer();
+  std::cout << "Moves:" << std::endl;
+
+  for (int i = 0; i < moves_container.Size(); i++) {
+    std::cout << i + 1 << ". "
+              << StringConverter::MoveToString(moves_container[i].MoveName())
+              << std::endl;
+  }
+
+  std::cout << std::endl;
+}
+
+auto Gui::DisplayTurnNumber(const int &turn_number) -> void {
+  std::cout << "Turn number: " << turn_number << std::endl;
 }
 
 auto Gui::DisplayPickInBattleMoveMessage(const bool &player_one) -> void {

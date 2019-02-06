@@ -55,7 +55,7 @@ auto IsSpecial(const MoveNames &move_name) -> bool {
 }
 
 auto IsDamaging(const MoveNames &move_name) -> bool {
-  return BasePower(move_name) != 0;
+  return BasePower(move_name) != static_cast<int>(PowerClasses::kNone);
 }
 
 auto IsUseless(const MoveNames &move_name) -> bool {

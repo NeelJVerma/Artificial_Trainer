@@ -6,11 +6,6 @@
 #include "basepower.h"
 
 namespace artificialtrainer {
-const int kNone = 0;
-const int kVariable = 1;
-const int kOneHitKo = 2;
-const int kUnchanged = 3;
-
 auto BasePower(const MoveNames &move_name) -> int {
   switch (move_name) {
     case MoveNames::kAbsorb:
@@ -18,19 +13,19 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kAcid:
       return 40;
     case MoveNames::kAcidArmor:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kAgility:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kAmnesia:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kAuroraBeam:
       return 65;
     case MoveNames::kBarrage:
       return 15;
     case MoveNames::kBarrier:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kBide:
-      return kVariable;
+      return static_cast<int>(PowerClasses::kVariable);
     case MoveNames::kBind:
       return 15;
     case MoveNames::kBite:
@@ -52,37 +47,37 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kCometPunch:
       return 18;
     case MoveNames::kConfuseRay:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kConfusion:
       return 50;
     case MoveNames::kConstrict:
       return 10;
     case MoveNames::kConversion:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kCounter:
-      return kVariable;
+      return static_cast<int>(PowerClasses::kVariable);
     case MoveNames::kCrabhammer:
       return 90;
     case MoveNames::kCut:
       return 50;
     case MoveNames::kDefenseCurl:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kDig:
       return 100;
     case MoveNames::kDisable:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kDizzyPunch:
       return 70;
     case MoveNames::kDoubleKick:
       return 30;
     case MoveNames::kDoubleTeam:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kDoubleEdge:
       return 100;
     case MoveNames::kDoubleSlap:
       return 15;
     case MoveNames::kDragonRage:
-      return kUnchanged;
+      return static_cast<int>(PowerClasses::kUnchanged);
     case MoveNames::kDreamEater:
       return 100;
     case MoveNames::kDrillPeck:
@@ -102,33 +97,33 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kFireSpin:
       return 15;
     case MoveNames::kFissure:
-      return kOneHitKo;
+      return static_cast<int>(PowerClasses::kOneHitKo);
     case MoveNames::kFlamethrower:
       return 95;
     case MoveNames::kFlash:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kFly:
       return 70;
     case MoveNames::kFocusEnergy:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kFuryAttack:
       return 15;
     case MoveNames::kFurySwipes:
       return 10;
     case MoveNames::kGlare:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kGrowl:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kGrowth:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kGuillotine:
-      return kOneHitKo;
+      return static_cast<int>(PowerClasses::kOneHitKo);
     case MoveNames::kGust:
       return 40;
     case MoveNames::kHarden:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kHaze:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kHeadbutt:
       return 70;
     case MoveNames::kHighJumpKick:
@@ -136,7 +131,7 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kHornAttack:
       return 65;
     case MoveNames::kHornDrill:
-      return kOneHitKo;
+      return static_cast<int>(PowerClasses::kOneHitKo);
     case MoveNames::kHydroPump:
       return 120;
     case MoveNames::kHyperBeam:
@@ -144,7 +139,7 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kHyperFang:
       return 80;
     case MoveNames::kHypnosis:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kIceBeam:
       return 95;
     case MoveNames::kIcePunch:
@@ -154,23 +149,23 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kKarateChop:
       return 55;
     case MoveNames::kKinesis:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kLeechLife:
       return 20;
     case MoveNames::kLeechSeed:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kLeer:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kLick:
       return 20;
     case MoveNames::kLightScreen:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kLovelyKiss:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kLowKick:
       return 50;
     case MoveNames::kMeditate:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kMegaDrain:
       return 40;
     case MoveNames::kMegaKick:
@@ -178,17 +173,17 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kMegaPunch:
       return 80;
     case MoveNames::kMetronome:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kMimic:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kMinimize:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kMirrorMove:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kMist:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kNightShade:
-      return kVariable;
+      return static_cast<int>(PowerClasses::kVariable);
     case MoveNames::kPayDay:
       return 40;
     case MoveNames::kPeck:
@@ -198,11 +193,11 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kPinMissile:
       return 14;
     case MoveNames::kPoisonGas:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kPoisonSting:
       return 15;
     case MoveNames::kPoisonPowder:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kPound:
       return 40;
     case MoveNames::kPsybeam:
@@ -210,7 +205,7 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kPsychic:
       return 90;
     case MoveNames::kPsywave:
-      return kVariable;
+      return static_cast<int>(PowerClasses::kVariable);
     case MoveNames::kQuickAttack:
       return 40;
     case MoveNames::kRage:
@@ -220,13 +215,13 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kRazorWind:
       return 80;
     case MoveNames::kRecover:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kReflect:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kRest:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kRoar:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kRockSlide:
       return 75;
     case MoveNames::kRockThrow:
@@ -234,19 +229,19 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kRollingKick:
       return 60;
     case MoveNames::kSandAttack:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kScratch:
       return 40;
     case MoveNames::kScreech:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kSeismicToss:
-      return kVariable;
+      return static_cast<int>(PowerClasses::kVariable);
     case MoveNames::kSelfDestruct:
       return 130;
     case MoveNames::kSharpen:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kSing:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kSkullBash:
       return 100;
     case MoveNames::kSkyAttack:
@@ -256,63 +251,63 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kSlash:
       return 70;
     case MoveNames::kSleepPowder:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kSludge:
       return 65;
     case MoveNames::kSmog:
       return 20;
     case MoveNames::kSmokescreen:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kSoftBoiled:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kSolarBeam:
       return 120;
     case MoveNames::kSonicBoom:
-      return kUnchanged;
+      return static_cast<int>(PowerClasses::kUnchanged);
     case MoveNames::kSpikeCannon:
       return 20;
     case MoveNames::kSplash:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kSpore:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kStomp:
       return 65;
     case MoveNames::kStrength:
       return 80;
     case MoveNames::kStringShot:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kStruggle:
       return 50;
     case MoveNames::kStunSpore:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kSubmission:
       return 80;
     case MoveNames::kSubstitute:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kSuperFang:
-      return kVariable;
+      return static_cast<int>(PowerClasses::kVariable);
     case MoveNames::kSupersonic:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kSurf:
       return 95;
     case MoveNames::kSwift:
       return 60;
     case MoveNames::kSwordsDance:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kTackle:
       return 35;
     case MoveNames::kTailWhip:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kTakeDown:
       return 90;
     case MoveNames::kTeleport:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kThrash:
       return 90;
     case MoveNames::kThunder:
       return 120;
     case MoveNames::kThunderWave:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kThunderbolt:
       return 95;
     case MoveNames::kThunderPunch:
@@ -320,9 +315,9 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kThunderShock:
       return 40;
     case MoveNames::kToxic:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kTransform:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kTriAttack:
       return 80;
     case MoveNames::kTwineedle:
@@ -336,27 +331,21 @@ auto BasePower(const MoveNames &move_name) -> int {
     case MoveNames::kWaterfall:
       return 80;
     case MoveNames::kWhirlwind:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kWingAttack:
       return 35;
     case MoveNames::kWithdraw:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kWrap:
       return 15;
     case MoveNames::kPass:
-      return kNone;
     case MoveNames::kSwitch1:
-      return kNone;
     case MoveNames::kSwitch2:
-      return kNone;
     case MoveNames::kSwitch3:
-      return kNone;
     case MoveNames::kSwitch4:
-      return kNone;
     case MoveNames::kSwitch5:
-      return kNone;
     case MoveNames::kSwitch6:
-      return kNone;
+      return static_cast<int>(PowerClasses::kNone);
     case MoveNames::kHitSelf:
       return 40;
     default:

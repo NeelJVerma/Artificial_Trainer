@@ -501,6 +501,60 @@ src/stat/ev.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.s
 .PHONY : src/stat/ev.cc.s
 
+src/stat/exclusiveingamestat.o: src/stat/exclusiveingamestat.cc.o
+
+.PHONY : src/stat/exclusiveingamestat.o
+
+# target to build an object file
+src/stat/exclusiveingamestat.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/exclusiveingamestat.cc.o
+.PHONY : src/stat/exclusiveingamestat.cc.o
+
+src/stat/exclusiveingamestat.i: src/stat/exclusiveingamestat.cc.i
+
+.PHONY : src/stat/exclusiveingamestat.i
+
+# target to preprocess a source file
+src/stat/exclusiveingamestat.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/exclusiveingamestat.cc.i
+.PHONY : src/stat/exclusiveingamestat.cc.i
+
+src/stat/exclusiveingamestat.s: src/stat/exclusiveingamestat.cc.s
+
+.PHONY : src/stat/exclusiveingamestat.s
+
+# target to generate assembly for a file
+src/stat/exclusiveingamestat.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/exclusiveingamestat.cc.s
+.PHONY : src/stat/exclusiveingamestat.cc.s
+
+src/stat/exclusiveingamestatscontainer.o: src/stat/exclusiveingamestatscontainer.cc.o
+
+.PHONY : src/stat/exclusiveingamestatscontainer.o
+
+# target to build an object file
+src/stat/exclusiveingamestatscontainer.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/exclusiveingamestatscontainer.cc.o
+.PHONY : src/stat/exclusiveingamestatscontainer.cc.o
+
+src/stat/exclusiveingamestatscontainer.i: src/stat/exclusiveingamestatscontainer.cc.i
+
+.PHONY : src/stat/exclusiveingamestatscontainer.i
+
+# target to preprocess a source file
+src/stat/exclusiveingamestatscontainer.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/exclusiveingamestatscontainer.cc.i
+.PHONY : src/stat/exclusiveingamestatscontainer.cc.i
+
+src/stat/exclusiveingamestatscontainer.s: src/stat/exclusiveingamestatscontainer.cc.s
+
+.PHONY : src/stat/exclusiveingamestatscontainer.s
+
+# target to generate assembly for a file
+src/stat/exclusiveingamestatscontainer.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/exclusiveingamestatscontainer.cc.s
+.PHONY : src/stat/exclusiveingamestatscontainer.cc.s
+
 src/stat/hp.o: src/stat/hp.cc.o
 
 .PHONY : src/stat/hp.o
@@ -555,59 +609,59 @@ src/stat/iv.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/iv.cc.s
 .PHONY : src/stat/iv.cc.s
 
-src/stat/stat.o: src/stat/stat.cc.o
+src/stat/normalstat.o: src/stat/normalstat.cc.o
 
-.PHONY : src/stat/stat.o
-
-# target to build an object file
-src/stat/stat.cc.o:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.o
-.PHONY : src/stat/stat.cc.o
-
-src/stat/stat.i: src/stat/stat.cc.i
-
-.PHONY : src/stat/stat.i
-
-# target to preprocess a source file
-src/stat/stat.cc.i:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.i
-.PHONY : src/stat/stat.cc.i
-
-src/stat/stat.s: src/stat/stat.cc.s
-
-.PHONY : src/stat/stat.s
-
-# target to generate assembly for a file
-src/stat/stat.cc.s:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/stat.cc.s
-.PHONY : src/stat/stat.cc.s
-
-src/stat/statscontainer.o: src/stat/statscontainer.cc.o
-
-.PHONY : src/stat/statscontainer.o
+.PHONY : src/stat/normalstat.o
 
 # target to build an object file
-src/stat/statscontainer.cc.o:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/statscontainer.cc.o
-.PHONY : src/stat/statscontainer.cc.o
+src/stat/normalstat.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/normalstat.cc.o
+.PHONY : src/stat/normalstat.cc.o
 
-src/stat/statscontainer.i: src/stat/statscontainer.cc.i
+src/stat/normalstat.i: src/stat/normalstat.cc.i
 
-.PHONY : src/stat/statscontainer.i
+.PHONY : src/stat/normalstat.i
 
 # target to preprocess a source file
-src/stat/statscontainer.cc.i:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/statscontainer.cc.i
-.PHONY : src/stat/statscontainer.cc.i
+src/stat/normalstat.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/normalstat.cc.i
+.PHONY : src/stat/normalstat.cc.i
 
-src/stat/statscontainer.s: src/stat/statscontainer.cc.s
+src/stat/normalstat.s: src/stat/normalstat.cc.s
 
-.PHONY : src/stat/statscontainer.s
+.PHONY : src/stat/normalstat.s
 
 # target to generate assembly for a file
-src/stat/statscontainer.cc.s:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/statscontainer.cc.s
-.PHONY : src/stat/statscontainer.cc.s
+src/stat/normalstat.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/normalstat.cc.s
+.PHONY : src/stat/normalstat.cc.s
+
+src/stat/normalstatscontainer.o: src/stat/normalstatscontainer.cc.o
+
+.PHONY : src/stat/normalstatscontainer.o
+
+# target to build an object file
+src/stat/normalstatscontainer.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/normalstatscontainer.cc.o
+.PHONY : src/stat/normalstatscontainer.cc.o
+
+src/stat/normalstatscontainer.i: src/stat/normalstatscontainer.cc.i
+
+.PHONY : src/stat/normalstatscontainer.i
+
+# target to preprocess a source file
+src/stat/normalstatscontainer.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/normalstatscontainer.cc.i
+.PHONY : src/stat/normalstatscontainer.cc.i
+
+src/stat/normalstatscontainer.s: src/stat/normalstatscontainer.cc.s
+
+.PHONY : src/stat/normalstatscontainer.s
+
+# target to generate assembly for a file
+src/stat/normalstatscontainer.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/stat/normalstatscontainer.cc.s
+.PHONY : src/stat/normalstatscontainer.cc.s
 
 src/stringconverter/stringconverter.o: src/stringconverter/stringconverter.cc.o
 
@@ -795,18 +849,24 @@ help:
 	@echo "... src/stat/ev.o"
 	@echo "... src/stat/ev.i"
 	@echo "... src/stat/ev.s"
+	@echo "... src/stat/exclusiveingamestat.o"
+	@echo "... src/stat/exclusiveingamestat.i"
+	@echo "... src/stat/exclusiveingamestat.s"
+	@echo "... src/stat/exclusiveingamestatscontainer.o"
+	@echo "... src/stat/exclusiveingamestatscontainer.i"
+	@echo "... src/stat/exclusiveingamestatscontainer.s"
 	@echo "... src/stat/hp.o"
 	@echo "... src/stat/hp.i"
 	@echo "... src/stat/hp.s"
 	@echo "... src/stat/iv.o"
 	@echo "... src/stat/iv.i"
 	@echo "... src/stat/iv.s"
-	@echo "... src/stat/stat.o"
-	@echo "... src/stat/stat.i"
-	@echo "... src/stat/stat.s"
-	@echo "... src/stat/statscontainer.o"
-	@echo "... src/stat/statscontainer.i"
-	@echo "... src/stat/statscontainer.s"
+	@echo "... src/stat/normalstat.o"
+	@echo "... src/stat/normalstat.i"
+	@echo "... src/stat/normalstat.s"
+	@echo "... src/stat/normalstatscontainer.o"
+	@echo "... src/stat/normalstatscontainer.i"
+	@echo "... src/stat/normalstatscontainer.s"
 	@echo "... src/stringconverter/stringconverter.o"
 	@echo "... src/stringconverter/stringconverter.i"
 	@echo "... src/stringconverter/stringconverter.s"

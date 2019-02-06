@@ -12,11 +12,12 @@
 #include "../move/movescontainer.h"
 #include "../move/pp.h"
 #include "../stringconverter/stringconverter.h"
+#include "../move/priority.h"
 
 namespace artificialtrainer {
 namespace {
-auto PokemonLearnsMove(const std::vector<MoveNames> &learnset,
-                       const MoveNames &move_selected) -> bool {
+auto MoveInLearnset(const std::vector<MoveNames> &learnset,
+                    const MoveNames &move_selected) -> bool {
   for (MoveNames learned_move : learnset) {
     if (move_selected == learned_move) {
       return true;
@@ -30,7 +31,8 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
   Gui::DisplayPokemonChoices();
   Gui::DisplayPickTeamMessage(team_one);
 
-  for (int i = 0; i < Team::kMaxTeamSize; i++) {
+  // TODO: CHANGE BACK TO ACTUAL TEAM SIZE WHEN DONE TESTING
+  for (int i = 0; i < Team::kMaxTeamSize - 5; i++) {
     Gui::DisplayPickPokemonMessage(i + 1);
     int pokemon_selection = InputHandler::GetIntInput(1, kNumSpecies);
     auto pokemon_species = static_cast<SpeciesNames>(pokemon_selection - 1);
@@ -44,7 +46,7 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
     Gui::DisplayPickLevelMessage();
     int level_selection = InputHandler::GetIntInput(1, Pokemon::kMaxLevel);
     int normal_stats_count = 0;
-    Stat stats[kNumNormalStats];
+    NormalStat stats[kNumNormalStats];
     Hp hp{};
 
     for (int j = 0; j < kNumNormalStats + 1; j++) {
@@ -58,8 +60,11 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
         hp = Hp(pokemon_species, level_selection, Ev(ev_selection),
                 Iv(iv_selection));
       } else {
-        stats[normal_stats_count++] = Stat(pokemon_species, stat_name,
-                                           Ev(ev_selection), Iv(iv_selection));
+        stats[normal_stats_count++] = NormalStat(pokemon_species,
+                                                 level_selection,
+                                                 stat_name,
+                                                 Ev(ev_selection),
+                                                 Iv(iv_selection));
       }
     }
 
@@ -72,7 +77,7 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
       int move_selection = InputHandler::GetIntInput(1, kNumMoves);
       auto move_name = static_cast<MoveNames>(move_selection);
 
-      if (!PokemonLearnsMove(learnset, move_name) ||
+      if (!MoveInLearnset(learnset, move_name) ||
           moves_container.SeenMove(move_name)) {
         Gui::DisplayInvalidChoiceMessage();
         j--;
@@ -83,8 +88,8 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
     }
 
     team.AddPokemon(Pokemon(pokemon_species,
-                            StatsContainer(pokemon_species,
-                                           hp, stats),
+                            NormalStatsContainer(pokemon_species,
+                                                 hp, stats),
                             moves_container,
                             TypeContainer(pokemon_species),
                             level_selection));
@@ -101,18 +106,48 @@ auto Battle::StartBattle() -> void {
   Gui::DisplayPlayerTeam(team_one_, true);
   Gui::DisplayPlayerTeam(team_two_, false);
   Gui::DisplayPickLeadingPokemonMessage(true);
-  int ones_leading_index = InputHandler::GetIntInput(1, Team::kMaxTeamSize);
-  team_one_.SetActiveMember(ones_leading_index - 1);
+  team_one_.SetActiveMember(
+      InputHandler::GetIntInput(1, Team::kMaxTeamSize) - 1);
   Gui::DisplayPickLeadingPokemonMessage(false);
-  int twos_leading_index = InputHandler::GetIntInput(1, Team::kMaxTeamSize);
-  team_two_.SetActiveMember(twos_leading_index - 1);
+  team_two_.SetActiveMember(
+      InputHandler::GetIntInput(1, Team::kMaxTeamSize) - 1);
 }
 
-auto Battle::HandleTurn() -> void {
+auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> Move {
+  Gui::DisplayPickInBattleMoveMessage(team_one);
+  MovesContainer moves = team.FindActiveMember().GetMovesContainer();
+  return moves[InputHandler::GetIntInput(1, moves.Size()) - 1];
+}
+
+auto Battle::HandleTurn(const int &turn_number) -> void {
+  Gui::DisplayTurnNumber(turn_number);
   Gui::DisplayPlayerTeam(team_one_, true);
   Gui::DisplayPlayerTeam(team_two_, false);
-  Gui::DisplayActivePokemonData(team_one_.FindActiveMember(), true);
-  Gui::DisplayActivePokemonData(team_two_.FindActiveMember(), false);
+  Pokemon &active_pokemon_one = team_one_.FindActiveMember();
+  Gui::DisplayActivePokemonData(active_pokemon_one, true);
+  Pokemon &active_pokemon_two = team_two_.FindActiveMember();
+  Gui::DisplayActivePokemonData(active_pokemon_two, false);
+  Move move_choice_one = PlayerPicksMove(team_one_, true);
+  Move move_choice_two = PlayerPicksMove(team_two_, false);
+  bool one_moves_first = false;
+  NormalStatsContainer active_stats_one =
+      active_pokemon_one.GetNormalStatsContainer();
+  NormalStatsContainer active_stats_two =
+      active_pokemon_two.GetNormalStatsContainer();
+
+  if (Priority(move_choice_one.MoveName()) ==
+      Priority(move_choice_two.MoveName())) {
+    if (active_stats_one[StatNames::kSpeed].InGameStat() >
+        active_stats_two[StatNames::kSpeed].InGameStat()) {
+      one_moves_first = true;
+    }
+  } else if (Priority(move_choice_one.MoveName()) >
+      Priority(move_choice_two.MoveName())) {
+    one_moves_first = true;
+  }
+
+  Pokemon &moves_first = (one_moves_first ? active_pokemon_one :
+                          active_pokemon_two);
 }
 
 auto Battle::Play() -> void {
@@ -123,7 +158,7 @@ auto Battle::Play() -> void {
   int num_turns_elapsed = 1;
 
   while (num_turns_elapsed++ < kMaxNumTurns && !BattleOver()) {
-    HandleTurn();
+    HandleTurn(num_turns_elapsed);
     break;
   }
 }

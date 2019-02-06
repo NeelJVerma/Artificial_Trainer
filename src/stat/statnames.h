@@ -11,10 +11,14 @@ enum class StatNames : int {
   kDefense,
   kSpecial,
   kSpeed,
-  kHp
+  kHp,
+  kAccuracy,
+  kEvasion
 };
 
 const int kNumNormalStats = static_cast<int>(StatNames::kSpeed) + 1;
+const int kNumExclusiveInGameStats =
+    static_cast<int>(StatNames::kEvasion) - static_cast<int>(StatNames::kHp);
 
 } //namespace artificialtrainer
 

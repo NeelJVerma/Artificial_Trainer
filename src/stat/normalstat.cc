@@ -3,7 +3,8 @@
 //
 
 #include <cassert>
-#include "stat.h"
+#include <cmath>
+#include "normalstat.h"
 
 namespace artificialtrainer {
 namespace {
@@ -1261,24 +1262,51 @@ auto GetBase(const SpeciesNames &species_name,
 
 } //namespace
 
-Stat::Stat(const SpeciesNames &species_name, const StatNames &stat_name,
-           const Ev &ev, const Iv &iv)
+NormalStat::NormalStat(const SpeciesNames &species_name, const int &level,
+                       const StatNames &stat_name, const Ev &ev, const Iv &iv)
     : base_stat_(GetBase(species_name,
                          stat_name)),
+      numerator_(2),
+      denominator_(2),
+      level_(level),
       ev_stat_(ev),
       iv_stat_(iv) {
 }
 
-auto Stat::EvStat() const -> Ev {
+auto NormalStat::EvStat() const -> Ev {
   return ev_stat_;
 }
 
-auto Stat::IvStat() const -> Iv {
+auto NormalStat::IvStat() const -> Iv {
   return iv_stat_;
 }
 
-auto Stat::BaseStat() const -> int {
+auto NormalStat::BaseStat() const -> int {
   return base_stat_;
+}
+
+auto NormalStat::RaiseNumerator(const int &num_stages) -> void {
+  numerator_ += num_stages;
+}
+
+auto NormalStat::RaiseDenominator(const int &num_stages) -> void {
+  denominator_ += num_stages;
+}
+
+auto NormalStat::LowerNumerator(const int &num_stages) -> void {
+  numerator_ -= num_stages;
+}
+
+auto NormalStat::LowerDenominator(const int &num_stages) -> void {
+  denominator_ -= num_stages;
+}
+
+auto NormalStat::InGameStat() const -> int {
+  int initial_stat = static_cast<int>(5 + floor(static_cast<double>(level_) /
+      100 * ((base_stat_ * 2) + 2 * iv_stat_.Value() + static_cast<double>(
+      ev_stat_.Value()) / 1024)));
+  return static_cast<int>(floor(initial_stat * (
+      static_cast<double>(numerator_) / denominator_)));
 }
 
 } //nammespace artificialtrainer

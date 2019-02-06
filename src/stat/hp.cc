@@ -320,8 +320,9 @@ auto BaseHp(const SpeciesNames &species) -> int {
 
 auto CalculateInBattleHpStat(const int &base_hp, const int &level,
                              const Ev &ev_stat, const Iv &iv_stat) -> int {
-  return static_cast<int>(10 + floor(static_cast<double>(level / 100 * (
-      (base_hp * 2) + 2 * iv_stat.Value() + ev_stat.Value() / 1024))) + level);
+  return static_cast<int>(10 + floor(static_cast<double>(level) /
+      100 * ((base_hp * 2) + 2 * iv_stat.Value() + static_cast<double>(
+      ev_stat.Value()) / 1024)) + level);
 }
 
 } //namespace

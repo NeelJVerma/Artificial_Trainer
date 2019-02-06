@@ -319,15 +319,19 @@ auto StringConverter::SpeciesToString(
 auto StringConverter::StatToString(const StatNames &stat_name) -> std::string {
   switch (stat_name) {
     case StatNames::kAttack:
-      return "attack";
+      return "Attack";
     case StatNames::kDefense:
-      return "defense";
+      return "Defense";
     case StatNames::kSpecial:
-      return "special";
+      return "Special";
     case StatNames::kSpeed:
-      return "speed";
+      return "Speed";
     case StatNames::kHp:
-      return "hp";
+      return "Hp";
+    case StatNames::kAccuracy:
+      return "Accuracy";
+    case StatNames::kEvasion:
+      return "Evasion";
     default:
       assert(false);
   };
