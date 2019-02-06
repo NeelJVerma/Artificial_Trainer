@@ -66,8 +66,8 @@ auto Gui::DisplayPickMoveMessage(const int &move_number) -> void {
 }
 
 auto Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) -> void {
-  std::vector<Pokemon> active_team = team.ActiveTeam();
-  std::vector<Pokemon> fainted_team = team.FaintedTeam();
+  std::vector<std::shared_ptr<Pokemon>> active_team = team.ActiveTeam();
+  std::vector<std::shared_ptr<Pokemon>> fainted_team = team.FaintedTeam();
 
   std::cout << "Active team " << (player_one ? "one" : "two") << ':'
             << std::endl;
@@ -75,8 +75,8 @@ auto Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) -> void {
 
   for (const auto &pokemon : active_team) {
     std::cout << i++ << ". "
-              << StringConverter::SpeciesToString(pokemon.SpeciesName())
-              << ": " << pokemon.GetNormalStatsContainer().HpStat().CurrentHp()
+              << StringConverter::SpeciesToString(pokemon->SpeciesName())
+              << ": " << pokemon->GetNormalStatsContainer().HpStat().CurrentHp()
               << " hp." << std::endl;
   }
 
@@ -87,7 +87,7 @@ auto Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) -> void {
 
   for (const auto &pokemon : fainted_team) {
     std::cout << i++ << ". "
-              << StringConverter::SpeciesToString(pokemon.SpeciesName())
+              << StringConverter::SpeciesToString(pokemon->SpeciesName())
               << '.' << std::endl;
   }
 
@@ -99,18 +99,18 @@ auto Gui::DisplayPickLeadingPokemonMessage(const bool &player_one) -> void {
             << ", select your leading Pokemon" << std::endl;
 }
 
-auto Gui::DisplayActivePokemonData(const Pokemon &pokemon,
+auto Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
                                    const bool &player_one) -> void {
   std::cout << "Active pokemon for player " << (player_one ? "one" : "two")
             << ':' << std::endl;
-  std::cout << StringConverter::SpeciesToString(pokemon.SpeciesName())
+  std::cout << StringConverter::SpeciesToString(pokemon->SpeciesName())
             << std::endl;
-  TypeContainer type_container = pokemon.GetTypeContainer();
+  TypeContainer type_container = pokemon->GetTypeContainer();
   std::cout << "Types: "
             << StringConverter::TypeToString(type_container.FirstType()) << ", "
             << StringConverter::TypeToString(type_container.SecondType())
             << std::endl;
-  NormalStatsContainer stats_container = pokemon.GetNormalStatsContainer();
+  NormalStatsContainer stats_container = pokemon->GetNormalStatsContainer();
   Hp hp_stat = stats_container.HpStat();
   std::cout << "Hp: " << hp_stat.HpAsPercent() << "% ("
             << hp_stat.CurrentHp() << '/' << hp_stat.MaxHp() << ')'
@@ -123,7 +123,7 @@ auto Gui::DisplayActivePokemonData(const Pokemon &pokemon,
   }
 
   ExclusiveInGameStatsContainer ex_stats_container =
-      pokemon.GetExclusiveInGameStatsContainer();
+      pokemon->GetExclusiveInGameStatsContainer();
 
   for (int i = kNumNormalStats + 1;
        i <= kNumNormalStats + kNumExclusiveInGameStats; i++) {
@@ -133,7 +133,7 @@ auto Gui::DisplayActivePokemonData(const Pokemon &pokemon,
               << ex_stats_container[stat_name].Denominator() << std::endl;
   }
 
-  MovesContainer moves_container = pokemon.GetMovesContainer();
+  MovesContainer moves_container = pokemon->GetMovesContainer();
   std::cout << "Moves:" << std::endl;
 
   for (int i = 0; i < moves_container.Size(); i++) {

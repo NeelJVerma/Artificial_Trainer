@@ -28,7 +28,7 @@ class Gui {
   static auto DisplayPlayerTeam(const Team &team,
                                 const bool &player_one) -> void;
   static auto DisplayPickLeadingPokemonMessage(const bool &player_one) -> void;
-  static auto DisplayActivePokemonData(const Pokemon &pokemon,
+  static auto DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
                                        const bool &player_one) -> void;
   static auto DisplayTurnNumber(const int &turn_number) -> void;
   static auto DisplayPickInBattleMoveMessage(const bool &player_one) -> void;

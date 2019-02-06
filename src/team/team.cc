@@ -6,7 +6,7 @@
 #include "team.h"
 
 namespace artificialtrainer {
-auto Team::AddPokemon(const Pokemon &pokemon) -> void {
+auto Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void {
   active_team_.push_back(pokemon);
 }
 
@@ -23,17 +23,17 @@ auto Team::FaintedTeamSize() const -> int {
   return static_cast<int>(fainted_team_.size());
 }
 
-auto Team::ActiveTeam() const -> std::vector<Pokemon> {
+auto Team::ActiveTeam() const -> std::vector<std::shared_ptr<Pokemon>> {
   return active_team_;
 }
 
-auto Team::FaintedTeam() const -> std::vector<Pokemon> {
+auto Team::FaintedTeam() const -> std::vector<std::shared_ptr<Pokemon>> {
   return fainted_team_;
 }
 
 auto Team::SeenPokemon(const SpeciesNames &species) -> bool {
   for (const auto &in_team : active_team_) {
-    if (species == in_team.SpeciesName()) {
+    if (species == in_team->SpeciesName()) {
       return true;
     }
   }
@@ -42,12 +42,12 @@ auto Team::SeenPokemon(const SpeciesNames &species) -> bool {
 }
 
 auto Team::SetActiveMember(const int &index) -> void {
-  active_team_[index].SetIsActive(true);
+  active_team_[index]->SetIsActive(true);
 }
 
-auto Team::FindActiveMember() -> Pokemon & {
+auto Team::FindActiveMember() -> std::shared_ptr<Pokemon> {
   for (auto &pokemon : active_team_) {
-    if (pokemon.IsActive()) {
+    if (pokemon->IsActive()) {
       return pokemon;
     }
   }

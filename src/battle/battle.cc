@@ -87,12 +87,14 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
       moves_container.AddMove(Move(move_name, Pp(move_name)));
     }
 
-    team.AddPokemon(Pokemon(pokemon_species,
-                            NormalStatsContainer(pokemon_species,
-                                                 hp, stats),
-                            moves_container,
-                            TypeContainer(pokemon_species),
-                            level_selection));
+    team.AddPokemon(std::make_shared<Pokemon>(pokemon_species,
+                                              NormalStatsContainer(
+                                                  pokemon_species,
+                                                  hp,
+                                                  stats),
+                                              moves_container,
+                                              TypeContainer(pokemon_species),
+                                              level_selection));
   }
 }
 
@@ -115,7 +117,7 @@ auto Battle::StartBattle() -> void {
 
 auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> Move {
   Gui::DisplayPickInBattleMoveMessage(team_one);
-  MovesContainer moves = team.FindActiveMember().GetMovesContainer();
+  MovesContainer moves = team.FindActiveMember()->GetMovesContainer();
   return moves[InputHandler::GetIntInput(1, moves.Size()) - 1];
 }
 
@@ -123,17 +125,17 @@ auto Battle::HandleTurn(const int &turn_number) -> void {
   Gui::DisplayTurnNumber(turn_number);
   Gui::DisplayPlayerTeam(team_one_, true);
   Gui::DisplayPlayerTeam(team_two_, false);
-  Pokemon &active_pokemon_one = team_one_.FindActiveMember();
+  std::shared_ptr<Pokemon> active_pokemon_one = team_one_.FindActiveMember();
   Gui::DisplayActivePokemonData(active_pokemon_one, true);
-  Pokemon &active_pokemon_two = team_two_.FindActiveMember();
+  std::shared_ptr<Pokemon> active_pokemon_two = team_two_.FindActiveMember();
   Gui::DisplayActivePokemonData(active_pokemon_two, false);
   Move move_choice_one = PlayerPicksMove(team_one_, true);
   Move move_choice_two = PlayerPicksMove(team_two_, false);
   bool one_moves_first = false;
   NormalStatsContainer active_stats_one =
-      active_pokemon_one.GetNormalStatsContainer();
+      active_pokemon_one->GetNormalStatsContainer();
   NormalStatsContainer active_stats_two =
-      active_pokemon_two.GetNormalStatsContainer();
+      active_pokemon_two->GetNormalStatsContainer();
 
   if (Priority(move_choice_one.MoveName()) ==
       Priority(move_choice_two.MoveName())) {
@@ -146,8 +148,8 @@ auto Battle::HandleTurn(const int &turn_number) -> void {
     one_moves_first = true;
   }
 
-  Pokemon &moves_first = (one_moves_first ? active_pokemon_one :
-                          active_pokemon_two);
+  std::shared_ptr<Pokemon> moves_first = (one_moves_first ? active_pokemon_one :
+                                          active_pokemon_two);
 }
 
 auto Battle::Play() -> void {
