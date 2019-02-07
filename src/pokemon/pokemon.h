@@ -42,6 +42,9 @@ class Pokemon {
   auto Level() const -> int;
   auto IsActive() const -> bool;
   auto SetIsActive(const bool &is_active) -> void;
+  auto SetMoveUsed(const int &index) -> void;
+  auto MoveUsed() const -> std::shared_ptr<Move>;
+
 
   // TODO: ADD IN GAME FLAG ATTRIBUTES. SETTING/GETTING
 
@@ -49,6 +52,7 @@ class Pokemon {
   NormalStatsContainer normal_stats_container_;
   ExclusiveInGameStatsContainer exclusive_in_game_stats_container_;
   MovesContainer moves_container_;
+  std::shared_ptr<Move> move_used_;
   TypeContainer type_container_;
   SpeciesNames species_name_;
   InGameFlags flags_;

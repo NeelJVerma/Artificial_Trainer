@@ -10,6 +10,7 @@ CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/move/movenames.
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/move/movescontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/move/pp.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/move/priority.h
+CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/move/usemove.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/pokemon/learnset.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/pokemon/pokemon.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/pokemon/speciesnames.h
@@ -92,8 +93,9 @@ CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/team/team.h
 CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/type/typecontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/main.cc.o: ../src/type/typenames.h
 
-CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o: ../src/move/accuracy.cc
-CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o: ../src/move/movenames.h
+CMakeFiles/Artificial_Trainer.dir/src/move/baseaccuracy.cc.o: ../src/move/baseaccuracy.cc
+CMakeFiles/Artificial_Trainer.dir/src/move/baseaccuracy.cc.o: ../src/move/baseaccuracy.h
+CMakeFiles/Artificial_Trainer.dir/src/move/baseaccuracy.cc.o: ../src/move/movenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.o: ../src/move/basepower.cc
 CMakeFiles/Artificial_Trainer.dir/src/move/basepower.cc.o: ../src/move/basepower.h
@@ -118,6 +120,28 @@ CMakeFiles/Artificial_Trainer.dir/src/move/pp.cc.o: ../src/move/pp.h
 CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o: ../src/move/priority.cc
 CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o: ../src/move/priority.h
+
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/move/baseaccuracy.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/move/basepower.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/move/move.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/move/movenames.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/move/movescontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/move/usemove.cc
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/move/usemove.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/pokemon/pokemon.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/pokemon/speciesnames.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/ev.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/exclusiveingamestat.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/exclusiveingamestatscontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/hp.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/iv.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/normalstat.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/normalstatscontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/statnames.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stringconverter/stringconverter.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/type/type.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/type/typecontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o: ../src/pokemon/learnset.cc

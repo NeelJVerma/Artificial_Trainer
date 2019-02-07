@@ -4,9 +4,9 @@
 
 #include <cassert>
 #include "movenames.h"
+#include "baseaccuracy.h"
 
 namespace artificialtrainer {
-const int kNeverMiss = 101;
 
 auto BaseAccuracy(const MoveNames &move_name) -> int {
   switch (move_name) {

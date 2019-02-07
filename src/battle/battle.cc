@@ -2,6 +2,8 @@
 // Created by neel on 1/25/19.
 //
 
+#include <random>
+#include <ctime>
 #include "battle.h"
 #include "../clientelements/gui.h"
 #include "../clientelements/inputhandler.h"
@@ -13,6 +15,7 @@
 #include "../move/pp.h"
 #include "../stringconverter/stringconverter.h"
 #include "../move/priority.h"
+#include "../move/usemove.h"
 
 namespace artificialtrainer {
 namespace {
@@ -85,7 +88,7 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
         continue;
       }
 
-      moves_container.AddMove(Move(move_name, Pp(move_name)));
+      moves_container.AddMove(std::make_shared<Move>(move_name, Pp(move_name)));
     }
 
     team.AddPokemon(std::make_shared<Pokemon>(pokemon_species,
@@ -116,10 +119,11 @@ auto Battle::StartBattle() -> void {
       InputHandler::GetIntInput(1, Team::kMaxTeamSize) - 1);
 }
 
-auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> Move {
+auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> void {
   Gui::DisplayPickInBattleMoveMessage(team_one);
+  std::shared_ptr<Pokemon> pokemon = team.FindActiveMember();
   MovesContainer moves = team.FindActiveMember()->GetMovesContainer();
-  return moves[InputHandler::GetIntInput(1, moves.Size()) - 1];
+  pokemon->SetMoveUsed(InputHandler::GetIntInput(1, moves.Size()) - 1);
 }
 
 auto Battle::HandleTurn() -> void {
@@ -129,27 +133,42 @@ auto Battle::HandleTurn() -> void {
   Gui::DisplayActivePokemonData(active_pokemon_one, true);
   std::shared_ptr<Pokemon> active_pokemon_two = team_two_.FindActiveMember();
   Gui::DisplayActivePokemonData(active_pokemon_two, false);
-  Move move_choice_one = PlayerPicksMove(team_one_, true);
-  Move move_choice_two = PlayerPicksMove(team_two_, false);
+  PlayerPicksMove(team_one_, true);
+  PlayerPicksMove(team_two_, false);
   bool one_moves_first = false;
-  NormalStatsContainer active_stats_one =
+  NormalStatsContainer normal_active_stats_one =
       active_pokemon_one->GetNormalStatsContainer();
-  NormalStatsContainer active_stats_two =
+  NormalStatsContainer normal_active_stats_two =
       active_pokemon_two->GetNormalStatsContainer();
+  std::shared_ptr<Move> move_one = active_pokemon_one->MoveUsed();
+  std::shared_ptr<Move> move_two = active_pokemon_two->MoveUsed();
 
-  if (Priority(move_choice_one.MoveName()) ==
-      Priority(move_choice_two.MoveName())) {
-    if (active_stats_one[StatNames::kSpeed]->InGameStat() >
-        active_stats_two[StatNames::kSpeed]->InGameStat()) {
+  if (Priority(move_two->MoveName()) ==
+      Priority(move_two->MoveName())) {
+    if (normal_active_stats_one[StatNames::kSpeed]->InGameStat() >
+        normal_active_stats_two[StatNames::kSpeed]->InGameStat()) {
       one_moves_first = true;
+    } else if (normal_active_stats_one[StatNames::kSpeed]->InGameStat() ==
+        normal_active_stats_two[StatNames::kSpeed]->InGameStat()) {
+      std::minstd_rand generator(std::time(0));
+      std::uniform_int_distribution<> distribution(0, 1);
+
+      if (distribution(generator) % 1) {
+        one_moves_first = true;
+      }
     }
-  } else if (Priority(move_choice_one.MoveName()) >
-      Priority(move_choice_two.MoveName())) {
+  } else if (Priority(move_one->MoveName()) >
+      Priority(move_two->MoveName())) {
     one_moves_first = true;
   }
 
-  std::shared_ptr<Pokemon> moves_first = (one_moves_first ? active_pokemon_one :
-                                          active_pokemon_two);
+  if (one_moves_first) {
+    UseMove(active_pokemon_one, active_pokemon_two);
+    UseMove(active_pokemon_two, active_pokemon_one);
+  } else {
+    UseMove(active_pokemon_two, active_pokemon_one);
+    UseMove(active_pokemon_one, active_pokemon_two);
+  }
 }
 
 auto Battle::Play() -> void {

@@ -8,6 +8,8 @@
 #include "movenames.h"
 
 namespace artificialtrainer {
+const int kNeverMiss = 101;
+
 auto BaseAccuracy(const MoveNames &move_name) -> int;
 
 } //namespace artificialtrainer

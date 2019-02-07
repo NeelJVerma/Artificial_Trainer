@@ -25,6 +25,10 @@ auto ExclusiveInGameStat::LowerDenominator(const int &num_stages) -> void {
   denominator_ -= num_stages;
 }
 
+auto ExclusiveInGameStat::CalculatedModifier() const -> double {
+  return static_cast<double>(numerator_) / denominator_;
+}
+
 auto ExclusiveInGameStat::Numerator() const -> int {
   return numerator_;
 }

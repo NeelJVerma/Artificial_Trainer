@@ -60,4 +60,12 @@ auto Pokemon::SetIsActive(const bool &is_active) -> void {
   is_active_ = is_active;
 }
 
+auto Pokemon::SetMoveUsed(const int &index) -> void {
+  move_used_ = moves_container_[index];
+}
+
+auto Pokemon::MoveUsed() const -> std::shared_ptr<Move> {
+  return move_used_;
+}
+
 } //namespace artificialtrainer

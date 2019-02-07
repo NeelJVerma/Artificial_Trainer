@@ -258,32 +258,32 @@ src/main.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/main.cc.s
 .PHONY : src/main.cc.s
 
-src/move/accuracy.o: src/move/accuracy.cc.o
+src/move/baseaccuracy.o: src/move/baseaccuracy.cc.o
 
-.PHONY : src/move/accuracy.o
+.PHONY : src/move/baseaccuracy.o
 
 # target to build an object file
-src/move/accuracy.cc.o:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.o
-.PHONY : src/move/accuracy.cc.o
+src/move/baseaccuracy.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/baseaccuracy.cc.o
+.PHONY : src/move/baseaccuracy.cc.o
 
-src/move/accuracy.i: src/move/accuracy.cc.i
+src/move/baseaccuracy.i: src/move/baseaccuracy.cc.i
 
-.PHONY : src/move/accuracy.i
+.PHONY : src/move/baseaccuracy.i
 
 # target to preprocess a source file
-src/move/accuracy.cc.i:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.i
-.PHONY : src/move/accuracy.cc.i
+src/move/baseaccuracy.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/baseaccuracy.cc.i
+.PHONY : src/move/baseaccuracy.cc.i
 
-src/move/accuracy.s: src/move/accuracy.cc.s
+src/move/baseaccuracy.s: src/move/baseaccuracy.cc.s
 
-.PHONY : src/move/accuracy.s
+.PHONY : src/move/baseaccuracy.s
 
 # target to generate assembly for a file
-src/move/accuracy.cc.s:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/accuracy.cc.s
-.PHONY : src/move/accuracy.cc.s
+src/move/baseaccuracy.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/baseaccuracy.cc.s
+.PHONY : src/move/baseaccuracy.cc.s
 
 src/move/basepower.o: src/move/basepower.cc.o
 
@@ -419,6 +419,33 @@ src/move/priority.s: src/move/priority.cc.s
 src/move/priority.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.s
 .PHONY : src/move/priority.cc.s
+
+src/move/usemove.o: src/move/usemove.cc.o
+
+.PHONY : src/move/usemove.o
+
+# target to build an object file
+src/move/usemove.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o
+.PHONY : src/move/usemove.cc.o
+
+src/move/usemove.i: src/move/usemove.cc.i
+
+.PHONY : src/move/usemove.i
+
+# target to preprocess a source file
+src/move/usemove.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.i
+.PHONY : src/move/usemove.cc.i
+
+src/move/usemove.s: src/move/usemove.cc.s
+
+.PHONY : src/move/usemove.s
+
+# target to generate assembly for a file
+src/move/usemove.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.s
+.PHONY : src/move/usemove.cc.s
 
 src/pokemon/learnset.o: src/pokemon/learnset.cc.o
 
@@ -822,9 +849,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/move/accuracy.o"
-	@echo "... src/move/accuracy.i"
-	@echo "... src/move/accuracy.s"
+	@echo "... src/move/baseaccuracy.o"
+	@echo "... src/move/baseaccuracy.i"
+	@echo "... src/move/baseaccuracy.s"
 	@echo "... src/move/basepower.o"
 	@echo "... src/move/basepower.i"
 	@echo "... src/move/basepower.s"
@@ -840,6 +867,9 @@ help:
 	@echo "... src/move/priority.o"
 	@echo "... src/move/priority.i"
 	@echo "... src/move/priority.s"
+	@echo "... src/move/usemove.o"
+	@echo "... src/move/usemove.i"
+	@echo "... src/move/usemove.s"
 	@echo "... src/pokemon/learnset.o"
 	@echo "... src/pokemon/learnset.i"
 	@echo "... src/pokemon/learnset.s"

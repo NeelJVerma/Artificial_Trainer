@@ -20,7 +20,7 @@ class Battle {
   auto BattleOver() const -> bool;
   auto StartBattle() -> void;
   auto HandleTurn() -> void;
-  auto PlayerPicksMove(Team &team, const bool &team_one) -> Move;
+  auto PlayerPicksMove(Team &team, const bool &team_one) -> void;
 };
 
 } //namespace artificialtrainer

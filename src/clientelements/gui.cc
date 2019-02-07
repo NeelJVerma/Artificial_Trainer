@@ -139,7 +139,7 @@ auto Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
 
   for (int i = 0; i < moves_container.Size(); i++) {
     std::cout << i + 1 << ". "
-              << StringConverter::MoveToString(moves_container[i].MoveName())
+              << StringConverter::MoveToString(moves_container[i]->MoveName())
               << std::endl;
   }
 
