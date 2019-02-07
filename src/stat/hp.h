@@ -18,12 +18,13 @@ class Hp {
   Hp() = default;
   Hp(const SpeciesNames &species_name, const int &level, const Ev &ev,
      const Iv &iv);
-  Hp(const int &current, const Ev &ev, const Iv &iv, const int &max_hp);
   auto EvStat() const -> Ev;
   auto IvStat() const -> Iv;
   auto CurrentHp() const -> int;
   auto MaxHp() const -> int;
   auto HpAsPercent() const -> double;
+  auto SubtractHp(const int &amount) -> void;
+  auto AddHp(const int &amount) -> void;
 
  private:
   int max_hp_;
@@ -31,9 +32,6 @@ class Hp {
   Ev ev_stat_;
   Iv iv_stat_;
 };
-
-auto operator+=(Hp &lhs, const int &rhs) -> Hp &;
-auto operator-=(Hp &lhs, const int &rhs) -> Hp &;
 
 } //namespace artificialtrainer
 

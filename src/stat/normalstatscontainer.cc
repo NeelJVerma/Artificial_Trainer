@@ -8,20 +8,20 @@
 namespace artificialtrainer {
 NormalStatsContainer::NormalStatsContainer(
     const SpeciesNames &species_name,
-    const Hp &hp_stat,
-    const NormalStat stats[kNumNormalStats])
+    const std::shared_ptr<Hp> &hp_stat,
+    const std::shared_ptr<NormalStat> stats[kNumNormalStats])
     : hp_stat_(hp_stat) {
   for (int i = 0; i < kNumNormalStats; i++) {
     normal_stats_[i] = stats[i];
   }
 }
 
-auto NormalStatsContainer::HpStat() -> Hp & {
+auto NormalStatsContainer::HpStat() -> std::shared_ptr<Hp> {
   return hp_stat_;
 }
 
 auto NormalStatsContainer::operator[](
-    const StatNames &stat_name) -> NormalStat & {
+    const StatNames &stat_name) -> std::shared_ptr<NormalStat> {
   int loc_stat_name = static_cast<int>(stat_name);
 
   if (loc_stat_name < 0 || loc_stat_name >= kNumNormalStats) {

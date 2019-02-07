@@ -76,7 +76,8 @@ auto Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) -> void {
   for (const auto &pokemon : active_team) {
     std::cout << i++ << ". "
               << StringConverter::SpeciesToString(pokemon->SpeciesName())
-              << ": " << pokemon->GetNormalStatsContainer().HpStat().CurrentHp()
+              << ": "
+              << pokemon->GetNormalStatsContainer().HpStat()->CurrentHp()
               << " hp." << std::endl;
   }
 
@@ -111,15 +112,15 @@ auto Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
             << StringConverter::TypeToString(type_container.SecondType())
             << std::endl;
   NormalStatsContainer stats_container = pokemon->GetNormalStatsContainer();
-  Hp hp_stat = stats_container.HpStat();
-  std::cout << "Hp: " << hp_stat.HpAsPercent() << "% ("
-            << hp_stat.CurrentHp() << '/' << hp_stat.MaxHp() << ')'
+  std::shared_ptr<Hp> hp_stat = stats_container.HpStat();
+  std::cout << "Hp: " << hp_stat->HpAsPercent() << "% ("
+            << hp_stat->CurrentHp() << '/' << hp_stat->MaxHp() << ')'
             << std::endl;
 
   for (int i = 0; i < kNumNormalStats; i++) {
     auto stat_name = static_cast<StatNames>(i);
     std::cout << StringConverter::StatToString(stat_name)
-              << ": " << stats_container[stat_name].InGameStat() << std::endl;
+              << ": " << stats_container[stat_name]->InGameStat() << std::endl;
   }
 
   ExclusiveInGameStatsContainer ex_stats_container =
@@ -129,8 +130,8 @@ auto Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
        i <= kNumNormalStats + kNumExclusiveInGameStats; i++) {
     auto stat_name = static_cast<StatNames>(i);
     std::cout << StringConverter::StatToString(stat_name)
-              << ": " << ex_stats_container[stat_name].Numerator() << '/'
-              << ex_stats_container[stat_name].Denominator() << std::endl;
+              << ": " << ex_stats_container[stat_name]->Numerator() << '/'
+              << ex_stats_container[stat_name]->Denominator() << std::endl;
   }
 
   MovesContainer moves_container = pokemon->GetMovesContainer();

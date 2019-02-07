@@ -5,6 +5,7 @@
 #ifndef ARTIFICIAL_TRAINER_STATSCONTAINER_H
 #define ARTIFICIAL_TRAINER_STATSCONTAINER_H
 
+#include <memory>
 #include "hp.h"
 #include "normalstat.h"
 
@@ -12,18 +13,20 @@ namespace artificialtrainer {
 class NormalStatsContainer {
  public:
   NormalStatsContainer() = default;
-  NormalStatsContainer(const SpeciesNames &species_name, const Hp &hp_stat,
-                       const NormalStat stats[kNumNormalStats]);
+  NormalStatsContainer(const SpeciesNames &species_name,
+                       const std::shared_ptr<Hp> &hp_stat,
+                       const std::shared_ptr<NormalStat>
+                       stats[kNumNormalStats]);
   NormalStatsContainer(const NormalStatsContainer &stats_container) = default;
   auto operator=(
       const NormalStatsContainer &stats_container)
-          -> NormalStatsContainer & = default;
-  auto HpStat() -> Hp &;
-  auto operator[](const StatNames &stat_name) -> NormalStat &;
+  -> NormalStatsContainer & = default;
+  auto HpStat() -> std::shared_ptr<Hp>;
+  auto operator[](const StatNames &stat_name) -> std::shared_ptr<NormalStat>;
 
  private:
-  Hp hp_stat_;
-  NormalStat normal_stats_[kNumNormalStats];
+  std::shared_ptr<Hp> hp_stat_;
+  std::shared_ptr<NormalStat> normal_stats_[kNumNormalStats];
 };
 
 } //namespace artificialtrainer

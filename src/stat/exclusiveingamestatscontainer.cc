@@ -8,12 +8,12 @@
 namespace artificialtrainer {
 ExclusiveInGameStatsContainer::ExclusiveInGameStatsContainer() {
   for (int i = 0; i < kNumExclusiveInGameStats; i++) {
-    exclusive_in_game_stats_[i] = ExclusiveInGameStat{};
+    exclusive_in_game_stats_[i] = std::make_shared<ExclusiveInGameStat>();
   }
 }
 
 auto ExclusiveInGameStatsContainer::operator[](
-    const StatNames &stat_name) -> ExclusiveInGameStat & {
+    const StatNames &stat_name) -> std::shared_ptr<ExclusiveInGameStat> {
   int loc_stat_name = static_cast<int>(stat_name);
 
   if (loc_stat_name <= kNumNormalStats ||

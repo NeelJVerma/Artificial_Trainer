@@ -5,6 +5,7 @@
 #ifndef ARTIFICIAL_TRAINER_EXCLUSIVEINGAMESTATSCONTAINER_H
 #define ARTIFICIAL_TRAINER_EXCLUSIVEINGAMESTATSCONTAINER_H
 
+#include <memory>
 #include "exclusiveingamestat.h"
 #include "statnames.h"
 
@@ -16,11 +17,13 @@ class ExclusiveInGameStatsContainer {
       const ExclusiveInGameStatsContainer &stats_container) = default;
   auto operator=(
       const ExclusiveInGameStatsContainer &stats_container)
-        -> ExclusiveInGameStatsContainer & = default;
-  auto operator[](const StatNames &stat_name) -> ExclusiveInGameStat &;
+  -> ExclusiveInGameStatsContainer & = default;
+  auto operator[](const StatNames &stat_name)
+  -> std::shared_ptr<ExclusiveInGameStat>;
 
  private:
-  ExclusiveInGameStat exclusive_in_game_stats_[kNumExclusiveInGameStats];
+  std::shared_ptr<ExclusiveInGameStat>
+      exclusive_in_game_stats_[kNumExclusiveInGameStats];
 
 };
 

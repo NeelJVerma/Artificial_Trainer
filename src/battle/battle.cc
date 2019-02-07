@@ -46,8 +46,8 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
     Gui::DisplayPickLevelMessage();
     int level_selection = InputHandler::GetIntInput(1, Pokemon::kMaxLevel);
     int normal_stats_count = 0;
-    NormalStat stats[kNumNormalStats];
-    Hp hp{};
+    std::shared_ptr<NormalStat> stats[kNumNormalStats];
+    std::shared_ptr<Hp> hp;
 
     for (int j = 0; j < kNumNormalStats + 1; j++) {
       auto stat_name = static_cast<StatNames>(j);
@@ -57,14 +57,15 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
       int iv_selection = InputHandler::GetIntInput(1, Iv::kMaxIv);
 
       if (stat_name == StatNames::kHp) {
-        hp = Hp(pokemon_species, level_selection, Ev(ev_selection),
-                Iv(iv_selection));
+        hp = std::make_shared<Hp>(pokemon_species, level_selection,
+                                  Ev(ev_selection), Iv(iv_selection));
       } else {
-        stats[normal_stats_count++] = NormalStat(pokemon_species,
-                                                 level_selection,
-                                                 stat_name,
-                                                 Ev(ev_selection),
-                                                 Iv(iv_selection));
+        stats[normal_stats_count++] = std::make_shared<NormalStat>
+            (pokemon_species,
+             level_selection,
+             stat_name,
+             Ev(ev_selection),
+             Iv(iv_selection));
       }
     }
 
@@ -121,8 +122,7 @@ auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> Move {
   return moves[InputHandler::GetIntInput(1, moves.Size()) - 1];
 }
 
-auto Battle::HandleTurn(const int &turn_number) -> void {
-  Gui::DisplayTurnNumber(turn_number);
+auto Battle::HandleTurn() -> void {
   Gui::DisplayPlayerTeam(team_one_, true);
   Gui::DisplayPlayerTeam(team_two_, false);
   std::shared_ptr<Pokemon> active_pokemon_one = team_one_.FindActiveMember();
@@ -139,8 +139,8 @@ auto Battle::HandleTurn(const int &turn_number) -> void {
 
   if (Priority(move_choice_one.MoveName()) ==
       Priority(move_choice_two.MoveName())) {
-    if (active_stats_one[StatNames::kSpeed].InGameStat() >
-        active_stats_two[StatNames::kSpeed].InGameStat()) {
+    if (active_stats_one[StatNames::kSpeed]->InGameStat() >
+        active_stats_two[StatNames::kSpeed]->InGameStat()) {
       one_moves_first = true;
     }
   } else if (Priority(move_choice_one.MoveName()) >
@@ -157,11 +157,11 @@ auto Battle::Play() -> void {
   SelectTeam(team_one_, true);
   SelectTeam(team_two_, false);
   StartBattle();
-  int num_turns_elapsed = 1;
+  int num_turns_elapsed = 0;
 
   while (num_turns_elapsed++ < kMaxNumTurns && !BattleOver()) {
-    HandleTurn(num_turns_elapsed);
-    break;
+    Gui::DisplayTurnNumber(num_turns_elapsed);
+    HandleTurn();
   }
 }
 
