@@ -123,7 +123,39 @@ auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> void {
   Gui::DisplayPickInBattleMoveMessage(team_one);
   std::shared_ptr<Pokemon> pokemon = team.FindActiveMember();
   MovesContainer moves = team.FindActiveMember()->GetMovesContainer();
-  pokemon->SetMoveUsed(InputHandler::GetIntInput(1, moves.Size()) - 1);
+  int move_choice = 1;
+
+  while (true) {
+    move_choice = InputHandler::GetIntInput(1, moves.Size());
+
+    if (moves[move_choice - 1]->CurrentPp()) {
+      break;
+    }
+
+    Gui::DisplayMoveHasNoPpMessage();
+  }
+
+  pokemon->SetMoveUsed(move_choice - 1);
+}
+
+auto Battle::HandleMove(const std::shared_ptr<Pokemon> &attacker,
+                        const std::shared_ptr<Pokemon> &defender,
+                        const bool &attacker_on_team_one) -> void {
+  MoveResults move_result = UseMove(attacker, defender);
+
+  if (move_result == MoveResults::kAttackerFainted) {
+    if (attacker_on_team_one) {
+      team_one_.FaintActivePokemon();
+    } else {
+      team_two_.FaintActivePokemon();
+    }
+  } else if (move_result == MoveResults::kDefenderFainted) {
+    if (!attacker_on_team_one) {
+      team_one_.FaintActivePokemon();
+    } else {
+      team_two_.FaintActivePokemon();
+    }
+  }
 }
 
 auto Battle::HandleTurn() -> void {
@@ -150,24 +182,24 @@ auto Battle::HandleTurn() -> void {
       one_moves_first = true;
     } else if (normal_active_stats_one[StatNames::kSpeed]->InGameStat() ==
         normal_active_stats_two[StatNames::kSpeed]->InGameStat()) {
-      std::minstd_rand generator(std::time(0));
+      std::random_device device;
+      std::mt19937 generator(device());
       std::uniform_int_distribution<> distribution(0, 1);
 
-      if (distribution(generator) % 1) {
+      if (distribution(generator) & 1) {
         one_moves_first = true;
       }
     }
-  } else if (Priority(move_one->MoveName()) >
-      Priority(move_two->MoveName())) {
+  } else if (Priority(move_one->MoveName()) > Priority(move_two->MoveName())) {
     one_moves_first = true;
   }
 
   if (one_moves_first) {
-    UseMove(active_pokemon_one, active_pokemon_two);
-    UseMove(active_pokemon_two, active_pokemon_one);
+    HandleMove(active_pokemon_one, active_pokemon_two, true);
+    HandleMove(active_pokemon_two, active_pokemon_one, false);
   } else {
-    UseMove(active_pokemon_two, active_pokemon_one);
-    UseMove(active_pokemon_one, active_pokemon_two);
+    HandleMove(active_pokemon_two, active_pokemon_one, true);
+    HandleMove(active_pokemon_one, active_pokemon_two, false);
   }
 }
 
@@ -182,6 +214,10 @@ auto Battle::Play() -> void {
     Gui::DisplayTurnNumber(num_turns_elapsed);
     HandleTurn();
   }
+
+  Gui::DisplayBattleOverMessage();
+  Gui::DisplayPlayerTeam(team_one_, true);
+  Gui::DisplayPlayerTeam(team_two_, false);
 }
 
 } //namespace artificialtrainer

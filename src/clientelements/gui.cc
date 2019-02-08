@@ -105,7 +105,7 @@ auto Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
   std::cout << "Active pokemon for player " << (player_one ? "one" : "two")
             << ':' << std::endl;
   std::cout << StringConverter::SpeciesToString(pokemon->SpeciesName())
-            << std::endl;
+            << ": level " << pokemon->Level() << std::endl;
   TypeContainer type_container = pokemon->GetTypeContainer();
   std::cout << "Types: "
             << StringConverter::TypeToString(type_container.FirstType()) << ", "
@@ -140,7 +140,7 @@ auto Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
   for (int i = 0; i < moves_container.Size(); i++) {
     std::cout << i + 1 << ". "
               << StringConverter::MoveToString(moves_container[i]->MoveName())
-              << std::endl;
+              << ": " << moves_container[i]->CurrentPp() << " pp" << std::endl;
   }
 
   std::cout << std::endl;
@@ -153,6 +153,40 @@ auto Gui::DisplayTurnNumber(const int &turn_number) -> void {
 auto Gui::DisplayPickInBattleMoveMessage(const bool &player_one) -> void {
   std::cout << "Player " << (player_one ? "one" : "two") << ", select your move"
             << std::endl;
+}
+
+auto Gui::DisplayMoveFailedMessage() -> void {
+  std::cout << "The move failed" << std::endl;
+}
+
+auto Gui::DisplayMoveMissedMessage() -> void {
+  std::cout << "The move missed" << std::endl;
+}
+
+auto Gui::DisplayPokemonFaintedMessage(const SpeciesNames &species_name)
+-> void {
+  std::cout << StringConverter::SpeciesToString(species_name) << " fainted"
+            << std::endl;
+}
+
+auto Gui::DisplayOneHitKoMoveLandedMessage() -> void {
+  std::cout << "The one hit ko move landed" << std::endl;
+}
+
+auto Gui::DisplayMoveHasNoPpMessage() -> void {
+  std::cout << "That move has no pp. Select again" << std::endl;
+}
+
+auto Gui::DisplayPokemonUsedMoveMessage(
+    const std::shared_ptr<Pokemon> &pokemon) -> void {
+  std::cout << StringConverter::SpeciesToString(pokemon->SpeciesName())
+            << " used "
+            << StringConverter::MoveToString(pokemon->MoveUsed()->MoveName())
+            << std::endl;
+}
+
+auto Gui::DisplayBattleOverMessage() -> void {
+  std::cout << "Battle over" << std::endl;
 }
 
 } //namespace artificialtrainer

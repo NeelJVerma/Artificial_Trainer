@@ -18,7 +18,7 @@ class Team {
   Team &operator=(const Team &team) = default;
   Team() = default;
 
-  auto FaintPokemon(const int &index) -> void;
+  auto FaintActivePokemon() -> void;
   auto AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void;
   auto ActiveTeamSize() const -> int;
   auto FaintedTeamSize() const -> int;
@@ -27,6 +27,7 @@ class Team {
   auto SeenPokemon(const SpeciesNames &species) -> bool;
   auto SetActiveMember(const int &index) -> void;
   auto FindActiveMember() -> std::shared_ptr<Pokemon>;
+  auto IndexOfActiveMember() -> int;
 
  private:
   std::vector<std::shared_ptr<Pokemon>> active_team_;

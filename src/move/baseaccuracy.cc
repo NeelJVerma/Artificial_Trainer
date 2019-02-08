@@ -293,7 +293,7 @@ auto BaseAccuracy(const MoveNames &move_name) -> int {
     case MoveNames::kSurf:
       return 100;
     case MoveNames::kSwift:
-      return 100;
+      return kNeverMiss;
     case MoveNames::kSwordsDance:
       return kNeverMiss;
     case MoveNames::kTackle:

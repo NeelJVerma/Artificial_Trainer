@@ -18,7 +18,7 @@ struct InGameFlags {
   bool biding = false;
   bool recharing = false;
   bool raging = false;
-  Move last_used_move = {};
+  bool was_hit_on_turn = false;
   // TODO: ADD MORE WHEN NEEDED
 };
 

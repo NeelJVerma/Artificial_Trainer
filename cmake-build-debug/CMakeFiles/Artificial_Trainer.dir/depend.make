@@ -121,6 +121,7 @@ CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o: ../src/move/movenames.
 CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o: ../src/move/priority.cc
 CMakeFiles/Artificial_Trainer.dir/src/move/priority.cc.o: ../src/move/priority.h
 
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/clientelements/gui.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/move/baseaccuracy.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/move/basepower.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/move/move.h
@@ -139,6 +140,7 @@ CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/normalstat.
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/normalstatscontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/statnames.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stringconverter/stringconverter.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/team/team.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/type/typecontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/type/typenames.h

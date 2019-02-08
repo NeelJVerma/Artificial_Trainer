@@ -32,6 +32,15 @@ class Gui {
                                        const bool &player_one) -> void;
   static auto DisplayTurnNumber(const int &turn_number) -> void;
   static auto DisplayPickInBattleMoveMessage(const bool &player_one) -> void;
+  static auto DisplayMoveFailedMessage() -> void;
+  static auto DisplayMoveMissedMessage() -> void;
+  static auto DisplayOneHitKoMoveLandedMessage() -> void;
+  static auto DisplayPokemonFaintedMessage(const SpeciesNames &species_name)
+  -> void;
+  static auto DisplayMoveHasNoPpMessage() -> void;
+  static auto DisplayPokemonUsedMoveMessage(
+      const std::shared_ptr<Pokemon> &pokemon) -> void;
+  static auto DisplayBattleOverMessage() -> void;
 };
 
 } // namespace artificialtrainer

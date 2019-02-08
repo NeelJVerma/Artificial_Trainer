@@ -10,9 +10,9 @@ auto Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void {
   active_team_.push_back(pokemon);
 }
 
-auto Team::FaintPokemon(const int &index) -> void {
-  fainted_team_.push_back(active_team_[index]);
-  active_team_.erase(active_team_.begin() + index);
+auto Team::FaintActivePokemon() -> void {
+  fainted_team_.push_back(FindActiveMember());
+  active_team_.erase(active_team_.begin() + IndexOfActiveMember());
 }
 
 auto Team::ActiveTeamSize() const -> int {
@@ -51,6 +51,22 @@ auto Team::FindActiveMember() -> std::shared_ptr<Pokemon> {
       return pokemon;
     }
   }
+
+  return nullptr;
+}
+
+auto Team::IndexOfActiveMember() -> int {
+  int i = 0;
+
+  for (auto &pokemon : active_team_) {
+    if (pokemon->IsActive()) {
+      return i;
+    }
+
+    i++;
+  }
+
+  return -1;
 }
 
 } //namespace artificialtrainer

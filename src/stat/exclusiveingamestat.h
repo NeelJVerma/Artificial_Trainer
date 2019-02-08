@@ -16,7 +16,7 @@ class ExclusiveInGameStat {
   auto RaiseDenominator(const int &num_stages) -> void;
   auto LowerNumerator(const int &num_stages) -> void;
   auto LowerDenominator(const int &num_stages) -> void;
-  auto CalculatedModifier() const -> double;
+  auto CalculatedStat() const -> double;
   auto Numerator() const -> int;
   auto Denominator() const -> int;
 
