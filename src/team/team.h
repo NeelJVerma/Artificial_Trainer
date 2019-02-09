@@ -26,8 +26,8 @@ class Team {
   auto FaintedTeam() const -> std::vector<std::shared_ptr<Pokemon>>;
   auto SeenPokemon(const SpeciesNames &species) -> bool;
   auto SetActiveMember(const int &index) -> void;
-  auto FindActiveMember() -> std::shared_ptr<Pokemon>;
-  auto IndexOfActiveMember() -> int;
+  auto ActiveMember() -> std::shared_ptr<Pokemon>;
+  auto IndexOfActiveMember() const -> int;
 
  private:
   std::vector<std::shared_ptr<Pokemon>> active_team_;

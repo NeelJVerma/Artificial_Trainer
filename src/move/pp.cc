@@ -3,10 +3,11 @@
 //
 
 #include <cassert>
+#include <limits>
 #include "pp.h"
 
 namespace artificialtrainer {
-const int kUnlimited = 0;
+const int kUnlimited = std::numeric_limits<int>::max();
 
 auto Pp(const MoveNames &move_name) -> int {
   switch (move_name) {
@@ -341,19 +342,12 @@ auto Pp(const MoveNames &move_name) -> int {
     case MoveNames::kWrap:
       return 20;
     case MoveNames::kPass:
-      return kUnlimited;
     case MoveNames::kSwitch1:
-      return kUnlimited;
     case MoveNames::kSwitch2:
-      return kUnlimited;
     case MoveNames::kSwitch3:
-      return kUnlimited;
     case MoveNames::kSwitch4:
-      return kUnlimited;
     case MoveNames::kSwitch5:
-      return kUnlimited;
     case MoveNames::kSwitch6:
-      return kUnlimited;
     case MoveNames::kHitSelf:
       return kUnlimited;
     default:

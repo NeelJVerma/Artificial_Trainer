@@ -672,12 +672,17 @@ auto StringConverter::MoveToString(const MoveNames &move_name) -> std::string {
     case MoveNames::kPass:
       return "Pass";
     case MoveNames::kSwitch1:
+      return "Switch 1";
     case MoveNames::kSwitch2:
+      return "Switch 2";
     case MoveNames::kSwitch3:
+      return "Switch 3";
     case MoveNames::kSwitch4:
+      return "Switch 4";
     case MoveNames::kSwitch5:
+      return "Switch 5";
     case MoveNames::kSwitch6:
-      return "Switch";
+      return "Switch 6";
     case MoveNames::kHitSelf:
       return "Hit Self";
     default:

@@ -20,9 +20,6 @@ class Battle {
   auto BattleOver() const -> bool;
   auto StartBattle() -> void;
   auto HandleTurn() -> void;
-  auto HandleMove(const std::shared_ptr<Pokemon> &attacker,
-                  const std::shared_ptr<Pokemon> &defender,
-                  const bool &attacker_on_team_one) -> void;
   auto PlayerPicksMove(Team &team, const bool &team_one) -> void;
 };
 

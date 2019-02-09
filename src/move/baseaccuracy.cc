@@ -341,19 +341,12 @@ auto BaseAccuracy(const MoveNames &move_name) -> int {
     case MoveNames::kWrap:
       return 85;
     case MoveNames::kPass:
-      return kNeverMiss;
     case MoveNames::kSwitch1:
-      return kNeverMiss;
     case MoveNames::kSwitch2:
-      return kNeverMiss;
     case MoveNames::kSwitch3:
-      return kNeverMiss;
     case MoveNames::kSwitch4:
-      return kNeverMiss;
     case MoveNames::kSwitch5:
-      return kNeverMiss;
     case MoveNames::kSwitch6:
-      return kNeverMiss;
     case MoveNames::kHitSelf:
       return kNeverMiss;
     default:

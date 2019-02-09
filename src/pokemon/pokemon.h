@@ -13,12 +13,8 @@
 
 namespace artificialtrainer {
 struct InGameFlags {
-  bool digging = false;
   bool flying = false;
-  bool biding = false;
-  bool recharing = false;
-  bool raging = false;
-  bool was_hit_on_turn = false;
+  bool digging = false;
   // TODO: ADD MORE WHEN NEEDED
 };
 
@@ -44,7 +40,7 @@ class Pokemon {
   auto SetIsActive(const bool &is_active) -> void;
   auto SetMoveUsed(const int &index) -> void;
   auto MoveUsed() const -> std::shared_ptr<Move>;
-
+  //auto SetIsVanished(const bool &is_vanished) -> void;
 
   // TODO: ADD IN GAME FLAG ATTRIBUTES. SETTING/GETTING
 

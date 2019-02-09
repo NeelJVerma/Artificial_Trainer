@@ -138,9 +138,18 @@ auto Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
   std::cout << "Moves:" << std::endl;
 
   for (int i = 0; i < moves_container.Size(); i++) {
-    std::cout << i + 1 << ". "
-              << StringConverter::MoveToString(moves_container[i]->MoveName())
-              << ": " << moves_container[i]->CurrentPp() << " pp" << std::endl;
+    int move = static_cast<int>(moves_container[i]->MoveName());
+
+    if (move < static_cast<int>(MoveNames::kPass)) {
+      std::cout << i + 1 << ". "
+                << StringConverter::MoveToString(moves_container[i]->MoveName())
+                << ": " << moves_container[i]->CurrentPp() << " pp"
+                << std::endl;
+    } else {
+      std::cout << i + 1 << ". "
+                << StringConverter::MoveToString(moves_container[i]->MoveName())
+                << std::endl;
+    }
   }
 
   std::cout << std::endl;
@@ -173,8 +182,8 @@ auto Gui::DisplayOneHitKoMoveLandedMessage() -> void {
   std::cout << "The one hit ko move landed" << std::endl;
 }
 
-auto Gui::DisplayMoveHasNoPpMessage() -> void {
-  std::cout << "That move has no pp. Select again" << std::endl;
+auto Gui::DisplayInvalidMoveChoiceMessage() -> void {
+  std::cout << "Invalid move choice" << std::endl;
 }
 
 auto Gui::DisplayPokemonUsedMoveMessage(
@@ -187,6 +196,10 @@ auto Gui::DisplayPokemonUsedMoveMessage(
 
 auto Gui::DisplayBattleOverMessage() -> void {
   std::cout << "Battle over" << std::endl;
+}
+
+auto Gui::DisplaySwitchPokemonMessage() -> void {
+  std::cout << "Select a pokemon to switch into" << std::endl;
 }
 
 } //namespace artificialtrainer

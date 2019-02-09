@@ -5,8 +5,7 @@
 #ifndef ARTIFICIAL_TRAINER_USEMOVE_H
 #define ARTIFICIAL_TRAINER_USEMOVE_H
 
-#include "../pokemon/pokemon.h"
-
+#include "../team/team.h"
 namespace artificialtrainer {
 enum class MoveResults : int {
   kAttackerSwitched,
@@ -16,8 +15,7 @@ enum class MoveResults : int {
   kDefenderFainted
 };
 
-auto UseMove(std::shared_ptr<Pokemon> attacker,
-             std::shared_ptr<Pokemon> defender) -> MoveResults;
+auto UseMove(Team &attacker, Team &defender) -> MoveResults;
 
 } //namespace artificialtrainer
 

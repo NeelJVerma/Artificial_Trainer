@@ -31,56 +31,23 @@ auto CalculateChanceToHit(const std::shared_ptr<Pokemon> &attacker,
   return (chance > 100 ? 100 : chance);
 }
 
-auto DoOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
-                    const std::shared_ptr<Pokemon> &defender) {
-  int attacker_speed =
-      attacker->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
-  int defender_speed =
-      defender->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
-
-  if ((attacker->Level() < defender->Level()) ||
-      (attacker_speed < defender_speed)) {
-    Gui::DisplayMoveFailedMessage();
-    return;
-  }
-
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_real_distribution<> distribution(1.0, 100.0);
-  attacker->MoveUsed()->DecrementPp(1);
-
-  if (distribution(generator) > CalculateChanceToHit(attacker, defender)) {
-    Gui::DisplayMoveMissedMessage();
-    return;
-  }
-
-  int defender_hp = defender->GetNormalStatsContainer().HpStat()->CurrentHp();
-  defender->GetNormalStatsContainer().HpStat()->SubtractHp(defender_hp);
-  Gui::DisplayOneHitKoMoveLandedMessage();
-  Gui::DisplayPokemonFaintedMessage(defender->SpeciesName());
-}
-
 auto DoDamage(const std::shared_ptr<Pokemon> &attacker,
               const std::shared_ptr<Pokemon> &defender) -> void {
 
 }
 
+auto Switch(Team &attacker) -> void {
+  std::shared_ptr<Pokemon> active_pokemon = attacker.ActiveMember();
+  std::shared_ptr<Move> move = active_pokemon->MoveUsed();
+  int switch_index = static_cast<int>(
+      move->MoveName()) - static_cast<int>(MoveNames::kSwitch1);
+  
+}
+
 } //namespace
 
-auto UseMove(std::shared_ptr<Pokemon> attacker,
-             std::shared_ptr<Pokemon> defender) -> MoveResults {
-  if (attacker->GetNormalStatsContainer().HpStat()->CurrentHp()) {
-    Gui::DisplayPokemonUsedMoveMessage(attacker);
-  }
-
-  if (static_cast<PowerClasses>(BasePower(attacker->MoveUsed()->MoveName())) ==
-      PowerClasses::kOneHitKo) {
-    DoOneHitKoMove(attacker, defender);
-
-    if (!defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
-      return MoveResults::kDefenderFainted;
-    }
-  }
+auto UseMove(Team &attacker, Team &defender) -> MoveResults {
+  Switch(attacker);
 }
 
 } //namespace artificialtrainer

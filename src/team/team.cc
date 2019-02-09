@@ -11,7 +11,7 @@ auto Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void {
 }
 
 auto Team::FaintActivePokemon() -> void {
-  fainted_team_.push_back(FindActiveMember());
+  fainted_team_.push_back(ActiveMember());
   active_team_.erase(active_team_.begin() + IndexOfActiveMember());
 }
 
@@ -45,7 +45,7 @@ auto Team::SetActiveMember(const int &index) -> void {
   active_team_[index]->SetIsActive(true);
 }
 
-auto Team::FindActiveMember() -> std::shared_ptr<Pokemon> {
+auto Team::ActiveMember() -> std::shared_ptr<Pokemon> {
   for (auto &pokemon : active_team_) {
     if (pokemon->IsActive()) {
       return pokemon;
@@ -55,7 +55,7 @@ auto Team::FindActiveMember() -> std::shared_ptr<Pokemon> {
   return nullptr;
 }
 
-auto Team::IndexOfActiveMember() -> int {
+auto Team::IndexOfActiveMember() const -> int {
   int i = 0;
 
   for (auto &pokemon : active_team_) {

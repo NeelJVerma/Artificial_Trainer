@@ -35,7 +35,7 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
   Gui::DisplayPickTeamMessage(team_one);
 
   // TODO: CHANGE BACK TO ACTUAL TEAM SIZE WHEN DONE TESTING
-  for (int i = 0; i < Team::kMaxTeamSize - 5; i++) {
+  for (int i = 0; i < Team::kMaxTeamSize - 4; i++) {
     Gui::DisplayPickPokemonMessage(i + 1);
     int pokemon_selection = InputHandler::GetIntInput(1, kNumSpecies);
     auto pokemon_species = static_cast<SpeciesNames>(pokemon_selection - 1);
@@ -91,6 +91,16 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
       moves_container.AddMove(std::make_shared<Move>(move_name, Pp(move_name)));
     }
 
+    MoveNames pass_move = MoveNames::kPass;
+    moves_container.AddMove(std::make_shared<Move>(pass_move, Pp(pass_move)));
+
+    for (int j = static_cast<int>(MoveNames::kSwitch1);
+         j <= static_cast<int>(MoveNames::kSwitch6); j++) {
+      auto switch_move = static_cast<MoveNames>(j);
+      moves_container.AddMove(
+          std::make_shared<Move>(switch_move, Pp(switch_move)));
+    }
+
     team.AddPokemon(std::make_shared<Pokemon>(pokemon_species,
                                               NormalStatsContainer(
                                                   pokemon_species,
@@ -100,6 +110,30 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
                                               TypeContainer(pokemon_species),
                                               level_selection));
   }
+}
+
+auto IsValidMoveChoice(const Team &team,
+                       const std::shared_ptr<Move> &move) -> bool {
+  int switch_beg = static_cast<int>(MoveNames::kSwitch1);
+  int switch_end = static_cast<int>(MoveNames::kSwitch6);
+  int selected = static_cast<int>(move->MoveName());
+
+  if (selected <= switch_end && selected >= switch_beg) {
+    // TODO: ADD CHECKS FOR DIGGING/FLYING/RECHARGING FLAGS
+    if (team.ActiveTeam().size() <= 1 ||
+        selected >= switch_beg + team.ActiveTeam().size()) {
+      return false;
+    }
+
+    if (selected - static_cast<int>(MoveNames::kPass) - 1 ==
+        team.IndexOfActiveMember()) {
+      return false;
+    }
+  }
+
+  // TODO: ADD CHECKS FOR PASSING AS WELL
+
+  return static_cast<bool>(move->CurrentPp());
 }
 
 } //namespace
@@ -121,49 +155,29 @@ auto Battle::StartBattle() -> void {
 
 auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> void {
   Gui::DisplayPickInBattleMoveMessage(team_one);
-  std::shared_ptr<Pokemon> pokemon = team.FindActiveMember();
-  MovesContainer moves = team.FindActiveMember()->GetMovesContainer();
-  int move_choice = 1;
+  std::shared_ptr<Pokemon> pokemon = team.ActiveMember();
+  MovesContainer moves = team.ActiveMember()->GetMovesContainer();
+  int move_choice;
 
   while (true) {
     move_choice = InputHandler::GetIntInput(1, moves.Size());
 
-    if (moves[move_choice - 1]->CurrentPp()) {
+    if (IsValidMoveChoice(team, moves[move_choice - 1])) {
       break;
     }
 
-    Gui::DisplayMoveHasNoPpMessage();
+    Gui::DisplayInvalidMoveChoiceMessage();
   }
 
   pokemon->SetMoveUsed(move_choice - 1);
 }
 
-auto Battle::HandleMove(const std::shared_ptr<Pokemon> &attacker,
-                        const std::shared_ptr<Pokemon> &defender,
-                        const bool &attacker_on_team_one) -> void {
-  MoveResults move_result = UseMove(attacker, defender);
-
-  if (move_result == MoveResults::kAttackerFainted) {
-    if (attacker_on_team_one) {
-      team_one_.FaintActivePokemon();
-    } else {
-      team_two_.FaintActivePokemon();
-    }
-  } else if (move_result == MoveResults::kDefenderFainted) {
-    if (!attacker_on_team_one) {
-      team_one_.FaintActivePokemon();
-    } else {
-      team_two_.FaintActivePokemon();
-    }
-  }
-}
-
 auto Battle::HandleTurn() -> void {
   Gui::DisplayPlayerTeam(team_one_, true);
   Gui::DisplayPlayerTeam(team_two_, false);
-  std::shared_ptr<Pokemon> active_pokemon_one = team_one_.FindActiveMember();
+  std::shared_ptr<Pokemon> active_pokemon_one = team_one_.ActiveMember();
   Gui::DisplayActivePokemonData(active_pokemon_one, true);
-  std::shared_ptr<Pokemon> active_pokemon_two = team_two_.FindActiveMember();
+  std::shared_ptr<Pokemon> active_pokemon_two = team_two_.ActiveMember();
   Gui::DisplayActivePokemonData(active_pokemon_two, false);
   PlayerPicksMove(team_one_, true);
   PlayerPicksMove(team_two_, false);
@@ -195,11 +209,11 @@ auto Battle::HandleTurn() -> void {
   }
 
   if (one_moves_first) {
-    HandleMove(active_pokemon_one, active_pokemon_two, true);
-    HandleMove(active_pokemon_two, active_pokemon_one, false);
+    UseMove(team_one_, team_two_);
+    UseMove(team_two_, team_one_);
   } else {
-    HandleMove(active_pokemon_two, active_pokemon_one, true);
-    HandleMove(active_pokemon_one, active_pokemon_two, false);
+    UseMove(team_two_, team_one_);
+    UseMove(team_one_, team_two_);
   }
 }
 
