@@ -13,6 +13,8 @@
 namespace artificialtrainer {
 class NormalStat {
  public:
+  static const int kMaxFactor = 8;
+  static const int kMinFactor = 2;
   NormalStat(const NormalStat &stat) = default;
   auto operator=(const NormalStat &stat) -> NormalStat & = default;
   NormalStat() = default;
@@ -25,7 +27,10 @@ class NormalStat {
   auto RaiseDenominator(const int &num_stages) -> void;
   auto LowerNumerator(const int &num_stages) -> void;
   auto LowerDenominator(const int &num_stages) -> void;
+  auto Numerator() const -> int;
+  auto Denominator() const -> int;
   auto InGameStat() const -> int;
+  auto ResetStat() -> void;
 
  private:
   int base_stat_;

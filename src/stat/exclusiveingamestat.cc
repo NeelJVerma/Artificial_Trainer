@@ -5,9 +5,9 @@
 #include "exclusiveingamestat.h"
 
 namespace artificialtrainer {
-ExclusiveInGameStat::ExclusiveInGameStat() : numerator_(3), denominator_(3) {
+ExclusiveInGameStat::ExclusiveInGameStat() : numerator_(kMinFactor),
+                                             denominator_(kMinFactor) {
 }
-
 
 auto ExclusiveInGameStat::RaiseNumerator(const int &num_stages) -> void {
   numerator_ += num_stages;
@@ -35,6 +35,11 @@ auto ExclusiveInGameStat::Numerator() const -> int {
 
 auto ExclusiveInGameStat::Denominator() const -> int {
   return denominator_;
+}
+
+auto ExclusiveInGameStat::ResetStat() -> void {
+  numerator_ = kMinFactor;
+  denominator_ = kMinFactor;
 }
 
 } //namespace artificialtrainer

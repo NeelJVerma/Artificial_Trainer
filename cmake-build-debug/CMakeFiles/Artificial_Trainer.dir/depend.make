@@ -141,6 +141,7 @@ CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/normalstats
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/statnames.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stringconverter/stringconverter.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/team/team.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/type/effectiveness.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/type/typecontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/type/typenames.h

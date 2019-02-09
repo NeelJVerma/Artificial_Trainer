@@ -205,4 +205,12 @@ auto Gui::DisplaySwitchMessage(const SpeciesNames &one,
             << StringConverter::SpeciesToString(two) << std::endl;
 }
 
+auto Gui::DisplayStatWontGoHigherMessage() -> void {
+  std::cout << "Stat won't go any higher" << std::endl;
+}
+
+auto Gui::DisplayStatWontGoLowerMessage() -> void {
+  std::cout << "Stat won't go any lower" << std::endl;
+}
+
 } //namespace artificialtrainer

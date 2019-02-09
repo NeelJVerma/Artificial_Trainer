@@ -8,6 +8,8 @@
 namespace artificialtrainer {
 class ExclusiveInGameStat {
  public:
+  static const int kMaxFactor = 9;
+  static const int kMinFactor = 3;
   ExclusiveInGameStat(const ExclusiveInGameStat &stat) = default;
   auto operator=(
       const ExclusiveInGameStat &stat) -> ExclusiveInGameStat & = default;
@@ -19,6 +21,7 @@ class ExclusiveInGameStat {
   auto CalculatedStat() const -> double;
   auto Numerator() const -> int;
   auto Denominator() const -> int;
+  auto ResetStat() -> void;
 
  private:
   int numerator_;

@@ -27,6 +27,8 @@ auto IsPhysical(MoveNames &move_name) -> bool;
 auto IsSpecial(const MoveNames &move_name) -> bool;
 auto IsDamaging(const MoveNames &move_name) -> bool;
 auto IsUseless(const MoveNames &move_name) -> bool;
+auto IsSwitch(const MoveNames &move_name) -> bool;
+auto OnlyChangesStat(const MoveNames &move_name) -> bool;
 
 } //namespace artificialtrainer
 

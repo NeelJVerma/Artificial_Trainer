@@ -1266,8 +1266,8 @@ NormalStat::NormalStat(const SpeciesNames &species_name, const int &level,
                        const StatNames &stat_name, const Ev &ev, const Iv &iv)
     : base_stat_(GetBase(species_name,
                          stat_name)),
-      numerator_(2),
-      denominator_(2),
+      numerator_(kMinFactor),
+      denominator_(kMinFactor),
       level_(level),
       ev_stat_(ev),
       iv_stat_(iv) {
@@ -1299,6 +1299,19 @@ auto NormalStat::LowerNumerator(const int &num_stages) -> void {
 
 auto NormalStat::LowerDenominator(const int &num_stages) -> void {
   denominator_ -= num_stages;
+}
+
+auto NormalStat::Numerator() const -> int {
+  return numerator_;
+}
+
+auto NormalStat::Denominator() const -> int {
+  return denominator_;
+}
+
+auto NormalStat::ResetStat() -> void {
+  numerator_ = kMinFactor;
+  denominator_ = kMinFactor;
 }
 
 auto NormalStat::InGameStat() const -> int {

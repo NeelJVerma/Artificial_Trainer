@@ -114,11 +114,10 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
 
 auto IsValidMoveChoice(const Team &team,
                        const std::shared_ptr<Move> &move) -> bool {
-  int switch_beg = static_cast<int>(MoveNames::kSwitch1);
-  int switch_end = static_cast<int>(MoveNames::kSwitch6);
-  int selected = static_cast<int>(move->MoveName());
+  if (IsSwitch(move->MoveName())) {
+    int switch_beg = static_cast<int>(MoveNames::kSwitch1);
+    int selected = static_cast<int>(move->MoveName());
 
-  if (selected <= switch_end && selected >= switch_beg) {
     // TODO: ADD CHECKS FOR DIGGING/FLYING/RECHARGING FLAGS
     if (team.ActiveTeam().size() <= 1 ||
         selected >= switch_beg + team.ActiveTeam().size()) {

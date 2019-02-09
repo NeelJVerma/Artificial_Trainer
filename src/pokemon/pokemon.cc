@@ -2,6 +2,7 @@
 // Created by neel on 1/23/19.
 //
 
+#include <iostream>
 #include "pokemon.h"
 
 namespace artificialtrainer {
@@ -32,7 +33,7 @@ auto Pokemon::GetNormalStatsContainer() const -> NormalStatsContainer {
 }
 
 auto Pokemon::GetExclusiveInGameStatsContainer() const
-  -> ExclusiveInGameStatsContainer {
+-> ExclusiveInGameStatsContainer {
   return exclusive_in_game_stats_container_;
 }
 
@@ -66,6 +67,93 @@ auto Pokemon::SetMoveUsed(const int &index) -> void {
 
 auto Pokemon::MoveUsed() const -> std::shared_ptr<Move> {
   return move_used_;
+}
+
+auto Pokemon::ResetStats() -> void {
+  for (int i = 0; i < kNumNormalStats; i++) {
+    normal_stats_container_[static_cast<StatNames>(i)]->ResetStat();
+  }
+
+  for (int i = kNumNormalStats + 1;
+       i <= kNumNormalStats + kNumExclusiveInGameStats; i++) {
+    exclusive_in_game_stats_container_[static_cast<StatNames>(i)]->ResetStat();
+  }
+}
+
+auto Pokemon::RaiseStat(const StatNames &stat_name,
+                        const int &num_stages) -> void {
+  if (stat_name != StatNames::kAccuracy && stat_name != StatNames::kEvasion) {
+    std::shared_ptr<NormalStat> stat_to_boost =
+        normal_stats_container_[stat_name];
+
+    for (int i = 0; i < num_stages; i++) {
+      if (stat_to_boost->Numerator() == NormalStat::kMaxFactor) {
+        return;
+      }
+
+      if (stat_to_boost->InGameStat() < 1.0) {
+        stat_to_boost->LowerDenominator(1);
+      } else {
+        stat_to_boost->RaiseNumerator(1);
+      }
+    }
+  } else {
+    std::shared_ptr<ExclusiveInGameStat> stat_to_boost =
+        exclusive_in_game_stats_container_[stat_name];
+
+    for (int i = 0; i < num_stages; i++) {
+      if (stat_to_boost->Numerator() == ExclusiveInGameStat::kMaxFactor) {
+        return;
+      }
+
+      if (stat_to_boost->CalculatedStat() < 1.0) {
+        stat_to_boost->LowerDenominator(1);
+      } else {
+        stat_to_boost->RaiseNumerator(1);
+      }
+    }
+  }
+}
+
+auto Pokemon::LowerStat(const StatNames &stat_name,
+                        const int &num_stages) -> void {
+  if (stat_name != StatNames::kAccuracy && stat_name != StatNames::kEvasion) {
+    std::shared_ptr<NormalStat> stat_to_lower =
+        normal_stats_container_[stat_name];
+
+    for (int i = 0; i > num_stages; i--) {
+      if (stat_to_lower->Denominator() == NormalStat::kMaxFactor) {
+        return;
+      }
+
+      if (stat_to_lower->InGameStat() > 1.0) {
+        stat_to_lower->LowerNumerator(1);
+      } else {
+        stat_to_lower->RaiseDenominator(1);
+      }
+    }
+  } else {
+    std::shared_ptr<ExclusiveInGameStat> stat_to_lower =
+        exclusive_in_game_stats_container_[stat_name];
+
+    for (int i = 0; i > num_stages; i--) {
+      if (stat_to_lower->Denominator() == ExclusiveInGameStat::kMaxFactor) {
+        return;
+      }
+
+      if (stat_to_lower->CalculatedStat() > 1.0) {
+        stat_to_lower->LowerNumerator(1);
+      } else {
+        stat_to_lower->RaiseDenominator(1);
+      }
+    }
+  }
+}
+
+auto Pokemon::ChangeStat(const StatNames &stat_name,
+                         const int &num_stages) -> void {
+  num_stages < 0 ? LowerStat(stat_name, num_stages) : RaiseStat(stat_name,
+                                                                num_stages);
 }
 
 } //namespace artificialtrainer

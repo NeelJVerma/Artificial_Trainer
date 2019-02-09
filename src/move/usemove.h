@@ -15,7 +15,7 @@ enum class MoveResults : int {
   kDefenderFainted
 };
 
-auto UseMove(Team &attacker, Team &defender) -> MoveResults;
+auto UseMove(Team &attacker, Team &defender) -> void;
 
 } //namespace artificialtrainer
 

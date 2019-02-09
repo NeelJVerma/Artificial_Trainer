@@ -40,7 +40,8 @@ class Pokemon {
   auto SetIsActive(const bool &is_active) -> void;
   auto SetMoveUsed(const int &index) -> void;
   auto MoveUsed() const -> std::shared_ptr<Move>;
-  //auto SetIsVanished(const bool &is_vanished) -> void;
+  auto ResetStats() -> void;
+  auto ChangeStat(const StatNames &stat_name, const int &num_stages) -> void;
 
   // TODO: ADD IN GAME FLAG ATTRIBUTES. SETTING/GETTING
 
@@ -54,6 +55,8 @@ class Pokemon {
   InGameFlags flags_;
   int level_;
   bool is_active_;
+  auto LowerStat(const StatNames &stat_name, const int &num_stages) -> void;
+  auto RaiseStat(const StatNames &stat_name, const int &num_stages) -> void;
 };
 
 } //namespace artificialtrainer

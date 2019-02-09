@@ -70,4 +70,48 @@ auto IsUseless(const MoveNames &move_name) -> bool {
   }
 }
 
+auto IsSwitch(const MoveNames &move_name) -> bool {
+  switch (move_name) {
+    case MoveNames::kSwitch1:
+    case MoveNames::kSwitch2:
+    case MoveNames::kSwitch3:
+    case MoveNames::kSwitch4:
+    case MoveNames::kSwitch5:
+    case MoveNames::kSwitch6:
+      return true;
+    default:
+      return false;
+  }
+}
+
+auto OnlyChangesStat(const MoveNames &move_name) -> bool {
+  switch (move_name) {
+    case MoveNames::kAcidArmor:
+    case MoveNames::kAgility:
+    case MoveNames::kAmnesia:
+    case MoveNames::kBarrier:
+    case MoveNames::kDefenseCurl:
+    case MoveNames::kDoubleTeam:
+    case MoveNames::kGrowth:
+    case MoveNames::kHarden:
+    case MoveNames::kMeditate:
+    case MoveNames::kMinimize:
+    case MoveNames::kSharpen:
+    case MoveNames::kSwordsDance:
+    case MoveNames::kWithdraw:
+    case MoveNames::kFlash:
+    case MoveNames::kGrowl:
+    case MoveNames::kKinesis:
+    case MoveNames::kLeer:
+    case MoveNames::kSandAttack:
+    case MoveNames::kScreech:
+    case MoveNames::kSmokescreen:
+    case MoveNames::kStringShot:
+    case MoveNames::kTailWhip:
+      return true;
+    default:
+      return false;
+  }
+}
+
 } //namespace artificialtrainer
