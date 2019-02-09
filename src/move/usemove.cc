@@ -37,17 +37,28 @@ auto DoDamage(const std::shared_ptr<Pokemon> &attacker,
 }
 
 auto Switch(Team &attacker) -> void {
-  std::shared_ptr<Pokemon> active_pokemon = attacker.ActiveMember();
-  std::shared_ptr<Move> move = active_pokemon->MoveUsed();
+  std::shared_ptr<Pokemon> old_active_pokemon = attacker.ActiveMember();
   int switch_index = static_cast<int>(
-      move->MoveName()) - static_cast<int>(MoveNames::kSwitch1);
-  
+      old_active_pokemon->MoveUsed()->MoveName()) - static_cast<int>(
+      MoveNames::kSwitch1);
+  old_active_pokemon->SetIsActive(false);
+  attacker.ActiveTeam()[switch_index]->SetIsActive(true);
+  attacker.SetActiveMember(switch_index);
+  Gui::DisplaySwitchMessage(old_active_pokemon->SpeciesName(),
+                            attacker.ActiveMember()->SpeciesName());
 }
 
 } //namespace
 
 auto UseMove(Team &attacker, Team &defender) -> MoveResults {
-  Switch(attacker);
+  int switch_beg = static_cast<int>(MoveNames::kSwitch1);
+  int switch_end = static_cast<int>(MoveNames::kSwitch6);
+  int selected = static_cast<int>(
+      attacker.ActiveMember()->MoveUsed()->MoveName());
+
+  if (selected <= switch_end && selected >= switch_beg) {
+    Switch(attacker);
+  }
 }
 
 } //namespace artificialtrainer

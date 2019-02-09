@@ -41,7 +41,8 @@ class Gui {
   static auto DisplayPokemonUsedMoveMessage(
       const std::shared_ptr<Pokemon> &pokemon) -> void;
   static auto DisplayBattleOverMessage() -> void;
-  static auto DisplaySwitchPokemonMessage() -> void;
+  static auto DisplaySwitchMessage(const SpeciesNames &one,
+                                   const SpeciesNames &two) -> void;
 };
 
 } // namespace artificialtrainer

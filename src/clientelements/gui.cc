@@ -198,8 +198,11 @@ auto Gui::DisplayBattleOverMessage() -> void {
   std::cout << "Battle over" << std::endl;
 }
 
-auto Gui::DisplaySwitchPokemonMessage() -> void {
-  std::cout << "Select a pokemon to switch into" << std::endl;
+auto Gui::DisplaySwitchMessage(const SpeciesNames &one,
+                               const SpeciesNames &two) -> void {
+  std::cout << StringConverter::SpeciesToString(one)
+            << " successfully switched out with "
+            << StringConverter::SpeciesToString(two) << std::endl;
 }
 
 } //namespace artificialtrainer
