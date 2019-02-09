@@ -11,6 +11,7 @@ auto Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void {
 }
 
 auto Team::FaintActivePokemon() -> void {
+  ActiveMember()->SetIsActive(false);
   fainted_team_.push_back(ActiveMember());
   active_team_.erase(active_team_.begin() + IndexOfActiveMember());
 }

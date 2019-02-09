@@ -66,14 +66,12 @@ auto MoveHit(const double &chance_to_hit) -> bool {
   return distribution(generator) <= chance_to_hit;
 }
 
-auto UseChangeStatMove(Team &attacker, Team &defender) -> void {
-  std::shared_ptr<Pokemon> attacking_member = attacker.ActiveMember();
-  std::shared_ptr<Pokemon> defending_member = defender.ActiveMember();
-  std::shared_ptr<Move> move_used = attacking_member->MoveUsed();
+auto UseChangeStatMove(const std::shared_ptr<Pokemon> &attacker,
+                       const std::shared_ptr<Pokemon> &defender) -> void {
+  std::shared_ptr<Move> move_used = attacker->MoveUsed();
   move_used->DecrementPp(1);
 
-  if (!MoveHit(CalculateChanceToHit(attacker.ActiveMember(),
-                                    defender.ActiveMember()))) {
+  if (!MoveHit(CalculateChanceToHit(attacker, defender))) {
     Gui::DisplayMoveMissedMessage();
     return;
   }
@@ -81,66 +79,99 @@ auto UseChangeStatMove(Team &attacker, Team &defender) -> void {
   switch (move_used->MoveName()) {
     case MoveNames::kAcidArmor:
     case MoveNames::kBarrier:
-      attacking_member->ChangeStat(StatNames::kDefense, 2);
+      attacker->ChangeStat(StatNames::kDefense, 2);
       break;
     case MoveNames::kAgility:
-      attacking_member->ChangeStat(StatNames::kSpeed, 2);
+      attacker->ChangeStat(StatNames::kSpeed, 2);
       break;
     case MoveNames::kAmnesia:
-      attacking_member->ChangeStat(StatNames::kSpecial, 2);
+      attacker->ChangeStat(StatNames::kSpecial, 2);
       break;
     case MoveNames::kGrowth:
-      attacking_member->ChangeStat(StatNames::kSpecial, 1);
+      attacker->ChangeStat(StatNames::kSpecial, 1);
       break;
     case MoveNames::kDefenseCurl:
     case MoveNames::kHarden:
     case MoveNames::kWithdraw:
-      attacking_member->ChangeStat(StatNames::kDefense, 1);
+      attacker->ChangeStat(StatNames::kDefense, 1);
       break;
     case MoveNames::kDoubleTeam:
     case MoveNames::kMinimize:
-      attacking_member->ChangeStat(StatNames::kEvasion, -1);
+      attacker->ChangeStat(StatNames::kEvasion, -1);
       break;
     case MoveNames::kMeditate:
     case MoveNames::kSharpen:
-      attacking_member->ChangeStat(StatNames::kAttack, 1);
+      attacker->ChangeStat(StatNames::kAttack, 1);
       break;
     case MoveNames::kSwordsDance:
-      attacking_member->ChangeStat(StatNames::kAttack, 2);
+      attacker->ChangeStat(StatNames::kAttack, 2);
       break;
     case MoveNames::kFlash:
     case MoveNames::kKinesis:
     case MoveNames::kSmokescreen:
     case MoveNames::kSandAttack:
-      defending_member->ChangeStat(StatNames::kAccuracy, -1);
+      defender->ChangeStat(StatNames::kAccuracy, -1);
       break;
     case MoveNames::kGrowl:
-      defending_member->ChangeStat(StatNames::kAttack, -1);
+      defender->ChangeStat(StatNames::kAttack, -1);
       break;
     case MoveNames::kLeer:
     case MoveNames::kTailWhip:
-      defending_member->ChangeStat(StatNames::kDefense, -1);
+      defender->ChangeStat(StatNames::kDefense, -1);
       break;
     case MoveNames::kScreech:
-      defending_member->ChangeStat(StatNames::kDefense, -2);
+      defender->ChangeStat(StatNames::kDefense, -2);
       break;
     case MoveNames::kStringShot:
-      defending_member->ChangeStat(StatNames::kSpeed, -1);
+      defender->ChangeStat(StatNames::kSpeed, -1);
       break;
     default:
       assert(false);
   }
 }
 
+auto DoOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
+                    const std::shared_ptr<Pokemon> &defender,
+                    Team &defender_team) -> void {
+  int attacker_speed =
+      attacker->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
+  int defender_speed =
+      defender->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
+
+  if ((attacker->Level() < defender->Level()) ||
+      (attacker_speed < defender_speed) ||
+      (!static_cast<int>(TypeProduct(attacker->MoveUsed(), defender)))) {
+    Gui::DisplayMoveFailedMessage();
+    return;
+  }
+
+  attacker->MoveUsed()->DecrementPp(1);
+
+  if (!MoveHit(CalculateChanceToHit(attacker, defender))) {
+    Gui::DisplayMoveMissedMessage();
+    return;
+  }
+
+  int defender_hp = defender->GetNormalStatsContainer().HpStat()->CurrentHp();
+  defender->GetNormalStatsContainer().HpStat()->SubtractHp(defender_hp);
+  defender_team.FaintActivePokemon();
+  Gui::DisplayOneHitKoMoveLandedMessage();
+  Gui::DisplayPokemonFaintedMessage(defender->SpeciesName());
+}
+
 } //namespace
 
 auto UseMove(Team &attacker, Team &defender) -> void {
   MoveNames move_used_name = attacker.ActiveMember()->MoveUsed()->MoveName();
+  std::shared_ptr<Pokemon> attacking_member = attacker.ActiveMember();
+  std::shared_ptr<Pokemon> defending_member = defender.ActiveMember();
 
   if (IsSwitch(move_used_name)) {
     Switch(attacker);
   } else if (OnlyChangesStat(move_used_name)) {
-    UseChangeStatMove(attacker, defender);
+    UseChangeStatMove(attacking_member, defending_member);
+  } else if (IsOneHitKo(move_used_name)) {
+    DoOneHitKoMove(attacking_member, defending_member, defender);
   }
 
   // if someone faints, the other user doesn't get to make a move, unless

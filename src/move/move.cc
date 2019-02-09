@@ -114,4 +114,8 @@ auto OnlyChangesStat(const MoveNames &move_name) -> bool {
   }
 }
 
+auto IsOneHitKo(const MoveNames &move_name) -> bool {
+  return BasePower(move_name) == static_cast<int>(PowerClasses::kOneHitKo);
+}
+
 } //namespace artificialtrainer
