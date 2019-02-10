@@ -140,7 +140,7 @@ auto DoOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
 
   if ((attacker->Level() < defender->Level()) ||
       (attacker_speed < defender_speed) ||
-      (TypeProduct(attacker->MoveUsed(), defender) == 0.0)) {
+      (!static_cast<bool>(TypeProduct(attacker->MoveUsed(), defender)))) {
     Gui::DisplayMoveFailedMessage();
     return;
   }
@@ -157,6 +157,7 @@ auto DoOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
   defender_team.FaintActivePokemon();
   Gui::DisplayOneHitKoMoveLandedMessage();
   Gui::DisplayPokemonFaintedMessage(defender->SpeciesName());
+  // if got here, prompt to switch in new member
 }
 
 } //namespace
