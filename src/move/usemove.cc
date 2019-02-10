@@ -140,7 +140,7 @@ auto DoOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
 
   if ((attacker->Level() < defender->Level()) ||
       (attacker_speed < defender_speed) ||
-      (!static_cast<int>(TypeProduct(attacker->MoveUsed(), defender)))) {
+      (static_cast<int>(TypeProduct(attacker->MoveUsed(), defender)) == 0.0)) {
     Gui::DisplayMoveFailedMessage();
     return;
   }
