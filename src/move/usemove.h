@@ -6,15 +6,8 @@
 #define ARTIFICIAL_TRAINER_USEMOVE_H
 
 #include "../team/team.h"
-namespace artificialtrainer {
-enum class MoveResults : int {
-  kAttackerSwitched,
-  kDefenderSwitched,
-  kSuccess,
-  kAttackerFainted,
-  kDefenderFainted
-};
 
+namespace artificialtrainer {
 auto UseMove(Team &attacker, Team &defender) -> void;
 
 } //namespace artificialtrainer

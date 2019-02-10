@@ -135,6 +135,10 @@ auto IsValidMoveChoice(const Team &team,
   return static_cast<bool>(move->CurrentPp());
 }
 
+auto IsValidSwitchChoice(const Team &team, const int &index) {
+  return index >= 0 && index < team.ActiveTeam().size();
+}
+
 } //namespace
 
 auto Battle::BattleOver() const -> bool {
@@ -150,6 +154,29 @@ auto Battle::StartBattle() -> void {
   Gui::DisplayPickLeadingPokemonMessage(false);
   team_two_.SetActiveMember(
       InputHandler::GetIntInput(1, Team::kMaxTeamSize) - 1);
+}
+
+auto Battle::PlayerPicksForcedSwitch(Team &team) -> void {
+  if (!team.ActiveTeamSize()) {
+    return;
+  }
+
+  Gui::DisplayForceSwitchMessage();
+  Gui::DisplayAvailableSwitchOptions(team);
+  int switch_choice;
+
+  while (true) {
+    switch_choice = InputHandler::GetIntInput(1, static_cast<int>(
+        team.ActiveTeam().size()));
+
+    if (IsValidSwitchChoice(team, switch_choice - 1)) {
+      break;
+    }
+
+    Gui::DisplayInvalidChoiceMessage();
+  }
+
+  team.ForceSwitch(switch_choice - 1);
 }
 
 auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> void {
@@ -169,6 +196,18 @@ auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> void {
   }
 
   pokemon->SetMoveUsed(move_choice - 1);
+}
+
+auto Battle::HandleMove(Team &attacker, Team &defender) -> void {
+  UseMove(attacker, defender);
+  std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
+
+  if (!active_attacker->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    attacker.FaintActivePokemon();
+    PlayerPicksForcedSwitch(attacker);
+  }
+
+  // TODO: NEED TO HANDLE DEFENDER NOT MAKING A MOVE IF ATTACKER KILLS SELF
 }
 
 auto Battle::HandleTurn() -> void {
@@ -208,11 +247,11 @@ auto Battle::HandleTurn() -> void {
   }
 
   if (one_moves_first) {
-    UseMove(team_one_, team_two_);
-    UseMove(team_two_, team_one_);
+    HandleMove(team_one_, team_two_);
+    HandleMove(team_two_, team_one_);
   } else {
-    UseMove(team_two_, team_one_);
-    UseMove(team_one_, team_two_);
+    HandleMove(team_two_, team_one_);
+    HandleMove(team_one_, team_two_);
   }
 }
 

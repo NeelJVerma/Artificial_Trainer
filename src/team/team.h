@@ -28,6 +28,8 @@ class Team {
   auto SetActiveMember(const int &index) -> void;
   auto ActiveMember() -> std::shared_ptr<Pokemon>;
   auto IndexOfActiveMember() const -> int;
+  auto HardSwitch() -> void;
+  auto ForceSwitch(const int &switch_index) -> void;
 
  private:
   std::vector<std::shared_ptr<Pokemon>> active_team_;

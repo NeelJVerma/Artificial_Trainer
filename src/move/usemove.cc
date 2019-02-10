@@ -46,16 +46,10 @@ auto DoDamage(const std::shared_ptr<Pokemon> &attacker,
 
 }
 
-auto Switch(Team &attacker) -> void {
-  std::shared_ptr<Pokemon> old_active_pokemon = attacker.ActiveMember();
-  int switch_index = static_cast<int>(
-      old_active_pokemon->MoveUsed()->MoveName()) - static_cast<int>(
-      MoveNames::kSwitch1);
-  old_active_pokemon->SetIsActive(false);
-  old_active_pokemon->ResetStats();
-  attacker.ActiveTeam()[switch_index]->SetIsActive(true);
-  attacker.SetActiveMember(switch_index);
-  Gui::DisplaySwitchMessage(old_active_pokemon->SpeciesName(),
+auto HardSwitch(Team &attacker) -> void {
+  std::shared_ptr<Pokemon> old_active_member = attacker.ActiveMember();
+  attacker.HardSwitch();
+  Gui::DisplaySwitchMessage(old_active_member->SpeciesName(),
                             attacker.ActiveMember()->SpeciesName());
 }
 
@@ -154,21 +148,23 @@ auto DoOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
 
   int defender_hp = defender->GetNormalStatsContainer().HpStat()->CurrentHp();
   defender->GetNormalStatsContainer().HpStat()->SubtractHp(defender_hp);
-  defender_team.FaintActivePokemon();
   Gui::DisplayOneHitKoMoveLandedMessage();
   Gui::DisplayPokemonFaintedMessage(defender->SpeciesName());
-  // if got here, prompt to switch in new member
+
+  /*if (defender_team.ActiveTeam().size() > 1) {
+
+  }*/
 }
 
 } //namespace
 
 auto UseMove(Team &attacker, Team &defender) -> void {
-  MoveNames move_used_name = attacker.ActiveMember()->MoveUsed()->MoveName();
   std::shared_ptr<Pokemon> attacking_member = attacker.ActiveMember();
   std::shared_ptr<Pokemon> defending_member = defender.ActiveMember();
+  MoveNames move_used_name = attacker.ActiveMember()->MoveUsed()->MoveName();
 
   if (IsSwitch(move_used_name)) {
-    Switch(attacker);
+    HardSwitch(attacker);
   } else if (OnlyChangesStat(move_used_name)) {
     UseChangeStatMove(attacking_member, defending_member);
   } else if (IsOneHitKo(move_used_name)) {

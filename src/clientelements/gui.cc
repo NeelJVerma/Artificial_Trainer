@@ -205,12 +205,21 @@ auto Gui::DisplaySwitchMessage(const SpeciesNames &one,
             << StringConverter::SpeciesToString(two) << std::endl;
 }
 
-auto Gui::DisplayStatWontGoHigherMessage() -> void {
-  std::cout << "Stat won't go any higher" << std::endl;
+auto Gui::DisplayForceSwitchMessage() -> void {
+  std::cout << "Pick a Pokemon to switch into" << std::endl;
 }
 
-auto Gui::DisplayStatWontGoLowerMessage() -> void {
-  std::cout << "Stat won't go any lower" << std::endl;
+auto Gui::DisplayAvailableSwitchOptions(const Team &team) -> void {
+  std::cout << "Available switches:" << std::endl;
+  int i = 1;
+
+  for (const auto &pokemon : team.ActiveTeam()) {
+    std::cout << i++ << ". "
+              << StringConverter::SpeciesToString(pokemon->SpeciesName())
+              << ": "
+              << pokemon->GetNormalStatsContainer().HpStat()->CurrentHp()
+              << " hp." << std::endl;
+  }
 }
 
 } //namespace artificialtrainer

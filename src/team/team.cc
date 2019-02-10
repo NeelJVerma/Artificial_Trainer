@@ -11,9 +11,10 @@ auto Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void {
 }
 
 auto Team::FaintActivePokemon() -> void {
-  fainted_team_.push_back(ActiveMember());
+  std::shared_ptr<Pokemon> old_active_member = ActiveMember();
+  fainted_team_.push_back(old_active_member);
   active_team_.erase(active_team_.begin() + IndexOfActiveMember());
-  ActiveMember()->SetIsActive(false);
+  old_active_member->SetIsActive(false);
 }
 
 auto Team::ActiveTeamSize() const -> int {
@@ -68,6 +69,22 @@ auto Team::IndexOfActiveMember() const -> int {
   }
 
   return -1;
+}
+
+auto Team::HardSwitch() -> void {
+  std::shared_ptr<Pokemon> old_active_pokemon = ActiveMember();
+  int switch_index = static_cast<int>(
+      old_active_pokemon->MoveUsed()->MoveName()) - static_cast<int>(
+      MoveNames::kSwitch1);
+  old_active_pokemon->SetIsActive(false);
+  old_active_pokemon->ResetStats();
+  active_team_[switch_index]->SetIsActive(true);
+  SetActiveMember(switch_index);
+}
+
+auto Team::ForceSwitch(const int &switch_index) -> void {
+  active_team_[switch_index]->SetIsActive(true);
+  SetActiveMember(switch_index);
 }
 
 } //namespace artificialtrainer

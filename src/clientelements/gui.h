@@ -43,8 +43,8 @@ class Gui {
   static auto DisplayBattleOverMessage() -> void;
   static auto DisplaySwitchMessage(const SpeciesNames &one,
                                    const SpeciesNames &two) -> void;
-  static auto DisplayStatWontGoHigherMessage() -> void;
-  static auto DisplayStatWontGoLowerMessage() -> void;
+  static auto DisplayForceSwitchMessage() -> void;
+  static auto DisplayAvailableSwitchOptions(const Team &team) -> void;
 };
 
 } // namespace artificialtrainer
