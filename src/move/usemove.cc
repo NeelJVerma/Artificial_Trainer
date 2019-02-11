@@ -38,7 +38,7 @@ auto TypeProduct(const std::shared_ptr<Move> &move_used,
   TypeNames move_type = Type(move_used->MoveName());
   TypeContainer defender_types = defender->GetTypeContainer();
   return Effectiveness(move_type, defender_types.FirstType()) *
-      Effectiveness(move_type, defender_types.SecondType());
+      Effectiveness(move_type, defender_types.SecondType()) * 10;
 }
 
 auto MoveCrit(const double &crit_chance) {
@@ -62,21 +62,15 @@ auto DamageRandomFactor() -> int {
   return distribution(generator);
 }
 
-auto DamageBonus(const std::shared_ptr<Pokemon> &attacker,
-                 const std::shared_ptr<Pokemon> &defender) -> double {
-  std::shared_ptr<Move> move_used = attacker->MoveUsed();
+auto DamageBonus(const std::shared_ptr<Pokemon> &attacker) -> double {
   return ((attacker->GetTypeContainer().MoveMatchesType(
-      move_used->MoveName())) ? 1.5 : 1.0) * TypeProduct(move_used, defender);
+      attacker->MoveUsed()->MoveName())) ? 1.5 : 1.0);
 }
 
 auto DoDamage(const std::shared_ptr<Pokemon> &attacker,
               const std::shared_ptr<Pokemon> &defender) -> void {
   NormalStatsContainer attacker_stats = attacker->GetNormalStatsContainer();
   NormalStatsContainer defender_stats = defender->GetNormalStatsContainer();
-  ExclusiveInGameStatsContainer ex_attacker_stats =
-      attacker->GetExclusiveInGameStatsContainer();
-  ExclusiveInGameStatsContainer ex_defender_stats =
-      defender->GetExclusiveInGameStatsContainer();
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
   attacker->MoveUsed()->DecrementPp(1);
 
@@ -134,11 +128,11 @@ auto DoDamage(const std::shared_ptr<Pokemon> &attacker,
     calculated_defense = defense->InGameStat();
   }
 
-  int damage_done = static_cast<int>(floor((((((((((static_cast<double>(
-      attacker->Level()) * (move_crit ? 2 : 1) * 2 / 5))) + 2 *
-      static_cast<double>(calculated_attack) * BasePower(
-      move_used->MoveName()) / calculated_defense) / 50)) + 2) *
-      DamageBonus(attacker, defender)) * DamageRandomFactor() / 255)));
+  int damage_done = static_cast<int>(floor(((((((((2.0 * (move_crit ? 2 : 1) *
+      attacker->Level() / 5 + 2) * calculated_attack * BasePower(
+      move_used->MoveName()) / calculated_defense) / 50) + 2) *
+      DamageBonus(attacker)) * TypeProduct(move_used, defender) / 10) *
+      DamageRandomFactor()) / 255)));
   int defender_hp = defender->GetNormalStatsContainer().HpStat()->CurrentHp();
   defender->GetNormalStatsContainer().HpStat()->SubtractHp(
       defender_hp - damage_done < 0 ? defender_hp : damage_done);

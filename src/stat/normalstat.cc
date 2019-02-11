@@ -1269,7 +1269,6 @@ NormalStat::NormalStat(const SpeciesNames &species_name, const int &level,
       numerator_(kMinFactor),
       denominator_(kMinFactor),
       level_(level),
-      initial_stat_(InGameStat()),
       ev_stat_(ev),
       iv_stat_(iv) {
 }
@@ -1324,7 +1323,14 @@ auto NormalStat::InGameStat() const -> int {
 }
 
 auto NormalStat::InitialStat() -> int {
-  return initial_stat_;
+  int old_numerator = numerator_;
+  int old_denominator = denominator_;
+  numerator_ = kMinFactor;
+  denominator_ = kMinFactor;
+  int return_stat = InGameStat();
+  numerator_ = old_numerator;
+  denominator_ = old_denominator;
+  return return_stat;
 }
 
 } //nammespace artificialtrainer

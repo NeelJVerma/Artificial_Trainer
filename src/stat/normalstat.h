@@ -38,7 +38,6 @@ class NormalStat {
   int numerator_;
   int denominator_;
   int level_;
-  int initial_stat_;
   Ev ev_stat_;
   Iv iv_stat_;
 };
