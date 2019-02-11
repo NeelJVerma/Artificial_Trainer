@@ -314,7 +314,7 @@ auto GetAttackFromSpecies(const SpeciesNames &species_name) -> int {
       return 100;
     default:
       assert(false);
-  };
+  }
 }
 
 auto GetDefenseFromSpecies(const SpeciesNames &species_name) -> int {
@@ -623,7 +623,7 @@ auto GetDefenseFromSpecies(const SpeciesNames &species_name) -> int {
       return 100;
     default:
       assert(false);
-  };
+  }
 }
 
 auto GetSpecialFromSpecies(const SpeciesNames &species_name) -> int {
@@ -932,7 +932,7 @@ auto GetSpecialFromSpecies(const SpeciesNames &species_name) -> int {
       return 100;
     default:
       assert(false);
-  };
+  }
 }
 
 auto GetSpeedFromSpecies(const SpeciesNames &species_name) -> int {
@@ -1241,7 +1241,7 @@ auto GetSpeedFromSpecies(const SpeciesNames &species_name) -> int {
       return 100;
     default:
       assert(false);
-  };
+  }
 }
 
 auto GetBase(const SpeciesNames &species_name,
@@ -1257,7 +1257,7 @@ auto GetBase(const SpeciesNames &species_name,
       return GetSpeedFromSpecies(species_name);
     default:
       assert(false);
-  };
+  }
 }
 
 } //namespace
@@ -1269,6 +1269,7 @@ NormalStat::NormalStat(const SpeciesNames &species_name, const int &level,
       numerator_(kMinFactor),
       denominator_(kMinFactor),
       level_(level),
+      initial_stat_(InGameStat()),
       ev_stat_(ev),
       iv_stat_(iv) {
 }
@@ -1320,6 +1321,10 @@ auto NormalStat::InGameStat() const -> int {
       ev_stat_.Value()) / 1024)));
   return static_cast<int>(floor(initial_stat * (
       static_cast<double>(numerator_) / denominator_)));
+}
+
+auto NormalStat::InitialStat() -> int {
+  return initial_stat_;
 }
 
 } //nammespace artificialtrainer

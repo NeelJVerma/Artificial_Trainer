@@ -15,6 +15,7 @@ namespace artificialtrainer {
 struct InGameFlags {
   bool flying = false;
   bool digging = false;
+  bool used_focus_energy = false;
   // TODO: ADD MORE WHEN NEEDED
 };
 
@@ -42,6 +43,8 @@ class Pokemon {
   auto MoveUsed() const -> std::shared_ptr<Move>;
   auto ResetStats() -> void;
   auto ChangeStat(const StatNames &stat_name, const int &num_stages) -> void;
+  auto SetUsedFocusEnergy(const bool &used) -> void;
+  auto UsedFocusEnergy() const -> bool;
 
   // TODO: ADD IN GAME FLAG ATTRIBUTES. SETTING/GETTING
 

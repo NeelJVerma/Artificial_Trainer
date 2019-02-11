@@ -45,6 +45,9 @@ class Gui {
                                    const SpeciesNames &two) -> void;
   static auto DisplayForceSwitchMessage() -> void;
   static auto DisplayAvailableSwitchOptions(const Team &team) -> void;
+  static auto DisplayMoveCritMessage() -> void;
+  static auto DisplayMoveHadNoEffectMessage() -> void;
+  static auto DisplayDamageDoneMessage(const int &damage_done) -> void;
 };
 
 } // namespace artificialtrainer

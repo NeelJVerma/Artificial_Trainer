@@ -156,4 +156,12 @@ auto Pokemon::ChangeStat(const StatNames &stat_name,
                                                                 num_stages);
 }
 
+auto Pokemon::SetUsedFocusEnergy(const bool &used) -> void {
+  flags_.used_focus_energy = true;
+}
+
+auto Pokemon::UsedFocusEnergy() const -> bool {
+  return flags_.used_focus_energy;
+}
+
 } //namespace artificialtrainer

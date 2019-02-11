@@ -222,4 +222,16 @@ auto Gui::DisplayAvailableSwitchOptions(const Team &team) -> void {
   }
 }
 
+auto Gui::DisplayMoveCritMessage() -> void {
+  std::cout << "The move landed a critical hit" << std::endl;
+}
+
+auto Gui::DisplayMoveHadNoEffectMessage() -> void {
+  std::cout << "The move had no effect" << std::endl;
+}
+
+auto Gui::DisplayDamageDoneMessage(const int &damage_done) -> void {
+  std::cout << "The move did " << damage_done << " damage" << std::endl;
+}
+
 } //namespace artificialtrainer

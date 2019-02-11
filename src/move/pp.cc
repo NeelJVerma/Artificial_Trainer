@@ -352,7 +352,7 @@ auto Pp(const MoveNames &move_name) -> int {
       return kUnlimited;
     default:
       assert(false);
-  };
+  }
 }
 
 } //namespace artificialtrainer

@@ -351,7 +351,7 @@ auto BaseAccuracy(const MoveNames &move_name) -> int {
       return kNeverMiss;
     default:
       assert(false);
-  };
+  }
 }
 
 } //namespace artificialtrainer

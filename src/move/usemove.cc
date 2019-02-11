@@ -41,16 +41,11 @@ auto TypeProduct(const std::shared_ptr<Move> &move_used,
       Effectiveness(move_type, defender_types.SecondType());
 }
 
-auto DoDamage(const std::shared_ptr<Pokemon> &attacker,
-              const std::shared_ptr<Pokemon> &defender) -> void {
-
-}
-
-auto HardSwitch(Team &attacker) -> void {
-  std::shared_ptr<Pokemon> old_active_member = attacker.ActiveMember();
-  attacker.HardSwitch();
-  Gui::DisplaySwitchMessage(old_active_member->SpeciesName(),
-                            attacker.ActiveMember()->SpeciesName());
+auto MoveCrit(const double &crit_chance) {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_real_distribution<> distribution(0.0, 1.0);
+  return distribution(generator) <= crit_chance;
 }
 
 auto MoveHit(const double &chance_to_hit) -> bool {
@@ -58,6 +53,103 @@ auto MoveHit(const double &chance_to_hit) -> bool {
   std::mt19937 generator(device());
   std::uniform_real_distribution<> distribution(1.0, 100.0);
   return distribution(generator) <= chance_to_hit;
+}
+
+auto DamageRandomFactor() -> int {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(217, 255);
+  return distribution(generator);
+}
+
+auto DamageBonus(const std::shared_ptr<Pokemon> &attacker,
+                 const std::shared_ptr<Pokemon> &defender) -> double {
+  std::shared_ptr<Move> move_used = attacker->MoveUsed();
+  return ((attacker->GetTypeContainer().MoveMatchesType(
+      move_used->MoveName())) ? 1.5 : 1.0) * TypeProduct(move_used, defender);
+}
+
+auto DoDamage(const std::shared_ptr<Pokemon> &attacker,
+              const std::shared_ptr<Pokemon> &defender) -> void {
+  NormalStatsContainer attacker_stats = attacker->GetNormalStatsContainer();
+  NormalStatsContainer defender_stats = defender->GetNormalStatsContainer();
+  ExclusiveInGameStatsContainer ex_attacker_stats =
+      attacker->GetExclusiveInGameStatsContainer();
+  ExclusiveInGameStatsContainer ex_defender_stats =
+      defender->GetExclusiveInGameStatsContainer();
+  std::shared_ptr<Move> move_used = attacker->MoveUsed();
+  attacker->MoveUsed()->DecrementPp(1);
+
+  if (IsUseless(move_used->MoveName())) {
+    Gui::DisplayMoveHadNoEffectMessage();
+    return;
+  }
+
+  if (!MoveHit(CalculateChanceToHit(attacker, defender))) {
+    Gui::DisplayMoveMissedMessage();
+    return;
+  }
+
+  double crit_chance;
+  double attacker_base_speed =
+      static_cast<double>(attacker_stats[StatNames::kSpeed]->BaseStat());
+
+  if (HasHighCriticalHitRatio(move_used->MoveName()) &&
+      attacker->UsedFocusEnergy()) {
+    crit_chance = attacker_base_speed / 256;
+  } else if (HasHighCriticalHitRatio(move_used->MoveName())) {
+    crit_chance = attacker_base_speed / 64;
+  } else if (attacker->UsedFocusEnergy()) {
+    crit_chance = attacker_base_speed / 2048;
+  } else {
+    crit_chance = attacker_base_speed / 512;
+  }
+
+  bool move_crit = false;
+
+  if (MoveCrit(crit_chance > 255.0 / 256.0 ? 255.0 / 256.0 : crit_chance)) {
+    move_crit = true;
+    Gui::DisplayMoveCritMessage();
+  }
+
+  std::shared_ptr<NormalStat> attack;
+  std::shared_ptr<NormalStat> defense;
+
+  if (IsPhysical(move_used->MoveName())) {
+    attack = attacker_stats[StatNames::kAttack];
+    defense = defender_stats[StatNames::kDefense];
+  } else {
+    attack = attacker_stats[StatNames::kSpecial];
+    defense = defender_stats[StatNames::kSpecial];
+  }
+
+  int calculated_attack;
+  int calculated_defense;
+
+  if (move_crit) {
+    calculated_attack = attack->InitialStat();
+    calculated_defense = defense->InitialStat();
+  } else {
+    calculated_attack = attack->InGameStat();
+    calculated_defense = defense->InGameStat();
+  }
+
+  int damage_done = static_cast<int>(floor((((((((((static_cast<double>(
+      attacker->Level()) * (move_crit ? 2 : 1) * 2 / 5))) + 2 *
+      static_cast<double>(calculated_attack) * BasePower(
+      move_used->MoveName()) / calculated_defense) / 50)) + 2) *
+      DamageBonus(attacker, defender)) * DamageRandomFactor() / 255)));
+  int defender_hp = defender->GetNormalStatsContainer().HpStat()->CurrentHp();
+  defender->GetNormalStatsContainer().HpStat()->SubtractHp(
+      defender_hp - damage_done < 0 ? defender_hp : damage_done);
+  Gui::DisplayDamageDoneMessage(damage_done);
+}
+
+auto HardSwitch(Team &attacker) -> void {
+  std::shared_ptr<Pokemon> old_active_member = attacker.ActiveMember();
+  attacker.HardSwitch();
+  Gui::DisplaySwitchMessage(old_active_member->SpeciesName(),
+                            attacker.ActiveMember()->SpeciesName());
 }
 
 auto UseChangeStatMove(const std::shared_ptr<Pokemon> &attacker,
@@ -150,10 +242,6 @@ auto DoOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
   defender->GetNormalStatsContainer().HpStat()->SubtractHp(defender_hp);
   Gui::DisplayOneHitKoMoveLandedMessage();
   Gui::DisplayPokemonFaintedMessage(defender->SpeciesName());
-
-  /*if (defender_team.ActiveTeam().size() > 1) {
-
-  }*/
 }
 
 } //namespace
@@ -161,7 +249,19 @@ auto DoOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
 auto UseMove(Team &attacker, Team &defender) -> void {
   std::shared_ptr<Pokemon> attacking_member = attacker.ActiveMember();
   std::shared_ptr<Pokemon> defending_member = defender.ActiveMember();
+
+  // TODO: TEST THIS
+  if (!attacking_member->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    return;
+  }
+
+  if (!defending_member->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    Gui::DisplayMoveFailedMessage();
+    return;
+  }
+
   MoveNames move_used_name = attacker.ActiveMember()->MoveUsed()->MoveName();
+  Gui::DisplayPokemonUsedMoveMessage(attacking_member);
 
   if (IsSwitch(move_used_name)) {
     HardSwitch(attacker);
@@ -169,6 +269,9 @@ auto UseMove(Team &attacker, Team &defender) -> void {
     UseChangeStatMove(attacking_member, defending_member);
   } else if (IsOneHitKo(move_used_name)) {
     DoOneHitKoMove(attacking_member, defending_member, defender);
+  } else if (IsDamaging(move_used_name)) {
+    DoDamage(attacking_member, defending_member);
+    // TODO: HANDLE SIDE EFFECT, WRAP IT IN A FUNCTION
   }
 
   // if someone faints, the other user doesn't get to make a move, unless

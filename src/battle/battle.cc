@@ -198,14 +198,24 @@ auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> void {
   pokemon->SetMoveUsed(move_choice - 1);
 }
 
-auto Battle::HandleMove(Team &attacker, Team &defender) -> void {
+auto Battle::HandleMove(Team &attacker, Team &defender) -> bool {
   UseMove(attacker, defender);
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
+  std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
 
   if (!active_attacker->GetNormalStatsContainer().HpStat()->CurrentHp()) {
     attacker.FaintActivePokemon();
     PlayerPicksForcedSwitch(attacker);
+    return false;
   }
+
+  if (!active_defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    defender.FaintActivePokemon();
+    PlayerPicksForcedSwitch(defender);
+    return false;
+  }
+
+  return true;
 
   // TODO: NEED TO HANDLE DEFENDER NOT MAKING A MOVE IF ATTACKER KILLS SELF
 }
@@ -227,7 +237,7 @@ auto Battle::HandleTurn() -> void {
   std::shared_ptr<Move> move_one = active_pokemon_one->MoveUsed();
   std::shared_ptr<Move> move_two = active_pokemon_two->MoveUsed();
 
-  if (Priority(move_two->MoveName()) ==
+  if (Priority(move_one->MoveName()) ==
       Priority(move_two->MoveName())) {
     if (normal_active_stats_one[StatNames::kSpeed]->InGameStat() >
         normal_active_stats_two[StatNames::kSpeed]->InGameStat()) {
@@ -247,11 +257,13 @@ auto Battle::HandleTurn() -> void {
   }
 
   if (one_moves_first) {
-    HandleMove(team_one_, team_two_);
-    HandleMove(team_two_, team_one_);
+    if (HandleMove(team_one_, team_two_)) {
+      HandleMove(team_two_, team_one_);
+    }
   } else {
-    HandleMove(team_two_, team_one_);
-    HandleMove(team_one_, team_two_);
+    if (HandleMove(team_two_, team_one_)) {
+      HandleMove(team_one_, team_two_);
+    }
   }
 }
 

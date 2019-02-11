@@ -2678,7 +2678,7 @@ auto Learnset(const SpeciesNames &species_name) -> std::vector<MoveNames> {
                                     MoveNames::kSubstitute};
     default:
       assert(false);
-  };
+  }
 }
 
 } //namespace artificialtrainer

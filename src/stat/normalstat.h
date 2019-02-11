@@ -31,12 +31,14 @@ class NormalStat {
   auto Denominator() const -> int;
   auto InGameStat() const -> int;
   auto ResetStat() -> void;
+  auto InitialStat() -> int;
 
  private:
   int base_stat_;
   int numerator_;
   int denominator_;
   int level_;
+  int initial_stat_;
   Ev ev_stat_;
   Iv iv_stat_;
 };

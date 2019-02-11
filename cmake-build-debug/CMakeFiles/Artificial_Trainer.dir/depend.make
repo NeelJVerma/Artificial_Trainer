@@ -242,7 +242,9 @@ CMakeFiles/Artificial_Trainer.dir/src/type/type.cc.o: ../src/type/type.cc
 CMakeFiles/Artificial_Trainer.dir/src/type/type.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/type/type.cc.o: ../src/type/typenames.h
 
+CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/pokemon/speciesnames.h
+CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/type/typecontainer.cc
 CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/type/typecontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/type/typecontainer.cc.o: ../src/type/typenames.h

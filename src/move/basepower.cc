@@ -350,7 +350,7 @@ auto BasePower(const MoveNames &move_name) -> int {
       return 40;
     default:
       assert(false);
-  };
+  }
 }
 
 } //namespace artificialtrainer

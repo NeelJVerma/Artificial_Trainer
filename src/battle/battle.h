@@ -21,7 +21,7 @@ class Battle {
   auto StartBattle() -> void;
   auto HandleTurn() -> void;
   auto PlayerPicksMove(Team &team, const bool &team_one) -> void;
-  auto HandleMove(Team &attacker, Team &defender) -> void;
+  auto HandleMove(Team &attacker, Team &defender) -> bool;
   auto PlayerPicksForcedSwitch(Team &team) -> void;
 };
 

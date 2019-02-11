@@ -8,6 +8,7 @@
 #include <utility>
 #include "../pokemon/speciesnames.h"
 #include "typenames.h"
+#include "../move/movenames.h"
 
 namespace artificialtrainer {
 class TypeContainer {
@@ -19,6 +20,7 @@ class TypeContainer {
   explicit TypeContainer(const SpeciesNames &species_name);
   auto FirstType() const -> TypeNames;
   auto SecondType() const -> TypeNames;
+  auto MoveMatchesType(const MoveNames &move_name) const -> bool;
 
  private:
   std::pair<TypeNames, TypeNames> types_;

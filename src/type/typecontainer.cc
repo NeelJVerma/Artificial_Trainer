@@ -4,10 +4,12 @@
 
 #include <cassert>
 #include "typecontainer.h"
+#include "type.h"
 
 namespace artificialtrainer {
 namespace {
-auto Type(const SpeciesNames &species_name) -> std::pair<TypeNames, TypeNames> {
+auto TypePair(
+    const SpeciesNames &species_name) -> std::pair<TypeNames, TypeNames> {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return std::make_pair(TypeNames::kGrass, TypeNames::kPoison);
@@ -319,7 +321,7 @@ auto Type(const SpeciesNames &species_name) -> std::pair<TypeNames, TypeNames> {
 } //namespace
 
 TypeContainer::TypeContainer(const SpeciesNames &species_name)
-    : types_(Type(species_name)) {
+    : types_(TypePair(species_name)) {
 }
 
 auto TypeContainer::FirstType() const -> TypeNames {
@@ -328,6 +330,10 @@ auto TypeContainer::FirstType() const -> TypeNames {
 
 auto TypeContainer::SecondType() const -> TypeNames {
   return types_.second;
+}
+
+auto TypeContainer::MoveMatchesType(const MoveNames &move_name) const -> bool {
+  return Type(move_name) == types_.first || Type(move_name) == types_.second;
 }
 
 } //namespace artificialtrainer

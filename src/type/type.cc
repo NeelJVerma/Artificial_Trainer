@@ -189,7 +189,7 @@ auto Type(const MoveNames &move_name) -> TypeNames {
       return TypeNames::kDragon;
     default:
       return TypeNames::kNoType;
-  };
+  }
 }
 
 } //namespace artificialtrainer

@@ -36,7 +36,7 @@ auto IsPhysical(const MoveNames &move_name) -> bool {
       return true;
     default:
       return false;
-  };
+  }
 }
 
 auto IsSpecial(const MoveNames &move_name) -> bool {
@@ -51,7 +51,7 @@ auto IsSpecial(const MoveNames &move_name) -> bool {
       return true;
     default:
       return false;
-  };
+  }
 }
 
 auto IsDamaging(const MoveNames &move_name) -> bool {
@@ -116,6 +116,18 @@ auto OnlyChangesStat(const MoveNames &move_name) -> bool {
 
 auto IsOneHitKo(const MoveNames &move_name) -> bool {
   return BasePower(move_name) == static_cast<int>(PowerClasses::kOneHitKo);
+}
+
+auto HasHighCriticalHitRatio(const MoveNames &move_name) -> bool {
+  switch (move_name) {
+    case MoveNames::kCrabhammer:
+    case MoveNames::kKarateChop:
+    case MoveNames::kRazorLeaf:
+    case MoveNames::kSlash:
+      return true;
+    default:
+      return false;
+  }
 }
 
 } //namespace artificialtrainer

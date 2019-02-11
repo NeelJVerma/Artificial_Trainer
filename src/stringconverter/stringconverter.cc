@@ -313,7 +313,7 @@ auto StringConverter::SpeciesToString(
       return "Mew";
     default:
       assert(false);
-  };
+  }
 }
 
 auto StringConverter::StatToString(const StatNames &stat_name) -> std::string {
@@ -334,7 +334,7 @@ auto StringConverter::StatToString(const StatNames &stat_name) -> std::string {
       return "Evasion";
     default:
       assert(false);
-  };
+  }
 }
 
 auto StringConverter::MoveToString(const MoveNames &move_name) -> std::string {
@@ -687,7 +687,7 @@ auto StringConverter::MoveToString(const MoveNames &move_name) -> std::string {
       return "Hit Self";
     default:
       assert(false);
-  };
+  }
 }
 
 auto StringConverter::TypeToString(const TypeNames &type_name) -> std::string {
@@ -726,7 +726,6 @@ auto StringConverter::TypeToString(const TypeNames &type_name) -> std::string {
       return "No Type";
     default:
       assert(false);
-
   }
 }
 

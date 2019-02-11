@@ -315,7 +315,7 @@ auto BaseHp(const SpeciesNames &species) -> int {
       return 100;
     default:
       assert(false);
-  };
+  }
 }
 
 auto CalculateInBattleHpStat(const int &base_hp, const int &level,
