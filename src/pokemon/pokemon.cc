@@ -156,12 +156,20 @@ auto Pokemon::ChangeStat(const StatNames &stat_name,
                                                                 num_stages);
 }
 
-auto Pokemon::SetUsedFocusEnergy(const bool &used) -> void {
+auto Pokemon::SetUsedFocusEnergy(const bool &used_focus_energy) -> void {
   flags_.used_focus_energy = true;
 }
 
 auto Pokemon::UsedFocusEnergy() const -> bool {
   return flags_.used_focus_energy;
+}
+
+auto Pokemon::SetFaintedSelf(const bool &fainted_self) -> void {
+  flags_.fainted_self = fainted_self;
+}
+
+auto Pokemon::FaintedSelf() const -> bool {
+  return flags_.fainted_self;
 }
 
 } //namespace artificialtrainer

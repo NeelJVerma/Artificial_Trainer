@@ -13,6 +13,7 @@ auto Priority(const MoveNames &move_name) -> int {
     case MoveNames::kSwitch4:
     case MoveNames::kSwitch5:
     case MoveNames::kSwitch6:
+    case MoveNames::kPass:
       return 2;
     case MoveNames::kQuickAttack:
       return 1;

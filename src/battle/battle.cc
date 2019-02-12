@@ -216,8 +216,6 @@ auto Battle::HandleMove(Team &attacker, Team &defender) -> bool {
   }
 
   return true;
-
-  // TODO: NEED TO HANDLE DEFENDER NOT MAKING A MOVE IF ATTACKER KILLS SELF
 }
 
 auto Battle::HandleTurn() -> void {

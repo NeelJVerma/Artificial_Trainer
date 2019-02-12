@@ -2,6 +2,7 @@
 // Created by neel on 1/27/19.
 //
 
+#include <cassert>
 #include "move.h"
 #include "../type/type.h"
 #include "basepower.h"
@@ -128,6 +129,53 @@ auto HasHighCriticalHitRatio(const MoveNames &move_name) -> bool {
     default:
       return false;
   }
+}
+
+auto VariableEffectChance(const MoveNames &move_name) -> int {
+  switch (move_name) {
+    case MoveNames::kAcid:
+    case MoveNames::kAuroraBeam:
+    case MoveNames::kBite:
+    case MoveNames::kBlizzard:
+    case MoveNames::kBoneClub:
+    case MoveNames::kBubbleBeam:
+    case MoveNames::kBubble:
+    case MoveNames::kConfusion:
+    case MoveNames::kConstrict:
+    case MoveNames::kEmber:
+    case MoveNames::kFirePunch:
+    case MoveNames::kFlamethrower:
+    case MoveNames::kHyperFang:
+    case MoveNames::kIceBeam:
+    case MoveNames::kIcePunch:
+    case MoveNames::kPsybeam:
+    case MoveNames::kThunder:
+    case MoveNames::kThunderbolt:
+    case MoveNames::kThunderPunch:
+    case MoveNames::kThunderShock:
+      return 10;
+    case MoveNames::kPoisonSting:
+    case MoveNames::kTwineedle:
+      return 20;
+    case MoveNames::kBodySlam:
+    case MoveNames::kFireBlast:
+    case MoveNames::kHeadbutt:
+    case MoveNames::kLick:
+    case MoveNames::kLowKick:
+    case MoveNames::kPsychic:
+    case MoveNames::kRollingKick:
+    case MoveNames::kSmog:
+    case MoveNames::kSludge:
+    case MoveNames::kStomp:
+      return 33;
+    default:
+      return 0;
+  }
+}
+
+auto IsSelfKoMove(const MoveNames &move_name) -> bool {
+  return move_name == MoveNames::kSelfDestruct ||
+      move_name == MoveNames::kExplosion;
 }
 
 } //namespace artificialtrainer

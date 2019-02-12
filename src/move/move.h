@@ -31,6 +31,8 @@ auto IsSwitch(const MoveNames &move_name) -> bool;
 auto OnlyChangesStat(const MoveNames &move_name) -> bool;
 auto IsOneHitKo(const MoveNames &move_name) -> bool;
 auto HasHighCriticalHitRatio(const MoveNames &move_name) -> bool;
+auto VariableEffectChance(const MoveNames &move_name) -> int;
+auto IsSelfKoMove(const MoveNames &move_name) -> bool;
 
 } //namespace artificialtrainer
 
