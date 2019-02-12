@@ -9,35 +9,35 @@ ExclusiveInGameStat::ExclusiveInGameStat() : numerator_(kMinFactor),
                                              denominator_(kMinFactor) {
 }
 
-auto ExclusiveInGameStat::RaiseNumerator(const int &num_stages) -> void {
+void ExclusiveInGameStat::RaiseNumerator(const int &num_stages) {
   numerator_ += num_stages;
 }
 
-auto ExclusiveInGameStat::RaiseDenominator(const int &num_stages) -> void {
+void ExclusiveInGameStat::RaiseDenominator(const int &num_stages) {
   denominator_ += num_stages;
 }
 
-auto ExclusiveInGameStat::LowerNumerator(const int &num_stages) -> void {
+void ExclusiveInGameStat::LowerNumerator(const int &num_stages) {
   numerator_ -= num_stages;
 }
 
-auto ExclusiveInGameStat::LowerDenominator(const int &num_stages) -> void {
+void ExclusiveInGameStat::LowerDenominator(const int &num_stages) {
   denominator_ -= num_stages;
 }
 
-auto ExclusiveInGameStat::CalculatedStat() const -> double {
+double ExclusiveInGameStat::CalculatedStat() const {
   return static_cast<double>(numerator_) / denominator_;
 }
 
-auto ExclusiveInGameStat::Numerator() const -> int {
+int ExclusiveInGameStat::Numerator() const {
   return numerator_;
 }
 
-auto ExclusiveInGameStat::Denominator() const -> int {
+int ExclusiveInGameStat::Denominator() const {
   return denominator_;
 }
 
-auto ExclusiveInGameStat::ResetStat() -> void {
+void ExclusiveInGameStat::ResetStat() {
   numerator_ = kMinFactor;
   denominator_ = kMinFactor;
 }

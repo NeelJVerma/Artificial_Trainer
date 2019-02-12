@@ -8,7 +8,7 @@
 #include "movenames.h"
 
 namespace artificialtrainer {
-auto Priority(const MoveNames &move_name) -> int;
+int Priority(const MoveNames &move_name);
 
 } //namespace artificialtrainer
 

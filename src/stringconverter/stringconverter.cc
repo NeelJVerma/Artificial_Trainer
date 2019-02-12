@@ -6,8 +6,7 @@
 #include "stringconverter.h"
 
 namespace artificialtrainer {
-auto StringConverter::SpeciesToString(
-    const SpeciesNames &species_name) -> std::string {
+std::string StringConverter::SpeciesToString(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return "Bulbasaur";
@@ -316,7 +315,7 @@ auto StringConverter::SpeciesToString(
   }
 }
 
-auto StringConverter::StatToString(const StatNames &stat_name) -> std::string {
+std::string StringConverter::StatToString(const StatNames &stat_name) {
   switch (stat_name) {
     case StatNames::kAttack:
       return "Attack";
@@ -337,7 +336,7 @@ auto StringConverter::StatToString(const StatNames &stat_name) -> std::string {
   }
 }
 
-auto StringConverter::MoveToString(const MoveNames &move_name) -> std::string {
+std::string StringConverter::MoveToString(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAbsorb:
       return "Absorb";
@@ -690,7 +689,7 @@ auto StringConverter::MoveToString(const MoveNames &move_name) -> std::string {
   }
 }
 
-auto StringConverter::TypeToString(const TypeNames &type_name) -> std::string {
+std::string StringConverter::TypeToString(const TypeNames &type_name) {
   switch (type_name) {
     case TypeNames::kNormal:
       return "Normal";

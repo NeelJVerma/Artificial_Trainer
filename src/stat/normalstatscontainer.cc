@@ -16,12 +16,12 @@ NormalStatsContainer::NormalStatsContainer(
   }
 }
 
-auto NormalStatsContainer::HpStat() -> std::shared_ptr<Hp> {
+std::shared_ptr<Hp> NormalStatsContainer::HpStat() const {
   return hp_stat_;
 }
 
-auto NormalStatsContainer::operator[](
-    const StatNames &stat_name) -> std::shared_ptr<NormalStat> {
+std::shared_ptr<NormalStat> NormalStatsContainer::operator[](
+    const StatNames &stat_name) const {
   int loc_stat_name = static_cast<int>(stat_name);
 
   if (loc_stat_name < 0 || loc_stat_name >= kNumNormalStats) {

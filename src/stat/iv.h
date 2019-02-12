@@ -9,13 +9,11 @@ namespace artificialtrainer {
 class Iv {
  public:
   static const int kMaxIv = 15;
-
   Iv(const Iv &iv) = default;
-  auto operator=(const Iv &iv) -> Iv & = default;
+  Iv &operator=(const Iv &iv) = default;
   Iv() = default;
   explicit Iv(const int &value);
-
-  auto Value() const -> int;
+  int Value() const;
 
  private:
   int value_;

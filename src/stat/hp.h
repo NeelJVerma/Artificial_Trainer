@@ -14,17 +14,15 @@ namespace artificialtrainer {
 class Hp {
  public:
   Hp(const Hp &hp) = default;
-  auto operator=(const Hp &hp) -> Hp & = default;
+  Hp &operator=(const Hp &hp) = default;
   Hp() = default;
   Hp(const SpeciesNames &species_name, const int &level, const Ev &ev,
      const Iv &iv);
-  auto EvStat() const -> Ev;
-  auto IvStat() const -> Iv;
-  auto CurrentHp() const -> int;
-  auto MaxHp() const -> int;
-  auto HpAsPercent() const -> double;
-  auto SubtractHp(const int &amount) -> void;
-  auto AddHp(const int &amount) -> void;
+  int CurrentHp() const;
+  int MaxHp() const;
+  double HpAsPercent() const;
+  void SubtractHp(const int &amount);
+  void AddHp(const int &amount);
 
  private:
   int max_hp_;

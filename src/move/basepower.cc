@@ -6,7 +6,7 @@
 #include "basepower.h"
 
 namespace artificialtrainer {
-auto BasePower(const MoveNames &move_name) -> int {
+int BasePower(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAbsorb:
       return 20;

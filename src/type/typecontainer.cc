@@ -8,8 +8,7 @@
 
 namespace artificialtrainer {
 namespace {
-auto TypePair(
-    const SpeciesNames &species_name) -> std::pair<TypeNames, TypeNames> {
+std::pair<TypeNames, TypeNames> TypePair(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return std::make_pair(TypeNames::kGrass, TypeNames::kPoison);
@@ -324,15 +323,15 @@ TypeContainer::TypeContainer(const SpeciesNames &species_name)
     : types_(TypePair(species_name)) {
 }
 
-auto TypeContainer::FirstType() const -> TypeNames {
+TypeNames TypeContainer::FirstType() const {
   return types_.first;
 }
 
-auto TypeContainer::SecondType() const -> TypeNames {
+TypeNames TypeContainer::SecondType() const {
   return types_.second;
 }
 
-auto TypeContainer::MoveMatchesType(const MoveNames &move_name) const -> bool {
+bool TypeContainer::MoveMatchesType(const MoveNames &move_name) const {
   return Type(move_name) == types_.first || Type(move_name) == types_.second;
 }
 

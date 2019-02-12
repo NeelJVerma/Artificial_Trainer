@@ -19,8 +19,8 @@
 
 namespace artificialtrainer {
 namespace {
-auto MoveInLearnset(const std::vector<MoveNames> &learnset,
-                    const MoveNames &move_selected) -> bool {
+bool MoveInLearnset(const std::vector<MoveNames> &learnset,
+                    const MoveNames &move_selected) {
   for (MoveNames learned_move : learnset) {
     if (move_selected == learned_move) {
       return true;
@@ -30,7 +30,7 @@ auto MoveInLearnset(const std::vector<MoveNames> &learnset,
   return false;
 }
 
-auto SelectTeam(Team &team, const bool &team_one) -> void {
+void SelectTeam(Team &team, const bool &team_one) {
   Gui::DisplayPokemonChoices();
   Gui::DisplayPickTeamMessage(team_one);
 
@@ -112,8 +112,7 @@ auto SelectTeam(Team &team, const bool &team_one) -> void {
   }
 }
 
-auto IsValidMoveChoice(const Team &team,
-                       const std::shared_ptr<Move> &move) -> bool {
+bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
   if (IsSwitch(move->MoveName())) {
     int switch_beg = static_cast<int>(MoveNames::kSwitch1);
     int selected = static_cast<int>(move->MoveName());
@@ -135,17 +134,17 @@ auto IsValidMoveChoice(const Team &team,
   return static_cast<bool>(move->CurrentPp());
 }
 
-auto IsValidSwitchChoice(const Team &team, const int &index) {
+bool IsValidSwitchChoice(const Team &team, const int &index) {
   return index >= 0 && index < team.ActiveTeam().size();
 }
 
 } //namespace
 
-auto Battle::BattleOver() const -> bool {
-  return !team_one_.ActiveTeamSize() || !team_two_.ActiveTeamSize();
+bool Battle::BattleOver() const {
+  return team_one_.ActiveTeam().empty() || team_two_.ActiveTeam().empty();
 }
 
-auto Battle::StartBattle() -> void {
+void Battle::StartBattle() {
   Gui::DisplayPlayerTeam(team_one_, true);
   Gui::DisplayPlayerTeam(team_two_, false);
   Gui::DisplayPickLeadingPokemonMessage(true);
@@ -156,8 +155,8 @@ auto Battle::StartBattle() -> void {
       InputHandler::GetIntInput(1, Team::kMaxTeamSize) - 1);
 }
 
-auto Battle::PlayerPicksForcedSwitch(Team &team) -> void {
-  if (!team.ActiveTeamSize()) {
+void Battle::PlayerPicksForcedSwitch(Team &team) {
+  if (team.ActiveTeam().empty()) {
     return;
   }
 
@@ -179,7 +178,7 @@ auto Battle::PlayerPicksForcedSwitch(Team &team) -> void {
   team.ForceSwitch(switch_choice - 1);
 }
 
-auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> void {
+void Battle::PlayerPicksMove(Team &team, const bool &team_one) {
   Gui::DisplayPickInBattleMoveMessage(team_one);
   std::shared_ptr<Pokemon> pokemon = team.ActiveMember();
   MovesContainer moves = team.ActiveMember()->GetMovesContainer();
@@ -198,7 +197,7 @@ auto Battle::PlayerPicksMove(Team &team, const bool &team_one) -> void {
   pokemon->SetMoveUsed(move_choice - 1);
 }
 
-auto Battle::HandleMove(Team &attacker, Team &defender) -> bool {
+bool Battle::HandleMove(Team &attacker, Team &defender) {
   UseMove(attacker, defender);
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
   std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
@@ -218,7 +217,7 @@ auto Battle::HandleMove(Team &attacker, Team &defender) -> bool {
   return true;
 }
 
-auto Battle::HandleTurn() -> void {
+void Battle::HandleTurn() {
   Gui::DisplayPlayerTeam(team_one_, true);
   Gui::DisplayPlayerTeam(team_two_, false);
   std::shared_ptr<Pokemon> active_pokemon_one = team_one_.ActiveMember();
@@ -265,7 +264,7 @@ auto Battle::HandleTurn() -> void {
   }
 }
 
-auto Battle::Play() -> void {
+void Battle::Play() {
   Gui::DisplayWelcomeMessage();
   SelectTeam(team_one_, true);
   SelectTeam(team_two_, false);

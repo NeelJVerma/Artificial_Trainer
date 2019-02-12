@@ -5,7 +5,7 @@
 #include "priority.h"
 
 namespace artificialtrainer {
-auto Priority(const MoveNames &move_name) -> int {
+int Priority(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kSwitch1:
     case MoveNames::kSwitch2:

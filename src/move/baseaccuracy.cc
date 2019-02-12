@@ -8,7 +8,7 @@
 
 namespace artificialtrainer {
 
-auto BaseAccuracy(const MoveNames &move_name) -> int {
+int BaseAccuracy(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAbsorb:
       return 100;

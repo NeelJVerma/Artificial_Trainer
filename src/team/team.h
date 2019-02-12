@@ -13,23 +13,19 @@ namespace artificialtrainer {
 class Team {
  public:
   static const int kMaxTeamSize = 6;
-
   Team(const Team &team) = delete;
   Team &operator=(const Team &team) = default;
   Team() = default;
-
-  auto FaintActivePokemon() -> void;
-  auto AddPokemon(const std::shared_ptr<Pokemon> &pokemon) -> void;
-  auto ActiveTeamSize() const -> int;
-  auto FaintedTeamSize() const -> int;
-  auto ActiveTeam() const -> std::vector<std::shared_ptr<Pokemon>>;
-  auto FaintedTeam() const -> std::vector<std::shared_ptr<Pokemon>>;
-  auto SeenPokemon(const SpeciesNames &species) -> bool;
-  auto SetActiveMember(const int &index) -> void;
-  auto ActiveMember() -> std::shared_ptr<Pokemon>;
-  auto IndexOfActiveMember() const -> int;
-  auto HardSwitch() -> void;
-  auto ForceSwitch(const int &switch_index) -> void;
+  void FaintActivePokemon();
+  void AddPokemon(const std::shared_ptr<Pokemon> &pokemon);
+  std::vector<std::shared_ptr<Pokemon>> ActiveTeam() const;
+  std::vector<std::shared_ptr<Pokemon>> FaintedTeam() const;
+  bool SeenPokemon(const SpeciesNames &species) const;
+  void SetActiveMember(const int &index);
+  std::shared_ptr<Pokemon> ActiveMember() const;
+  int IndexOfActiveMember() const;
+  void HardSwitch();
+  void ForceSwitch(const int &switch_index);
 
  private:
   std::vector<std::shared_ptr<Pokemon>> active_team_;

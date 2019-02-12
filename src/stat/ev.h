@@ -9,13 +9,11 @@ namespace artificialtrainer {
 class Ev {
  public:
   static const int kMaxEv = 65535;
-
   Ev(const Ev &ev) = default;
-  auto operator=(const Ev &ev) -> Ev & = default;
+  Ev &operator=(const Ev &ev) = default;
   Ev() = default;
   explicit Ev(const int &value);
-
-  auto Value() const -> int;
+  int Value() const;
 
  private:
   int value_;

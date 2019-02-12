@@ -12,13 +12,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f761d81-71cd-48eb-84a4-b5d508f52e87" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/battle/battle.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/battle/battle.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/battle/battle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/battle/battle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientelements/gui.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientelements/gui.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientelements/gui.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientelements/gui.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientelements/inputhandler.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientelements/inputhandler.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientelements/inputhandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientelements/inputhandler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientelements/sanitizer.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientelements/sanitizer.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientelements/sanitizer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientelements/sanitizer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/baseaccuracy.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/baseaccuracy.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/baseaccuracy.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/baseaccuracy.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/basepower.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/basepower.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/basepower.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/basepower.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/move/move.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/move.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/move/move.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/move.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/movescontainer.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/movescontainer.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/movescontainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/movescontainer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/pp.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/pp.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/pp.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/pp.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/move/priority.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/priority.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/priority.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/priority.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/move/usemove.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/usemove.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/usemove.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/usemove.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/learnset.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/learnset.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/learnset.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/learnset.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pokemon/pokemon.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/pokemon.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pokemon/pokemon.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/pokemon.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/ev.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/ev.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/ev.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/ev.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/exclusiveingamestat.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/exclusiveingamestat.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/exclusiveingamestat.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/exclusiveingamestat.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/hp.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/hp.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/hp.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/hp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/iv.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/iv.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/iv.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/iv.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/normalstat.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/normalstat.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/normalstat.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/normalstat.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/normalstatscontainer.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/normalstatscontainer.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/normalstatscontainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/normalstatscontainer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stringconverter/stringconverter.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stringconverter/stringconverter.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stringconverter/stringconverter.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stringconverter/stringconverter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/team.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/team.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/team/team.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/team.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/type/effectiveness.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/type/effectiveness.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/type/effectiveness.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/type/effectiveness.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/type/type.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/type/type.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/type/type.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/type/type.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/type/typecontainer.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/type/typecontainer.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/type/typecontainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/type/typecontainer.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,76 +79,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/move/usemove.cc">
+        <entry file="file://$PROJECT_DIR$/src/team/team.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="360" column="25" lean-forward="true" selection-start-line="360" selection-start-column="25" selection-end-line="360" selection-end-column="25" />
+            <state relative-caret-position="421">
+              <caret line="24" column="48" lean-forward="true" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
               <folding>
-                <element signature="e#37#53#0" expanded="true" />
+                <element signature="e#107#124#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/type/typenames.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
-              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
-              <folding>
-                <element signature="e#113#138#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/move/priority.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="164" column="1" selection-start-line="164" selection-start-column="1" selection-end-line="164" selection-end-column="1" />
-              <folding>
-                <element signature="e#38#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/move/move.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1195">
-              <caret line="180" column="27" selection-start-line="180" selection-start-column="27" selection-end-line="180" selection-end-column="27" />
-              <folding>
-                <element signature="e#38#56#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/move/move.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="34" column="54" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -111,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/battle/battle.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="212" column="20" selection-start-line="212" selection-start-column="20" selection-end-line="212" selection-end-column="20" />
+            <state relative-caret-position="205">
+              <caret line="143" column="73" selection-start-line="143" selection-start-column="73" selection-end-line="143" selection-end-column="73" />
               <folding>
                 <element signature="e#38#55#0" expanded="true" />
               </folding>
@@ -121,35 +103,90 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/move/usemove.h">
+        <entry file="file://$PROJECT_DIR$/src/team/team.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="709">
+              <caret line="63" column="1" lean-forward="true" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
+              <folding>
+                <element signature="e#38#58#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/move/priority.h">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/src/type/effectiveness.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/type/effectiveness.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="33" column="1" lean-forward="true" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/type/type.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/type/type.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/type/typecontainer.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+              <folding>
+                <element signature="e#125#143#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/type/typecontainer.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="583">
+              <caret line="333" column="6" lean-forward="true" selection-start-line="333" selection-start-column="6" selection-end-line="333" selection-end-column="6" />
+              <folding>
+                <element signature="e#38#56#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/type/typenames.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="558">
+              <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>return \d.</find>
-      <find>caterpie</find>
-      <find>alakaz</find>
-      <find>moveset</find>
-      <find>tostring</find>
-      <find>getspe</find>
-      <find>getbase</find>
-      <find>getsi</find>
-      <find>get</find>
-      <find>typetos</find>
-      <find>fly</find>
-      <find>chariz</find>
       <find>species</find>
       <find>kUnchanged</find>
       <find>PowerClasses::kUnchanged</find>
@@ -165,9 +202,21 @@
       <find>normalstat</find>
       <find>psych</find>
       <find>dodamage</find>
-      <find>movecrit</find>
       <find>doonehitko</find>
       <find>forceswi</find>
+      <find>damagedone</find>
+      <find>effectacti</find>
+      <find>subtracthp</find>
+      <find>gui</find>
+      <find>subtra</find>
+      <find>-&gt; void</find>
+      <find>-&gt; bool</find>
+      <find>kunlim</find>
+      <find>damagerandom</find>
+      <find>movecrit</find>
+      <find>movehit</find>
+      <find>damagera</find>
+      <find>-&gt;.*</find>
     </findStrings>
     <replaceStrings>
       <replace>int</replace>
@@ -180,6 +229,8 @@
       <replace>learnset</replace>
       <replace>PowerClasses::kUnchanged</replace>
       <replace>static_cast&lt;int&gt;(PowerClasses::kUnchanged)</replace>
+      <replace>;</replace>
+      <replace>{</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -188,57 +239,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/FindSFML.cmake" />
-        <option value="$PROJECT_DIR$/cmake_modules/FindSFML.cmake" />
-        <option value="$PROJECT_DIR$/cmake_modules/FindTGUI.cmake" />
-        <option value="$PROJECT_DIR$/src/main.cc" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/move/movenames.h" />
+        <option value="$PROJECT_DIR$/src/battle/battle.h" />
+        <option value="$PROJECT_DIR$/src/clientelements/gui.h" />
+        <option value="$PROJECT_DIR$/src/clientelements/gui.cc" />
+        <option value="$PROJECT_DIR$/src/clientelements/inputhandler.h" />
+        <option value="$PROJECT_DIR$/src/clientelements/inputhandler.cc" />
+        <option value="$PROJECT_DIR$/src/clientelements/sanitizer.h" />
+        <option value="$PROJECT_DIR$/src/clientelements/sanitizer.cc" />
+        <option value="$PROJECT_DIR$/src/move/baseaccuracy.h" />
+        <option value="$PROJECT_DIR$/src/move/baseaccuracy.cc" />
         <option value="$PROJECT_DIR$/src/move/basepower.h" />
-        <option value="$PROJECT_DIR$/src/move/ingamepower.cc" />
-        <option value="$PROJECT_DIR$/src/move/ingamepower.h" />
-        <option value="$PROJECT_DIR$/src/stat/calculate.h" />
-        <option value="$PROJECT_DIR$/src/stat/calculate.cc" />
-        <option value="$PROJECT_DIR$/src/stat/stat.h" />
-        <option value="$PROJECT_DIR$/src/stat/stat.cc" />
-        <option value="$PROJECT_DIR$/src/stat/statscontainer.cc" />
-        <option value="$PROJECT_DIR$/src/stat/statscontainer.h" />
-        <option value="$PROJECT_DIR$/src/stat/statnames.h" />
-        <option value="$PROJECT_DIR$/src/stat/hp.h" />
-        <option value="$PROJECT_DIR$/src/stat/normalstatscontainer.h" />
-        <option value="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.h" />
-        <option value="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc" />
+        <option value="$PROJECT_DIR$/src/move/basepower.cc" />
+        <option value="$PROJECT_DIR$/src/move/move.h" />
+        <option value="$PROJECT_DIR$/src/move/move.cc" />
         <option value="$PROJECT_DIR$/src/move/movescontainer.h" />
         <option value="$PROJECT_DIR$/src/move/movescontainer.cc" />
-        <option value="$PROJECT_DIR$/src/move/accuracy.h" />
-        <option value="$PROJECT_DIR$/src/move/accuracy.cc" />
-        <option value="$PROJECT_DIR$/src/move/movenames.h" />
+        <option value="$PROJECT_DIR$/src/move/pp.h" />
+        <option value="$PROJECT_DIR$/src/move/pp.cc" />
+        <option value="$PROJECT_DIR$/src/move/priority.h" />
+        <option value="$PROJECT_DIR$/src/move/priority.cc" />
+        <option value="$PROJECT_DIR$/src/move/usemove.h" />
+        <option value="$PROJECT_DIR$/src/move/usemove.cc" />
+        <option value="$PROJECT_DIR$/src/pokemon/learnset.h" />
+        <option value="$PROJECT_DIR$/src/pokemon/learnset.cc" />
+        <option value="$PROJECT_DIR$/src/pokemon/pokemon.h" />
+        <option value="$PROJECT_DIR$/src/pokemon/pokemon.cc" />
+        <option value="$PROJECT_DIR$/src/stat/ev.h" />
+        <option value="$PROJECT_DIR$/src/stat/ev.cc" />
         <option value="$PROJECT_DIR$/src/stat/exclusiveingamestat.h" />
         <option value="$PROJECT_DIR$/src/stat/exclusiveingamestat.cc" />
-        <option value="$PROJECT_DIR$/src/team/team.h" />
-        <option value="$PROJECT_DIR$/src/move/usemove.h" />
-        <option value="$PROJECT_DIR$/src/team/team.cc" />
-        <option value="$PROJECT_DIR$/src/move/baseaccuracy.cc" />
-        <option value="$PROJECT_DIR$/src/move/basepower.cc" />
-        <option value="$PROJECT_DIR$/src/move/pp.cc" />
-        <option value="$PROJECT_DIR$/src/pokemon/learnset.cc" />
+        <option value="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.h" />
+        <option value="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc" />
+        <option value="$PROJECT_DIR$/src/stat/hp.h" />
         <option value="$PROJECT_DIR$/src/stat/hp.cc" />
+        <option value="$PROJECT_DIR$/src/stat/iv.h" />
+        <option value="$PROJECT_DIR$/src/stat/iv.cc" />
+        <option value="$PROJECT_DIR$/src/stat/normalstat.h" />
+        <option value="$PROJECT_DIR$/src/stat/normalstat.cc" />
+        <option value="$PROJECT_DIR$/src/stat/normalstatscontainer.h" />
         <option value="$PROJECT_DIR$/src/stat/normalstatscontainer.cc" />
+        <option value="$PROJECT_DIR$/src/stringconverter/stringconverter.h" />
         <option value="$PROJECT_DIR$/src/stringconverter/stringconverter.cc" />
+        <option value="$PROJECT_DIR$/src/battle/battle.cc" />
+        <option value="$PROJECT_DIR$/src/team/team.h" />
+        <option value="$PROJECT_DIR$/src/team/team.cc" />
+        <option value="$PROJECT_DIR$/src/type/effectiveness.h" />
+        <option value="$PROJECT_DIR$/src/type/effectiveness.cc" />
+        <option value="$PROJECT_DIR$/src/type/type.h" />
         <option value="$PROJECT_DIR$/src/type/type.cc" />
         <option value="$PROJECT_DIR$/src/type/typecontainer.h" />
         <option value="$PROJECT_DIR$/src/type/typecontainer.cc" />
-        <option value="$PROJECT_DIR$/src/clientelements/gui.h" />
-        <option value="$PROJECT_DIR$/src/clientelements/gui.cc" />
-        <option value="$PROJECT_DIR$/src/battle/battle.h" />
-        <option value="$PROJECT_DIR$/src/stat/normalstat.h" />
-        <option value="$PROJECT_DIR$/src/stat/normalstat.cc" />
-        <option value="$PROJECT_DIR$/src/battle/battle.cc" />
-        <option value="$PROJECT_DIR$/src/pokemon/pokemon.h" />
-        <option value="$PROJECT_DIR$/src/pokemon/pokemon.cc" />
-        <option value="$PROJECT_DIR$/src/move/move.h" />
-        <option value="$PROJECT_DIR$/src/move/move.cc" />
-        <option value="$PROJECT_DIR$/src/move/usemove.cc" />
-        <option value="$PROJECT_DIR$/src/move/priority.cc" />
       </list>
     </option>
   </component>
@@ -370,12 +421,21 @@
       <workItem from="1548717172635" duration="31982000" />
       <workItem from="1548863791326" duration="60863000" />
       <workItem from="1549405141130" duration="68398000" />
-      <workItem from="1549753421624" duration="44438000" />
+      <workItem from="1549753421624" duration="54162000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="330020000" />
+    <option name="totallyTimeSpent" value="339744000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="3" y="28" width="1915" height="1013" extended-state="0" />
@@ -385,15 +445,15 @@
       <window_info id="Structure" order="1" sideWeight="0.5010707" side_tool="true" weight="0.22263949" />
       <window_info id="Favorites" order="2" sideWeight="0.5008489" side_tool="true" weight="0.17328326" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3503326" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.17401393" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.04408353" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.34454757" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.36426914" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32946634" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.9315545" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.04408353" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32946634" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="CMake" order="12" weight="0.32869378" />
@@ -407,107 +467,45 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/stringconverter/stringconverter.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/basepower.h">
+    <entry file="file://$PROJECT_DIR$/src/clientelements/inputhandler.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="12" lean-forward="true" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+        <state relative-caret-position="180">
+          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pokemon/speciesnames.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/pp.h">
+    <entry file="file://$PROJECT_DIR$/src/clientelements/inputhandler.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="126">
+          <caret line="13" column="65" selection-start-line="13" selection-start-column="65" selection-end-line="13" selection-end-column="65" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/type/effectiveness.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/normalstatscontainer.h">
+    <entry file="file://$PROJECT_DIR$/src/clientelements/sanitizer.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-          <folding>
-            <element signature="e#127#144#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="198">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.h">
+    <entry file="file://$PROJECT_DIR$/src/clientelements/sanitizer.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-          <folding>
-            <element signature="e#156#173#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/movescontainer.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="e#127#144#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestat.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/statnames.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+        <state relative-caret-position="162">
+          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/move/baseaccuracy.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="216">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
         </state>
       </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/ext/atomicity.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/team.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="31" column="7" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
-          <folding>
-            <element signature="e#107#124#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clientelements/inputhandler.cc">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clientelements/sanitizer.cc">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/move/baseaccuracy.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="701">
-          <caret line="353" column="3" lean-forward="true" selection-start-line="353" selection-start-column="3" selection-end-line="353" selection-end-column="3" />
+        <state relative-caret-position="180">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
           </folding>
@@ -516,215 +514,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/move/basepower.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="352" column="3" lean-forward="true" selection-start-line="352" selection-start-column="3" selection-end-line="352" selection-end-column="3" />
+        <state relative-caret-position="-5850">
+          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/pp.cc">
+    <entry file="file://$PROJECT_DIR$/src/move/basepower.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="701">
-          <caret line="354" column="3" lean-forward="true" selection-start-line="354" selection-start-column="3" selection-end-line="354" selection-end-column="3" />
+        <state relative-caret-position="306">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/move.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="655">
+          <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/ev.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-          <folding>
-            <element signature="e#37#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/hp.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="317" column="3" lean-forward="true" selection-start-line="317" selection-start-column="3" selection-end-line="317" selection-end-column="3" />
-          <folding>
-            <element signature="e#38#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/type/effectiveness.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/movescontainer.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/move/movenames.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2973">
-          <caret line="168" column="12" lean-forward="true" selection-start-line="168" selection-start-column="12" selection-end-line="168" selection-end-column="12" />
+        <state relative-caret-position="25">
+          <caret line="154" column="6" lean-forward="true" selection-start-line="154" selection-start-column="6" selection-end-line="154" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/type/typecontainer.h">
+    <entry file="file://$PROJECT_DIR$/src/move/movescontainer.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="35" lean-forward="true" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
-          <folding>
-            <element signature="e#125#143#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="522">
+          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stringconverter/stringconverter.cc">
+    <entry file="file://$PROJECT_DIR$/src/move/pp.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7123">
-          <caret line="725" column="17" selection-start-line="725" selection-start-column="17" selection-end-line="725" selection-end-column="17" />
+        <state relative-caret-position="180">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/type/type.h">
+    <entry file="file://$PROJECT_DIR$/src/move/pp.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="e#107#137#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/team.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="81" column="32" lean-forward="true" selection-start-line="81" selection-start-column="32" selection-end-line="81" selection-end-column="32" />
-          <folding>
-            <element signature="e#38#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clientelements/gui.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="49" column="71" selection-start-line="49" selection-start-column="71" selection-end-line="49" selection-end-column="71" />
-          <folding>
-            <element signature="e#105#124#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clientelements/gui.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="233" column="72" selection-start-line="233" selection-start-column="72" selection-end-line="233" selection-end-column="72" />
-          <folding>
-            <element signature="e#38#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/battle/battle.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="23" column="57" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestat.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/normalstatscontainer.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-          <folding>
-            <element signature="e#38#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/ext/new_allocator.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="119" selection-start-line="119" selection-end-line="119" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/bits/shared_ptr.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="588" column="43" lean-forward="true" selection-start-line="588" selection-start-column="43" selection-end-line="588" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/normalstat.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="28" column="55" lean-forward="true" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
-          <folding>
-            <element signature="e#107#129#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/bits/shared_ptr_base.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6931">
-          <caret line="1186" column="28" selection-start-line="1186" selection-start-column="28" selection-end-line="1186" selection-end-column="28" />
-          <folding>
-            <element signature="e#32578#32626#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/normalstat.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="1304" column="20" lean-forward="true" selection-start-line="1304" selection-start-column="20" selection-end-line="1304" selection-end-column="20" />
+        <state relative-caret-position="198">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/priority.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/priority.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/learnset.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#115#132#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pokemon/learnset.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="2585" column="76" lean-forward="true" selection-start-line="2585" selection-start-column="76" selection-end-line="2585" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/type/type.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="191" column="3" lean-forward="true" selection-start-line="191" selection-start-column="3" selection-end-line="191" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/type/typecontainer.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="331" column="23" selection-start-line="331" selection-start-column="23" selection-end-line="331" selection-end-column="23" />
+        <state relative-caret-position="144">
+          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
           </folding>
@@ -733,82 +606,277 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+        <state relative-caret-position="648">
+          <caret line="60" column="67" selection-start-line="60" selection-start-column="67" selection-end-line="60" selection-end-column="67" />
           <folding>
             <element signature="e#113#138#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="164" column="1" selection-start-line="164" selection-start-column="1" selection-end-line="164" selection-end-column="1" />
-          <folding>
-            <element signature="e#38#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/type/typenames.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/priority.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/battle/battle.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="212" column="20" selection-start-line="212" selection-start-column="20" selection-end-line="212" selection-end-column="20" />
-          <folding>
-            <element signature="e#38#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/move.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1195">
-          <caret line="180" column="27" selection-start-line="180" selection-start-column="27" selection-end-line="180" selection-end-column="27" />
-          <folding>
-            <element signature="e#38#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/move/move.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="34" column="54" selection-start-line="34" selection-start-column="54" selection-end-line="34" selection-end-column="54" />
+        <state relative-caret-position="395">
+          <caret line="23" column="2" lean-forward="true" selection-start-line="23" selection-start-column="2" selection-end-line="23" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/move/usemove.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="180">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/move/usemove.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="360" column="25" lean-forward="true" selection-start-line="360" selection-start-column="25" selection-end-line="360" selection-end-column="25" />
+        <state relative-caret-position="128">
+          <caret line="354" column="3" selection-start-line="354" selection-start-column="3" selection-end-line="354" selection-end-column="3" />
           <folding>
             <element signature="e#37#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/priority.cc">
+    <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="691">
+          <caret line="162" column="5" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
+          <folding>
+            <element signature="e#38#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/speciesnames.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/ev.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/ev.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestat.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestat.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="565">
+          <caret line="39" column="11" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="58" lean-forward="true" selection-start-line="23" selection-start-column="58" selection-end-line="23" selection-end-column="58" />
+          <folding>
+            <element signature="e#37#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/hp.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/hp.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="350" column="40" selection-start-line="350" selection-start-column="40" selection-end-line="350" selection-end-column="40" />
+          <folding>
+            <element signature="e#38#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/iv.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/iv.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+          <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/normalstat.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="26" column="47" lean-forward="true" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+          <folding>
+            <element signature="e#107#129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/normalstat.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="1221" column="35" lean-forward="true" selection-start-line="1221" selection-start-column="35" selection-end-line="1221" selection-end-column="35" />
+          <folding>
+            <element signature="e#38#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/normalstatscontainer.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#38#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/statnames.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/normalstatscontainer.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/movescontainer.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+          <folding>
+            <element signature="e#127#144#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stringconverter/stringconverter.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stringconverter/stringconverter.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1807">
+          <caret line="698" column="22" selection-start-line="698" selection-start-column="22" selection-end-line="698" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battle/battle.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="143" column="73" selection-start-line="143" selection-start-column="73" selection-end-line="143" selection-end-column="73" />
+          <folding>
+            <element signature="e#38#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/team.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="24" column="48" lean-forward="true" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+          <folding>
+            <element signature="e#107#124#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/team.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="709">
+          <caret line="63" column="1" lean-forward="true" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
+          <folding>
+            <element signature="e#38#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/type/effectiveness.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/type/effectiveness.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="1" lean-forward="true" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/type/type.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/type/type.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/type/typecontainer.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding>
+            <element signature="e#125#143#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/type/typecontainer.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="583">
+          <caret line="333" column="6" lean-forward="true" selection-start-line="333" selection-start-column="6" selection-end-line="333" selection-end-column="6" />
+          <folding>
+            <element signature="e#38#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/type/typenames.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
         </state>
       </provider>
     </entry>

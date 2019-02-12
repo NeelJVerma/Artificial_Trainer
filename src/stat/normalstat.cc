@@ -8,7 +8,7 @@
 
 namespace artificialtrainer {
 namespace {
-auto GetAttackFromSpecies(const SpeciesNames &species_name) -> int {
+int GetAttackFromSpecies(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return 49;
@@ -317,7 +317,7 @@ auto GetAttackFromSpecies(const SpeciesNames &species_name) -> int {
   }
 }
 
-auto GetDefenseFromSpecies(const SpeciesNames &species_name) -> int {
+int GetDefenseFromSpecies(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return 49;
@@ -626,7 +626,7 @@ auto GetDefenseFromSpecies(const SpeciesNames &species_name) -> int {
   }
 }
 
-auto GetSpecialFromSpecies(const SpeciesNames &species_name) -> int {
+int GetSpecialFromSpecies(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return 65;
@@ -935,7 +935,7 @@ auto GetSpecialFromSpecies(const SpeciesNames &species_name) -> int {
   }
 }
 
-auto GetSpeedFromSpecies(const SpeciesNames &species_name) -> int {
+int GetSpeedFromSpecies(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return 45;
@@ -1244,8 +1244,8 @@ auto GetSpeedFromSpecies(const SpeciesNames &species_name) -> int {
   }
 }
 
-auto GetBase(const SpeciesNames &species_name,
-             const StatNames &stat_name) -> int {
+int GetBase(const SpeciesNames &species_name,
+            const StatNames &stat_name) {
   switch (stat_name) {
     case StatNames::kAttack:
       return GetAttackFromSpecies(species_name);
@@ -1273,48 +1273,40 @@ NormalStat::NormalStat(const SpeciesNames &species_name, const int &level,
       iv_stat_(iv) {
 }
 
-auto NormalStat::EvStat() const -> Ev {
-  return ev_stat_;
-}
-
-auto NormalStat::IvStat() const -> Iv {
-  return iv_stat_;
-}
-
-auto NormalStat::BaseStat() const -> int {
+int NormalStat::BaseStat() const {
   return base_stat_;
 }
 
-auto NormalStat::RaiseNumerator(const int &num_stages) -> void {
+void NormalStat::RaiseNumerator(const int &num_stages) {
   numerator_ += num_stages;
 }
 
-auto NormalStat::RaiseDenominator(const int &num_stages) -> void {
+void NormalStat::RaiseDenominator(const int &num_stages) {
   denominator_ += num_stages;
 }
 
-auto NormalStat::LowerNumerator(const int &num_stages) -> void {
+void NormalStat::LowerNumerator(const int &num_stages) {
   numerator_ -= num_stages;
 }
 
-auto NormalStat::LowerDenominator(const int &num_stages) -> void {
+void NormalStat::LowerDenominator(const int &num_stages) {
   denominator_ -= num_stages;
 }
 
-auto NormalStat::Numerator() const -> int {
+int NormalStat::Numerator() const {
   return numerator_;
 }
 
-auto NormalStat::Denominator() const -> int {
+int NormalStat::Denominator() const {
   return denominator_;
 }
 
-auto NormalStat::ResetStat() -> void {
+void NormalStat::ResetStat() {
   numerator_ = kMinFactor;
   denominator_ = kMinFactor;
 }
 
-auto NormalStat::InGameStat() const -> int {
+int NormalStat::InGameStat() const {
   int initial_stat = static_cast<int>(5 + floor(static_cast<double>(level_) /
       100 * ((base_stat_ * 2) + 2 * iv_stat_.Value() + static_cast<double>(
       ev_stat_.Value()) / 1024)));
@@ -1322,7 +1314,7 @@ auto NormalStat::InGameStat() const -> int {
       static_cast<double>(numerator_) / denominator_)));
 }
 
-auto NormalStat::InitialStat() -> int {
+int NormalStat::InitialStat() {
   int old_numerator = numerator_;
   int old_denominator = denominator_;
   numerator_ = kMinFactor;

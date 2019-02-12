@@ -16,22 +16,20 @@ class NormalStat {
   static const int kMaxFactor = 8;
   static const int kMinFactor = 2;
   NormalStat(const NormalStat &stat) = default;
-  auto operator=(const NormalStat &stat) -> NormalStat & = default;
+  NormalStat &operator=(const NormalStat &stat) = default;
   NormalStat() = default;
   NormalStat(const SpeciesNames &species_name, const int &level,
              const StatNames &stat_name, const Ev &ev, const Iv &iv);
-  auto EvStat() const -> Ev;
-  auto IvStat() const -> Iv;
-  auto BaseStat() const -> int;
-  auto RaiseNumerator(const int &num_stages) -> void;
-  auto RaiseDenominator(const int &num_stages) -> void;
-  auto LowerNumerator(const int &num_stages) -> void;
-  auto LowerDenominator(const int &num_stages) -> void;
-  auto Numerator() const -> int;
-  auto Denominator() const -> int;
-  auto InGameStat() const -> int;
-  auto ResetStat() -> void;
-  auto InitialStat() -> int;
+  int BaseStat() const;
+  void RaiseNumerator(const int &num_stages);
+  void RaiseDenominator(const int &num_stages);
+  void LowerNumerator(const int &num_stages);
+  void LowerDenominator(const int &num_stages);
+  int Numerator() const;
+  int Denominator() const;
+  int InGameStat() const;
+  void ResetStat();
+  int InitialStat();
 
  private:
   int base_stat_;

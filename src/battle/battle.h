@@ -11,18 +11,18 @@ namespace artificialtrainer {
 class Battle {
  public:
   Battle() = default;
-  auto Play() -> void;
+  void Play();
 
  private:
   const int kMaxNumTurns = 100;
   Team team_one_;
   Team team_two_;
-  auto BattleOver() const -> bool;
-  auto StartBattle() -> void;
-  auto HandleTurn() -> void;
-  auto PlayerPicksMove(Team &team, const bool &team_one) -> void;
-  auto HandleMove(Team &attacker, Team &defender) -> bool;
-  auto PlayerPicksForcedSwitch(Team &team) -> void;
+  bool BattleOver() const;
+  void StartBattle();
+  void HandleTurn();
+  void PlayerPicksMove(Team &team, const bool &team_one);
+  bool HandleMove(Team &attacker, Team &defender);
+  void PlayerPicksForcedSwitch(Team &team);
 };
 
 } //namespace artificialtrainer

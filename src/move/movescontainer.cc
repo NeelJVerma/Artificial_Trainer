@@ -5,16 +5,15 @@
 #include "movescontainer.h"
 
 namespace artificialtrainer {
-auto MovesContainer::AddMove(const std::shared_ptr<Move> &move) -> void {
+void MovesContainer::AddMove(const std::shared_ptr<Move> &move) {
   current_moves_.push_back(move);
 }
 
-auto MovesContainer::CurrentMoves() const
--> std::vector<std::shared_ptr<Move>> {
+std::vector<std::shared_ptr<Move>> MovesContainer::CurrentMoves() const {
   return current_moves_;
 }
 
-auto MovesContainer::SeenMove(const MoveNames &move_name) -> bool {
+bool MovesContainer::SeenMove(const MoveNames &move_name) const {
   for (const auto &in_container : current_moves_) {
     if (move_name == in_container->MoveName()) {
       return true;
@@ -24,11 +23,11 @@ auto MovesContainer::SeenMove(const MoveNames &move_name) -> bool {
   return false;
 }
 
-auto MovesContainer::Size() const -> int {
+int MovesContainer::Size() const {
   return static_cast<int>(current_moves_.size());
 }
 
-auto MovesContainer::operator[](const int &index) -> std::shared_ptr<Move> {
+std::shared_ptr<Move> MovesContainer::operator[](const int &index) const {
   return current_moves_[index];
 }
 

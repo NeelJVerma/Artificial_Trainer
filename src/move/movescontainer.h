@@ -17,13 +17,12 @@ class MovesContainer {
 
   MovesContainer() = default;
   MovesContainer(const MovesContainer &moves_container) = default;
-  auto operator=(
-      const MovesContainer &moves_container) -> MovesContainer & = default;
-  auto AddMove(const std::shared_ptr<Move> &move) -> void;
-  auto CurrentMoves() const -> std::vector<std::shared_ptr<Move>>;
-  auto SeenMove(const MoveNames &move_name) -> bool;
-  auto Size() const -> int;
-  auto operator[](const int &index) -> std::shared_ptr<Move>;
+  MovesContainer &operator=(const MovesContainer &moves_container) = default;
+  void AddMove(const std::shared_ptr<Move> &move);
+  std::vector<std::shared_ptr<Move>> CurrentMoves() const;
+  bool SeenMove(const MoveNames &move_name) const;
+  int Size() const;
+  std::shared_ptr<Move> operator[](const int &index) const;
 
  private:
   std::vector<std::shared_ptr<Move>> current_moves_;

@@ -15,7 +15,7 @@ enum class PowerClasses : int {
   kUnchanged
 };
 
-auto BasePower(const MoveNames &move_name) -> int;
+int BasePower(const MoveNames &move_name);
 
 } //namespace artificialtrainer
 

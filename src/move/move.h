@@ -11,28 +11,28 @@ namespace artificialtrainer {
 class Move {
  public:
   Move(const Move &move) = default;
-  auto operator=(const Move &move) -> Move & = default;
+  Move &operator=(const Move &move) = default;
   Move() = default;
   Move(const MoveNames &move_name, const int &current_pp);
-  auto MoveName() const -> MoveNames;
-  auto CurrentPp() const -> int;
-  auto DecrementPp(const int &amount) -> void;
+  MoveNames MoveName() const;
+  int CurrentPp() const;
+  void DecrementPp(const int &amount);
 
  private:
   int current_pp_;
   MoveNames move_name_;
 };
 
-auto IsPhysical(const MoveNames &move_name) -> bool;
-auto IsSpecial(const MoveNames &move_name) -> bool;
-auto IsDamaging(const MoveNames &move_name) -> bool;
-auto IsUseless(const MoveNames &move_name) -> bool;
-auto IsSwitch(const MoveNames &move_name) -> bool;
-auto OnlyChangesStat(const MoveNames &move_name) -> bool;
-auto IsOneHitKo(const MoveNames &move_name) -> bool;
-auto HasHighCriticalHitRatio(const MoveNames &move_name) -> bool;
-auto VariableEffectChance(const MoveNames &move_name) -> int;
-auto IsSelfKoMove(const MoveNames &move_name) -> bool;
+bool IsPhysical(const MoveNames &move_name);
+bool IsSpecial(const MoveNames &move_name);
+bool IsDamaging(const MoveNames &move_name);
+bool IsUseless(const MoveNames &move_name);
+bool IsSwitch(const MoveNames &move_name);
+bool OnlyChangesStat(const MoveNames &move_name);
+bool IsOneHitKo(const MoveNames &move_name);
+bool HasHighCriticalHitRatio(const MoveNames &move_name);
+int VariableEffectChance(const MoveNames &move_name);
+bool IsSelfKoMove(const MoveNames &move_name);
 
 } //namespace artificialtrainer
 

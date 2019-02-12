@@ -18,11 +18,10 @@ class NormalStatsContainer {
                        const std::shared_ptr<NormalStat>
                        stats[kNumNormalStats]);
   NormalStatsContainer(const NormalStatsContainer &stats_container) = default;
-  auto operator=(
-      const NormalStatsContainer &stats_container)
-  -> NormalStatsContainer & = default;
-  auto HpStat() -> std::shared_ptr<Hp>;
-  auto operator[](const StatNames &stat_name) -> std::shared_ptr<NormalStat>;
+  NormalStatsContainer &operator=(
+      const NormalStatsContainer &stats_container) = default;
+  std::shared_ptr<Hp> HpStat() const;
+  std::shared_ptr<NormalStat> operator[](const StatNames &stat_name) const;
 
  private:
   std::shared_ptr<Hp> hp_stat_;

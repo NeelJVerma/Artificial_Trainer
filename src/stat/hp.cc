@@ -8,9 +8,8 @@
 
 namespace artificialtrainer {
 namespace {
-auto BaseHp(const SpeciesNames &species) -> int {
+int BaseHp(const SpeciesNames &species) {
   switch (species) {
-    //Gen 1
     case SpeciesNames::kBulbasaur:
       return 45;
     case SpeciesNames::kIvysaur:
@@ -318,8 +317,8 @@ auto BaseHp(const SpeciesNames &species) -> int {
   }
 }
 
-auto CalculateInBattleHpStat(const int &base_hp, const int &level,
-                             const Ev &ev_stat, const Iv &iv_stat) -> int {
+int CalculateInBattleHpStat(const int &base_hp, const int &level,
+                            const Ev &ev_stat, const Iv &iv_stat) {
   return static_cast<int>(10 + floor(static_cast<double>(level) /
       100 * ((base_hp * 2) + 2 * iv_stat.Value() + static_cast<double>(
       ev_stat.Value()) / 1024)) + level);
@@ -337,31 +336,33 @@ Hp::Hp(const SpeciesNames &species_name, const int &level, const Ev &ev,
   max_hp_ = current_hp_;
 }
 
-auto Hp::EvStat() const -> Ev {
-  return ev_stat_;
-}
-
-auto Hp::IvStat() const -> Iv {
-  return iv_stat_;
-}
-
-auto Hp::CurrentHp() const -> int {
+int Hp::CurrentHp() const {
   return current_hp_;
 }
 
-auto Hp::MaxHp() const -> int {
+int Hp::MaxHp() const {
   return max_hp_;
 }
 
-auto Hp::HpAsPercent() const -> double {
+double Hp::HpAsPercent() const {
   return 100 * (static_cast<double>(current_hp_) / max_hp_);
 }
 
-auto Hp::SubtractHp(const int &amount) -> void {
+void Hp::SubtractHp(const int &amount) {
+  if (current_hp_ - amount < 0) {
+    current_hp_ = 0;
+    return;
+  }
+
   current_hp_ -= amount;
 }
 
-auto Hp::AddHp(const int &amount) -> void {
+void Hp::AddHp(const int &amount) {
+  if (current_hp_ + amount > max_hp_) {
+    current_hp_ = max_hp_;
+    return;
+  }
+
   current_hp_ += amount;
 }
 

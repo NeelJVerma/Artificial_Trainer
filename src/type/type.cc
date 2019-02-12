@@ -5,7 +5,7 @@
 #include "type.h"
 
 namespace artificialtrainer {
-auto Type(const MoveNames &move_name) -> TypeNames {
+TypeNames Type(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kBarrage:
     case MoveNames::kBide:

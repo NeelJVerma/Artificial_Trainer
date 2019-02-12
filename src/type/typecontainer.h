@@ -15,12 +15,11 @@ class TypeContainer {
  public:
   TypeContainer() = default;
   TypeContainer(const TypeContainer &type_container) = default;
-  auto operator=(
-      const TypeContainer &type_container) -> TypeContainer & = default;
+  TypeContainer &operator=(const TypeContainer &type_container) = default;
   explicit TypeContainer(const SpeciesNames &species_name);
-  auto FirstType() const -> TypeNames;
-  auto SecondType() const -> TypeNames;
-  auto MoveMatchesType(const MoveNames &move_name) const -> bool;
+  TypeNames FirstType() const;
+  TypeNames SecondType() const;
+  bool MoveMatchesType(const MoveNames &move_name) const;
 
  private:
   std::pair<TypeNames, TypeNames> types_;

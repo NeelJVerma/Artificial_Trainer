@@ -8,7 +8,7 @@
 #include "../team/team.h"
 
 namespace artificialtrainer {
-auto UseMove(Team &attacker, Team &defender) -> void;
+void UseMove(Team &attacker, Team &defender);
 
 } //namespace artificialtrainer
 

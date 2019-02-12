@@ -8,7 +8,7 @@
 #include "movenames.h"
 
 namespace artificialtrainer {
-auto Pp(const MoveNames &move_name) -> int;
+int Pp(const MoveNames &move_name);
 
 } //namespace artificialtrainer
 

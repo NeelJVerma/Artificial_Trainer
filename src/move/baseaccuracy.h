@@ -10,7 +10,7 @@
 namespace artificialtrainer {
 const int kNeverMiss = 101;
 
-auto BaseAccuracy(const MoveNames &move_name) -> int;
+int BaseAccuracy(const MoveNames &move_name);
 
 } //namespace artificialtrainer
 

@@ -9,7 +9,7 @@ Ev::Ev(const int &value) {
   value_ = value;
 }
 
-auto Ev::Value() const -> int {
+int Ev::Value() const {
   return value_;
 }
 

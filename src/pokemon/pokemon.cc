@@ -28,48 +28,48 @@ Pokemon::Pokemon() : species_name_(SpeciesNames::kBulbasaur),
                      is_active_(false) {
 }
 
-auto Pokemon::GetNormalStatsContainer() const -> NormalStatsContainer {
+NormalStatsContainer Pokemon::GetNormalStatsContainer() const {
   return normal_stats_container_;
 }
 
-auto Pokemon::GetExclusiveInGameStatsContainer() const
--> ExclusiveInGameStatsContainer {
+ExclusiveInGameStatsContainer Pokemon::
+GetExclusiveInGameStatsContainer() const {
   return exclusive_in_game_stats_container_;
 }
 
-auto Pokemon::GetMovesContainer() const -> MovesContainer {
+MovesContainer Pokemon::GetMovesContainer() const {
   return moves_container_;
 }
 
-auto Pokemon::GetTypeContainer() const -> TypeContainer {
+TypeContainer Pokemon::GetTypeContainer() const {
   return type_container_;
 }
 
-auto Pokemon::SpeciesName() const -> SpeciesNames {
+SpeciesNames Pokemon::SpeciesName() const {
   return species_name_;
 }
 
-auto Pokemon::Level() const -> int {
+int Pokemon::Level() const {
   return level_;
 }
 
-auto Pokemon::IsActive() const -> bool {
+bool Pokemon::IsActive() const {
   return is_active_;
 }
 
-auto Pokemon::SetIsActive(const bool &is_active) -> void {
+void Pokemon::SetIsActive(const bool &is_active) {
   is_active_ = is_active;
 }
 
-auto Pokemon::SetMoveUsed(const int &index) -> void {
+void Pokemon::SetMoveUsed(const int &index) {
   move_used_ = moves_container_[index];
 }
 
-auto Pokemon::MoveUsed() const -> std::shared_ptr<Move> {
+std::shared_ptr<Move> Pokemon::MoveUsed() const {
   return move_used_;
 }
 
-auto Pokemon::ResetStats() -> void {
+void Pokemon::ResetStats() {
   for (int i = 0; i < kNumNormalStats; i++) {
     normal_stats_container_[static_cast<StatNames>(i)]->ResetStat();
   }
@@ -80,8 +80,8 @@ auto Pokemon::ResetStats() -> void {
   }
 }
 
-auto Pokemon::RaiseStat(const StatNames &stat_name,
-                        const int &num_stages) -> void {
+void Pokemon::RaiseStat(const StatNames &stat_name,
+                        const int &num_stages) {
   if (stat_name != StatNames::kAccuracy && stat_name != StatNames::kEvasion) {
     std::shared_ptr<NormalStat> stat_to_boost =
         normal_stats_container_[stat_name];
@@ -115,8 +115,8 @@ auto Pokemon::RaiseStat(const StatNames &stat_name,
   }
 }
 
-auto Pokemon::LowerStat(const StatNames &stat_name,
-                        const int &num_stages) -> void {
+void Pokemon::LowerStat(const StatNames &stat_name,
+                        const int &num_stages) {
   if (stat_name != StatNames::kAccuracy && stat_name != StatNames::kEvasion) {
     std::shared_ptr<NormalStat> stat_to_lower =
         normal_stats_container_[stat_name];
@@ -150,26 +150,18 @@ auto Pokemon::LowerStat(const StatNames &stat_name,
   }
 }
 
-auto Pokemon::ChangeStat(const StatNames &stat_name,
-                         const int &num_stages) -> void {
+void Pokemon::ChangeStat(const StatNames &stat_name,
+                         const int &num_stages) {
   num_stages < 0 ? LowerStat(stat_name, num_stages) : RaiseStat(stat_name,
                                                                 num_stages);
 }
 
-auto Pokemon::SetUsedFocusEnergy(const bool &used_focus_energy) -> void {
+void Pokemon::SetUsedFocusEnergy(const bool &used_focus_energy) {
   flags_.used_focus_energy = true;
 }
 
-auto Pokemon::UsedFocusEnergy() const -> bool {
+bool Pokemon::UsedFocusEnergy() const {
   return flags_.used_focus_energy;
-}
-
-auto Pokemon::SetFaintedSelf(const bool &fainted_self) -> void {
-  flags_.fainted_self = fainted_self;
-}
-
-auto Pokemon::FaintedSelf() const -> bool {
-  return flags_.fainted_self;
 }
 
 } //namespace artificialtrainer

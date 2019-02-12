@@ -8,17 +8,17 @@
 #include "../move/basepower.h"
 
 namespace artificialtrainer {
-auto Gui::DisplayWelcomeMessage() -> void {
+void Gui::DisplayWelcomeMessage() {
   std::cout << "Welcome to Artificial Trainer, a Gen 1 battle simulator/AI!"
             << std::endl;
 }
 
-auto Gui::DisplayPickTeamMessage(const bool &player_one) -> void {
+void Gui::DisplayPickTeamMessage(const bool &player_one) {
   std::cout << "Player " << (player_one ? "one" : "two") << ", select your "
                                                             "team" << std::endl;
 }
 
-auto Gui::DisplayPokemonChoices() -> void {
+void Gui::DisplayPokemonChoices() {
   std::cout << "Team choices:" << std::endl;
 
   for (int i = 0; i < kNumSpecies; ++i) {
@@ -28,30 +28,29 @@ auto Gui::DisplayPokemonChoices() -> void {
   }
 }
 
-auto Gui::DisplayPickPokemonMessage(const int &num) -> void {
+void Gui::DisplayPickPokemonMessage(const int &num) {
   std::cout << "Pick Pokemon number " << num << '.' << std::endl;
 }
 
-auto Gui::DisplayInvalidChoiceMessage() -> void {
+void Gui::DisplayInvalidChoiceMessage() {
   std::cout << "Invalid choice. Select again." << std::endl;
 }
 
-auto Gui::DisplayPickEvMessage(const StatNames &stat_name) -> void {
+void Gui::DisplayPickEvMessage(const StatNames &stat_name) {
   std::cout << "Pick the " << StringConverter::StatToString(stat_name) << " ev."
             << std::endl;
 }
 
-auto Gui::DisplayPickIvMessage(const StatNames &stat_name) -> void {
+void Gui::DisplayPickIvMessage(const StatNames &stat_name) {
   std::cout << "Pick the " << StringConverter::StatToString(stat_name) << " iv."
             << std::endl;
 }
 
-auto Gui::DisplayPickLevelMessage() -> void {
+void Gui::DisplayPickLevelMessage() {
   std::cout << "Pick this Pokemon's level." << std::endl;
 }
 
-auto Gui::DisplayPokemonLearnset(
-    const std::vector<MoveNames> &moveset) -> void {
+void Gui::DisplayPokemonLearnset(const std::vector<MoveNames> &moveset) {
   std::cout << "Learned moves:" << std::endl;
 
   for (MoveNames move_name : moveset) {
@@ -60,12 +59,12 @@ auto Gui::DisplayPokemonLearnset(
   }
 }
 
-auto Gui::DisplayPickMoveMessage(const int &move_number) -> void {
+void Gui::DisplayPickMoveMessage(const int &move_number) {
   std::cout << "Pick move number " << move_number << " for this Pokemon"
             << std::endl;
 }
 
-auto Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) -> void {
+void Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) {
   std::vector<std::shared_ptr<Pokemon>> active_team = team.ActiveTeam();
   std::vector<std::shared_ptr<Pokemon>> fainted_team = team.FaintedTeam();
 
@@ -95,13 +94,13 @@ auto Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) -> void {
   std::cout << std::endl;
 }
 
-auto Gui::DisplayPickLeadingPokemonMessage(const bool &player_one) -> void {
+void Gui::DisplayPickLeadingPokemonMessage(const bool &player_one) {
   std::cout << "Player " << (player_one ? "one" : "two")
             << ", select your leading Pokemon" << std::endl;
 }
 
-auto Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
-                                   const bool &player_one) -> void {
+void Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
+                                   const bool &player_one) {
   std::cout << "Active pokemon for player " << (player_one ? "one" : "two")
             << ':' << std::endl;
   std::cout << StringConverter::SpeciesToString(pokemon->SpeciesName())
@@ -155,61 +154,60 @@ auto Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
   std::cout << std::endl;
 }
 
-auto Gui::DisplayTurnNumber(const int &turn_number) -> void {
+void Gui::DisplayTurnNumber(const int &turn_number) {
   std::cout << "Turn number: " << turn_number << std::endl;
 }
 
-auto Gui::DisplayPickInBattleMoveMessage(const bool &player_one) -> void {
+void Gui::DisplayPickInBattleMoveMessage(const bool &player_one) {
   std::cout << "Player " << (player_one ? "one" : "two") << ", select your move"
             << std::endl;
 }
 
-auto Gui::DisplayMoveFailedMessage() -> void {
+void Gui::DisplayMoveFailedMessage() {
   std::cout << "The move failed" << std::endl;
 }
 
-auto Gui::DisplayMoveMissedMessage() -> void {
+void Gui::DisplayMoveMissedMessage() {
   std::cout << "The move missed" << std::endl;
 }
 
-auto Gui::DisplayPokemonFaintedMessage(const SpeciesNames &species_name)
--> void {
+void Gui::DisplayPokemonFaintedMessage(const SpeciesNames &species_name) {
   std::cout << StringConverter::SpeciesToString(species_name) << " fainted"
             << std::endl;
 }
 
-auto Gui::DisplayOneHitKoMoveLandedMessage() -> void {
+void Gui::DisplayOneHitKoMoveLandedMessage() {
   std::cout << "The one hit ko move landed" << std::endl;
 }
 
-auto Gui::DisplayInvalidMoveChoiceMessage() -> void {
+void Gui::DisplayInvalidMoveChoiceMessage() {
   std::cout << "Invalid move choice" << std::endl;
 }
 
-auto Gui::DisplayPokemonUsedMoveMessage(
-    const std::shared_ptr<Pokemon> &pokemon) -> void {
+void Gui::DisplayPokemonUsedMoveMessage(
+    const std::shared_ptr<Pokemon> &pokemon) {
   std::cout << StringConverter::SpeciesToString(pokemon->SpeciesName())
             << " used "
             << StringConverter::MoveToString(pokemon->MoveUsed()->MoveName())
             << std::endl;
 }
 
-auto Gui::DisplayBattleOverMessage() -> void {
+void Gui::DisplayBattleOverMessage() {
   std::cout << "Battle over" << std::endl;
 }
 
-auto Gui::DisplaySwitchMessage(const SpeciesNames &one,
-                               const SpeciesNames &two) -> void {
+void Gui::DisplaySwitchMessage(const SpeciesNames &one,
+                               const SpeciesNames &two) {
   std::cout << StringConverter::SpeciesToString(one)
             << " successfully switched out with "
             << StringConverter::SpeciesToString(two) << std::endl;
 }
 
-auto Gui::DisplayForceSwitchMessage() -> void {
+void Gui::DisplayForceSwitchMessage() {
   std::cout << "Pick a Pokemon to switch into" << std::endl;
 }
 
-auto Gui::DisplayAvailableSwitchOptions(const Team &team) -> void {
+void Gui::DisplayAvailableSwitchOptions(const Team &team) {
   std::cout << "Available switches:" << std::endl;
   int i = 1;
 
@@ -222,16 +220,24 @@ auto Gui::DisplayAvailableSwitchOptions(const Team &team) -> void {
   }
 }
 
-auto Gui::DisplayMoveCritMessage() -> void {
+void Gui::DisplayMoveCritMessage() {
   std::cout << "The move landed a critical hit" << std::endl;
 }
 
-auto Gui::DisplayMoveHadNoEffectMessage() -> void {
+void Gui::DisplayMoveHadNoEffectMessage() {
   std::cout << "The move had no effect" << std::endl;
 }
 
-auto Gui::DisplayDamageDoneMessage(const int &damage_done) -> void {
+void Gui::DisplayDamageDoneMessage(const int &damage_done) {
   std::cout << "The move did " << damage_done << " damage" << std::endl;
+}
+
+void Gui::DisplayNotVeryEffectiveMessage() {
+  std::cout << "The move was not very effective" << std::endl;
+}
+
+void Gui::DisplaySuperEffectiveMessage() {
+  std::cout << "The move was super effective" << std::endl;
 }
 
 } //namespace artificialtrainer

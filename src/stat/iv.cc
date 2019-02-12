@@ -9,7 +9,7 @@ Iv::Iv(const int &value) {
   value_ = value;
 }
 
-auto Iv::Value() const -> int {
+int Iv::Value() const {
   return value_;
 }
 

@@ -11,7 +11,7 @@
 #include "gui.h"
 
 namespace artificialtrainer {
-auto InputHandler::GetIntInput(const int lower, const int upper) -> int {
+int InputHandler::GetIntInput(const int lower, const int upper) {
   int return_int;
 
   while (true) {

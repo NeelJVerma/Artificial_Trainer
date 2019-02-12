@@ -16,7 +16,7 @@ struct InGameFlags {
   bool flying = false;
   bool digging = false;
   bool used_focus_energy = false;
-  bool fainted_self = false;
+  bool flinched = false;
   // TODO: ADD MORE WHEN NEEDED
 };
 
@@ -25,30 +25,26 @@ class Pokemon {
   static const int kMaxLevel = 100;
 
   Pokemon(const Pokemon &pokemon) = default;
-  auto operator=(const Pokemon &pokemon) -> Pokemon & = default;
+  Pokemon &operator=(const Pokemon &pokemon) = default;
   Pokemon();
   Pokemon(const SpeciesNames &species_name,
           const NormalStatsContainer &stats_container,
           const MovesContainer &moves_container,
           const TypeContainer &type_container, const int &level);
-  auto GetNormalStatsContainer() const -> NormalStatsContainer;
-  auto GetExclusiveInGameStatsContainer() const
-    -> ExclusiveInGameStatsContainer;
-  auto GetMovesContainer() const -> MovesContainer;
-  auto GetTypeContainer() const -> TypeContainer;
-  auto SpeciesName() const -> SpeciesNames;
-  auto Level() const -> int;
-  auto IsActive() const -> bool;
-  auto SetIsActive(const bool &is_active) -> void;
-  auto SetMoveUsed(const int &index) -> void;
-  auto MoveUsed() const -> std::shared_ptr<Move>;
-  auto ResetStats() -> void;
-  auto ChangeStat(const StatNames &stat_name, const int &num_stages) -> void;
-  auto SetUsedFocusEnergy(const bool &used_focus_energy) -> void;
-  auto UsedFocusEnergy() const -> bool;
-  auto SetFaintedSelf(const bool &fainted_self) -> void;
-  auto FaintedSelf() const -> bool;
-
+  NormalStatsContainer GetNormalStatsContainer() const;
+  ExclusiveInGameStatsContainer GetExclusiveInGameStatsContainer() const;
+  MovesContainer GetMovesContainer() const;
+  TypeContainer GetTypeContainer() const;
+  SpeciesNames SpeciesName() const;
+  int Level() const;
+  bool IsActive() const;
+  void SetIsActive(const bool &is_active);
+  void SetMoveUsed(const int &index);
+  std::shared_ptr<Move> MoveUsed() const;
+  void ResetStats();
+  void ChangeStat(const StatNames &stat_name, const int &num_stages);
+  void SetUsedFocusEnergy(const bool &used_focus_energy);
+  bool UsedFocusEnergy() const;
   // TODO: ADD IN GAME FLAG ATTRIBUTES. SETTING/GETTING
 
  private:
@@ -61,8 +57,8 @@ class Pokemon {
   InGameFlags flags_;
   int level_;
   bool is_active_;
-  auto LowerStat(const StatNames &stat_name, const int &num_stages) -> void;
-  auto RaiseStat(const StatNames &stat_name, const int &num_stages) -> void;
+  void LowerStat(const StatNames &stat_name, const int &num_stages);
+  void RaiseStat(const StatNames &stat_name, const int &num_stages);
 };
 
 } //namespace artificialtrainer

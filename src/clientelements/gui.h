@@ -14,40 +14,41 @@
 namespace artificialtrainer {
 class Gui {
  public:
-  static auto DisplayWelcomeMessage() -> void;
-  static auto DisplayPickTeamMessage(const bool &player_one) -> void;
-  static auto DisplayPokemonChoices() -> void;
-  static auto DisplayPickPokemonMessage(const int &num) -> void;
-  static auto DisplayInvalidChoiceMessage() -> void;
-  static auto DisplayPickEvMessage(const StatNames &stat_name) -> void;
-  static auto DisplayPickIvMessage(const StatNames &stat_name) -> void;
-  static auto DisplayPickLevelMessage() -> void;
-  static auto DisplayPokemonLearnset(
-      const std::vector<MoveNames> &moveset) -> void;
-  static auto DisplayPickMoveMessage(const int &move_number) -> void;
-  static auto DisplayPlayerTeam(const Team &team,
-                                const bool &player_one) -> void;
-  static auto DisplayPickLeadingPokemonMessage(const bool &player_one) -> void;
-  static auto DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
-                                       const bool &player_one) -> void;
-  static auto DisplayTurnNumber(const int &turn_number) -> void;
-  static auto DisplayPickInBattleMoveMessage(const bool &player_one) -> void;
-  static auto DisplayMoveFailedMessage() -> void;
-  static auto DisplayMoveMissedMessage() -> void;
-  static auto DisplayOneHitKoMoveLandedMessage() -> void;
-  static auto DisplayPokemonFaintedMessage(const SpeciesNames &species_name)
-  -> void;
-  static auto DisplayInvalidMoveChoiceMessage() -> void;
-  static auto DisplayPokemonUsedMoveMessage(
-      const std::shared_ptr<Pokemon> &pokemon) -> void;
-  static auto DisplayBattleOverMessage() -> void;
-  static auto DisplaySwitchMessage(const SpeciesNames &one,
-                                   const SpeciesNames &two) -> void;
-  static auto DisplayForceSwitchMessage() -> void;
-  static auto DisplayAvailableSwitchOptions(const Team &team) -> void;
-  static auto DisplayMoveCritMessage() -> void;
-  static auto DisplayMoveHadNoEffectMessage() -> void;
-  static auto DisplayDamageDoneMessage(const int &damage_done) -> void;
+  static void DisplayWelcomeMessage();
+  static void DisplayPickTeamMessage(const bool &player_one);
+  static void DisplayPokemonChoices();
+  static void DisplayPickPokemonMessage(const int &num);
+  static void DisplayInvalidChoiceMessage();
+  static void DisplayPickEvMessage(const StatNames &stat_name);
+  static void DisplayPickIvMessage(const StatNames &stat_name);
+  static void DisplayPickLevelMessage();
+  static void DisplayPokemonLearnset(
+      const std::vector<MoveNames> &moveset);
+  static void DisplayPickMoveMessage(const int &move_number);
+  static void DisplayPlayerTeam(const Team &team,
+                                const bool &player_one);
+  static void DisplayPickLeadingPokemonMessage(const bool &player_one);
+  static void DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
+                                       const bool &player_one);
+  static void DisplayTurnNumber(const int &turn_number);
+  static void DisplayPickInBattleMoveMessage(const bool &player_one);
+  static void DisplayMoveFailedMessage();
+  static void DisplayMoveMissedMessage();
+  static void DisplayOneHitKoMoveLandedMessage();
+  static void DisplayPokemonFaintedMessage(const SpeciesNames &species_name);
+  static void DisplayInvalidMoveChoiceMessage();
+  static void DisplayPokemonUsedMoveMessage(
+      const std::shared_ptr<Pokemon> &pokemon);
+  static void DisplayBattleOverMessage();
+  static void DisplaySwitchMessage(const SpeciesNames &one,
+                                   const SpeciesNames &two);
+  static void DisplayForceSwitchMessage();
+  static void DisplayAvailableSwitchOptions(const Team &team);
+  static void DisplayMoveCritMessage();
+  static void DisplayMoveHadNoEffectMessage();
+  static void DisplayDamageDoneMessage(const int &damage_done);
+  static void DisplayNotVeryEffectiveMessage();
+  static void DisplaySuperEffectiveMessage();
 };
 
 } // namespace artificialtrainer

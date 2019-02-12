@@ -12,19 +12,24 @@ Move::Move(const MoveNames &move_name, const int &current_pp)
     : move_name_(move_name), current_pp_(current_pp) {
 }
 
-auto Move::MoveName() const -> MoveNames {
+MoveNames Move::MoveName() const {
   return move_name_;
 }
 
-auto Move::CurrentPp() const -> int {
+int Move::CurrentPp() const {
   return current_pp_;
 }
 
-auto Move::DecrementPp(const int &amount) -> void {
+void Move::DecrementPp(const int &amount) {
+  if (current_pp_ - amount < 0) {
+    current_pp_ = 0;
+    return;
+  }
+
   current_pp_ -= amount;
 }
 
-auto IsPhysical(const MoveNames &move_name) -> bool {
+bool IsPhysical(const MoveNames &move_name) {
   switch (Type(move_name)) {
     case TypeNames::kNormal:
     case TypeNames::kFighting:
@@ -40,7 +45,7 @@ auto IsPhysical(const MoveNames &move_name) -> bool {
   }
 }
 
-auto IsSpecial(const MoveNames &move_name) -> bool {
+bool IsSpecial(const MoveNames &move_name) {
   switch (Type(move_name)) {
     case TypeNames::kFire:
     case TypeNames::kWater:
@@ -55,11 +60,11 @@ auto IsSpecial(const MoveNames &move_name) -> bool {
   }
 }
 
-auto IsDamaging(const MoveNames &move_name) -> bool {
+bool IsDamaging(const MoveNames &move_name) {
   return BasePower(move_name) != static_cast<int>(PowerClasses::kNone);
 }
 
-auto IsUseless(const MoveNames &move_name) -> bool {
+bool IsUseless(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kRoar:
     case MoveNames::kSplash:
@@ -71,7 +76,7 @@ auto IsUseless(const MoveNames &move_name) -> bool {
   }
 }
 
-auto IsSwitch(const MoveNames &move_name) -> bool {
+bool IsSwitch(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kSwitch1:
     case MoveNames::kSwitch2:
@@ -85,7 +90,7 @@ auto IsSwitch(const MoveNames &move_name) -> bool {
   }
 }
 
-auto OnlyChangesStat(const MoveNames &move_name) -> bool {
+bool OnlyChangesStat(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAcidArmor:
     case MoveNames::kAgility:
@@ -115,11 +120,11 @@ auto OnlyChangesStat(const MoveNames &move_name) -> bool {
   }
 }
 
-auto IsOneHitKo(const MoveNames &move_name) -> bool {
+bool IsOneHitKo(const MoveNames &move_name) {
   return BasePower(move_name) == static_cast<int>(PowerClasses::kOneHitKo);
 }
 
-auto HasHighCriticalHitRatio(const MoveNames &move_name) -> bool {
+bool HasHighCriticalHitRatio(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kCrabhammer:
     case MoveNames::kKarateChop:
@@ -131,7 +136,7 @@ auto HasHighCriticalHitRatio(const MoveNames &move_name) -> bool {
   }
 }
 
-auto VariableEffectChance(const MoveNames &move_name) -> int {
+int VariableEffectChance(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAcid:
     case MoveNames::kAuroraBeam:
@@ -173,7 +178,7 @@ auto VariableEffectChance(const MoveNames &move_name) -> int {
   }
 }
 
-auto IsSelfKoMove(const MoveNames &move_name) -> bool {
+bool IsSelfKoMove(const MoveNames &move_name) {
   return move_name == MoveNames::kSelfDestruct ||
       move_name == MoveNames::kExplosion;
 }

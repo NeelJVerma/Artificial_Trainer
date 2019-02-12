@@ -6,7 +6,7 @@
 #include "learnset.h"
 
 namespace artificialtrainer {
-auto Learnset(const SpeciesNames &species_name) -> std::vector<MoveNames> {
+std::vector<MoveNames> Learnset(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
       return std::vector<MoveNames>{MoveNames::kGrowl, MoveNames::kTackle,

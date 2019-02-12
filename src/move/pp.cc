@@ -7,9 +7,12 @@
 #include "pp.h"
 
 namespace artificialtrainer {
+namespace {
 const int kUnlimited = std::numeric_limits<int>::max();
 
-auto Pp(const MoveNames &move_name) -> int {
+} //namespace
+
+int Pp(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAbsorb:
       return 20;

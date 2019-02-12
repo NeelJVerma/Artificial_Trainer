@@ -12,8 +12,8 @@ ExclusiveInGameStatsContainer::ExclusiveInGameStatsContainer() {
   }
 }
 
-auto ExclusiveInGameStatsContainer::operator[](
-    const StatNames &stat_name) -> std::shared_ptr<ExclusiveInGameStat> {
+std::shared_ptr<ExclusiveInGameStat> ExclusiveInGameStatsContainer::operator[](
+    const StatNames &stat_name) {
   int loc_stat_name = static_cast<int>(stat_name);
 
   if (loc_stat_name <= kNumNormalStats ||

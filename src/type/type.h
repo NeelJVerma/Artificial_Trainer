@@ -9,7 +9,7 @@
 #include "typenames.h"
 
 namespace artificialtrainer {
-auto Type(const MoveNames &move_name) -> TypeNames;
+TypeNames Type(const MoveNames &move_name);
 
 } //namespace artificialtrainer
 

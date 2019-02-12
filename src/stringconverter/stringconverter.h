@@ -14,10 +14,10 @@
 namespace artificialtrainer {
 class StringConverter {
  public:
-  static auto SpeciesToString(const SpeciesNames &species_name) -> std::string;
-  static auto StatToString(const StatNames &stat_name) -> std::string;
-  static auto MoveToString(const MoveNames &move_name) -> std::string;
-  static auto TypeToString(const TypeNames &type_name) -> std::string;
+  static std::string SpeciesToString(const SpeciesNames &species_name);
+  static std::string StatToString(const StatNames &stat_name);
+  static std::string MoveToString(const MoveNames &move_name);
+  static std::string TypeToString(const TypeNames &type_name);
 };
 
 } //namespace artificialtrainer

@@ -11,17 +11,16 @@ class ExclusiveInGameStat {
   static const int kMaxFactor = 9;
   static const int kMinFactor = 3;
   ExclusiveInGameStat(const ExclusiveInGameStat &stat) = default;
-  auto operator=(
-      const ExclusiveInGameStat &stat) -> ExclusiveInGameStat & = default;
+  ExclusiveInGameStat &operator=(const ExclusiveInGameStat &stat) = default;
   ExclusiveInGameStat();
-  auto RaiseNumerator(const int &num_stages) -> void;
-  auto RaiseDenominator(const int &num_stages) -> void;
-  auto LowerNumerator(const int &num_stages) -> void;
-  auto LowerDenominator(const int &num_stages) -> void;
-  auto CalculatedStat() const -> double;
-  auto Numerator() const -> int;
-  auto Denominator() const -> int;
-  auto ResetStat() -> void;
+  void RaiseNumerator(const int &num_stages);
+  void RaiseDenominator(const int &num_stages);
+  void LowerNumerator(const int &num_stages);
+  void LowerDenominator(const int &num_stages);
+  double CalculatedStat() const;
+  int Numerator() const;
+  int Denominator() const;
+  void ResetStat();
 
  private:
   int numerator_;

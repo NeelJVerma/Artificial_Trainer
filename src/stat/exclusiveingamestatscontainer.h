@@ -15,11 +15,9 @@ class ExclusiveInGameStatsContainer {
   ExclusiveInGameStatsContainer();
   ExclusiveInGameStatsContainer(
       const ExclusiveInGameStatsContainer &stats_container) = default;
-  auto operator=(
-      const ExclusiveInGameStatsContainer &stats_container)
-  -> ExclusiveInGameStatsContainer & = default;
-  auto operator[](const StatNames &stat_name)
-  -> std::shared_ptr<ExclusiveInGameStat>;
+  ExclusiveInGameStatsContainer &operator=(
+      const ExclusiveInGameStatsContainer &stats_container) = default;
+  std::shared_ptr<ExclusiveInGameStat> operator[](const StatNames &stat_name);
 
  private:
   std::shared_ptr<ExclusiveInGameStat>
