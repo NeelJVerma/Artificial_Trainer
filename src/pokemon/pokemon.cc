@@ -15,6 +15,7 @@ Pokemon::Pokemon(const SpeciesNames &species_name,
       exclusive_in_game_stats_container_{},
       moves_container_(moves_container),
       type_container_(type_container),
+      move_used_(nullptr),
       level_(level),
       is_active_(false) {
 }
@@ -24,6 +25,7 @@ Pokemon::Pokemon() : species_name_(SpeciesNames::kBulbasaur),
                      exclusive_in_game_stats_container_{},
                      moves_container_{},
                      type_container_{},
+                     move_used_(nullptr),
                      level_(0),
                      is_active_(false) {
 }
@@ -157,7 +159,7 @@ void Pokemon::ChangeStat(const StatNames &stat_name,
 }
 
 void Pokemon::SetUsedFocusEnergy(const bool &used_focus_energy) {
-  flags_.used_focus_energy = true;
+  flags_.used_focus_energy = used_focus_energy;
 }
 
 bool Pokemon::UsedFocusEnergy() const {

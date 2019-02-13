@@ -9,7 +9,7 @@
 
 namespace artificialtrainer {
 Move::Move(const MoveNames &move_name, const int &current_pp)
-    : move_name_(move_name), current_pp_(current_pp) {
+    : move_name_(move_name), current_pp_(current_pp), damage_done_(0) {
 }
 
 MoveNames Move::MoveName() const {
@@ -27,6 +27,14 @@ void Move::DecrementPp(const int &amount) {
   }
 
   current_pp_ -= amount;
+}
+
+void Move::SetDamageDone(const int &damage_done) {
+  damage_done_ = damage_done;
+}
+
+int Move::DamageDone() const {
+  return damage_done_;
 }
 
 bool IsPhysical(const MoveNames &move_name) {
@@ -181,6 +189,53 @@ int VariableEffectChance(const MoveNames &move_name) {
 bool IsSelfKoMove(const MoveNames &move_name) {
   return move_name == MoveNames::kSelfDestruct ||
       move_name == MoveNames::kExplosion;
+}
+
+bool OnlyAppliesSomeEffect(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kConfuseRay:
+    case MoveNames::kConversion:
+    case MoveNames::kDisable:
+    case MoveNames::kFocusEnergy:
+    case MoveNames::kGlare:
+    case MoveNames::kHaze:
+    case MoveNames::kHypnosis:
+    case MoveNames::kLeechSeed:
+    case MoveNames::kLightScreen:
+    case MoveNames::kLovelyKiss:
+    case MoveNames::kMetronome:
+    case MoveNames::kMimic:
+    case MoveNames::kMirrorMove:
+    case MoveNames::kMist:
+    case MoveNames::kPoisonGas:
+    case MoveNames::kPoisonPowder:
+    case MoveNames::kRecover:
+    case MoveNames::kReflect:
+    case MoveNames::kRest:
+    case MoveNames::kSing:
+    case MoveNames::kSleepPowder:
+    case MoveNames::kSoftBoiled:
+    case MoveNames::kSpore:
+    case MoveNames::kStunSpore:
+    case MoveNames::kSubstitute:
+    case MoveNames::kSupersonic:
+    case MoveNames::kThunderWave:
+    case MoveNames::kToxic:
+    case MoveNames::kTransform:
+      return true;
+    default:
+      return false;
+  }
+}
+
+bool HasVariableDamage(const MoveNames &move_name) {
+  return static_cast<PowerClasses>(BasePower(move_name)) ==
+      PowerClasses::kVariable;
+}
+
+bool HasUnchangedDamage(const MoveNames &move_name) {
+  return static_cast<PowerClasses>(BasePower(move_name)) ==
+      PowerClasses::kUnchanged;
 }
 
 } //namespace artificialtrainer

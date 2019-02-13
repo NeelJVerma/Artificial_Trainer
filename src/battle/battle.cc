@@ -262,6 +262,9 @@ void Battle::HandleTurn() {
       HandleMove(team_one_, team_two_);
     }
   }
+
+  move_one->SetDamageDone(0);
+  move_two->SetDamageDone(0);
 }
 
 void Battle::Play() {

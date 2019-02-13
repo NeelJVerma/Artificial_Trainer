@@ -17,9 +17,12 @@ class Move {
   MoveNames MoveName() const;
   int CurrentPp() const;
   void DecrementPp(const int &amount);
+  void SetDamageDone(const int &damage_done);
+  int DamageDone() const;
 
  private:
   int current_pp_;
+  int damage_done_;
   MoveNames move_name_;
 };
 
@@ -33,6 +36,9 @@ bool IsOneHitKo(const MoveNames &move_name);
 bool HasHighCriticalHitRatio(const MoveNames &move_name);
 int VariableEffectChance(const MoveNames &move_name);
 bool IsSelfKoMove(const MoveNames &move_name);
+bool OnlyAppliesSomeEffect(const MoveNames &move_name);
+bool HasVariableDamage(const MoveNames &move_name);
+bool HasUnchangedDamage(const MoveNames &move_name);
 
 } //namespace artificialtrainer
 
