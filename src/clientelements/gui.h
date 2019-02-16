@@ -58,6 +58,10 @@ class Gui {
   static void DisplayConfusionEndedMessage();
   static void DisplayDisableEndedMessage();
   static void DisplayMoveDisabledMessage(const MoveNames &move_name);
+  static void DisplayRecoilDamageMessage(const SpeciesNames &species_name,
+                                         const int &damage_done);
+  static void DisplayPokemonFaintedSelfMessage(
+      const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

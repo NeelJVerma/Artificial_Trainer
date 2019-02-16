@@ -60,6 +60,8 @@ class Pokemon {
   void HandleDisable();
   void UseConversion();
   void AbsorbHp(const int &damage_done);
+  void TakeRecoilDamage(const int &damage_done);
+  void AutoFaint();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
@@ -76,7 +78,6 @@ class Pokemon {
   void LowerStat(const StatNames &stat_name, const int &num_stages);
   void RaiseStat(const StatNames &stat_name, const int &num_stages);
   void ResetStats();
-  void DisableRandomMove();
   int EndOfNormalMovesIndex() const;
   void ReEnableDisabledMove();
 };

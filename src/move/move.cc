@@ -9,7 +9,8 @@
 
 namespace artificialtrainer {
 Move::Move(const MoveNames &move_name, const int &current_pp)
-    : move_name_(move_name), current_pp_(current_pp), damage_done_(0) {
+    : move_name_(move_name), current_pp_(current_pp), damage_done_(0),
+      disabled_(false) {
 }
 
 MoveNames Move::MoveName() const {

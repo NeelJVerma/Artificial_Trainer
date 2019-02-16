@@ -23,6 +23,7 @@ class Hp {
   double HpAsPercent() const;
   void SubtractHp(const int &amount);
   void AddHp(const int &amount);
+  void SubtractAllHp();
 
  private:
   int max_hp_;

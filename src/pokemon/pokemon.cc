@@ -280,6 +280,16 @@ void Pokemon::AbsorbHp(const int &damage_done) {
   Gui::DisplayHpAbsorbedMessage(species_name_, absored);
 }
 
+void Pokemon::TakeRecoilDamage(const int &damage_done) {
+  int recoil_damage = damage_done >> 2;
+  normal_stats_container_.HpStat()->SubtractHp(recoil_damage);
+  Gui::DisplayRecoilDamageMessage(species_name_, recoil_damage);
+}
+
+void Pokemon::AutoFaint() {
+  normal_stats_container_.HpStat()->SubtractAllHp();
+}
+
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);

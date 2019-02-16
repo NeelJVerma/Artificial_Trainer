@@ -366,4 +366,8 @@ void Hp::AddHp(const int &amount) {
   current_hp_ += amount;
 }
 
+void Hp::SubtractAllHp() {
+  current_hp_ -= current_hp_;
+}
+
 } //namespace artificialtrainer

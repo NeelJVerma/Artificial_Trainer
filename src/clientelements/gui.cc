@@ -279,4 +279,15 @@ void Gui::DisplayMoveDisabledMessage(const MoveNames &move_name) {
             << " is disabled" << std::endl;
 }
 
+void Gui::DisplayRecoilDamageMessage(const SpeciesNames &species_name,
+                                     const int &damage_done) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " took " << damage_done << " recoil damage" << std::endl;
+}
+
+void Gui::DisplayPokemonFaintedSelfMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " fainted itself" << std::endl;
+}
+
 } //namespace artificialtrainer

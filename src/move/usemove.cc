@@ -170,6 +170,24 @@ void UseCounter(const std::shared_ptr<Pokemon> &attacker,
   Gui::DisplayDamageDoneMessage(damage_done);
 }
 
+void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
+                     const std::shared_ptr<Pokemon> &defender) {
+  int attacker_speed =
+      attacker->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
+  int defender_speed =
+      defender->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
+
+  if (attacker->Level() < defender->Level() ||
+      attacker_speed < defender_speed ||
+      !static_cast<bool>(TypeProduct(attacker->MoveUsed(), defender))) {
+    Gui::DisplayMoveFailedMessage();
+    return;
+  }
+
+  defender->AutoFaint();
+  Gui::DisplayOneHitKoMoveLandedMessage();
+}
+
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
                   const int &damage_done) {
@@ -277,6 +295,31 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         defender->DisableMove();
       }
 
+      break;
+    case MoveNames::kDoubleTeam:
+    case MoveNames::kMinimize:
+      attacker->ChangeStat(StatNames::kEvasion, -1);
+      break;
+    case MoveNames::kDoubleEdge:
+    case MoveNames::kTakeDown:
+    case MoveNames::kSubmission:
+      attacker->TakeRecoilDamage(damage_done);
+      break;
+    case MoveNames::kDragonRage:
+      defender->GetNormalStatsContainer().HpStat()->SubtractHp(40);
+      break;
+    case MoveNames::kDreamEater:
+      // if defender is sleeping, absorb hp
+      break;
+    case MoveNames::kExplosion:
+    case MoveNames::kSelfDestruct:
+      // if defender is behind sub, attacker will not faint self
+      attacker->AutoFaint();
+      break;
+    case MoveNames::kFissure:
+    case MoveNames::kGuillotine:
+    case MoveNames::kHornDrill:
+      UseOneHitKoMove(attacker, defender);
       break;
     default:
       break;
