@@ -240,4 +240,20 @@ void Gui::DisplaySuperEffectiveMessage() {
   std::cout << "The move was super effective" << std::endl;
 }
 
+void Gui::DisplayFlinchedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name) << " flinched"
+            << std::endl;
+}
+
+void Gui::DisplayConfusedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is confused" << std::endl;
+}
+
+void Gui::DisplayHpAbsorbedMessage(const SpeciesNames &species_name,
+                                   const int &absorbed) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " absorbed " << absorbed << " hp" << std::endl;
+}
+
 } //namespace artificialtrainer

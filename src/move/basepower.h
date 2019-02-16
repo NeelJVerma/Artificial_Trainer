@@ -8,13 +8,6 @@
 #include "movenames.h"
 
 namespace artificialtrainer {
-enum class PowerClasses : int {
-  kNone,
-  kVariable,
-  kOneHitKo,
-  kUnchanged
-};
-
 int BasePower(const MoveNames &move_name);
 
 } //namespace artificialtrainer

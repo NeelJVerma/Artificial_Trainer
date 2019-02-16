@@ -10,6 +10,7 @@
 #include "../move/movescontainer.h"
 #include "../type/typecontainer.h"
 #include "../stat/exclusiveingamestatscontainer.h"
+#include "statusnames.h"
 
 namespace artificialtrainer {
 struct InGameFlags {
@@ -17,7 +18,8 @@ struct InGameFlags {
   bool digging = false;
   bool used_focus_energy = false;
   bool flinched = false;
-  // TODO: ADD MORE WHEN NEEDED
+  bool confused = false;
+  StatusNames status = StatusNames::kClear;
 };
 
 class Pokemon {
@@ -45,7 +47,14 @@ class Pokemon {
   void ChangeStat(const StatNames &stat_name, const int &num_stages);
   void SetUsedFocusEnergy(const bool &used_focus_energy);
   bool UsedFocusEnergy() const;
-  // TODO: ADD IN GAME FLAG ATTRIBUTES. SETTING/GETTING
+  void SetFlinched(const bool &flinched);
+  bool IsFlinched() const;
+  void SetConfused(const bool &confused);
+  bool IsConfused() const;
+  void SetStatus(const StatusNames &status_name);
+  StatusNames Status() const;
+  void ResetSwitchFlags();
+  void ResetEndOfTurnFlags();
 
  private:
   NormalStatsContainer normal_stats_container_;

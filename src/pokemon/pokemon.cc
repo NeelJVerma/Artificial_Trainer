@@ -166,4 +166,38 @@ bool Pokemon::UsedFocusEnergy() const {
   return flags_.used_focus_energy;
 }
 
+void Pokemon::SetFlinched(const bool &flinched) {
+  flags_.flinched = flinched;
+}
+
+bool Pokemon::IsFlinched() const {
+  return flags_.flinched;
+}
+
+
+void Pokemon::SetConfused(const bool &confused) {
+  flags_.confused = confused;
+}
+
+bool Pokemon::IsConfused() const {
+  return flags_.confused;
+}
+
+void Pokemon::SetStatus(const StatusNames &status_name) {
+  flags_.status = status_name;
+}
+
+StatusNames Pokemon::Status() const {
+  return flags_.status;
+}
+
+void Pokemon::ResetEndOfTurnFlags() {
+  flags_.flinched = false;
+  move_used_->SetDamageDone(0);
+}
+
+void Pokemon::ResetSwitchFlags() {
+  // TODO: RESET SWITCH FLAGS
+}
+
 } //namespace artificialtrainer

@@ -55,6 +55,13 @@ bool MoveHit(const double &chance_to_hit) {
   return distribution(generator) <= chance_to_hit;
 }
 
+bool VariableEffectActivates(const MoveNames &move_name) {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(1, 100);
+  return distribution(generator) <= VariableEffectChance(move_name);
+}
+
 int DamageRandomFactor() {
   std::random_device device;
   std::mt19937 generator(device());
@@ -62,7 +69,7 @@ int DamageRandomFactor() {
   return distribution(generator);
 }
 
-double DamageBonus(const std::shared_ptr<Pokemon> &attacker) {
+double StabBonus(const std::shared_ptr<Pokemon> &attacker) {
   return ((attacker->GetTypeContainer().MoveMatchesType(
       attacker->MoveUsed()->MoveName())) ? 1.5 : 1.0);
 }
@@ -118,6 +125,11 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
   std::pair<int, int> used_stats = AttackAndDefenseUsed(attacker, defender,
                                                         move_crit);
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
+
+  if (!BasePower(move_used->MoveName())) {
+    return 0;
+  }
+
   double type_product = TypeProduct(move_used, defender);
 
   if (!static_cast<int>(type_product)) {
@@ -131,332 +143,64 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
   return static_cast<int>(floor(((((((((2.0 * (move_crit ? 2 : 1) *
       attacker->Level() / 5 + 2) * used_stats.first * BasePower(
       move_used->MoveName()) * (self_ko_move ? 2 : 1) / used_stats.second) /
-      50) + 2) * DamageBonus(attacker)) * type_product / 10) *
+      50) + 2) * StabBonus(attacker)) * type_product / 10) *
       DamageRandomFactor()) / 255)));
 }
 
-bool DoNormalDamage(const std::shared_ptr<Pokemon> &attacker,
-                    const std::shared_ptr<Pokemon> &defender) {
-  NormalStatsContainer attacker_stats = attacker->GetNormalStatsContainer();
-  NormalStatsContainer defender_stats = defender->GetNormalStatsContainer();
-  std::shared_ptr<Move> move_used = attacker->MoveUsed();
-  move_used->DecrementPp(1);
+void AbsorbHp(const std::shared_ptr<Pokemon> &attacker,
+              const int &damage_done) {
+  int absored = damage_done >> 1;
+  attacker->GetNormalStatsContainer().HpStat()->AddHp(absored);
+  Gui::DisplayHpAbsorbedMessage(attacker->SpeciesName(), absored);
+}
 
-  if (!MoveHit(ChanceToHit(attacker, defender))) {
-    Gui::DisplayMoveMissedMessage();
+void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
+                  const std::shared_ptr<Pokemon> &defender,
+                  const int &damage_done) {
+  MoveNames move_name = attacker->MoveUsed()->MoveName();
+
+  switch (move_name) {
+    case MoveNames::kAbsorb:
+    case MoveNames::kMegaDrain:
+    case MoveNames::kLeechLife:
+      AbsorbHp(attacker, damage_done);
+      break;
+    case MoveNames::kAcid:
+    case MoveNames::kPsychic:
+      if (VariableEffectActivates(move_name)) {
+        defender->ChangeStat(StatNames::kSpecial, -1);
+      }
+      break;
+    case MoveNames::kBarrier:
+    case MoveNames::kAcidArmor:
+      attacker->ChangeStat(StatNames::kDefense, 2);
+      break;
+    default:
+      break;
+  }
+}
+
+bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
+                  const std::shared_ptr<Pokemon> &defender) {
+  if (!attacker->GetNormalStatsContainer().HpStat()->CurrentHp() ||
+      !defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
     return false;
   }
 
-  bool move_crit = false;
-  double crit_chance = CriticalHitChance(attacker);
+  StatusNames attacker_status = attacker->Status();
+  // SLEEP, FROZEN: RETURN FALSE
+  // FLINCHED: RETURN FALSE
+  // FULLY PARA: RETURN FALSE
+  // HIT SELF: RETURN FALSE
+  // IS LOCKED IN TO CLAMP, BIND, ETC
 
-  if (MoveCrit(crit_chance > 255.0 / 256.0 ? 255.0 / 256.0 : crit_chance)) {
-    move_crit = true;
-    Gui::DisplayMoveCritMessage();
-  }
-
-  int damage_done = DamageDone(attacker, defender, move_crit, false);
-  move_used->SetDamageDone(damage_done);
-  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
-  Gui::DisplayDamageDoneMessage(damage_done);
   return true;
 }
 
-bool VariableEffectActivates(const MoveNames &move_name) {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(1, 100);
-  return distribution(generator) <= VariableEffectChance(move_name);
-}
-
-void HandleVariableEffect(const MoveNames &move_name,
-                          const std::shared_ptr<Pokemon> &defender) {
-  switch (move_name) {
-    case MoveNames::kAcid:
-      defender->ChangeStat(StatNames::kDefense, -1);
-      break;
-    case MoveNames::kAuroraBeam:
-      defender->ChangeStat(StatNames::kAttack, -1);
-      break;
-    case MoveNames::kBite:
-      // SET FLINCH FLAG
-      break;
-    case MoveNames::kBlizzard:
-      // FREEZE
-      break;
-    case MoveNames::kBoneClub:
-      // SET FLINCH FLAG
-      break;
-    case MoveNames::kBubbleBeam:
-    case MoveNames::kBubble:
-      defender->ChangeStat(StatNames::kSpeed, -1);
-      break;
-    case MoveNames::kConfusion:
-      // CONFUSE
-      break;
-    case MoveNames::kConstrict:
-      defender->ChangeStat(StatNames::kSpeed, -1);
-      break;
-    default:
-      break;
-  }
-}
-
-void UseNormalDamagingMove(const std::shared_ptr<Pokemon> &attacker,
-                           const std::shared_ptr<Pokemon> &defender) {
-  if (DoNormalDamage(attacker, defender)) {
-    if (VariableEffectActivates(attacker->MoveUsed()->MoveName())) {
-      HandleVariableEffect(attacker->MoveUsed()->MoveName(), defender);
-    }
-  }
-}
-
-void HardSwitch(Team &attacker) {
-  std::shared_ptr<Pokemon> old_active_member = attacker.ActiveMember();
-  attacker.HardSwitch();
-  Gui::DisplaySwitchMessage(old_active_member->SpeciesName(),
-                            attacker.ActiveMember()->SpeciesName());
-}
-
-void UseChangeStatMove(const std::shared_ptr<Pokemon> &attacker,
-                       const std::shared_ptr<Pokemon> &defender) {
-  std::shared_ptr<Move> move_used = attacker->MoveUsed();
-  move_used->DecrementPp(1);
-
-  if (!MoveHit(ChanceToHit(attacker, defender))) {
-    Gui::DisplayMoveMissedMessage();
-    return;
-  }
-
-  switch (move_used->MoveName()) {
-    case MoveNames::kAcidArmor:
-    case MoveNames::kBarrier:
-      attacker->ChangeStat(StatNames::kDefense, 2);
-      break;
-    case MoveNames::kAgility:
-      attacker->ChangeStat(StatNames::kSpeed, 2);
-      break;
-    case MoveNames::kAmnesia:
-      attacker->ChangeStat(StatNames::kSpecial, 2);
-      break;
-    case MoveNames::kGrowth:
-      attacker->ChangeStat(StatNames::kSpecial, 1);
-      break;
-    case MoveNames::kDefenseCurl:
-    case MoveNames::kHarden:
-    case MoveNames::kWithdraw:
-      attacker->ChangeStat(StatNames::kDefense, 1);
-      break;
-    case MoveNames::kDoubleTeam:
-    case MoveNames::kMinimize:
-      attacker->ChangeStat(StatNames::kEvasion, -1);
-      break;
-    case MoveNames::kMeditate:
-    case MoveNames::kSharpen:
-      attacker->ChangeStat(StatNames::kAttack, 1);
-      break;
-    case MoveNames::kSwordsDance:
-      attacker->ChangeStat(StatNames::kAttack, 2);
-      break;
-    case MoveNames::kFlash:
-    case MoveNames::kKinesis:
-    case MoveNames::kSmokescreen:
-    case MoveNames::kSandAttack:
-      defender->ChangeStat(StatNames::kAccuracy, -1);
-      break;
-    case MoveNames::kGrowl:
-      defender->ChangeStat(StatNames::kAttack, -1);
-      break;
-    case MoveNames::kLeer:
-    case MoveNames::kTailWhip:
-      defender->ChangeStat(StatNames::kDefense, -1);
-      break;
-    case MoveNames::kScreech:
-      defender->ChangeStat(StatNames::kDefense, -2);
-      break;
-    case MoveNames::kStringShot:
-      defender->ChangeStat(StatNames::kSpeed, -1);
-      break;
-    default:
-      assert(false);
-  }
-}
-
-void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
-                     const std::shared_ptr<Pokemon> &defender,
-                     Team &defender_team) {
-  int attacker_speed =
-      attacker->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
-  int defender_speed =
-      defender->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
-
-  if ((attacker->Level() < defender->Level()) ||
-      (attacker_speed < defender_speed) ||
-      (!static_cast<bool>(TypeProduct(attacker->MoveUsed(), defender)))) {
-    Gui::DisplayMoveFailedMessage();
-    return;
-  }
-
-  attacker->MoveUsed()->DecrementPp(1);
-
-  if (!MoveHit(ChanceToHit(attacker, defender))) {
-    Gui::DisplayMoveMissedMessage();
-    return;
-  }
-
-  int defender_hp = defender->GetNormalStatsContainer().HpStat()->CurrentHp();
-  defender->GetNormalStatsContainer().HpStat()->SubtractHp(defender_hp);
-  Gui::DisplayOneHitKoMoveLandedMessage();
-  Gui::DisplayPokemonFaintedMessage(defender->SpeciesName());
-}
-
-void UseSelfKoMove(const std::shared_ptr<Pokemon> &attacker,
-                   const std::shared_ptr<Pokemon> &defender) {
-  if (!static_cast<bool>(TypeProduct(attacker->MoveUsed(), defender))) {
-    Gui::DisplayMoveFailedMessage();
-    return;
-  }
-
-  attacker->MoveUsed()->DecrementPp(1);
-
-  if (!MoveHit(ChanceToHit(attacker, defender))) {
-    Gui::DisplayMoveMissedMessage();
-    return;
-  }
-
-  bool move_crit = false;
-  double crit_chance = CriticalHitChance(attacker);
-
-  if (MoveCrit(crit_chance > 255.0 / 256.0 ? 255.0 / 256.0 : crit_chance)) {
-    move_crit = true;
-    Gui::DisplayMoveCritMessage();
-  }
-
-  int damage_done = DamageDone(attacker, defender, move_crit, true);
+void DoDamage(const std::shared_ptr<Pokemon> &defender,
+              const int &damage_done) {
   defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
   Gui::DisplayDamageDoneMessage(damage_done);
-  int attacker_hp = attacker->GetNormalStatsContainer().HpStat()->CurrentHp();
-  attacker->GetNormalStatsContainer().HpStat()->SubtractHp(attacker_hp);
-  Gui::DisplayPokemonFaintedMessage(attacker->SpeciesName());
-}
-
-void UseUselessMove(const std::shared_ptr<Pokemon> &attacker) {
-  attacker->MoveUsed()->DecrementPp(1);
-  Gui::DisplayMoveHadNoEffectMessage();
-}
-
-void UseUnchangedDamageMove(const std::shared_ptr<Pokemon> &attacker,
-                            const std::shared_ptr<Pokemon> &defender) {
-  std::shared_ptr<Move> move_used = attacker->MoveUsed();
-  move_used->DecrementPp(1);
-
-  if (!MoveHit(ChanceToHit(attacker, defender))) {
-    Gui::DisplayMoveMissedMessage();
-    return;
-  }
-
-  switch (move_used->MoveName()) {
-    case MoveNames::kDragonRage:
-      defender->GetNormalStatsContainer().HpStat()->SubtractHp(40);
-      move_used->SetDamageDone(40);
-      break;
-    case MoveNames::kSonicBoom:
-      defender->GetNormalStatsContainer().HpStat()->SubtractHp(20);
-      move_used->SetDamageDone(20);
-      break;
-    default:
-      assert(false);
-  }
-}
-
-void UseCounter(const std::shared_ptr<Pokemon> &attacker,
-                const std::shared_ptr<Pokemon> &defender) {
-  if (!static_cast<int>(TypeProduct(attacker->MoveUsed(), defender))) {
-    Gui::DisplayMoveHadNoEffectMessage();
-    return;
-  }
-
-  MoveNames defender_move_name = defender->MoveUsed()->MoveName();
-  TypeNames defender_move_type = Type(defender_move_name);
-
-  if (IsSpecial(defender_move_name) || !IsDamaging(defender_move_name) ||
-      (defender_move_type != TypeNames::kNormal &&
-          defender_move_type != TypeNames::kFighting)) {
-    Gui::DisplayMoveFailedMessage();
-    return;
-  }
-
-  int damage_done = defender->MoveUsed()->DamageDone() * 2;
-  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
-  Gui::DisplayDamageDoneMessage(damage_done);
-}
-
-void DoDamageEqualToAttackerLevel(const std::shared_ptr<Pokemon> &attacker,
-                                  const std::shared_ptr<Pokemon> &defender) {
-  int damage_done = attacker->Level();
-  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
-  Gui::DisplayDamageDoneMessage(damage_done);
-}
-
-void UsePsywave(const std::shared_ptr<Pokemon> &attacker,
-                const std::shared_ptr<Pokemon> &defender) {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(1, static_cast<int>(
-      1.5 * attacker->Level()));
-  int damage_done = distribution(generator);
-  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
-  Gui::DisplayDamageDoneMessage(damage_done);
-}
-
-void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
-                  const std::shared_ptr<Pokemon> &defender) {
-  if (!static_cast<int>(TypeProduct(attacker->MoveUsed(), defender))) {
-    Gui::DisplayMoveHadNoEffectMessage();
-    return;
-  }
-
-  int damage_done =
-      defender->GetNormalStatsContainer().HpStat()->CurrentHp() >> 1;
-  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
-  Gui::DisplayDamageDoneMessage(damage_done);
-}
-
-void UseBide(const std::shared_ptr<Pokemon> &attacker,
-             const std::shared_ptr<Pokemon> &defender) {
-
-}
-
-void UseVariableDamageMove(const std::shared_ptr<Pokemon> &attacker,
-                           const std::shared_ptr<Pokemon> &defender) {
-  std::shared_ptr<Move> move_used = attacker->MoveUsed();
-  move_used->DecrementPp(1);
-
-  if (!MoveHit(ChanceToHit(attacker, defender))) {
-    Gui::DisplayMoveMissedMessage();
-    return;
-  }
-
-  switch (move_used->MoveName()) {
-    case MoveNames::kBide:
-      UseBide(attacker, defender);
-      break;
-    case MoveNames::kCounter:
-      UseCounter(attacker, defender);
-      break;
-    case MoveNames::kNightShade:
-    case MoveNames::kSeismicToss:
-      DoDamageEqualToAttackerLevel(attacker, defender);
-      break;
-    case MoveNames::kPsywave:
-      UsePsywave(attacker, defender);
-      break;
-    case MoveNames::kSuperFang:
-      UseSuperFang(attacker, defender);
-      break;
-    default:
-      assert(false);
-  }
 }
 
 } //namespace
@@ -465,34 +209,39 @@ void UseMove(Team &attacker, Team &defender) {
   std::shared_ptr<Pokemon> attacking_member = attacker.ActiveMember();
   std::shared_ptr<Pokemon> defending_member = defender.ActiveMember();
 
-  if (!attacking_member->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+  if (!IsGoodToMove(attacking_member, defending_member)) {
     return;
   }
 
-  if (!defending_member->GetNormalStatsContainer().HpStat()->CurrentHp()) {
-    Gui::DisplayMoveFailedMessage();
-    return;
-  }
-
-  MoveNames move_used_name = attacker.ActiveMember()->MoveUsed()->MoveName();
   Gui::DisplayPokemonUsedMoveMessage(attacking_member);
 
-  if (IsUseless(move_used_name)) {
-    UseUselessMove(attacking_member);
-  } else if (IsSwitch(move_used_name)) {
-    HardSwitch(attacker);
-  } else if (OnlyChangesStat(move_used_name)) {
-    UseChangeStatMove(attacking_member, defending_member);
-  } else if (IsOneHitKo(move_used_name)) {
-    UseOneHitKoMove(attacking_member, defending_member, defender);
-  } else if (IsSelfKoMove(move_used_name)) {
-    UseSelfKoMove(attacking_member, defending_member);
-  } else if (HasVariableDamage(move_used_name)) {
-    UseVariableDamageMove(attacking_member, defending_member);
-  } else if (HasUnchangedDamage(move_used_name)) {
-    UseUnchangedDamageMove(attacking_member, defending_member);
-  } else if (IsDamaging(move_used_name)) {
-    UseNormalDamagingMove(attacking_member, defending_member);
+  if (!MoveHit(ChanceToHit(attacking_member, defending_member))) {
+    Gui::DisplayMoveMissedMessage();
+    return;
+  }
+
+  bool move_crit = MoveCrit(CriticalHitChance(attacking_member));
+
+  if (move_crit) {
+    Gui::DisplayMoveCritMessage();
+  }
+
+  // have to call recursively for moves that hit multiple times in one turn
+  // maybe ?
+
+  int damage_done = IsSelfKo(attacking_member->MoveUsed()->MoveName()) ?
+                    DamageDone(attacking_member,
+                               defending_member,
+                               move_crit,
+                               true) :
+                    DamageDone(attacking_member,
+                               defending_member,
+                               move_crit,
+                               false);
+  DoSideEffect(attacking_member, defending_member, damage_done);
+
+  if (damage_done) {
+    DoDamage(defending_member, damage_done);
   }
 }
 

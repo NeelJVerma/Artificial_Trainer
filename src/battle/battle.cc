@@ -35,7 +35,7 @@ void SelectTeam(Team &team, const bool &team_one) {
   Gui::DisplayPickTeamMessage(team_one);
 
   // TODO: CHANGE BACK TO ACTUAL TEAM SIZE WHEN DONE TESTING
-  for (int i = 0; i < Team::kMaxTeamSize - 4; i++) {
+  for (int i = 0; i < Team::kMaxTeamSize - 5; i++) {
     Gui::DisplayPickPokemonMessage(i + 1);
     int pokemon_selection = InputHandler::GetIntInput(1, kNumSpecies);
     auto pokemon_species = static_cast<SpeciesNames>(pokemon_selection - 1);
@@ -203,12 +203,14 @@ bool Battle::HandleMove(Team &attacker, Team &defender) {
   std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
 
   if (!active_attacker->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    Gui::DisplayPokemonFaintedMessage(active_attacker->SpeciesName());
     attacker.FaintActivePokemon();
     PlayerPicksForcedSwitch(attacker);
     return false;
   }
 
   if (!active_defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    Gui::DisplayPokemonFaintedMessage(active_defender->SpeciesName());
     defender.FaintActivePokemon();
     PlayerPicksForcedSwitch(defender);
     return false;
@@ -263,8 +265,8 @@ void Battle::HandleTurn() {
     }
   }
 
-  move_one->SetDamageDone(0);
-  move_two->SetDamageDone(0);
+  active_pokemon_one->ResetEndOfTurnFlags();
+  active_pokemon_two->ResetEndOfTurnFlags();
 }
 
 void Battle::Play() {

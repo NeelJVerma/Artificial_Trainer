@@ -332,7 +332,11 @@ TypeNames TypeContainer::SecondType() const {
 }
 
 bool TypeContainer::MoveMatchesType(const MoveNames &move_name) const {
-  return Type(move_name) == types_.first || Type(move_name) == types_.second;
+  bool matches_first = Type(move_name) == types_.first &&
+      types_.first != TypeNames::kNoType;
+  bool matches_second = Type(move_name) == types_.second &&
+      types_.second != TypeNames::kNoType;
+  return matches_first || matches_second;
 }
 
 } //namespace artificialtrainer

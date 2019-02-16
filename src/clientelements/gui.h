@@ -49,6 +49,10 @@ class Gui {
   static void DisplayDamageDoneMessage(const int &damage_done);
   static void DisplayNotVeryEffectiveMessage();
   static void DisplaySuperEffectiveMessage();
+  static void DisplayHpAbsorbedMessage(const SpeciesNames &species_name,
+                                       const int &absorbed);
+  static void DisplayFlinchedMessage(const SpeciesNames &species_name);
+  static void DisplayConfusedMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

@@ -26,19 +26,12 @@ class Move {
   MoveNames move_name_;
 };
 
-bool IsPhysical(const MoveNames &move_name);
-bool IsSpecial(const MoveNames &move_name);
 bool IsDamaging(const MoveNames &move_name);
-bool IsUseless(const MoveNames &move_name);
+bool IsPhysical(const MoveNames &move_name);
 bool IsSwitch(const MoveNames &move_name);
-bool OnlyChangesStat(const MoveNames &move_name);
-bool IsOneHitKo(const MoveNames &move_name);
 bool HasHighCriticalHitRatio(const MoveNames &move_name);
+bool IsSelfKo(const MoveNames &move_name);
 int VariableEffectChance(const MoveNames &move_name);
-bool IsSelfKoMove(const MoveNames &move_name);
-bool OnlyAppliesSomeEffect(const MoveNames &move_name);
-bool HasVariableDamage(const MoveNames &move_name);
-bool HasUnchangedDamage(const MoveNames &move_name);
 
 } //namespace artificialtrainer
 

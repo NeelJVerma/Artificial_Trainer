@@ -37,6 +37,10 @@ int Move::DamageDone() const {
   return damage_done_;
 }
 
+bool IsDamaging(const MoveNames &move_name) {
+  return static_cast<bool>(BasePower(move_name));
+}
+
 bool IsPhysical(const MoveNames &move_name) {
   switch (Type(move_name)) {
     case TypeNames::kNormal:
@@ -47,37 +51,6 @@ bool IsPhysical(const MoveNames &move_name) {
     case TypeNames::kBug:
     case TypeNames::kRock:
     case TypeNames::kGhost:
-      return true;
-    default:
-      return false;
-  }
-}
-
-bool IsSpecial(const MoveNames &move_name) {
-  switch (Type(move_name)) {
-    case TypeNames::kFire:
-    case TypeNames::kWater:
-    case TypeNames::kElectric:
-    case TypeNames::kGrass:
-    case TypeNames::kIce:
-    case TypeNames::kPsychic:
-    case TypeNames::kDragon:
-      return true;
-    default:
-      return false;
-  }
-}
-
-bool IsDamaging(const MoveNames &move_name) {
-  return BasePower(move_name) != static_cast<int>(PowerClasses::kNone);
-}
-
-bool IsUseless(const MoveNames &move_name) {
-  switch (move_name) {
-    case MoveNames::kRoar:
-    case MoveNames::kSplash:
-    case MoveNames::kWhirlwind:
-    case MoveNames::kTeleport:
       return true;
     default:
       return false;
@@ -98,46 +71,22 @@ bool IsSwitch(const MoveNames &move_name) {
   }
 }
 
-bool OnlyChangesStat(const MoveNames &move_name) {
-  switch (move_name) {
-    case MoveNames::kAcidArmor:
-    case MoveNames::kAgility:
-    case MoveNames::kAmnesia:
-    case MoveNames::kBarrier:
-    case MoveNames::kDefenseCurl:
-    case MoveNames::kDoubleTeam:
-    case MoveNames::kGrowth:
-    case MoveNames::kHarden:
-    case MoveNames::kMeditate:
-    case MoveNames::kMinimize:
-    case MoveNames::kSharpen:
-    case MoveNames::kSwordsDance:
-    case MoveNames::kWithdraw:
-    case MoveNames::kFlash:
-    case MoveNames::kGrowl:
-    case MoveNames::kKinesis:
-    case MoveNames::kLeer:
-    case MoveNames::kSandAttack:
-    case MoveNames::kScreech:
-    case MoveNames::kSmokescreen:
-    case MoveNames::kStringShot:
-    case MoveNames::kTailWhip:
-      return true;
-    default:
-      return false;
-  }
-}
-
-bool IsOneHitKo(const MoveNames &move_name) {
-  return BasePower(move_name) == static_cast<int>(PowerClasses::kOneHitKo);
-}
-
 bool HasHighCriticalHitRatio(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kCrabhammer:
     case MoveNames::kKarateChop:
     case MoveNames::kRazorLeaf:
     case MoveNames::kSlash:
+      return true;
+    default:
+      return false;
+  }
+}
+
+bool IsSelfKo(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kExplosion:
+    case MoveNames::kSelfDestruct:
       return true;
     default:
       return false;
@@ -182,60 +131,8 @@ int VariableEffectChance(const MoveNames &move_name) {
     case MoveNames::kStomp:
       return 33;
     default:
-      return 0;
+      assert(false);
   }
-}
-
-bool IsSelfKoMove(const MoveNames &move_name) {
-  return move_name == MoveNames::kSelfDestruct ||
-      move_name == MoveNames::kExplosion;
-}
-
-bool OnlyAppliesSomeEffect(const MoveNames &move_name) {
-  switch (move_name) {
-    case MoveNames::kConfuseRay:
-    case MoveNames::kConversion:
-    case MoveNames::kDisable:
-    case MoveNames::kFocusEnergy:
-    case MoveNames::kGlare:
-    case MoveNames::kHaze:
-    case MoveNames::kHypnosis:
-    case MoveNames::kLeechSeed:
-    case MoveNames::kLightScreen:
-    case MoveNames::kLovelyKiss:
-    case MoveNames::kMetronome:
-    case MoveNames::kMimic:
-    case MoveNames::kMirrorMove:
-    case MoveNames::kMist:
-    case MoveNames::kPoisonGas:
-    case MoveNames::kPoisonPowder:
-    case MoveNames::kRecover:
-    case MoveNames::kReflect:
-    case MoveNames::kRest:
-    case MoveNames::kSing:
-    case MoveNames::kSleepPowder:
-    case MoveNames::kSoftBoiled:
-    case MoveNames::kSpore:
-    case MoveNames::kStunSpore:
-    case MoveNames::kSubstitute:
-    case MoveNames::kSupersonic:
-    case MoveNames::kThunderWave:
-    case MoveNames::kToxic:
-    case MoveNames::kTransform:
-      return true;
-    default:
-      return false;
-  }
-}
-
-bool HasVariableDamage(const MoveNames &move_name) {
-  return static_cast<PowerClasses>(BasePower(move_name)) ==
-      PowerClasses::kVariable;
-}
-
-bool HasUnchangedDamage(const MoveNames &move_name) {
-  return static_cast<PowerClasses>(BasePower(move_name)) ==
-      PowerClasses::kUnchanged;
 }
 
 } //namespace artificialtrainer
