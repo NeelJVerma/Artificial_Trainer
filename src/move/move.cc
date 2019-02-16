@@ -37,6 +37,14 @@ int Move::DamageDone() const {
   return damage_done_;
 }
 
+void Move::SetDisabled(const bool &disabled) {
+  disabled_ = disabled;
+}
+
+bool Move::IsDisabled() const {
+  return disabled_;
+}
+
 bool IsDamaging(const MoveNames &move_name) {
   return static_cast<bool>(BasePower(move_name));
 }

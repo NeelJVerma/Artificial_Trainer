@@ -19,10 +19,13 @@ class Move {
   void DecrementPp(const int &amount);
   void SetDamageDone(const int &damage_done);
   int DamageDone() const;
+  void SetDisabled(const bool &disabled);
+  bool IsDisabled() const;
 
  private:
   int current_pp_;
   int damage_done_;
+  bool disabled_;
   MoveNames move_name_;
 };
 

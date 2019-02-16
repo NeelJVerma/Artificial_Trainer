@@ -182,20 +182,26 @@ bool Pokemon::IsFlinched() const {
 }
 
 
-bool Pokemon::Confuse() {
-  return flags_.confusion.Activate();
+void Pokemon::Confuse() {
+  flags_.confusion.Activate();
+}
+
+void Pokemon::DisableMove() {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(0, EndOfNormalMovesIndex() - 1);
+  int random_index = distribution(generator);
+  moves_container_[random_index]->SetDisabled(true);
+  Gui::DisplayMoveDisabledMessage(moves_container_[random_index]->MoveName());
+  flags_.disable.Activate();
+}
+
+bool Pokemon::HasMoveDisabled() const {
+  return flags_.disable.IsActive();
 }
 
 bool Pokemon::IsConfused() const {
   return flags_.confusion.IsActive();
-}
-
-void Pokemon::SetStatus(const StatusNames &status_name) {
-  flags_.status = status_name;
-}
-
-StatusNames Pokemon::Status() const {
-  return flags_.status;
 }
 
 void Pokemon::SetVanished(const bool &vanished) {
@@ -206,7 +212,7 @@ bool Pokemon::IsVanished() const {
   return flags_.vanished;
 }
 
-void Pokemon::UseConversion() {
+int Pokemon::EndOfNormalMovesIndex() const {
   int end_normal_moves_index = 0;
 
   for (int i = 0; i < moves_container_.Size(); i++) {
@@ -216,15 +222,21 @@ void Pokemon::UseConversion() {
     }
   }
 
+  return end_normal_moves_index;
+}
+
+void Pokemon::UseConversion() {
   std::random_device device;
   std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(0, end_normal_moves_index);
+  std::uniform_int_distribution<> distribution(0, EndOfNormalMovesIndex() - 1);
   TypeNames random_type = Type(
       moves_container_[distribution(generator)]->MoveName());
   type_container_.ResetTypeFromConversion(random_type);
 }
 
 bool Pokemon::HandleConfusion() {
+  // TODO: IF POKEMON IS RECHARGING OR STATUS PREVENTS THEM FROM ATTACKING,
+  //  RETURN TRUE
   if (!flags_.confusion.IsActive()) {
     return true;
   }
@@ -245,6 +257,29 @@ bool Pokemon::HandleConfusion() {
   return true;
 }
 
+void Pokemon::ReEnableDisabledMove() {
+  for (int i = 0; i < EndOfNormalMovesIndex(); i++) {
+    if (moves_container_[i]->IsDisabled()) {
+      moves_container_[i]->SetDisabled(false);
+    }
+  }
+}
+
+void Pokemon::HandleDisable() {
+  if (!flags_.disable.IsActive()) {
+    ReEnableDisabledMove();
+    return;
+  }
+
+  flags_.disable.AdvanceOneTurn();
+}
+
+void Pokemon::AbsorbHp(const int &damage_done) {
+  int absored = damage_done >> 1;
+  normal_stats_container_.HpStat()->AddHp(absored);
+  Gui::DisplayHpAbsorbedMessage(species_name_, absored);
+}
+
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);
@@ -253,6 +288,7 @@ void Pokemon::ResetEndOfTurnFlags() {
 void Pokemon::ResetSwitchFlags() {
   ResetStats();
   flags_.confusion = Confusion{};
+  flags_.disable = Disable{};
   flags_.used_focus_energy = false;
   type_container_ = TypeContainer(species_name_);
 }

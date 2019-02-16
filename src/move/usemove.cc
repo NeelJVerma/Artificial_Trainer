@@ -148,11 +148,26 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
       DamageRandomFactor()) / 255)));
 }
 
-void AbsorbHp(const std::shared_ptr<Pokemon> &attacker,
-              const int &damage_done) {
-  int absored = damage_done >> 1;
-  attacker->GetNormalStatsContainer().HpStat()->AddHp(absored);
-  Gui::DisplayHpAbsorbedMessage(attacker->SpeciesName(), absored);
+void UseCounter(const std::shared_ptr<Pokemon> &attacker,
+                const std::shared_ptr<Pokemon> &defender) {
+  if (!static_cast<int>(TypeProduct(attacker->MoveUsed(), defender))) {
+    Gui::DisplayMoveHadNoEffectMessage();
+    return;
+  }
+
+  MoveNames defender_move_name = defender->MoveUsed()->MoveName();
+  TypeNames defender_move_type = Type(defender_move_name);
+
+  if (!IsPhysical(defender_move_name) || !IsDamaging(defender_move_name) ||
+      (defender_move_type != TypeNames::kNormal &&
+          defender_move_type != TypeNames::kFighting)) {
+    Gui::DisplayMoveFailedMessage();
+    return;
+  }
+
+  int damage_done = defender->MoveUsed()->DamageDone() << 1;
+  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
+  Gui::DisplayDamageDoneMessage(damage_done);
 }
 
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
@@ -164,7 +179,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kAbsorb:
     case MoveNames::kMegaDrain:
     case MoveNames::kLeechLife:
-      AbsorbHp(attacker, damage_done);
+      attacker->AbsorbHp(damage_done);
       break;
     case MoveNames::kAcid:
     case MoveNames::kPsychic:
@@ -226,7 +241,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
     case MoveNames::kConfuseRay:
     case MoveNames::kSupersonic:
-      if (defender->Confuse()) {
+      if (!defender->IsConfused()) {
+        defender->Confuse();
         Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
       }
 
@@ -234,7 +250,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kConfusion:
     case MoveNames::kPsybeam:
       if (VariableEffectActivates(move_name)) {
-        if (defender->Confuse()) {
+        if (!defender->IsConfused()) {
+          defender->Confuse();
           Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
         }
       }
@@ -242,6 +259,24 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
     case MoveNames::kConversion:
       attacker->UseConversion();
+      break;
+    case MoveNames::kCounter:
+      UseCounter(attacker, defender);
+      break;
+    case MoveNames::kDefenseCurl:
+    case MoveNames::kHarden:
+    case MoveNames::kWithdraw:
+      attacker->ChangeStat(StatNames::kDefense, 1);
+      break;
+    case MoveNames::kDig:
+    case MoveNames::kFly:
+      // use vanish move
+      break;
+    case MoveNames::kDisable:
+      if (!defender->HasMoveDisabled()) {
+        defender->DisableMove();
+      }
+
       break;
     default:
       break;
@@ -261,12 +296,15 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
     return false;
   }
 
-  StatusNames attacker_status = attacker->Status();
-
   if (!attacker->HandleConfusion()) {
     attacker->SetMoveUsed(std::make_shared<Move>(
         MoveNames::kHitSelf, Pp(MoveNames::kHitSelf)));
     DoDamage(attacker, DamageDone(attacker, attacker, false, false));
+    return false;
+  }
+
+  if (attacker->MoveUsed()->IsDisabled()) {
+    Gui::DisplayMoveDisabledMessage(attacker->MoveUsed()->MoveName());
     return false;
   }
 
@@ -310,8 +348,9 @@ void UseMove(Team &attacker, Team &defender) {
     return;
   }
 
+  attacking_member->HandleDisable();
+  defending_member->HandleDisable();
   attacking_member->MoveUsed()->DecrementPp(1);
-
   Gui::DisplayPokemonUsedMoveMessage(attacking_member);
 
   if (!MoveHit(ChanceToHit(attacking_member, defending_member))) {
@@ -341,6 +380,7 @@ void UseMove(Team &attacker, Team &defender) {
   DoSideEffect(attacking_member, defending_member, damage_done);
 
   if (damage_done && WillDoDamage(attacking_member)) {
+    attacking_member->MoveUsed()->SetDamageDone(damage_done);
     DoDamage(defending_member, damage_done);
   }
 }

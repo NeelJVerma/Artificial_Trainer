@@ -270,4 +270,13 @@ void Gui::DisplayConfusionStartedMessage(const SpeciesNames &species_name) {
             << " became confused" << std::endl;
 }
 
+void Gui::DisplayDisableEndedMessage() {
+  std::cout << "The disable ended" << std::endl;
+}
+
+void Gui::DisplayMoveDisabledMessage(const MoveNames &move_name) {
+  std::cout << StringConverter::MoveToString(move_name)
+            << " is disabled" << std::endl;
+}
+
 } //namespace artificialtrainer

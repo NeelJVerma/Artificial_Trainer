@@ -447,6 +447,33 @@ src/move/usemove.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.s
 .PHONY : src/move/usemove.cc.s
 
+src/pokemon/Disable.o: src/pokemon/Disable.cc.o
+
+.PHONY : src/pokemon/Disable.o
+
+# target to build an object file
+src/pokemon/Disable.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/Disable.cc.o
+.PHONY : src/pokemon/Disable.cc.o
+
+src/pokemon/Disable.i: src/pokemon/Disable.cc.i
+
+.PHONY : src/pokemon/Disable.i
+
+# target to preprocess a source file
+src/pokemon/Disable.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/Disable.cc.i
+.PHONY : src/pokemon/Disable.cc.i
+
+src/pokemon/Disable.s: src/pokemon/Disable.cc.s
+
+.PHONY : src/pokemon/Disable.s
+
+# target to generate assembly for a file
+src/pokemon/Disable.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/Disable.cc.s
+.PHONY : src/pokemon/Disable.cc.s
+
 src/pokemon/confusion.o: src/pokemon/confusion.cc.o
 
 .PHONY : src/pokemon/confusion.o
@@ -897,6 +924,9 @@ help:
 	@echo "... src/move/usemove.o"
 	@echo "... src/move/usemove.i"
 	@echo "... src/move/usemove.s"
+	@echo "... src/pokemon/Disable.o"
+	@echo "... src/pokemon/Disable.i"
+	@echo "... src/pokemon/Disable.s"
 	@echo "... src/pokemon/confusion.o"
 	@echo "... src/pokemon/confusion.i"
 	@echo "... src/pokemon/confusion.s"

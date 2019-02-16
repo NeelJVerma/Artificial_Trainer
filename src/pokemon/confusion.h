@@ -12,7 +12,7 @@ class Confusion {
   Confusion &operator=(const Confusion &confusion) = default;
   Confusion();
   bool IsActive() const;
-  bool Activate();
+  void Activate();
   void AdvanceOneTurn();
 
  private:

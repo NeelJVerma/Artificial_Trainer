@@ -14,13 +14,12 @@ bool Confusion::IsActive() const {
   return static_cast<bool>(num_turns_confused_);
 }
 
-bool Confusion::Activate() {
+void Confusion::Activate() {
   if (IsActive()) {
-    return false;
+    return;
   }
 
   num_turns_confused_ = 1;
-  return true;
 }
 
 void Confusion::AdvanceOneTurn() {

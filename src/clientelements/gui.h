@@ -56,6 +56,8 @@ class Gui {
   static void DisplayConfusionStartedMessage(const SpeciesNames &species_name);
   static void DisplayHitSelfMessage(const SpeciesNames &species_name);
   static void DisplayConfusionEndedMessage();
+  static void DisplayDisableEndedMessage();
+  static void DisplayMoveDisabledMessage(const MoveNames &move_name);
 };
 
 } // namespace artificialtrainer

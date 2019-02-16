@@ -12,6 +12,7 @@
 #include "../stat/exclusiveingamestatscontainer.h"
 #include "statusnames.h"
 #include "confusion.h"
+#include "Disable.h"
 
 namespace artificialtrainer {
 struct InGameFlags {
@@ -19,7 +20,7 @@ struct InGameFlags {
   bool used_focus_energy = false;
   bool flinched = false;
   Confusion confusion{};
-  StatusNames status = StatusNames::kClear;
+  Disable disable{};
 };
 
 class Pokemon {
@@ -49,14 +50,16 @@ class Pokemon {
   bool UsedFocusEnergy() const;
   void SetFlinched(const bool &flinched);
   bool IsFlinched() const;
-  bool Confuse();
+  void Confuse();
   bool IsConfused() const;
-  void SetStatus(const StatusNames &status_name);
-  StatusNames Status() const;
+  void DisableMove();
+  bool HasMoveDisabled() const;
   void SetVanished(const bool &vanished);
-  bool HandleConfusion();
   bool IsVanished() const;
+  bool HandleConfusion();
+  void HandleDisable();
   void UseConversion();
+  void AbsorbHp(const int &damage_done);
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
@@ -73,6 +76,9 @@ class Pokemon {
   void LowerStat(const StatNames &stat_name, const int &num_stages);
   void RaiseStat(const StatNames &stat_name, const int &num_stages);
   void ResetStats();
+  void DisableRandomMove();
+  int EndOfNormalMovesIndex() const;
+  void ReEnableDisabledMove();
 };
 
 } //namespace artificialtrainer
