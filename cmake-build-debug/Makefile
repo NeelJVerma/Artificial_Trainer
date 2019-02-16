@@ -447,6 +447,33 @@ src/move/usemove.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.s
 .PHONY : src/move/usemove.cc.s
 
+src/pokemon/confusion.o: src/pokemon/confusion.cc.o
+
+.PHONY : src/pokemon/confusion.o
+
+# target to build an object file
+src/pokemon/confusion.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o
+.PHONY : src/pokemon/confusion.cc.o
+
+src/pokemon/confusion.i: src/pokemon/confusion.cc.i
+
+.PHONY : src/pokemon/confusion.i
+
+# target to preprocess a source file
+src/pokemon/confusion.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.i
+.PHONY : src/pokemon/confusion.cc.i
+
+src/pokemon/confusion.s: src/pokemon/confusion.cc.s
+
+.PHONY : src/pokemon/confusion.s
+
+# target to generate assembly for a file
+src/pokemon/confusion.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.s
+.PHONY : src/pokemon/confusion.cc.s
+
 src/pokemon/learnset.o: src/pokemon/learnset.cc.o
 
 .PHONY : src/pokemon/learnset.o
@@ -870,6 +897,9 @@ help:
 	@echo "... src/move/usemove.o"
 	@echo "... src/move/usemove.i"
 	@echo "... src/move/usemove.s"
+	@echo "... src/pokemon/confusion.o"
+	@echo "... src/pokemon/confusion.i"
+	@echo "... src/pokemon/confusion.s"
 	@echo "... src/pokemon/learnset.o"
 	@echo "... src/pokemon/learnset.i"
 	@echo "... src/pokemon/learnset.s"

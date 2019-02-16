@@ -3,7 +3,9 @@
 //
 
 #include <iostream>
+#include <random>
 #include "pokemon.h"
+#include "../clientelements/gui.h"
 
 namespace artificialtrainer {
 Pokemon::Pokemon(const SpeciesNames &species_name,
@@ -65,6 +67,10 @@ void Pokemon::SetIsActive(const bool &is_active) {
 
 void Pokemon::SetMoveUsed(const int &index) {
   move_used_ = moves_container_[index];
+}
+
+void Pokemon::SetMoveUsed(const std::shared_ptr<Move> &move) {
+  move_used_ = move;
 }
 
 std::shared_ptr<Move> Pokemon::MoveUsed() const {
@@ -175,12 +181,12 @@ bool Pokemon::IsFlinched() const {
 }
 
 
-void Pokemon::SetConfused(const bool &confused) {
-  flags_.confused = confused;
+bool Pokemon::Confuse() {
+  return flags_.confusion.Activate();
 }
 
 bool Pokemon::IsConfused() const {
-  return flags_.confused;
+  return flags_.confusion.IsActive();
 }
 
 void Pokemon::SetStatus(const StatusNames &status_name) {
@@ -191,13 +197,50 @@ StatusNames Pokemon::Status() const {
   return flags_.status;
 }
 
+void Pokemon::SetVanished(const bool &vanished) {
+  flags_.vanished = vanished;
+}
+
+bool Pokemon::IsVanished() const {
+  return flags_.vanished;
+}
+
+bool Pokemon::HandleConfusion() {
+  if (!flags_.confusion.IsActive()) {
+    return true;
+  }
+
+  Gui::DisplayConfusedMessage(species_name_);
+
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(1, 100);
+
+  if (distribution(generator) <= 50) {
+    Gui::DisplayHitSelfMessage(species_name_);
+    flags_.confusion.AdvanceOneTurn();
+    return false;
+  }
+
+  flags_.confusion.AdvanceOneTurn();
+  return true;
+}
+
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);
+
+  if (move_used_->MoveName() == MoveNames::kConfusion) {
+    std::vector<std::shared_ptr<Move>> current_moves =
+        moves_container_.CurrentMoves();
+    current_moves.erase(current_moves.begin() + current_moves.size() - 1);
+  }
 }
 
 void Pokemon::ResetSwitchFlags() {
-  // TODO: RESET SWITCH FLAGS
+  ResetStats();
+  flags_.confusion = Confusion{};
+  flags_.used_focus_energy = false;
 }
 
 } //namespace artificialtrainer

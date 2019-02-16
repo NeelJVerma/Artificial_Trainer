@@ -250,10 +250,24 @@ void Gui::DisplayConfusedMessage(const SpeciesNames &species_name) {
             << " is confused" << std::endl;
 }
 
+void Gui::DisplayHitSelfMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " hit itself in confusion" << std::endl;
+}
+
 void Gui::DisplayHpAbsorbedMessage(const SpeciesNames &species_name,
                                    const int &absorbed) {
   std::cout << StringConverter::SpeciesToString(species_name)
             << " absorbed " << absorbed << " hp" << std::endl;
+}
+
+void Gui::DisplayConfusionEndedMessage() {
+  std::cout << "The confusion ended" << std::endl;
+}
+
+void Gui::DisplayConfusionStartedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " became confused" << std::endl;
 }
 
 } //namespace artificialtrainer

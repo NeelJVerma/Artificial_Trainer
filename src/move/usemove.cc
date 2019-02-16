@@ -11,6 +11,7 @@
 #include "basepower.h"
 #include "../clientelements/gui.h"
 #include "../type/effectiveness.h"
+#include "pp.h"
 
 namespace artificialtrainer {
 namespace {
@@ -170,14 +171,85 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       if (VariableEffectActivates(move_name)) {
         defender->ChangeStat(StatNames::kSpecial, -1);
       }
+
       break;
     case MoveNames::kBarrier:
     case MoveNames::kAcidArmor:
       attacker->ChangeStat(StatNames::kDefense, 2);
       break;
+    case MoveNames::kAgility:
+      attacker->ChangeStat(StatNames::kSpeed, 2);
+      break;
+    case MoveNames::kBite:
+    case MoveNames::kBoneClub:
+    case MoveNames::kHeadbutt:
+    case MoveNames::kHyperFang:
+    case MoveNames::kLowKick:
+    case MoveNames::kRollingKick:
+    case MoveNames::kStomp:
+      if (VariableEffectActivates(move_name)) {
+        defender->SetFlinched(true);
+      }
+
+      break;
+    case MoveNames::kAmnesia:
+      attacker->ChangeStat(StatNames::kSpeed, 2);
+      break;
+    case MoveNames::kAuroraBeam:
+      defender->ChangeStat(StatNames::kAttack, -1);
+      break;
+    case MoveNames::kBide:
+      // use bide
+      break;
+    case MoveNames::kBind:
+    case MoveNames::kClamp:
+    case MoveNames::kFireSpin:
+    case MoveNames::kWrap:
+      // trap defender
+      break;
+    case MoveNames::kBlizzard:
+    case MoveNames::kIcePunch:
+    case MoveNames::kIceBeam:
+      // variable freeze defender
+      break;
+    case MoveNames::kBodySlam:
+    case MoveNames::kLick:
+    case MoveNames::kThunder:
+    case MoveNames::kThunderbolt:
+    case MoveNames::kThunderShock:
+      // variable paralyze defender
+      break;
+    case MoveNames::kBubble:
+    case MoveNames::kBubbleBeam:
+    case MoveNames::kConstrict:
+      defender->ChangeStat(StatNames::kSpeed, -1);
+      break;
+    case MoveNames::kConfuseRay:
+    case MoveNames::kSupersonic:
+      if (defender->Confuse()) {
+        Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
+      }
+
+      break;
+    case MoveNames::kConfusion:
+    case MoveNames::kPsybeam:
+      if (VariableEffectActivates(move_name)) {
+        if (defender->Confuse()) {
+          Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
+        }
+      }
+
+      break;
+
     default:
       break;
   }
+}
+
+void DoDamage(const std::shared_ptr<Pokemon> &defender,
+              const int &damage_done) {
+  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
+  Gui::DisplayDamageDoneMessage(damage_done);
 }
 
 bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
@@ -188,6 +260,14 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   }
 
   StatusNames attacker_status = attacker->Status();
+
+  if (!attacker->HandleConfusion()) {
+    attacker->SetMoveUsed(std::make_shared<Move>(
+        MoveNames::kHitSelf, Pp(MoveNames::kHitSelf)));
+    DoDamage(attacker, DamageDone(attacker, attacker, false, false));
+    return false;
+  }
+
   // SLEEP, FROZEN: RETURN FALSE
   // FLINCHED: RETURN FALSE
   // FULLY PARA: RETURN FALSE
@@ -197,10 +277,13 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   return true;
 }
 
-void DoDamage(const std::shared_ptr<Pokemon> &defender,
-              const int &damage_done) {
-  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
-  Gui::DisplayDamageDoneMessage(damage_done);
+bool WillDoDamage(const std::shared_ptr<Pokemon> &attacker) {
+  if (attacker->IsVanished()) {
+    return false;
+  }
+
+  // TODO: ADD MORE AS NEEDED
+  return true;
 }
 
 } //namespace
@@ -209,9 +292,16 @@ void UseMove(Team &attacker, Team &defender) {
   std::shared_ptr<Pokemon> attacking_member = attacker.ActiveMember();
   std::shared_ptr<Pokemon> defending_member = defender.ActiveMember();
 
+  if (IsSwitch(attacking_member->MoveUsed()->MoveName())) {
+    attacker.HardSwitch();
+    return;
+  }
+
   if (!IsGoodToMove(attacking_member, defending_member)) {
     return;
   }
+
+  attacking_member->MoveUsed()->DecrementPp(1);
 
   Gui::DisplayPokemonUsedMoveMessage(attacking_member);
 
@@ -220,7 +310,8 @@ void UseMove(Team &attacker, Team &defender) {
     return;
   }
 
-  bool move_crit = MoveCrit(CriticalHitChance(attacking_member));
+  bool move_crit = IsDamaging(attacking_member->MoveUsed()->MoveName())
+                   ? MoveCrit(CriticalHitChance(attacking_member)) : false;
 
   if (move_crit) {
     Gui::DisplayMoveCritMessage();
@@ -240,7 +331,7 @@ void UseMove(Team &attacker, Team &defender) {
                                false);
   DoSideEffect(attacking_member, defending_member, damage_done);
 
-  if (damage_done) {
+  if (damage_done && WillDoDamage(attacking_member)) {
     DoDamage(defending_member, damage_done);
   }
 }

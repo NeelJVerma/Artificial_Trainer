@@ -69,7 +69,7 @@ void Team::HardSwitch() {
       old_active_pokemon->MoveUsed()->MoveName()) - static_cast<int>(
       MoveNames::kSwitch1);
   old_active_pokemon->SetIsActive(false);
-  old_active_pokemon->ResetStats();
+  old_active_pokemon->ResetSwitchFlags();
   active_team_[switch_index]->SetIsActive(true);
   SetActiveMember(switch_index);
 }

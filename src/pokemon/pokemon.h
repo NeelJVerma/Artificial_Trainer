@@ -11,14 +11,14 @@
 #include "../type/typecontainer.h"
 #include "../stat/exclusiveingamestatscontainer.h"
 #include "statusnames.h"
+#include "confusion.h"
 
 namespace artificialtrainer {
 struct InGameFlags {
-  bool flying = false;
-  bool digging = false;
+  bool vanished = false;
   bool used_focus_energy = false;
   bool flinched = false;
-  bool confused = false;
+  Confusion confusion{};
   StatusNames status = StatusNames::kClear;
 };
 
@@ -42,17 +42,20 @@ class Pokemon {
   bool IsActive() const;
   void SetIsActive(const bool &is_active);
   void SetMoveUsed(const int &index);
+  void SetMoveUsed(const std::shared_ptr<Move> &move);
   std::shared_ptr<Move> MoveUsed() const;
-  void ResetStats();
   void ChangeStat(const StatNames &stat_name, const int &num_stages);
   void SetUsedFocusEnergy(const bool &used_focus_energy);
   bool UsedFocusEnergy() const;
   void SetFlinched(const bool &flinched);
   bool IsFlinched() const;
-  void SetConfused(const bool &confused);
+  bool Confuse();
   bool IsConfused() const;
   void SetStatus(const StatusNames &status_name);
   StatusNames Status() const;
+  void SetVanished(const bool &vanished);
+  bool HandleConfusion();
+  bool IsVanished() const;
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
@@ -68,6 +71,7 @@ class Pokemon {
   bool is_active_;
   void LowerStat(const StatNames &stat_name, const int &num_stages);
   void RaiseStat(const StatNames &stat_name, const int &num_stages);
+  void ResetStats();
 };
 
 } //namespace artificialtrainer
