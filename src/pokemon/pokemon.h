@@ -56,6 +56,7 @@ class Pokemon {
   void SetVanished(const bool &vanished);
   bool HandleConfusion();
   bool IsVanished() const;
+  void UseConversion();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 

@@ -6,6 +6,7 @@
 #include <random>
 #include "pokemon.h"
 #include "../clientelements/gui.h"
+#include "../type/type.h"
 
 namespace artificialtrainer {
 Pokemon::Pokemon(const SpeciesNames &species_name,
@@ -205,6 +206,24 @@ bool Pokemon::IsVanished() const {
   return flags_.vanished;
 }
 
+void Pokemon::UseConversion() {
+  int end_normal_moves_index = 0;
+
+  for (int i = 0; i < moves_container_.Size(); i++) {
+    if (moves_container_[i]->MoveName() == MoveNames::kPass) {
+      end_normal_moves_index = i;
+      break;
+    }
+  }
+
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(0, end_normal_moves_index);
+  TypeNames random_type = Type(
+      moves_container_[distribution(generator)]->MoveName());
+  type_container_.ResetTypeFromConversion(random_type);
+}
+
 bool Pokemon::HandleConfusion() {
   if (!flags_.confusion.IsActive()) {
     return true;
@@ -229,18 +248,13 @@ bool Pokemon::HandleConfusion() {
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);
-
-  if (move_used_->MoveName() == MoveNames::kConfusion) {
-    std::vector<std::shared_ptr<Move>> current_moves =
-        moves_container_.CurrentMoves();
-    current_moves.erase(current_moves.begin() + current_moves.size() - 1);
-  }
 }
 
 void Pokemon::ResetSwitchFlags() {
   ResetStats();
   flags_.confusion = Confusion{};
   flags_.used_focus_energy = false;
+  type_container_ = TypeContainer(species_name_);
 }
 
 } //namespace artificialtrainer

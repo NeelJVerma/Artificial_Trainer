@@ -19,7 +19,6 @@ class MovesContainer {
   MovesContainer(const MovesContainer &moves_container) = default;
   MovesContainer &operator=(const MovesContainer &moves_container) = default;
   void AddMove(const std::shared_ptr<Move> &move);
-  std::vector<std::shared_ptr<Move>> CurrentMoves() const;
   bool SeenMove(const MoveNames &move_name) const;
   int Size() const;
   std::shared_ptr<Move> operator[](const int &index) const;

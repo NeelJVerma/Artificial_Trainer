@@ -19,6 +19,7 @@ class TypeContainer {
   explicit TypeContainer(const SpeciesNames &species_name);
   TypeNames FirstType() const;
   TypeNames SecondType() const;
+  void ResetTypeFromConversion(const TypeNames &type_name);
   bool MoveMatchesType(const MoveNames &move_name) const;
 
  private:

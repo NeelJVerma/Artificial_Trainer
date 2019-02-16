@@ -201,6 +201,7 @@ CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/normalst
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/normalstatscontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/statnames.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/team/team.h
+CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/type/typecontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/type/typenames.h
 
@@ -249,6 +250,7 @@ CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.o: ../s
 CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/stringconverter/stringconverter.cc.o: ../src/type/typenames.h
 
+CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/clientelements/gui.h
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/move/move.h
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o: ../src/move/movescontainer.h

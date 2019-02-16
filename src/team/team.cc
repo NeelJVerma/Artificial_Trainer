@@ -3,7 +3,7 @@
 //
 
 #include <stdexcept>
-#include "team.h"
+#include "../clientelements/gui.h"
 
 namespace artificialtrainer {
 void Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) {

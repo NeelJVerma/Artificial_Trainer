@@ -240,7 +240,9 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       }
 
       break;
-
+    case MoveNames::kConversion:
+      attacker->UseConversion();
+      break;
     default:
       break;
   }
@@ -286,6 +288,13 @@ bool WillDoDamage(const std::shared_ptr<Pokemon> &attacker) {
   return true;
 }
 
+void HardSwitch(Team &attacker) {
+  std::shared_ptr<Pokemon> old_active_member = attacker.ActiveMember();
+  attacker.HardSwitch();
+  Gui::DisplaySwitchMessage(old_active_member->SpeciesName(),
+                            attacker.ActiveMember()->SpeciesName());
+}
+
 } //namespace
 
 void UseMove(Team &attacker, Team &defender) {
@@ -293,7 +302,7 @@ void UseMove(Team &attacker, Team &defender) {
   std::shared_ptr<Pokemon> defending_member = defender.ActiveMember();
 
   if (IsSwitch(attacking_member->MoveUsed()->MoveName())) {
-    attacker.HardSwitch();
+    HardSwitch(attacker);
     return;
   }
 

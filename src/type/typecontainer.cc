@@ -339,4 +339,9 @@ bool TypeContainer::MoveMatchesType(const MoveNames &move_name) const {
   return matches_first || matches_second;
 }
 
+void TypeContainer::ResetTypeFromConversion(const TypeNames &type_name) {
+  types_.first = type_name;
+  types_.second = TypeNames::kNoType;
+}
+
 } //namespace artificialtrainer
