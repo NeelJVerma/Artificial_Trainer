@@ -21,6 +21,7 @@ class Move {
   int DamageDone() const;
   void SetDisabled(const bool &disabled);
   bool IsDisabled() const;
+  void ResetMove(const MoveNames &move_name, const int &current_pp);
 
  private:
   int current_pp_;

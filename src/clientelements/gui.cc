@@ -285,4 +285,11 @@ void Gui::DisplayRecoilDamageMessage(const SpeciesNames &species_name,
             << " took " << damage_done << " recoil damage" << std::endl;
 }
 
+void Gui::DisplayPokemonCopiedMoveMessage(const SpeciesNames &species_name,
+                                          const MoveNames &move_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " copied " << StringConverter::MoveToString(move_name)
+            << std::endl;
+}
+
 } //namespace artificialtrainer

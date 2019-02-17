@@ -202,6 +202,52 @@ void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
   Gui::DisplayOneHitKoMoveLandedMessage();
 }
 
+bool MimicWillSucceed(const std::shared_ptr<Pokemon> &attacker,
+                      const std::shared_ptr<Pokemon> &defender) {
+  MovesContainer defender_moves = defender->GetMovesContainer();
+
+  for (int i = 0; i < defender_moves.Size(); i++) {
+    if (!attacker->GetMovesContainer().SeenMove(
+        defender_moves[i]->MoveName())) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+MoveNames MoveFromMimic(const std::shared_ptr<Pokemon> &attacker,
+                        const std::shared_ptr<Pokemon> &defender) {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(
+      0, defender->EndOfNormalMovesIndex() - 1);
+  MoveNames random_move;
+
+  while (true) {
+    random_move =
+        defender->GetMovesContainer()[distribution(generator)]->MoveName();
+
+    if (random_move != MoveNames::kStruggle &&
+        random_move != MoveNames::kMimic &&
+        !attacker->GetMovesContainer().SeenMove(random_move)) {
+      break;
+    }
+  }
+
+  return random_move;
+}
+
+void UseMimic(const std::shared_ptr<Pokemon> &attacker,
+              const std::shared_ptr<Pokemon> &defender) {
+  MoveNames random_move = MoveFromMimic(attacker, defender);
+  MovesContainer attacker_moves = attacker->GetMovesContainer();
+  int mimic_pp = attacker_moves[attacker_moves.IndexOfMimic()]->CurrentPp();
+  attacker_moves.ResetMoveAtIndex(attacker_moves.IndexOfMimic(), random_move,
+                                  mimic_pp);
+  Gui::DisplayPokemonCopiedMoveMessage(attacker->SpeciesName(), random_move);
+}
+
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
                   const int &damage_done, const bool &move_hit) {
@@ -394,6 +440,10 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kSharpen:
       attacker->ChangeStat(StatNames::kAttack, 1);
       break;
+    case MoveNames::kMimic:
+      MimicWillSucceed(attacker, defender) ?
+      UseMimic(attacker, defender) : Gui::DisplayMoveFailedMessage();
+      break;
     default:
       break;
   }
@@ -497,9 +547,18 @@ void UseMove(Team &attacker, Team &defender) {
     Gui::DisplayMoveMissedMessage();
   }
 
-  // have to handle metronome separately as well
+  // Metronome has to be handled separately because it makes the attacker
+  // call a random move. This needs to be set as attacker->MoveUsed(), and
+  // then they have to call that move with the side effect and damage. See
+  // Pokemon->UseMetronome() for a reference.
   if (move_used->MoveName() == MoveNames::kMetronome) {
     attacking_member->UseMetronome();
+  }
+
+  // Mirror move must be handled separately for the same reason. The attacker
+  // essentially is going to be executing two moves.
+  if (move_used->MoveName() == MoveNames::kMirrorMove) {
+    // use mirror move
   }
 
   ExecuteMove(attacking_member, defending_member, move_hit);

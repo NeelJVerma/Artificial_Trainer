@@ -46,6 +46,13 @@ bool Move::IsDisabled() const {
   return disabled_;
 }
 
+void Move::ResetMove(const MoveNames &move_name, const int &current_pp) {
+  move_name_ = move_name;
+  current_pp_ = current_pp;
+  disabled_ = false;
+  damage_done_ = 0;
+}
+
 bool IsDamaging(const MoveNames &move_name) {
   return static_cast<bool>(BasePower(move_name));
 }

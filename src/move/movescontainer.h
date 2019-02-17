@@ -21,6 +21,9 @@ class MovesContainer {
   void AddMove(const std::shared_ptr<Move> &move);
   bool SeenMove(const MoveNames &move_name) const;
   int Size() const;
+  int IndexOfMimic() const;
+  void ResetMoveAtIndex(const int &index, const MoveNames &move_name,
+                        const int &move_pp);
   std::shared_ptr<Move> operator[](const int &index) const;
 
  private:

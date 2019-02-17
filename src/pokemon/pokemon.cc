@@ -308,7 +308,6 @@ void Pokemon::UseMetronome() {
     }
   }
 
-
   move_used_ = std::make_shared<Move>(random_move, Pp(random_move));
   Gui::DisplayPokemonUsedMoveMessage(species_name_, random_move);
 }

@@ -23,6 +23,23 @@ int MovesContainer::Size() const {
   return static_cast<int>(current_moves_.size());
 }
 
+int MovesContainer::IndexOfMimic() const {
+  for (int i = 0; i < current_moves_.size(); i++) {
+    if (current_moves_[i]->MoveName() == MoveNames::kMimic) {
+      return i;
+    }
+  }
+
+  // Will never reach here because of how this function is used.
+  return -1;
+}
+
+void MovesContainer::ResetMoveAtIndex(const int &index,
+                                      const MoveNames &move_name,
+                                      const int &move_pp) {
+  current_moves_[index]->ResetMove(move_name, move_pp);
+}
+
 std::shared_ptr<Move> MovesContainer::operator[](const int &index) const {
   return current_moves_[index];
 }

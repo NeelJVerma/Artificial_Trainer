@@ -64,6 +64,7 @@ class Pokemon {
   void AutoFaint();
   void UseMetronome();
   bool IsTyoe(const TypeNames &type_name) const;
+  int EndOfNormalMovesIndex() const;
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
@@ -80,7 +81,6 @@ class Pokemon {
   void LowerStat(const StatNames &stat_name, const int &num_stages);
   void RaiseStat(const StatNames &stat_name, const int &num_stages);
   void ResetStats();
-  int EndOfNormalMovesIndex() const;
   void ReEnableDisabledMove();
 };
 
