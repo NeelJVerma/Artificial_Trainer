@@ -313,6 +313,14 @@ void Pokemon::UseMetronome() {
   Gui::DisplayPokemonUsedMoveMessage(species_name_, random_move);
 }
 
+bool Pokemon::IsTyoe(const TypeNames &type_name) const {
+  bool matches_first = type_name == type_container_.FirstType() &&
+      type_container_.FirstType() != TypeNames::kNoType;
+  bool matches_second = type_name == type_container_.SecondType() &&
+      type_container_.SecondType() != TypeNames::kNoType;
+  return matches_first || matches_second;
+}
+
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);

@@ -63,6 +63,7 @@ class Pokemon {
   void TakeRecoilDamage(const int &damage_done);
   void AutoFaint();
   void UseMetronome();
+  bool IsTyoe(const TypeNames &type_name) const;
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 

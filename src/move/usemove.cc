@@ -122,9 +122,7 @@ std::pair<int, int> AttackAndDefenseUsed(
 
 int DamageDone(const std::shared_ptr<Pokemon> &attacker,
                const std::shared_ptr<Pokemon> &defender,
-               const bool &move_crit, const bool &self_ko_move) {
-  std::pair<int, int> used_stats = AttackAndDefenseUsed(attacker, defender,
-                                                        move_crit);
+               const bool &self_ko_move) {
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
 
   if (!BasePower(move_used->MoveName())) {
@@ -133,12 +131,26 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
 
   double type_product = TypeProduct(move_used, defender);
 
-  if (!static_cast<int>(type_product)) {
+  if (!static_cast<int>(type_product) ||
+      (move_used->MoveName() == MoveNames::kLick &&
+          defender->IsTyoe(TypeNames::kPsychic))) {
     Gui::DisplayMoveHadNoEffectMessage();
-  } else if (type_product < 10.0) {
+    return 0;
+  }
+
+  if (type_product < 10.0) {
     Gui::DisplayNotVeryEffectiveMessage();
   } else if (type_product > 10.0) {
     Gui::DisplaySuperEffectiveMessage();
+  }
+
+  bool move_crit = IsDamaging(move_used->MoveName())
+                   ? MoveCrit(CriticalHitChance(attacker)) : false;
+  std::pair<int, int> used_stats = AttackAndDefenseUsed(attacker, defender,
+                                                        move_crit);
+
+  if (move_crit) {
+    Gui::DisplayMoveCritMessage();
   }
 
   return static_cast<int>(floor(((((((((2.0 * (move_crit ? 2 : 1) *
@@ -192,8 +204,12 @@ void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
 
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
-                  const int &damage_done) {
+                  const int &damage_done, const bool &move_hit) {
   MoveNames move_name = attacker->MoveUsed()->MoveName();
+
+  if (!HasSideEffectIfMissed(move_name) && !move_hit) {
+    return;
+  }
 
   switch (move_name) {
     case MoveNames::kAbsorb:
@@ -346,6 +362,14 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kHaze:
       // haze the field
       break;
+    case MoveNames::kHighJumpKick:
+    case MoveNames::kJumpKick:
+      if (!move_hit || !damage_done) {
+        attacker->GetNormalStatsContainer().HpStat()->SubtractHp(1);
+        Gui::DisplayRecoilDamageMessage(attacker->SpeciesName(), 1);
+      }
+
+      break;
     case MoveNames::kHyperBeam:
       // recharge
       break;
@@ -396,7 +420,7 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   if (!attacker->HandleConfusion()) {
     attacker->SetMoveUsed(std::make_shared<Move>(
         MoveNames::kHitSelf, Pp(MoveNames::kHitSelf)));
-    DoDamage(attacker, DamageDone(attacker, attacker, false, false));
+    DoDamage(attacker, DamageDone(attacker, attacker, false));
     return false;
   }
 
@@ -415,20 +439,35 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   return true;
 }
 
-bool WillDoDamage(const std::shared_ptr<Pokemon> &attacker) {
-  if (attacker->IsVanished()) {
-    return false;
-  }
-
-  // TODO: ADD MORE AS NEEDED
-  return true;
-}
-
 void HardSwitch(Team &attacker) {
   std::shared_ptr<Pokemon> old_active_member = attacker.ActiveMember();
   attacker.HardSwitch();
   Gui::DisplaySwitchMessage(old_active_member->SpeciesName(),
                             attacker.ActiveMember()->SpeciesName());
+}
+
+void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
+                 const std::shared_ptr<Pokemon> &defender,
+                 const bool &move_hit) {
+  std::shared_ptr<Move> move_used = attacker->MoveUsed();
+
+  // have to call recursively for moves that hit multiple times in one turn
+  // maybe ?
+
+  int damage_done = IsSelfKo(move_used->MoveName()) ?
+                    DamageDone(attacker,
+                               defender,
+                               true) :
+                    DamageDone(attacker,
+                               defender,
+                               false);
+
+  if (damage_done && move_hit) {
+    move_used->SetDamageDone(damage_done);
+    DoDamage(defender, damage_done);
+  }
+
+  DoSideEffect(attacker, defender, damage_done, move_hit);
 }
 
 } //namespace
@@ -448,53 +487,22 @@ void UseMove(Team &attacker, Team &defender) {
 
   attacking_member->HandleDisable();
   defending_member->HandleDisable();
+  std::shared_ptr<Move> move_used = attacking_member->MoveUsed();
   attacking_member->MoveUsed()->DecrementPp(1);
   Gui::DisplayPokemonUsedMoveMessage(attacking_member->SpeciesName(),
-                                     attacking_member->MoveUsed()->MoveName());
+                                     move_used->MoveName());
+  bool move_hit = MoveHit(ChanceToHit(attacking_member, defending_member));
 
-  if (!MoveHit(ChanceToHit(attacking_member, defending_member))) {
+  if (!move_hit) {
     Gui::DisplayMoveMissedMessage();
-    MoveNames move_used_name = attacking_member->MoveUsed()->MoveName();
-
-    // have to handle this separately
-    if (move_used_name == MoveNames::kHighJumpKick ||
-        move_used_name == MoveNames::kJumpKick) {
-      attacking_member->GetNormalStatsContainer().HpStat()->SubtractHp(1);
-      Gui::DisplayRecoilDamageMessage(attacking_member->SpeciesName(), 1);
-    }
-
-    return;
   }
 
-  if (attacking_member->MoveUsed()->MoveName() == MoveNames::kMetronome) {
+  // have to handle metronome separately as well
+  if (move_used->MoveName() == MoveNames::kMetronome) {
     attacking_member->UseMetronome();
   }
 
-  bool move_crit = IsDamaging(attacking_member->MoveUsed()->MoveName())
-                   ? MoveCrit(CriticalHitChance(attacking_member)) : false;
-
-  if (move_crit) {
-    Gui::DisplayMoveCritMessage();
-  }
-
-  // have to call recursively for moves that hit multiple times in one turn
-  // maybe ?
-
-  int damage_done = IsSelfKo(attacking_member->MoveUsed()->MoveName()) ?
-                    DamageDone(attacking_member,
-                               defending_member,
-                               move_crit,
-                               true) :
-                    DamageDone(attacking_member,
-                               defending_member,
-                               move_crit,
-                               false);
-  DoSideEffect(attacking_member, defending_member, damage_done);
-
-  if (damage_done && WillDoDamage(attacking_member)) {
-    attacking_member->MoveUsed()->SetDamageDone(damage_done);
-    DoDamage(defending_member, damage_done);
-  }
+  ExecuteMove(attacking_member, defending_member, move_hit);
 }
 
 } //namespace artificialtrainer

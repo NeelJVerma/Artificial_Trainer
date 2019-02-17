@@ -144,4 +144,16 @@ int VariableEffectChance(const MoveNames &move_name) {
   }
 }
 
+bool HasSideEffectIfMissed(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kHighJumpKick:
+    case MoveNames::kJumpKick:
+    case MoveNames::kExplosion:
+    case MoveNames::kSelfDestruct:
+      return true;
+    default:
+      return false;
+  }
+}
+
 } //namespace artificialtrainer

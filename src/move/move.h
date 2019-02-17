@@ -34,6 +34,7 @@ bool IsPhysical(const MoveNames &move_name);
 bool IsSwitch(const MoveNames &move_name);
 bool HasHighCriticalHitRatio(const MoveNames &move_name);
 bool IsSelfKo(const MoveNames &move_name);
+bool HasSideEffectIfMissed(const MoveNames &move_name);
 int VariableEffectChance(const MoveNames &move_name);
 
 } //namespace artificialtrainer
