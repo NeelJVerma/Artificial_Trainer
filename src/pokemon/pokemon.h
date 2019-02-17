@@ -12,7 +12,7 @@
 #include "../stat/exclusiveingamestatscontainer.h"
 #include "statusnames.h"
 #include "confusion.h"
-#include "Disable.h"
+#include "disable.h"
 
 namespace artificialtrainer {
 struct InGameFlags {
@@ -21,6 +21,8 @@ struct InGameFlags {
   bool flinched = false;
   Confusion confusion{};
   Disable disable{};
+  bool used_mimic = false;
+  int mimic_index = 0;
 };
 
 class Pokemon {
@@ -65,6 +67,8 @@ class Pokemon {
   void UseMetronome();
   bool IsTyoe(const TypeNames &type_name) const;
   int EndOfNormalMovesIndex() const;
+  void SetUsedMimic(const bool &used_mimic);
+  void SetMimicIndex(const int& index_in_move_container);
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
@@ -82,6 +86,7 @@ class Pokemon {
   void RaiseStat(const StatNames &stat_name, const int &num_stages);
   void ResetStats();
   void ReEnableDisabledMove();
+  void RestoreMimic();
 };
 
 } //namespace artificialtrainer

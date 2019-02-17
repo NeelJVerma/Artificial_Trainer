@@ -156,16 +156,16 @@
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/move/usemove.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/pokemon/Disable.cc">
-			<Option target="Artificial_Trainer"/>
-		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/pokemon/Disable.h">
-			<Option target="Artificial_Trainer"/>
-		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/pokemon/confusion.cc">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/pokemon/confusion.h">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/pokemon/disable.cc">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/pokemon/disable.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/pokemon/learnset.cc">

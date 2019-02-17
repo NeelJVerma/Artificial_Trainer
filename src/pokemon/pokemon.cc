@@ -320,6 +320,24 @@ bool Pokemon::IsTyoe(const TypeNames &type_name) const {
   return matches_first || matches_second;
 }
 
+void Pokemon::SetUsedMimic(const bool &used_mimic) {
+  flags_.used_mimic = used_mimic;
+}
+
+void Pokemon::SetMimicIndex(const int &index_in_move_container) {
+  flags_.mimic_index = index_in_move_container;
+}
+
+void Pokemon::RestoreMimic() {
+  if (!flags_.used_mimic) {
+    return;
+  }
+
+  std::shared_ptr<Move> move_to_reset = moves_container_[flags_.mimic_index];
+  move_to_reset->ResetMove(MoveNames::kMimic, move_to_reset->CurrentPp());
+  flags_.used_mimic = false;
+}
+
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);
@@ -327,6 +345,7 @@ void Pokemon::ResetEndOfTurnFlags() {
 
 void Pokemon::ResetSwitchFlags() {
   ResetStats();
+  RestoreMimic();
   flags_.confusion = Confusion{};
   flags_.disable = Disable{};
   flags_.used_focus_energy = false;

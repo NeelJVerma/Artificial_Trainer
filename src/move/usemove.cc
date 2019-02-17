@@ -242,9 +242,11 @@ void UseMimic(const std::shared_ptr<Pokemon> &attacker,
               const std::shared_ptr<Pokemon> &defender) {
   MoveNames random_move = MoveFromMimic(attacker, defender);
   MovesContainer attacker_moves = attacker->GetMovesContainer();
-  int mimic_pp = attacker_moves[attacker_moves.IndexOfMimic()]->CurrentPp();
-  attacker_moves.ResetMoveAtIndex(attacker_moves.IndexOfMimic(), random_move,
-                                  mimic_pp);
+  int index_of_mimic = attacker_moves.IndexOfMimic();
+  int mimic_pp = attacker_moves[index_of_mimic]->CurrentPp();
+  attacker_moves.ResetMoveAtIndex(index_of_mimic, random_move, mimic_pp);
+  attacker->SetMimicIndex(index_of_mimic);
+  attacker->SetUsedMimic(true);
   Gui::DisplayPokemonCopiedMoveMessage(attacker->SpeciesName(), random_move);
 }
 

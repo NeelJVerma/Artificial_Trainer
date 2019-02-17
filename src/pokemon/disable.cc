@@ -3,7 +3,7 @@
 //
 
 #include <random>
-#include "Disable.h"
+#include "disable.h"
 #include "../clientelements/gui.h"
 
 namespace artificialtrainer {
