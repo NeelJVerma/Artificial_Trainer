@@ -136,7 +136,6 @@ void Pokemon::LowerStat(const StatNames &stat_name,
         return;
       }
 
-      std::cout << stat_to_lower->InGameStat() << std::endl;
       if (stat_to_lower->CalculatedStat() > 1.0) {
         stat_to_lower->LowerNumerator(1);
       } else {
@@ -338,6 +337,14 @@ void Pokemon::RestoreMimic() {
   flags_.used_mimic = false;
 }
 
+void Pokemon::SetExecutedMove(const std::shared_ptr<Move> &executed_move) {
+  flags_.exectued_move = executed_move;
+}
+
+std::shared_ptr<Move> Pokemon::ExecutedMove() const {
+  return flags_.exectued_move;
+}
+
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);
@@ -350,6 +357,7 @@ void Pokemon::ResetSwitchFlags() {
   flags_.disable = Disable{};
   flags_.used_focus_energy = false;
   type_container_ = TypeContainer(species_name_);
+  flags_.exectued_move = nullptr;
 }
 
 } //namespace artificialtrainer

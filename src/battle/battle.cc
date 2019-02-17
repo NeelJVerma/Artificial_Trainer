@@ -35,7 +35,7 @@ void SelectTeam(Team &team, const bool &team_one) {
   Gui::DisplayPickTeamMessage(team_one);
 
   // TODO: CHANGE BACK TO ACTUAL TEAM SIZE WHEN DONE TESTING
-  for (int i = 0; i < Team::kMaxTeamSize - 4; i++) {
+  for (int i = 0; i < Team::kMaxTeamSize - 5; i++) {
     Gui::DisplayPickPokemonMessage(i + 1);
     int pokemon_selection = InputHandler::GetIntInput(1, kNumSpecies);
     auto pokemon_species = static_cast<SpeciesNames>(pokemon_selection - 1);
@@ -205,6 +205,7 @@ bool Battle::HandleMove(Team &attacker, Team &defender) {
   UseMove(attacker, defender);
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
   std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
+  active_attacker->SetExecutedMove(active_attacker->MoveUsed());
 
   if (!active_attacker->GetNormalStatsContainer().HpStat()->CurrentHp()) {
     Gui::DisplayPokemonFaintedMessage(active_attacker->SpeciesName());

@@ -498,6 +498,20 @@ void HardSwitch(Team &attacker) {
                             attacker.ActiveMember()->SpeciesName());
 }
 
+void UseMirrorMove(const std::shared_ptr<Pokemon> &attacker,
+                   const std::shared_ptr<Pokemon> &defender) {
+  std::shared_ptr<Move> executed_move = defender->ExecutedMove();
+
+  if (!executed_move) {
+    Gui::DisplayMoveFailedMessage();
+    return;
+  }
+
+  attacker->SetMoveUsed(executed_move);
+  Gui::DisplayPokemonUsedMoveMessage(attacker->SpeciesName(),
+                                     executed_move->MoveName());
+}
+
 void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
                  const std::shared_ptr<Pokemon> &defender,
                  const bool &move_hit) {
@@ -560,7 +574,7 @@ void UseMove(Team &attacker, Team &defender) {
   // Mirror move must be handled separately for the same reason. The attacker
   // essentially is going to be executing two moves.
   if (move_used->MoveName() == MoveNames::kMirrorMove) {
-    // use mirror move
+    UseMirrorMove(attacking_member, defending_member);
   }
 
   ExecuteMove(attacking_member, defending_member, move_hit);
