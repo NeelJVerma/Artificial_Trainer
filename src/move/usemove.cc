@@ -171,15 +171,17 @@ void UseCounter(const std::shared_ptr<Pokemon> &attacker,
 }
 
 void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
-                     const std::shared_ptr<Pokemon> &defender) {
+                     const std::shared_ptr<Pokemon> &defender,
+                     const int &damage_done) {
+  // in this case, damage done is damage that would have been done. if it's
+  // 0, the move didn't affect the target
   int attacker_speed =
       attacker->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
   int defender_speed =
       defender->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
 
   if (attacker->Level() < defender->Level() ||
-      attacker_speed < defender_speed ||
-      !static_cast<bool>(TypeProduct(attacker->MoveUsed(), defender))) {
+      attacker_speed < defender_speed || !damage_done) {
     Gui::DisplayMoveFailedMessage();
     return;
   }
@@ -319,7 +321,54 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kFissure:
     case MoveNames::kGuillotine:
     case MoveNames::kHornDrill:
-      UseOneHitKoMove(attacker, defender);
+      UseOneHitKoMove(attacker, defender, damage_done);
+      break;
+    case MoveNames::kFlash:
+    case MoveNames::kKinesis:
+    case MoveNames::kSmokescreen:
+    case MoveNames::kSandAttack:
+      defender->ChangeStat(StatNames::kAccuracy, -1);
+      break;
+    case MoveNames::kFocusEnergy:
+      attacker->SetUsedFocusEnergy(true);
+      break;
+    case MoveNames::kGlare:
+    case MoveNames::kStunSpore:
+    case MoveNames::kThunderWave:
+      // paralyze the target
+      break;
+    case MoveNames::kGrowl:
+      defender->ChangeStat(StatNames::kAttack, -1);
+      break;
+    case MoveNames::kGrowth:
+      attacker->ChangeStat(StatNames::kSpecial, 1);
+      break;
+    case MoveNames::kHaze:
+      // haze the field
+      break;
+    case MoveNames::kHyperBeam:
+      // recharge
+      break;
+    case MoveNames::kHypnosis:
+    case MoveNames::kLovelyKiss:
+    case MoveNames::kSing:
+    case MoveNames::kSleepPowder:
+    case MoveNames::kSpore:
+      // put target to sleep
+      break;
+    case MoveNames::kLeechSeed:
+      // use leech seed
+      break;
+    case MoveNames::kLeer:
+    case MoveNames::kTailWhip:
+      defender->ChangeStat(StatNames::kDefense, -1);
+      break;
+    case MoveNames::kLightScreen:
+      // set up light screen
+      break;
+    case MoveNames::kMeditate:
+    case MoveNames::kSharpen:
+      attacker->ChangeStat(StatNames::kAttack, 1);
       break;
     default:
       break;
@@ -336,6 +385,11 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender) {
   if (!attacker->GetNormalStatsContainer().HpStat()->CurrentHp() ||
       !defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    return false;
+  }
+
+  if (attacker->IsFlinched()) {
+    Gui::DisplayFlinchedMessage(attacker->SpeciesName());
     return false;
   }
 
@@ -356,6 +410,7 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   // FULLY PARA: RETURN FALSE
   // HIT SELF: RETURN FALSE
   // IS LOCKED IN TO CLAMP, BIND, ETC
+  // DISABLED
 
   return true;
 }
@@ -394,11 +449,25 @@ void UseMove(Team &attacker, Team &defender) {
   attacking_member->HandleDisable();
   defending_member->HandleDisable();
   attacking_member->MoveUsed()->DecrementPp(1);
-  Gui::DisplayPokemonUsedMoveMessage(attacking_member);
+  Gui::DisplayPokemonUsedMoveMessage(attacking_member->SpeciesName(),
+                                     attacking_member->MoveUsed()->MoveName());
 
   if (!MoveHit(ChanceToHit(attacking_member, defending_member))) {
     Gui::DisplayMoveMissedMessage();
+    MoveNames move_used_name = attacking_member->MoveUsed()->MoveName();
+
+    // have to handle this separately
+    if (move_used_name == MoveNames::kHighJumpKick ||
+        move_used_name == MoveNames::kJumpKick) {
+      attacking_member->GetNormalStatsContainer().HpStat()->SubtractHp(1);
+      Gui::DisplayRecoilDamageMessage(attacking_member->SpeciesName(), 1);
+    }
+
     return;
+  }
+
+  if (attacking_member->MoveUsed()->MoveName() == MoveNames::kMetronome) {
+    attacking_member->UseMetronome();
   }
 
   bool move_crit = IsDamaging(attacking_member->MoveUsed()->MoveName())

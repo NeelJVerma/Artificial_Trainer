@@ -7,6 +7,7 @@
 #include "pokemon.h"
 #include "../clientelements/gui.h"
 #include "../type/type.h"
+#include "../move/pp.h"
 
 namespace artificialtrainer {
 Pokemon::Pokemon(const SpeciesNames &species_name,
@@ -100,7 +101,7 @@ void Pokemon::RaiseStat(const StatNames &stat_name,
         return;
       }
 
-      if (stat_to_boost->InGameStat() < 1.0) {
+      if (stat_to_boost->CalculatedStat() < 1.0) {
         stat_to_boost->LowerDenominator(1);
       } else {
         stat_to_boost->RaiseNumerator(1);
@@ -135,7 +136,8 @@ void Pokemon::LowerStat(const StatNames &stat_name,
         return;
       }
 
-      if (stat_to_lower->InGameStat() > 1.0) {
+      std::cout << stat_to_lower->InGameStat() << std::endl;
+      if (stat_to_lower->CalculatedStat() > 1.0) {
         stat_to_lower->LowerNumerator(1);
       } else {
         stat_to_lower->RaiseDenominator(1);
@@ -180,7 +182,6 @@ void Pokemon::SetFlinched(const bool &flinched) {
 bool Pokemon::IsFlinched() const {
   return flags_.flinched;
 }
-
 
 void Pokemon::Confuse() {
   flags_.confusion.Activate();
@@ -288,6 +289,28 @@ void Pokemon::TakeRecoilDamage(const int &damage_done) {
 
 void Pokemon::AutoFaint() {
   normal_stats_container_.HpStat()->SubtractAllHp();
+}
+
+void Pokemon::UseMetronome() {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(1, static_cast<int>(
+      MoveNames::kPass) - 1);
+  MoveNames random_move;
+
+  while (true) {
+    random_move = static_cast<MoveNames>(distribution(generator));
+
+    if (!moves_container_.SeenMove(random_move) &&
+        random_move != MoveNames::kStruggle &&
+        random_move != MoveNames::kMetronome) {
+      break;
+    }
+  }
+
+
+  move_used_ = std::make_shared<Move>(random_move, Pp(random_move));
+  Gui::DisplayPokemonUsedMoveMessage(species_name_, random_move);
 }
 
 void Pokemon::ResetEndOfTurnFlags() {

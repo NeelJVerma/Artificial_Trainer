@@ -25,6 +25,7 @@ class NormalStat {
   void RaiseDenominator(const int &num_stages);
   void LowerNumerator(const int &num_stages);
   void LowerDenominator(const int &num_stages);
+  double CalculatedStat() const;
   int Numerator() const;
   int Denominator() const;
   int InGameStat() const;

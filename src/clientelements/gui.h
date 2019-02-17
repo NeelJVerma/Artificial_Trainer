@@ -37,8 +37,8 @@ class Gui {
   static void DisplayOneHitKoMoveLandedMessage();
   static void DisplayPokemonFaintedMessage(const SpeciesNames &species_name);
   static void DisplayInvalidMoveChoiceMessage();
-  static void DisplayPokemonUsedMoveMessage(
-      const std::shared_ptr<Pokemon> &pokemon);
+  static void DisplayPokemonUsedMoveMessage(const SpeciesNames &species_name,
+                                            const MoveNames &move_name);
   static void DisplayBattleOverMessage();
   static void DisplaySwitchMessage(const SpeciesNames &one,
                                    const SpeciesNames &two);
@@ -60,8 +60,6 @@ class Gui {
   static void DisplayMoveDisabledMessage(const MoveNames &move_name);
   static void DisplayRecoilDamageMessage(const SpeciesNames &species_name,
                                          const int &damage_done);
-  static void DisplayPokemonFaintedSelfMessage(
-      const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

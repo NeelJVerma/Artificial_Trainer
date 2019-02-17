@@ -62,6 +62,7 @@ class Pokemon {
   void AbsorbHp(const int &damage_done);
   void TakeRecoilDamage(const int &damage_done);
   void AutoFaint();
+  void UseMetronome();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 

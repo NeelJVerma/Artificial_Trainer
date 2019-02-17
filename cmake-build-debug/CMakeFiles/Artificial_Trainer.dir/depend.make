@@ -215,6 +215,7 @@ CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/clientelement
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/move/move.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/move/movescontainer.h
+CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/move/pp.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/pokemon/Disable.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/pokemon/confusion.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/pokemon/pokemon.cc

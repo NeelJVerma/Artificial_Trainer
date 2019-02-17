@@ -184,11 +184,11 @@ void Gui::DisplayInvalidMoveChoiceMessage() {
   std::cout << "Invalid move choice" << std::endl;
 }
 
-void Gui::DisplayPokemonUsedMoveMessage(
-    const std::shared_ptr<Pokemon> &pokemon) {
-  std::cout << StringConverter::SpeciesToString(pokemon->SpeciesName())
+void Gui::DisplayPokemonUsedMoveMessage(const SpeciesNames &species_name,
+                                        const MoveNames &move_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
             << " used "
-            << StringConverter::MoveToString(pokemon->MoveUsed()->MoveName())
+            << StringConverter::MoveToString(move_name)
             << std::endl;
 }
 
@@ -283,11 +283,6 @@ void Gui::DisplayRecoilDamageMessage(const SpeciesNames &species_name,
                                      const int &damage_done) {
   std::cout << StringConverter::SpeciesToString(species_name)
             << " took " << damage_done << " recoil damage" << std::endl;
-}
-
-void Gui::DisplayPokemonFaintedSelfMessage(const SpeciesNames &species_name) {
-  std::cout << StringConverter::SpeciesToString(species_name)
-            << " fainted itself" << std::endl;
 }
 
 } //namespace artificialtrainer

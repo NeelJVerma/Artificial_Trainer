@@ -1277,6 +1277,10 @@ int NormalStat::BaseStat() const {
   return base_stat_;
 }
 
+double NormalStat::CalculatedStat() const {
+  return static_cast<double>(numerator_) / denominator_;
+}
+
 void NormalStat::RaiseNumerator(const int &num_stages) {
   numerator_ += num_stages;
 }
