@@ -62,6 +62,8 @@ class Gui {
                                          const int &damage_done);
   static void DisplayPokemonCopiedMoveMessage(const SpeciesNames &species_name,
                                               const MoveNames &move_name);
+  static void DisplayMistStartedMessage(const SpeciesNames &species_name);
+  static void DisplayIsUnderMistMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

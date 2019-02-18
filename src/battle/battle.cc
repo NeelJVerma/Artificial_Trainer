@@ -205,7 +205,6 @@ bool Battle::HandleMove(Team &attacker, Team &defender) {
   UseMove(attacker, defender);
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
   std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
-  active_attacker->SetExecutedMove(active_attacker->MoveUsed());
 
   if (!active_attacker->GetNormalStatsContainer().HpStat()->CurrentHp()) {
     Gui::DisplayPokemonFaintedMessage(active_attacker->SpeciesName());

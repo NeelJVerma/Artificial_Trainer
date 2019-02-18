@@ -92,6 +92,11 @@ void Pokemon::ResetStats() {
 
 void Pokemon::RaiseStat(const StatNames &stat_name,
                         const int &num_stages) {
+  if (stat_name == StatNames::kEvasion && flags_.under_mist) {
+    Gui::DisplayIsUnderMistMessage(species_name_);
+    return;
+  }
+
   if (stat_name != StatNames::kAccuracy && stat_name != StatNames::kEvasion) {
     std::shared_ptr<NormalStat> stat_to_boost =
         normal_stats_container_[stat_name];
@@ -127,6 +132,11 @@ void Pokemon::RaiseStat(const StatNames &stat_name,
 
 void Pokemon::LowerStat(const StatNames &stat_name,
                         const int &num_stages) {
+  if (stat_name != StatNames::kEvasion && flags_.under_mist) {
+    Gui::DisplayIsUnderMistMessage(species_name_);
+    return;
+  }
+
   if (stat_name != StatNames::kAccuracy && stat_name != StatNames::kEvasion) {
     std::shared_ptr<NormalStat> stat_to_lower =
         normal_stats_container_[stat_name];
@@ -345,6 +355,22 @@ std::shared_ptr<Move> Pokemon::ExecutedMove() const {
   return flags_.exectued_move;
 }
 
+void Pokemon::SetUnderMist(const bool &under_mist) {
+  flags_.under_mist = under_mist;
+}
+
+void Pokemon::RecoverHp() {
+  std::shared_ptr<Hp> hp = normal_stats_container_.HpStat();
+  int max_minus_current = hp->MaxHp() - hp->CurrentHp();
+
+  if (max_minus_current == 255 || max_minus_current == 511) {
+    Gui::DisplayMoveFailedMessage();
+    return;
+  }
+
+  hp->AddHp(hp->MaxHp() >> 1);
+}
+
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);
@@ -358,6 +384,7 @@ void Pokemon::ResetSwitchFlags() {
   flags_.used_focus_energy = false;
   type_container_ = TypeContainer(species_name_);
   flags_.exectued_move = nullptr;
+  flags_.under_mist = false;
 }
 
 } //namespace artificialtrainer

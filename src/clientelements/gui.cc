@@ -292,4 +292,15 @@ void Gui::DisplayPokemonCopiedMoveMessage(const SpeciesNames &species_name,
             << std::endl;
 }
 
+void Gui::DisplayMistStartedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is now under mist. It is protected from negative stat changes"
+            << std::endl;
+}
+
+void Gui::DisplayIsUnderMistMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is under mist. Its stats won't go lower" << std::endl;
+}
+
 } //namespace artificialtrainer

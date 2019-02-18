@@ -250,6 +250,37 @@ void UseMimic(const std::shared_ptr<Pokemon> &attacker,
   Gui::DisplayPokemonCopiedMoveMessage(attacker->SpeciesName(), random_move);
 }
 
+void DoDamage(const std::shared_ptr<Pokemon> &defender,
+              const int &damage_done) {
+  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
+  Gui::DisplayDamageDoneMessage(damage_done);
+}
+
+void DoDamageEqualToAttackerLevel(const std::shared_ptr<Pokemon> &attacker,
+                                  const std::shared_ptr<Pokemon> &defender) {
+  DoDamage(defender, attacker->Level());
+}
+
+void UsePsywave(const std::shared_ptr<Pokemon> &attacker,
+                const std::shared_ptr<Pokemon> &defender) {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(1, static_cast<int>(
+      1.5 * attacker->Level()));
+  DoDamage(defender, distribution(generator));
+}
+
+void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
+                  const std::shared_ptr<Pokemon> &defender) {
+  if (!static_cast<int>(TypeProduct(attacker->MoveUsed(), defender))) {
+    Gui::DisplayMoveHadNoEffectMessage();
+    return;
+  }
+
+  DoDamage(defender,
+           defender->GetNormalStatsContainer().HpStat()->CurrentHp() >> 1);
+}
+
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
                   const int &damage_done, const bool &move_hit) {
@@ -369,10 +400,11 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kDoubleEdge:
     case MoveNames::kTakeDown:
     case MoveNames::kSubmission:
+    case MoveNames::kStruggle:
       attacker->TakeRecoilDamage(damage_done);
       break;
     case MoveNames::kDragonRage:
-      defender->GetNormalStatsContainer().HpStat()->SubtractHp(40);
+      DoDamage(defender, 40);
       break;
     case MoveNames::kDreamEater:
       // if defender is sleeping, absorb hp
@@ -446,15 +478,75 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       MimicWillSucceed(attacker, defender) ?
       UseMimic(attacker, defender) : Gui::DisplayMoveFailedMessage();
       break;
+    case MoveNames::kMist:
+      attacker->SetUnderMist(true);
+      Gui::DisplayMistStartedMessage(attacker->SpeciesName());
+      break;
+    case MoveNames::kNightShade:
+    case MoveNames::kSeismicToss:
+      DoDamageEqualToAttackerLevel(attacker, defender);
+      break;
+    case MoveNames::kPetalDance:
+    case MoveNames::kRage:
+    case MoveNames::kThrash:
+      // lock in. Might need to handle rage separately
+      break;
+    case MoveNames::kPoisonGas:
+    case MoveNames::kPoisonPowder:
+      // regular poison defender
+      break;
+    case MoveNames::kPoisonSting:
+    case MoveNames::kSludge:
+    case MoveNames::kSmog:
+    case MoveNames::kTwineedle:
+      // variable poison defender
+      break;
+    case MoveNames::kPsywave:
+      UsePsywave(attacker, defender);
+      break;
+    case MoveNames::kRazorWind:
+    case MoveNames::kSkullBash:
+    case MoveNames::kSkyAttack:
+    case MoveNames::kSolarBeam:
+      // use charge up move. may have to handle separately
+      break;
+    case MoveNames::kRecover:
+    case MoveNames::kSoftBoiled:
+      attacker->RecoverHp();
+      break;
+    case MoveNames::kReflect:
+      // set up reflect
+      break;
+    case MoveNames::kRest:
+      // rest
+      break;
+    case MoveNames::kScreech:
+      defender->ChangeStat(StatNames::kDefense, -2);
+      break;
+    case MoveNames::kSonicBoom:
+      DoDamage(defender, 20);
+      break;
+    case MoveNames::kStringShot:
+      defender->ChangeStat(StatNames::kSpeed, -1);
+      break;
+    case MoveNames::kSubstitute:
+      // use substitute
+      break;
+    case MoveNames::kSuperFang:
+      UseSuperFang(attacker, defender);
+      break;
+    case MoveNames::kSwordsDance:
+      attacker->ChangeStat(StatNames::kAttack, 2);
+      break;
+    case MoveNames::kToxic:
+      // use toxic
+      break;
+    case MoveNames::kTransform:
+      // use transform. May have to add a transform state class
+      break;
     default:
       break;
   }
-}
-
-void DoDamage(const std::shared_ptr<Pokemon> &defender,
-              const int &damage_done) {
-  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
-  Gui::DisplayDamageDoneMessage(damage_done);
 }
 
 bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
@@ -554,7 +646,7 @@ void UseMove(Team &attacker, Team &defender) {
   attacking_member->HandleDisable();
   defending_member->HandleDisable();
   std::shared_ptr<Move> move_used = attacking_member->MoveUsed();
-  attacking_member->MoveUsed()->DecrementPp(1);
+  move_used->DecrementPp(1);
   Gui::DisplayPokemonUsedMoveMessage(attacking_member->SpeciesName(),
                                      move_used->MoveName());
   bool move_hit = MoveHit(ChanceToHit(attacking_member, defending_member));
@@ -578,6 +670,7 @@ void UseMove(Team &attacker, Team &defender) {
   }
 
   ExecuteMove(attacking_member, defending_member, move_hit);
+  attacking_member->SetExecutedMove(move_used);
 }
 
 } //namespace artificialtrainer

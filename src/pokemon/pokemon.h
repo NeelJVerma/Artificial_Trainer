@@ -24,6 +24,7 @@ struct InGameFlags {
   bool used_mimic = false;
   int mimic_index = 0;
   std::shared_ptr<Move> exectued_move = nullptr;
+  bool under_mist = false;
 };
 
 class Pokemon {
@@ -72,6 +73,8 @@ class Pokemon {
   void SetMimicIndex(const int& index_in_move_container);
   void SetExecutedMove(const std::shared_ptr<Move> &executed_move);
   std::shared_ptr<Move> ExecutedMove() const;
+  void SetUnderMist(const bool &under_mist);
+  void RecoverHp();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
