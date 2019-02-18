@@ -347,12 +347,12 @@ void Pokemon::RestoreMimic() {
   flags_.used_mimic = false;
 }
 
-void Pokemon::SetExecutedMove(const std::shared_ptr<Move> &executed_move) {
-  flags_.exectued_move = executed_move;
+void Pokemon::SetExecutedMove(const bool &executed_move) {
+  flags_.executed_move = executed_move;
 }
 
-std::shared_ptr<Move> Pokemon::ExecutedMove() const {
-  return flags_.exectued_move;
+bool Pokemon::ExecutedMove() const {
+  return flags_.executed_move;
 }
 
 void Pokemon::SetUnderMist(const bool &under_mist) {
@@ -397,9 +397,9 @@ void Pokemon::ResetSwitchFlags() {
   RestoreMimic();
   flags_.confusion = Confusion{};
   flags_.disable = Disable{};
-  flags_.used_focus_energy = false;
   type_container_ = TypeContainer(species_name_);
-  flags_.exectued_move = nullptr;
+  flags_.used_focus_energy = false;
+  flags_.executed_move = false;
   flags_.under_mist = false;
   flags_.behind_reflect = false;
   flags_.behind_light_screen = false;

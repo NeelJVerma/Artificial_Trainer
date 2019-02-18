@@ -24,9 +24,9 @@ struct InGameFlags {
   bool under_mist = false;
   bool behind_light_screen = false;
   bool behind_reflect = false;
+  bool executed_move = false;
   Confusion confusion{};
   Disable disable{};
-  std::shared_ptr<Move> exectued_move = nullptr;
 };
 
 class Pokemon {
@@ -73,8 +73,8 @@ class Pokemon {
   int EndOfNormalMovesIndex() const;
   void SetUsedMimic(const bool &used_mimic);
   void SetMimicIndex(const int& index_in_move_container);
-  void SetExecutedMove(const std::shared_ptr<Move> &executed_move);
-  std::shared_ptr<Move> ExecutedMove() const;
+  void SetExecutedMove(const bool &executed_move);
+  bool ExecutedMove() const;
   void SetUnderMist(const bool &under_mist);
   void SetBehindLightScreen(const bool &behind_light_screen);
   bool IsBehindLightScreen() const;

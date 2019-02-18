@@ -610,16 +610,17 @@ void HardSwitch(Team &attacker) {
 
 void UseMirrorMove(const std::shared_ptr<Pokemon> &attacker,
                    const std::shared_ptr<Pokemon> &defender) {
-  std::shared_ptr<Move> executed_move = defender->ExecutedMove();
-
-  if (!executed_move) {
+  if (!defender->ExecutedMove()) {
     Gui::DisplayMoveFailedMessage();
     return;
   }
 
-  attacker->SetMoveUsed(executed_move);
+  MoveNames defender_move_name = defender->MoveUsed()->MoveName();
+  std::shared_ptr<Move> move_used = std::make_shared<Move>(
+      defender_move_name, Pp(defender_move_name));
+  attacker->SetMoveUsed(defender->MoveUsed());
   Gui::DisplayPokemonUsedMoveMessage(attacker->SpeciesName(),
-                                     executed_move->MoveName());
+                                     defender_move_name);
 }
 
 void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
@@ -685,7 +686,7 @@ void UseMove(Team &attacker, Team &defender) {
   }
 
   ExecuteMove(attacking_member, defending_member, move_hit);
-  attacking_member->SetExecutedMove(move_used);
+  attacking_member->SetExecutedMove(true);
 }
 
 } //namespace artificialtrainer
