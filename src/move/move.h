@@ -32,6 +32,7 @@ class Move {
 
 bool IsDamaging(const MoveNames &move_name);
 bool IsPhysical(const MoveNames &move_name);
+bool IsSpecial(const MoveNames &move_name);
 bool IsSwitch(const MoveNames &move_name);
 bool HasHighCriticalHitRatio(const MoveNames &move_name);
 bool IsSelfKo(const MoveNames &move_name);

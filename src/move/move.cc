@@ -73,6 +73,21 @@ bool IsPhysical(const MoveNames &move_name) {
   }
 }
 
+bool IsSpecial(const MoveNames &move_name) {
+  switch (Type(move_name)) {
+    case TypeNames::kFire:
+    case TypeNames::kWater:
+    case TypeNames::kElectric:
+    case TypeNames::kGrass:
+    case TypeNames::kIce:
+    case TypeNames::kPsychic:
+    case TypeNames::kDragon:
+      return true;
+    default:
+      return false;
+  }
+}
+
 bool IsSwitch(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kSwitch1:

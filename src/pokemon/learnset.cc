@@ -386,7 +386,8 @@ std::vector<MoveNames> Learnset(const SpeciesNames &species_name) {
                                     MoveNames::kThunderbolt, MoveNames::kMimic,
                                     MoveNames::kDoubleTeam, MoveNames::kReflect,
                                     MoveNames::kBide, MoveNames::kSkullBash,
-                                    MoveNames::kRest, MoveNames::kSubstitute};
+                                    MoveNames::kRest, MoveNames::kSubstitute,
+                                    MoveNames::kLightScreen};
     case SpeciesNames::kRaichu:
       return std::vector<MoveNames>{MoveNames::kGrowl, MoveNames::kThunderShock,
                                     MoveNames::kThunderWave,

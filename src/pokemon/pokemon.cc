@@ -371,6 +371,22 @@ void Pokemon::RecoverHp() {
   hp->AddHp(hp->MaxHp() >> 1);
 }
 
+void Pokemon::SetBehindLightScreen(const bool &behind_light_screen) {
+  flags_.behind_light_screen = behind_light_screen;
+}
+
+bool Pokemon::IsBehindLightScreen() const {
+  return flags_.behind_light_screen;
+}
+
+void Pokemon::SetBehindReflect(const bool &behind_reflect) {
+  flags_.behind_reflect = behind_reflect;
+}
+
+bool Pokemon::IsBehindReflect() const {
+  return flags_.behind_reflect;
+}
+
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);
@@ -385,6 +401,8 @@ void Pokemon::ResetSwitchFlags() {
   type_container_ = TypeContainer(species_name_);
   flags_.exectued_move = nullptr;
   flags_.under_mist = false;
+  flags_.behind_reflect = false;
+  flags_.behind_light_screen = false;
 }
 
 } //namespace artificialtrainer

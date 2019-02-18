@@ -19,12 +19,14 @@ struct InGameFlags {
   bool vanished = false;
   bool used_focus_energy = false;
   bool flinched = false;
-  Confusion confusion{};
-  Disable disable{};
   bool used_mimic = false;
   int mimic_index = 0;
-  std::shared_ptr<Move> exectued_move = nullptr;
   bool under_mist = false;
+  bool behind_light_screen = false;
+  bool behind_reflect = false;
+  Confusion confusion{};
+  Disable disable{};
+  std::shared_ptr<Move> exectued_move = nullptr;
 };
 
 class Pokemon {
@@ -74,6 +76,10 @@ class Pokemon {
   void SetExecutedMove(const std::shared_ptr<Move> &executed_move);
   std::shared_ptr<Move> ExecutedMove() const;
   void SetUnderMist(const bool &under_mist);
+  void SetBehindLightScreen(const bool &behind_light_screen);
+  bool IsBehindLightScreen() const;
+  void SetBehindReflect(const bool &behind_reflect);
+  bool IsBehindReflect() const;
   void RecoverHp();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();

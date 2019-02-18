@@ -122,7 +122,11 @@ std::pair<int, int> AttackAndDefenseUsed(
 
 int DamageDone(const std::shared_ptr<Pokemon> &attacker,
                const std::shared_ptr<Pokemon> &defender,
-               const bool &self_ko_move) {
+               const bool &self_ko_move, const bool &move_hit) {
+  if (!move_hit) {
+    return 0;
+  }
+
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
 
   if (!BasePower(move_used->MoveName())) {
@@ -250,15 +254,29 @@ void UseMimic(const std::shared_ptr<Pokemon> &attacker,
   Gui::DisplayPokemonCopiedMoveMessage(attacker->SpeciesName(), random_move);
 }
 
-void DoDamage(const std::shared_ptr<Pokemon> &defender,
-              const int &damage_done) {
+void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
+                         const MoveNames &attacker_move,
+                         const int &damage_done) {
+  int adjusted_damage = damage_done;
+
+  if ((defender->IsBehindReflect() && IsPhysical(attacker_move)) ||
+      (defender->IsBehindLightScreen() && IsSpecial(attacker_move))) {
+    adjusted_damage >>= 1;
+  }
+
+  defender->GetNormalStatsContainer().HpStat()->SubtractHp(adjusted_damage);
+  Gui::DisplayDamageDoneMessage(adjusted_damage);
+}
+
+void DoDirectDamage(const std::shared_ptr<Pokemon> &defender,
+                    const int &damage_done) {
   defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
   Gui::DisplayDamageDoneMessage(damage_done);
 }
 
 void DoDamageEqualToAttackerLevel(const std::shared_ptr<Pokemon> &attacker,
                                   const std::shared_ptr<Pokemon> &defender) {
-  DoDamage(defender, attacker->Level());
+  DoDirectDamage(defender, attacker->Level());
 }
 
 void UsePsywave(const std::shared_ptr<Pokemon> &attacker,
@@ -267,7 +285,7 @@ void UsePsywave(const std::shared_ptr<Pokemon> &attacker,
   std::mt19937 generator(device());
   std::uniform_int_distribution<> distribution(1, static_cast<int>(
       1.5 * attacker->Level()));
-  DoDamage(defender, distribution(generator));
+  DoDirectDamage(defender, distribution(generator));
 }
 
 void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
@@ -277,8 +295,8 @@ void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
     return;
   }
 
-  DoDamage(defender,
-           defender->GetNormalStatsContainer().HpStat()->CurrentHp() >> 1);
+  DoDirectDamage(
+      defender, defender->GetNormalStatsContainer().HpStat()->CurrentHp() >> 1);
 }
 
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
@@ -404,7 +422,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       attacker->TakeRecoilDamage(damage_done);
       break;
     case MoveNames::kDragonRage:
-      DoDamage(defender, 40);
+      DoDirectDamage(defender, 40);
       break;
     case MoveNames::kDreamEater:
       // if defender is sleeping, absorb hp
@@ -468,7 +486,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       defender->ChangeStat(StatNames::kDefense, -1);
       break;
     case MoveNames::kLightScreen:
-      // set up light screen
+      attacker->SetBehindLightScreen(true);
       break;
     case MoveNames::kMeditate:
     case MoveNames::kSharpen:
@@ -515,7 +533,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       attacker->RecoverHp();
       break;
     case MoveNames::kReflect:
-      // set up reflect
+      attacker->SetBehindReflect(true);
       break;
     case MoveNames::kRest:
       // rest
@@ -524,7 +542,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       defender->ChangeStat(StatNames::kDefense, -2);
       break;
     case MoveNames::kSonicBoom:
-      DoDamage(defender, 20);
+      DoDirectDamage(defender, 20);
       break;
     case MoveNames::kStringShot:
       defender->ChangeStat(StatNames::kSpeed, -1);
@@ -564,7 +582,7 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   if (!attacker->HandleConfusion()) {
     attacker->SetMoveUsed(std::make_shared<Move>(
         MoveNames::kHitSelf, Pp(MoveNames::kHitSelf)));
-    DoDamage(attacker, DamageDone(attacker, attacker, false));
+    DoDirectDamage(attacker, DamageDone(attacker, attacker, false, true));
     return false;
   }
 
@@ -613,16 +631,13 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
   // maybe ?
 
   int damage_done = IsSelfKo(move_used->MoveName()) ?
-                    DamageDone(attacker,
-                               defender,
-                               true) :
-                    DamageDone(attacker,
-                               defender,
-                               false);
+                    DamageDone(attacker, defender, true, move_hit) :
+                    DamageDone(attacker, defender, false, move_hit);
 
   if (damage_done && move_hit) {
     move_used->SetDamageDone(damage_done);
-    DoDamage(defender, damage_done);
+    DoConditionalDamage(defender, attacker->MoveUsed()->MoveName(),
+                        damage_done);
   }
 
   DoSideEffect(attacker, defender, damage_done, move_hit);
