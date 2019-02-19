@@ -23,6 +23,10 @@ class Battle {
   void PlayerPicksMove(Team &team, const bool &team_one);
   bool HandleMove(Team &attacker, Team &defender);
   void PlayerPicksForcedSwitch(Team &team);
+  void HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &pokemon,
+                               Team &team);
+  bool DoPokemonActiveCheck(const std::shared_ptr<Pokemon> &pokemon,
+                            Team &team);
 };
 
 } //namespace artificialtrainer

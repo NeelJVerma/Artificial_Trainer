@@ -201,26 +201,34 @@ void Battle::PlayerPicksMove(Team &team, const bool &team_one) {
   pokemon->SetMoveUsed(move_choice - 1);
 }
 
+bool Battle::DoPokemonActiveCheck(const std::shared_ptr<Pokemon> &pokemon,
+                                  Team &team) {
+  if (!pokemon->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    Gui::DisplayPokemonFaintedMessage(pokemon->SpeciesName());
+    team.FaintActivePokemon();
+    PlayerPicksForcedSwitch(team);
+    return false;
+  }
+
+  return true;
+}
+
 bool Battle::HandleMove(Team &attacker, Team &defender) {
   UseMove(attacker, defender);
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
   std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
 
-  if (!active_attacker->GetNormalStatsContainer().HpStat()->CurrentHp()) {
-    Gui::DisplayPokemonFaintedMessage(active_attacker->SpeciesName());
-    attacker.FaintActivePokemon();
-    PlayerPicksForcedSwitch(attacker);
-    return false;
+  return DoPokemonActiveCheck(active_attacker, attacker) ||
+      DoPokemonActiveCheck(active_defender, defender);
+}
+
+void Battle::HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &pokemon,
+                                     Team &team) {
+  if (pokemon->IsBurned()) {
+    pokemon->DoBurnDamage();
   }
 
-  if (!active_defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
-    Gui::DisplayPokemonFaintedMessage(active_defender->SpeciesName());
-    defender.FaintActivePokemon();
-    PlayerPicksForcedSwitch(defender);
-    return false;
-  }
-
-  return true;
+  DoPokemonActiveCheck(pokemon, team);
 }
 
 void Battle::HandleTurn() {
@@ -259,14 +267,15 @@ void Battle::HandleTurn() {
     one_moves_first = true;
   }
 
-  if (one_moves_first) {
-    if (HandleMove(team_one_, team_two_)) {
-      HandleMove(team_two_, team_one_);
-    }
-  } else {
-    if (HandleMove(team_two_, team_one_)) {
-      HandleMove(team_one_, team_two_);
-    }
+  // TODO: burn/toxic/leech seed/other end of turn statuses: put in function
+  if (one_moves_first && HandleMove(team_one_, team_two_)) {
+    HandleMove(team_two_, team_one_);
+    HandleEndOfTurnStatuses(active_pokemon_one, team_one_);
+    HandleEndOfTurnStatuses(active_pokemon_two, team_two_);
+  } else if (!one_moves_first && HandleMove(team_two_, team_one_)) {
+    HandleMove(team_one_, team_two_);
+    HandleEndOfTurnStatuses(active_pokemon_two, team_two_);
+    HandleEndOfTurnStatuses(active_pokemon_one, team_one_);
   }
 
   active_pokemon_one->ResetEndOfTurnFlags();

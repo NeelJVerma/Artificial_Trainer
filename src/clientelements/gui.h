@@ -68,7 +68,9 @@ class Gui {
       const SpeciesNames &species_name);
   static void DisplaySubstituteTooKDamageMessage(const int &damage_done);
   static void DisplaySubstituteFadedMessage(const SpeciesNames &species_name);
-  static void DisplayStatsCantBeLoweredMessage();
+  static void DisplayIsBehindSubstituteMessage();
+  static void DisplayBurnStartedMessage(const SpeciesNames &species_name);
+  static void DisplayIsBurnedMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

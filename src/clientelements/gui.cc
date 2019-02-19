@@ -317,8 +317,19 @@ void Gui::DisplaySubstituteFadedMessage(const SpeciesNames &species_name) {
             << "\'s substitute faded" << std::endl;
 }
 
-void Gui::DisplayStatsCantBeLoweredMessage() {
-  std::cout << "Opponent can't change stats behind a substitute" << std::endl;
+void Gui::DisplayIsBehindSubstituteMessage() {
+  std::cout << "Opponent can't change stats, confuse, or status "
+               "pokemon behind a substitute" << std::endl;
+}
+
+void Gui::DisplayBurnStartedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " became burned" << std::endl;
+}
+
+void Gui::DisplayIsBurnedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is burned" << std::endl;
 }
 
 } //namespace artificialtrainer

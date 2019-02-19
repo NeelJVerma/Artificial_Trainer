@@ -148,6 +148,18 @@ bool IsBinding(const MoveNames &move_name) {
   }
 }
 
+bool IsDraining(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kAbsorb:
+    case MoveNames::kMegaDrain:
+    case MoveNames::kLeechLife:
+    case MoveNames::kDreamEater:
+      return true;
+    default:
+      return false;
+  }
+}
+
 int VariableEffectChance(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAcid:
