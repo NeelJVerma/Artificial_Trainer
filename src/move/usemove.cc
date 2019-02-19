@@ -157,11 +157,12 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
     Gui::DisplayMoveCritMessage();
   }
 
-  return static_cast<int>(floor(((((((((2.0 * (move_crit ? 2 : 1) *
+  int damage_done = static_cast<int>(floor(((((((((2.0 * (move_crit ? 2 : 1) *
       attacker->Level() / 5 + 2) * used_stats.first * BasePower(
       move_used->MoveName()) * (self_ko_move ? 2 : 1) / used_stats.second) /
       50) + 2) * StabBonus(attacker)) * type_product / 10) *
       DamageRandomFactor()) / 255)));
+  return !damage_done ? 1 : damage_done;
 }
 
 void UseCounter(const std::shared_ptr<Pokemon> &attacker,
@@ -267,6 +268,7 @@ void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
   if ((defender->IsBehindReflect() && IsPhysical(attacker_move)) ||
       (defender->IsBehindLightScreen() && IsSpecial(attacker_move))) {
     adjusted_damage >>= 1;
+    adjusted_damage = !adjusted_damage ? 1 : adjusted_damage;
   }
 
   if (defender->SubstituteIsActive()) {

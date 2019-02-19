@@ -295,12 +295,14 @@ void Pokemon::HandleDisable() {
 
 void Pokemon::AbsorbHp(const int &damage_done) {
   int absored = damage_done >> 1;
+  absored = !absored ? 1 : absored;
   normal_stats_container_.HpStat()->AddHp(absored);
   Gui::DisplayHpAbsorbedMessage(species_name_, absored);
 }
 
 void Pokemon::TakeRecoilDamage(const int &damage_done) {
   int recoil_damage = damage_done >> 2;
+  recoil_damage = !recoil_damage ? 1 : recoil_damage;
   normal_stats_container_.HpStat()->SubtractHp(recoil_damage);
   Gui::DisplayRecoilDamageMessage(species_name_, recoil_damage);
 }
@@ -458,7 +460,8 @@ bool Pokemon::IsStatused() const {
 void Pokemon::DoBurnDamage() {
   Gui::DisplayIsBurnedMessage(species_name_);
   std::shared_ptr<Hp> hp_stat = normal_stats_container_.HpStat();
-  int damage_done = static_cast<int>(ceil(hp_stat->MaxHp() / 16.0));
+  int damage_done = hp_stat->MaxHp() >> 16;
+  damage_done = !damage_done ? 1 : damage_done;
   hp_stat->SubtractHp(damage_done);
   Gui::DisplayDamageDoneMessage(damage_done);
 }
