@@ -63,6 +63,11 @@ int Team::IndexOfActiveMember() const {
   return -1;
 }
 
+void Team::SwitchAction(const int &switch_index) {
+  active_team_[switch_index]->SetIsActive(true);
+  SetActiveMember(switch_index);
+}
+
 void Team::HardSwitch() {
   std::shared_ptr<Pokemon> old_active_pokemon = ActiveMember();
   int switch_index = static_cast<int>(
@@ -70,13 +75,7 @@ void Team::HardSwitch() {
       MoveNames::kSwitch1);
   old_active_pokemon->SetIsActive(false);
   old_active_pokemon->ResetSwitchFlags();
-  active_team_[switch_index]->SetIsActive(true);
-  SetActiveMember(switch_index);
-}
-
-void Team::ForceSwitch(const int &switch_index) {
-  active_team_[switch_index]->SetIsActive(true);
-  SetActiveMember(switch_index);
+  SwitchAction(switch_index);
 }
 
 } //namespace artificialtrainer

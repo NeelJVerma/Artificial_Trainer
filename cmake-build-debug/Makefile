@@ -555,6 +555,33 @@ src/pokemon/pokemon.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.s
 .PHONY : src/pokemon/pokemon.cc.s
 
+src/pokemon/substitute.o: src/pokemon/substitute.cc.o
+
+.PHONY : src/pokemon/substitute.o
+
+# target to build an object file
+src/pokemon/substitute.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/substitute.cc.o
+.PHONY : src/pokemon/substitute.cc.o
+
+src/pokemon/substitute.i: src/pokemon/substitute.cc.i
+
+.PHONY : src/pokemon/substitute.i
+
+# target to preprocess a source file
+src/pokemon/substitute.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/substitute.cc.i
+.PHONY : src/pokemon/substitute.cc.i
+
+src/pokemon/substitute.s: src/pokemon/substitute.cc.s
+
+.PHONY : src/pokemon/substitute.s
+
+# target to generate assembly for a file
+src/pokemon/substitute.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/substitute.cc.s
+.PHONY : src/pokemon/substitute.cc.s
+
 src/stat/ev.o: src/stat/ev.cc.o
 
 .PHONY : src/stat/ev.o
@@ -936,6 +963,9 @@ help:
 	@echo "... src/pokemon/pokemon.o"
 	@echo "... src/pokemon/pokemon.i"
 	@echo "... src/pokemon/pokemon.s"
+	@echo "... src/pokemon/substitute.o"
+	@echo "... src/pokemon/substitute.i"
+	@echo "... src/pokemon/substitute.s"
 	@echo "... src/stat/ev.o"
 	@echo "... src/stat/ev.i"
 	@echo "... src/stat/ev.s"

@@ -27,6 +27,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/pokemon/substitute.cc.o"
   "Artificial_Trainer.pdb"
   "Artificial_Trainer"
 )

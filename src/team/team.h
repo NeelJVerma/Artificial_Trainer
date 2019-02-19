@@ -25,7 +25,7 @@ class Team {
   std::shared_ptr<Pokemon> ActiveMember() const;
   int IndexOfActiveMember() const;
   void HardSwitch();
-  void ForceSwitch(const int &switch_index);
+  void SwitchAction(const int &switch_index);
 
  private:
   std::vector<std::shared_ptr<Pokemon>> active_team_;

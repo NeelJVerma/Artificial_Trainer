@@ -303,4 +303,22 @@ void Gui::DisplayIsUnderMistMessage(const SpeciesNames &species_name) {
             << " is under mist. Its stats won't go lower" << std::endl;
 }
 
+void Gui::DisplayIsBehindSubstituteMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is now behind a substitute" << std::endl;
+}
+
+void Gui::DisplaySubstituteTooKDamageMessage(const int &damage_done) {
+  std::cout << "The substitute took " << damage_done << " damage" << std::endl;
+}
+
+void Gui::DisplaySubstituteFadedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << "\'s substitute faded" << std::endl;
+}
+
+void Gui::DisplayStatsCantBeLoweredMessage() {
+  std::cout << "Opponent can't change stats behind a substitute" << std::endl;
+}
+
 } //namespace artificialtrainer

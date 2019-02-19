@@ -214,6 +214,13 @@ bool Pokemon::IsConfused() const {
   return flags_.confusion.IsActive();
 }
 
+void Pokemon::DoConfusionDamage(const int &damage_done) {
+  SetMoveUsed(std::make_shared<Move>(
+      MoveNames::kHitSelf, Pp(MoveNames::kHitSelf)));
+  normal_stats_container_.HpStat()->SubtractHp(damage_done);
+  Gui::DisplayDamageDoneMessage(damage_done);
+}
+
 void Pokemon::SetVanished(const bool &vanished) {
   flags_.vanished = vanished;
 }
@@ -387,6 +394,36 @@ bool Pokemon::IsBehindReflect() const {
   return flags_.behind_reflect;
 }
 
+void Pokemon::UseSubstitute() {
+  std::shared_ptr<Hp> hp_stat = normal_stats_container_.HpStat();
+
+  if (flags_.substitute.IsActive() || hp_stat->HpAsPercent() <= 25.0) {
+    Gui::DisplayMoveFailedMessage();
+    return;
+  }
+
+  int damage_taken = hp_stat->MaxHp() >> 2;
+  flags_.substitute.Activate(damage_taken);
+  hp_stat->SubtractHp(damage_taken);
+  Gui::DisplayIsBehindSubstituteMessage(species_name_);
+}
+
+bool Pokemon::SubstituteIsActive() const {
+  return flags_.substitute.IsActive();
+}
+
+void Pokemon::DoDamageToSubstitute(const int &damage_done) {
+  int sub_current_hp = flags_.substitute.CurrentHp();
+  Gui::DisplaySubstituteTooKDamageMessage(damage_done);
+
+  if (sub_current_hp - damage_done <= 0) {
+    flags_.substitute.TakeDamage(sub_current_hp);
+    Gui::DisplaySubstituteFadedMessage(species_name_);
+  } else {
+    flags_.substitute.TakeDamage(damage_done);
+  }
+}
+
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);
@@ -397,6 +434,7 @@ void Pokemon::ResetSwitchFlags() {
   RestoreMimic();
   flags_.confusion = Confusion{};
   flags_.disable = Disable{};
+  flags_.substitute = Substitute{};
   type_container_ = TypeContainer(species_name_);
   flags_.used_focus_energy = false;
   flags_.executed_move = false;

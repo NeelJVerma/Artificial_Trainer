@@ -124,6 +124,30 @@ bool IsSelfKo(const MoveNames &move_name) {
   }
 }
 
+bool HasSideEffectIfMissed(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kHighJumpKick:
+    case MoveNames::kJumpKick:
+    case MoveNames::kExplosion:
+    case MoveNames::kSelfDestruct:
+      return true;
+    default:
+      return false;
+  }
+}
+
+bool IsBinding(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kBind:
+    case MoveNames::kClamp:
+    case MoveNames::kFireSpin:
+    case MoveNames::kWrap:
+      return true;
+    default:
+      return false;
+  }
+}
+
 int VariableEffectChance(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAcid:
@@ -163,18 +187,6 @@ int VariableEffectChance(const MoveNames &move_name) {
       return 33;
     default:
       assert(false);
-  }
-}
-
-bool HasSideEffectIfMissed(const MoveNames &move_name) {
-  switch (move_name) {
-    case MoveNames::kHighJumpKick:
-    case MoveNames::kJumpKick:
-    case MoveNames::kExplosion:
-    case MoveNames::kSelfDestruct:
-      return true;
-    default:
-      return false;
   }
 }
 

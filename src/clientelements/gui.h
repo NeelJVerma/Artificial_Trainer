@@ -64,6 +64,11 @@ class Gui {
                                               const MoveNames &move_name);
   static void DisplayMistStartedMessage(const SpeciesNames &species_name);
   static void DisplayIsUnderMistMessage(const SpeciesNames &species_name);
+  static void DisplayIsBehindSubstituteMessage(
+      const SpeciesNames &species_name);
+  static void DisplaySubstituteTooKDamageMessage(const int &damage_done);
+  static void DisplaySubstituteFadedMessage(const SpeciesNames &species_name);
+  static void DisplayStatsCantBeLoweredMessage();
 };
 
 } // namespace artificialtrainer

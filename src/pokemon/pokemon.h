@@ -13,6 +13,7 @@
 #include "statusnames.h"
 #include "confusion.h"
 #include "disable.h"
+#include "substitute.h"
 
 namespace artificialtrainer {
 struct InGameFlags {
@@ -20,13 +21,14 @@ struct InGameFlags {
   bool used_focus_energy = false;
   bool flinched = false;
   bool used_mimic = false;
-  int mimic_index = 0;
   bool under_mist = false;
   bool behind_light_screen = false;
   bool behind_reflect = false;
   bool executed_move = false;
+  int mimic_index = 0;
   Confusion confusion{};
   Disable disable{};
+  Substitute substitute{};
 };
 
 class Pokemon {
@@ -63,6 +65,7 @@ class Pokemon {
   void SetVanished(const bool &vanished);
   bool IsVanished() const;
   bool HandleConfusion();
+  void DoConfusionDamage(const int &damage_done);
   void HandleDisable();
   void UseConversion();
   void AbsorbHp(const int &damage_done);
@@ -80,6 +83,9 @@ class Pokemon {
   bool IsBehindLightScreen() const;
   void SetBehindReflect(const bool &behind_reflect);
   bool IsBehindReflect() const;
+  void UseSubstitute();
+  bool SubstituteIsActive() const;
+  void DoDamageToSubstitute(const int &damage_done);
   void RecoverHp();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();

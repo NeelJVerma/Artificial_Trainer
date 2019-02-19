@@ -179,7 +179,7 @@ void Battle::PlayerPicksForcedSwitch(Team &team) {
     Gui::DisplayInvalidChoiceMessage();
   }
 
-  team.ForceSwitch(switch_choice - 1);
+  team.SwitchAction(switch_choice - 1);
 }
 
 void Battle::PlayerPicksMove(Team &team, const bool &team_one) {
