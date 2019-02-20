@@ -123,13 +123,11 @@ std::pair<int, int> AttackAndDefenseUsed(
 int DamageDone(const std::shared_ptr<Pokemon> &attacker,
                const std::shared_ptr<Pokemon> &defender,
                const bool &self_ko_move, const bool &move_hit) {
-  if (!move_hit) {
-    return 0;
-  }
-
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
 
-  if (!BasePower(move_used->MoveName())) {
+  if (!move_hit ||
+      (defender->IsVanished() && move_used->MoveName() != MoveNames::kSwift) ||
+      !BasePower(move_used->MoveName())) {
     return 0;
   }
 
@@ -442,7 +440,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
     case MoveNames::kDig:
     case MoveNames::kFly:
-      // use vanish move
+      attacker->UseVanishMove();
       break;
     case MoveNames::kDisable:
       defender->DisableMove();
@@ -771,9 +769,16 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
   // have to call recursively for moves that hit multiple times in one turn
   // maybe ?
 
-  int damage_done = IsSelfKo(move_used->MoveName()) ?
-                    DamageDone(attacker, defender, true, move_hit) :
-                    DamageDone(attacker, defender, false, move_hit);
+  int damage_done;
+
+  if ((move_used->MoveName() == MoveNames::kDig ||
+      move_used->MoveName() == MoveNames::kFly) && !attacker->IsVanished()) {
+    damage_done = 0;
+  } else {
+    damage_done = IsSelfKo(move_used->MoveName()) ?
+                  DamageDone(attacker, defender, true, move_hit) :
+                  DamageDone(attacker, defender, false, move_hit);
+  }
 
   if (damage_done && move_hit) {
     move_used->SetDamageDone(damage_done);
@@ -841,21 +846,22 @@ void UseMove(Team &attacker, Team &defender) {
   }
 
   MoveNames move_used_name = attacking_member->MoveUsed()->MoveName();
-
-  if (defending_member->SubstituteIsActive() &&
-      (move_used_name == MoveNames::kSuperFang || IsBinding(move_used_name) ||
-          IsDraining(move_used_name))) {
-    Gui::DisplayMoveFailedMessage();
-    return;
-  }
-  // IF DEFENDER IS VANISHED, THE MOVE WILL ALSO FAIL
-
   attacking_member->HandleDisable();
   defending_member->HandleDisable();
   std::shared_ptr<Move> move_used = attacking_member->MoveUsed();
   move_used->DecrementPp(1);
   Gui::DisplayPokemonUsedMoveMessage(attacking_member->SpeciesName(),
                                      move_used->MoveName());
+
+  if ((defending_member->SubstituteIsActive() &&
+      (move_used_name == MoveNames::kSuperFang || IsBinding(move_used_name) ||
+          IsDraining(move_used_name))) ||
+      (defending_member->IsVanished() && !WorksIfDefenderIsVanished(
+          move_used_name))) {
+    Gui::DisplayMoveFailedMessage();
+    return;
+  }
+
   bool move_hit = MoveHit(ChanceToHit(attacking_member, defending_member));
 
   if (!move_hit) {

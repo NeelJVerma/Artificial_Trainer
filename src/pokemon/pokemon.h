@@ -70,7 +70,7 @@ class Pokemon {
   void Confuse();
   bool IsConfused() const;
   void DisableMove();
-  void SetVanished(const bool &vanished);
+  void UseVanishMove();
   bool IsVanished() const;
   bool HandleConfusion();
   void DoConfusionDamage(const int &damage_done);

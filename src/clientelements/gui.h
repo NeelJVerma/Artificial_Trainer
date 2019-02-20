@@ -92,6 +92,7 @@ class Gui {
   static void DisplayWokeUpMessage(const SpeciesNames &species_name);
   static void DisplayRecoveredAllHpMessage(const SpeciesNames &species_name);
   static void DisplayHazeResetMessage();
+  static void DisplayPokemonVanishedMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

@@ -423,4 +423,9 @@ void Gui::DisplayHazeResetMessage() {
             << std::endl;
 }
 
+void Gui::DisplayPokemonVanishedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " just vanished" << std::endl;
+}
+
 } //namespace artificialtrainer

@@ -113,6 +113,8 @@ void SelectTeam(Team &team, const bool &team_one) {
 }
 
 bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
+  std::shared_ptr<Pokemon> active_member = team.ActiveMember();
+
   if (IsSwitch(move->MoveName())) {
     int switch_beg = static_cast<int>(MoveNames::kSwitch1);
     int selected = static_cast<int>(move->MoveName());
@@ -127,6 +129,11 @@ bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
         team.IndexOfActiveMember()) {
       return false;
     }
+  }
+
+  if (active_member->IsVanished() &&
+      move->MoveName() != active_member->MoveUsed()->MoveName()) {
+    return false;
   }
 
   if (move->IsDisabled()) {

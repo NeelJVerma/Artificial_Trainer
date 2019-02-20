@@ -230,8 +230,13 @@ void Pokemon::DoConfusionDamage(const int &damage_done) {
   Gui::DisplayDamageDoneMessage(damage_done);
 }
 
-void Pokemon::SetVanished(const bool &vanished) {
-  flags_.vanished = vanished;
+void Pokemon::UseVanishMove() {
+  if (!flags_.vanished) {
+    flags_.vanished = true;
+    Gui::DisplayPokemonVanishedMessage(species_name_);
+  } else {
+    flags_.vanished = false;
+  }
 }
 
 bool Pokemon::IsVanished() const {
@@ -261,8 +266,10 @@ void Pokemon::UseConversion() {
 }
 
 bool Pokemon::HandleConfusion() {
-  // TODO: IF POKEMON IS RECHARGING OR ASLEEP OR FROZEN
-  if (!flags_.confusion.IsActive()) {
+  StatusNames status = flags_.status;
+
+  if (!flags_.confusion.IsActive() || status == StatusNames::kAsleepRest ||
+      status == StatusNames::kAsleep || status == StatusNames::kFrozen) {
     return true;
   }
 
@@ -273,6 +280,10 @@ bool Pokemon::HandleConfusion() {
   std::uniform_int_distribution<> distribution(1, 100);
 
   if (distribution(generator) <= 50) {
+    if (flags_.vanished) {
+      flags_.vanished = false;
+    }
+
     Gui::DisplayHitSelfMessage(species_name_);
     flags_.confusion.AdvanceOneTurn();
     return false;

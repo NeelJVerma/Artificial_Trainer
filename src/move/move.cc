@@ -186,6 +186,52 @@ bool HitsTwoToFiveTimes(const MoveNames &move_name) {
   }
 }
 
+bool WorksIfDefenderIsVanished(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kAcidArmor:
+    case MoveNames::kAgility:
+    case MoveNames::kAmnesia:
+    case MoveNames::kBarrier:
+    case MoveNames::kBide:
+    case MoveNames::kConversion:
+    case MoveNames::kDefenseCurl:
+    case MoveNames::kDig:
+    case MoveNames::kDoubleTeam:
+    case MoveNames::kExplosion:
+    case MoveNames::kFly:
+    case MoveNames::kFocusEnergy:
+    case MoveNames::kGrowth:
+    case MoveNames::kHarden:
+    case MoveNames::kHighJumpKick:
+    case MoveNames::kJumpKick:
+    case MoveNames::kLightScreen:
+    case MoveNames::kMeditate:
+    case MoveNames::kMetronome:
+    case MoveNames::kMimic:
+    case MoveNames::kMinimize:
+    case MoveNames::kMirrorMove:
+    case MoveNames::kMist:
+    case MoveNames::kRecover:
+    case MoveNames::kReflect:
+    case MoveNames::kRest:
+    case MoveNames::kSelfDestruct:
+    case MoveNames::kSharpen:
+    case MoveNames::kRazorWind:
+    case MoveNames::kSkullBash:
+    case MoveNames::kSkyAttack:
+    case MoveNames::kSoftBoiled:
+    case MoveNames::kSolarBeam:
+    case MoveNames::kSubstitute:
+    case MoveNames::kSwift:
+    case MoveNames::kSwordsDance:
+    case MoveNames::kTransform:
+    case MoveNames::kWithdraw:
+      return true;
+    default:
+      return false;
+  }
+}
+
 int VariableEffectChance(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAcid:
