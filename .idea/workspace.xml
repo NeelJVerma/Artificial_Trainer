@@ -12,13 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f761d81-71cd-48eb-84a4-b5d508f52e87" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/clientelements/gui.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientelements/gui.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientelements/gui.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientelements/gui.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/move.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/move.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/move.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/move.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/move/usemove.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/usemove.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pokemon/pokemon.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/pokemon.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pokemon/pokemon.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/pokemon.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stat/normalstat.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/normalstat.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stat/normalstat.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/normalstat.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/move/usemove.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="543" column="19" selection-start-line="543" selection-start-column="19" selection-end-line="543" selection-end-column="19" />
+            <state relative-caret-position="92">
+              <caret line="799" lean-forward="true" selection-start-line="799" selection-end-line="799" />
               <folding>
                 <element signature="e#37#53#0" expanded="true" />
               </folding>
@@ -45,11 +43,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/move/move.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="565">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/move/move.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <folding>
+                <element signature="e#38#56#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="668" column="37" lean-forward="true" selection-start-line="668" selection-start-column="37" selection-end-line="668" selection-end-column="37" />
+            <state relative-caret-position="555">
+              <caret line="595" column="20" selection-start-line="595" selection-start-column="20" selection-end-line="595" selection-end-column="20" />
               <folding>
                 <element signature="e#38#57#0" expanded="true" />
               </folding>
@@ -100,15 +119,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/include/c++/5/bits/stl_vector.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6607">
-              <caret line="1161" column="63" lean-forward="true" selection-start-line="1161" selection-start-column="63" selection-end-line="1161" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/clientelements/gui.cc">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="622">
@@ -132,24 +142,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/battle/battle.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="311" column="16" selection-start-line="311" selection-start-column="16" selection-end-line="311" selection-end-column="16" />
-              <folding>
-                <element signature="e#38#55#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>CONFUSE</find>
-      <find>applystat</find>
       <find>lowerstat</find>
       <find>movefailed</find>
       <find>displaymov</find>
@@ -178,6 +174,8 @@
       <find>willwake</find>
       <find>haze</find>
       <find>rest</find>
+      <find>executem</find>
+      <find>twinee</find>
     </findStrings>
     <replaceStrings>
       <replace>int</replace>
@@ -241,18 +239,18 @@
         <option value="$PROJECT_DIR$/src/team/team.cc" />
         <option value="$PROJECT_DIR$/src/pokemon/substitute.cc" />
         <option value="$PROJECT_DIR$/src/pokemon/substitute.h" />
-        <option value="$PROJECT_DIR$/src/move/move.h" />
-        <option value="$PROJECT_DIR$/src/move/move.cc" />
         <option value="$PROJECT_DIR$/src/battle/battle.h" />
         <option value="$PROJECT_DIR$/src/battle/battle.cc" />
         <option value="$PROJECT_DIR$/src/clientelements/gui.h" />
         <option value="$PROJECT_DIR$/src/clientelements/gui.cc" />
         <option value="$PROJECT_DIR$/src/pokemon/confusion.h" />
-        <option value="$PROJECT_DIR$/src/move/usemove.cc" />
         <option value="$PROJECT_DIR$/src/stat/normalstat.h" />
         <option value="$PROJECT_DIR$/src/stat/normalstat.cc" />
         <option value="$PROJECT_DIR$/src/pokemon/pokemon.h" />
         <option value="$PROJECT_DIR$/src/pokemon/pokemon.cc" />
+        <option value="$PROJECT_DIR$/src/move/move.h" />
+        <option value="$PROJECT_DIR$/src/move/move.cc" />
+        <option value="$PROJECT_DIR$/src/move/usemove.cc" />
       </list>
     </option>
   </component>
@@ -387,12 +385,12 @@
       <workItem from="1548863791326" duration="60863000" />
       <workItem from="1549405141130" duration="68398000" />
       <workItem from="1549753421624" duration="62736000" />
-      <workItem from="1550368038245" duration="67712000" />
+      <workItem from="1550368038245" duration="71072000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="473170000" />
+    <option name="totallyTimeSpent" value="476530000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -407,13 +405,13 @@
     <frame x="0" y="-5" width="1920" height="1085" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49892932" visible="true" weight="0.21351932" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49892932" visible="true" weight="0.21351932" />
       <window_info id="Structure" order="1" sideWeight="0.5010707" side_tool="true" weight="0.22263949" />
       <window_info id="Favorites" order="2" sideWeight="0.5008489" side_tool="true" weight="0.17328326" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.4817987" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.7408994" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.16702355" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.040685225" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.16702355" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32946634" />
@@ -582,27 +580,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/move.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="40" column="44" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/move/basepower.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/move.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="197" column="24" lean-forward="true" selection-start-line="197" selection-start-column="24" selection-end-line="197" selection-end-column="24" />
-          <folding>
-            <element signature="e#38#56#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -770,16 +751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/usemove.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="543" column="19" selection-start-line="543" selection-start-column="19" selection-end-line="543" selection-end-column="19" />
-          <folding>
-            <element signature="e#37#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/stat/normalstat.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
@@ -797,6 +768,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="595" column="20" selection-start-line="595" selection-start-column="20" selection-end-line="595" selection-end-column="20" />
+          <folding>
+            <element signature="e#38#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
@@ -807,12 +788,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
+    <entry file="file://$PROJECT_DIR$/src/move/move.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="668" column="37" lean-forward="true" selection-start-line="668" selection-start-column="37" selection-end-line="668" selection-end-column="37" />
+        <state relative-caret-position="565">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/move.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
           <folding>
-            <element signature="e#38#57#0" expanded="true" />
+            <element signature="e#38#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/usemove.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="799" lean-forward="true" selection-start-line="799" selection-end-line="799" />
+          <folding>
+            <element signature="e#37#53#0" expanded="true" />
           </folding>
         </state>
       </provider>

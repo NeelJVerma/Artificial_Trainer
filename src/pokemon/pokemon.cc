@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <random>
+#include <cassert>
 #include "pokemon.h"
 #include "../clientelements/gui.h"
 #include "../type/type.h"
@@ -592,7 +593,7 @@ void Pokemon::ApplyStatus(const StatusNames &status_name) {
       ApplyRestSleep();
       break;
     default:
-      break;
+      assert(false);
   }
 }
 

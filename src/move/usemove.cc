@@ -784,6 +784,47 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
   DoSideEffect(attacker, defender, damage_done, move_hit);
 }
 
+void UseMoveThatAlwaysHitsTwice(const std::shared_ptr<Pokemon> &attacker,
+                                const std::shared_ptr<Pokemon> &defender,
+                                const bool &move_hit) {
+  ExecuteMove(attacker, defender, move_hit);
+  ExecuteMove(attacker, defender, move_hit);
+}
+
+void UseMoveThatHitsTwoToFiveTimes(const std::shared_ptr<Pokemon> &attacker,
+                                   const std::shared_ptr<Pokemon> &defender,
+                                   const bool &move_hit) {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_real_distribution<> distribution(0.0, 100.0);
+
+  for (int i = 0; i < 5; i++) {
+    switch (i) {
+      case 0:
+      case 1:
+        ExecuteMove(attacker, defender, move_hit);
+        break;
+      case 2:
+        if (distribution(generator) > 37.5) {
+          return;
+        }
+
+        ExecuteMove(attacker, defender, move_hit);
+        break;
+      case 3:
+      case 4:
+        if (distribution(generator) > 12.5) {
+          return;
+        }
+
+        ExecuteMove(attacker, defender, move_hit);
+        break;
+      default:
+        assert(false);
+    }
+  }
+}
+
 } //namespace
 
 void UseMove(Team &attacker, Team &defender) {
@@ -835,7 +876,14 @@ void UseMove(Team &attacker, Team &defender) {
     UseMirrorMove(attacking_member, defending_member);
   }
 
-  ExecuteMove(attacking_member, defending_member, move_hit);
+  if (AlwaysHitsTwice(move_used->MoveName())) {
+    UseMoveThatAlwaysHitsTwice(attacking_member, defending_member, move_hit);
+  } else if (HitsTwoToFiveTimes(move_used->MoveName())) {
+    UseMoveThatHitsTwoToFiveTimes(attacking_member, defending_member, move_hit);
+  } else {
+    ExecuteMove(attacking_member, defending_member, move_hit);
+  }
+
   attacking_member->SetExecutedMove(true);
 }
 

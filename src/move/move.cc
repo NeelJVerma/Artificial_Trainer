@@ -160,6 +160,32 @@ bool IsDraining(const MoveNames &move_name) {
   }
 }
 
+bool AlwaysHitsTwice(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kTwineedle:
+    case MoveNames::kBonemerang:
+    case MoveNames::kDoubleKick:
+      return true;
+    default:
+      return false;
+  }
+}
+
+bool HitsTwoToFiveTimes(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kBarrage:
+    case MoveNames::kCometPunch:
+    case MoveNames::kDoubleSlap:
+    case MoveNames::kFuryAttack:
+    case MoveNames::kFurySwipes:
+    case MoveNames::kPinMissile:
+    case MoveNames::kSpikeCannon:
+      return true;
+    default:
+      return false;
+  }
+}
+
 int VariableEffectChance(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAcid:
