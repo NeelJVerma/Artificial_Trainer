@@ -378,7 +378,10 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kBlizzard:
     case MoveNames::kIcePunch:
     case MoveNames::kIceBeam:
-      // variable freeze defender
+      if (VariableEffectActivates(move_name)) {
+        defender->ApplyStatus(StatusNames::kFrozen);
+      }
+
       break;
     case MoveNames::kBodySlam:
     case MoveNames::kLick:
@@ -457,8 +460,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kFireBlast:
     case MoveNames::kFirePunch:
     case MoveNames::kFlamethrower:
-      if (VariableEffectActivates(move_name) &&
-          !defender->SubstituteIsActive() && !defender->IsStatused()) {
+      if (VariableEffectActivates(move_name)) {
         defender->ApplyStatus(StatusNames::kBurned);
       }
 
@@ -626,6 +628,11 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender) {
   if (!attacker->GetNormalStatsContainer().HpStat()->CurrentHp() ||
       !defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    return false;
+  }
+
+  if (attacker->IsFrozen()) {
+    Gui::DisplayIsFrozenMessage(attacker->SpeciesName());
     return false;
   }
 

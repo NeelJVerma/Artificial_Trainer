@@ -77,6 +77,8 @@ class Gui {
   static void DisplayLeechSeedStartedMessage(const SpeciesNames &species_name);
   static void DisplayHadHpSappedMessage(const SpeciesNames &species_name,
                                         const int &sapped);
+  static void DisplayFreezeStartedMessage(const SpeciesNames &species_name);
+  static void DisplayIsFrozenMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

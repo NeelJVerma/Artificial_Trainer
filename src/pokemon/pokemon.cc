@@ -172,7 +172,9 @@ void Pokemon::LowerStat(const StatNames &stat_name,
 
 void Pokemon::ChangeStat(const StatNames &stat_name,
                          const int &num_stages) {
-  num_stages < 0 ? LowerStat(stat_name, num_stages, flags_.burned) :
+  num_stages < 0 ? LowerStat(stat_name,
+                             num_stages,
+                             flags_.status == StatusNames::kBurned) :
   RaiseStat(stat_name, num_stages);
 }
 
@@ -439,13 +441,12 @@ void Pokemon::DoDamageToSubstitute(const int &damage_done) {
 }
 
 bool Pokemon::IsBurned() const {
-  return flags_.burned;
+  return flags_.status == StatusNames::kBurned;
 }
 
 void Pokemon::ApplyBurn() {
   if (!IsType(TypeNames::kFire)) {
-    flags_.burned = true;
-    flags_.statused = true;
+    flags_.status = StatusNames::kBurned;
     flags_.old_attack_stat =
         normal_stats_container_[StatNames::kAttack]->InGameStat();
     ChangeStat(StatNames::kAttack, -2);
@@ -453,18 +454,28 @@ void Pokemon::ApplyBurn() {
   }
 }
 
+void Pokemon::ApplyFreeze() {
+  if (!IsType(TypeNames::kIce)) {
+    flags_.status = StatusNames::kFrozen;
+    Gui::DisplayFreezeStartedMessage(species_name_);
+  }
+}
+
 void Pokemon::ApplyStatus(const StatusNames &status_name) {
+  if (flags_.status != StatusNames::kClear || SubstituteIsActive()) {
+    return;
+  }
+
   switch (status_name) {
     case StatusNames::kBurned:
       ApplyBurn();
       break;
+    case StatusNames::kFrozen:
+      ApplyFreeze();
+      break;
     default:
       break;
   }
-}
-
-bool Pokemon::IsStatused() const {
-  return flags_.statused;
 }
 
 int Pokemon::DoOneSixteenthStatusDamage() {
@@ -501,6 +512,10 @@ int Pokemon::DoLeechSeedDamage() {
   return sapped;
 }
 
+bool Pokemon::IsFrozen() const {
+  return flags_.status == StatusNames::kFrozen;
+}
+
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
   move_used_->SetDamageDone(0);
@@ -518,6 +533,7 @@ void Pokemon::ResetSwitchFlags() {
   flags_.under_mist = false;
   flags_.behind_reflect = false;
   flags_.behind_light_screen = false;
+  flags_.seeded = false;
 }
 
 } //namespace artificialtrainer

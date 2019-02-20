@@ -354,4 +354,14 @@ void Gui::DisplayHadHpSappedMessage(const SpeciesNames &species_name,
             << " had " << sapped << " hp sapped from it" << std::endl;
 }
 
+void Gui::DisplayFreezeStartedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is now frozen" << std::endl;
+}
+
+void Gui::DisplayIsFrozenMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is frozen. It can't attack" << std::endl;
+}
+
 } //namespace artificialtrainer

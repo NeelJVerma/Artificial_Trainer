@@ -25,14 +25,13 @@ struct InGameFlags {
   bool behind_light_screen = false;
   bool behind_reflect = false;
   bool executed_move = false;
-  bool burned = false;
-  bool statused = false;
   bool seeded = false;
   int old_attack_stat = 0;
   int mimic_index = 0;
   Confusion confusion{};
   Disable disable{};
   Substitute substitute{};
+  StatusNames status;
 };
 
 class Pokemon {
@@ -92,11 +91,11 @@ class Pokemon {
   void RecoverHp();
   bool IsBurned() const;
   void ApplyStatus(const StatusNames &status_name);
-  bool IsStatused() const;
   void ApplyLeechSeed();
   bool IsSeeded() const;
   int DoLeechSeedDamage();
   void DoBurnDamage();
+  bool IsFrozen() const;
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
@@ -117,6 +116,7 @@ class Pokemon {
   void ReEnableDisabledMove();
   void RestoreMimic();
   void ApplyBurn();
+  void ApplyFreeze();
   int DoOneSixteenthStatusDamage();
 };
 
