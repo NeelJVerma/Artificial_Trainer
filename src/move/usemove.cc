@@ -414,8 +414,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
     case MoveNames::kConfusion:
     case MoveNames::kPsybeam:
-      if (VariableEffectActivates(move_name) && !defender->IsConfused() &&
-          !defender->SubstituteIsActive()) {
+      if (VariableEffectActivates(move_name)) {
         defender->Confuse();
         Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
       }
@@ -488,9 +487,26 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       attacker->UseFocusEnergy();
       break;
     case MoveNames::kGlare:
-    case MoveNames::kStunSpore:
-    case MoveNames::kThunderWave:
       if (defender->IsStatused() || defender->SubstituteIsActive()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        defender->ApplyStatus(StatusNames::kParalyzed);
+      }
+
+      break;
+    case MoveNames::kStunSpore:
+      if (defender->IsStatused() || defender->SubstituteIsActive() ||
+          defender->IsType(TypeNames::kGrass)) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        defender->ApplyStatus(StatusNames::kParalyzed);
+      }
+
+      break;
+    case MoveNames::kThunderWave:
+      if (defender->IsStatused() || defender->SubstituteIsActive() ||
+          defender->IsType(TypeNames::kElectric) ||
+          defender->IsType(TypeNames::kGround)) {
         Gui::DisplayMoveFailedMessage();
       } else {
         defender->ApplyStatus(StatusNames::kParalyzed);
@@ -566,13 +582,22 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
     case MoveNames::kPoisonGas:
     case MoveNames::kPoisonPowder:
-      // regular poison defender
+      if (defender->SubstituteIsActive() ||
+          defender->IsType(TypeNames::kPoison) || defender->IsStatused()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        defender->ApplyStatus(StatusNames::kPoisoned);
+      }
+
       break;
     case MoveNames::kPoisonSting:
     case MoveNames::kSludge:
     case MoveNames::kSmog:
     case MoveNames::kTwineedle:
-      // variable poison defender
+      if (VariableEffectActivates(move_name)) {
+        defender->ApplyStatus(StatusNames::kPoisoned);
+      }
+
       break;
     case MoveNames::kPsywave:
       UsePsywave(attacker, defender);
@@ -739,6 +764,7 @@ void UseMove(Team &attacker, Team &defender) {
     Gui::DisplayMoveFailedMessage();
     return;
   }
+  // IF DEFENDER IS VANISHED, THE MOVE WILL ALSO FAIL
 
   attacking_member->HandleDisable();
   defending_member->HandleDisable();

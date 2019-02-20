@@ -227,6 +227,8 @@ void Battle::HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
                                      Team &team) {
   if (attacker->IsBurned()) {
     attacker->DoBurnDamage();
+  } else if (attacker->IsPoisoned()) {
+    attacker->DoPoisonDamage();
   }
 
   if (attacker->IsSeeded()) {

@@ -142,7 +142,9 @@ void Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
     if (move < static_cast<int>(MoveNames::kPass)) {
       std::cout << i + 1 << ". "
                 << StringConverter::MoveToString(moves_container[i]->MoveName())
-                << ": " << moves_container[i]->CurrentPp() << " pp"
+                << ": " << moves_container[i]->CurrentPp() << " pp, "
+                << StringConverter::TypeToString(
+                    Type(moves_container[i]->MoveName())) << " type"
                 << std::endl;
     } else {
       std::cout << i + 1 << ". "
@@ -372,6 +374,27 @@ void Gui::DisplayParalysisStartedMessage(const SpeciesNames &species_name) {
 void Gui::DisplayFullyParalyzedMessage(const SpeciesNames &species_name) {
   std::cout << StringConverter::SpeciesToString(species_name)
             << " is fully paralyzed. It can't attack" << std::endl;
+}
+
+void Gui::DisplayPoisonStartedMessage(const SpeciesNames &species_name,
+                                      const bool &is_toxic) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is now "
+            << (is_toxic ? "badly poisoned from toxic" : "poisoned")
+            << std::endl;
+}
+
+void Gui::DisplayIsPoisonedMessage(const SpeciesNames &species_name,
+                                   const bool &is_toxic) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is under the effects of " << (is_toxic ? "toxic" : "poison")
+            << std::endl;
+}
+
+void Gui::DisplayTookPoisonDamageMessage(const SpeciesNames &species_name,
+                                         const int &damage_done) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " took " << damage_done << " damage from poison" << std::endl;
 }
 
 } //namespace artificialtrainer

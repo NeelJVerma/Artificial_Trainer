@@ -198,7 +198,9 @@ bool Pokemon::IsFlinched() const {
 }
 
 void Pokemon::Confuse() {
-  flags_.confusion.Activate();
+  if (!flags_.confusion.IsActive() && !SubstituteIsActive()) {
+    flags_.confusion.Activate();
+  }
 }
 
 void Pokemon::DisableMove() {
@@ -483,6 +485,13 @@ bool Pokemon::IsFullyParalyzed() const {
   return distribution(generator) <= 25;
 }
 
+void Pokemon::ApplyPoison() {
+  if (!IsType(TypeNames::kPoison)) {
+    flags_.status = StatusNames::kPoisoned;
+    Gui::DisplayPoisonStartedMessage(species_name_, false);
+  }
+}
+
 void Pokemon::ApplyStatus(const StatusNames &status_name) {
   if (flags_.status != StatusNames::kClear || SubstituteIsActive()) {
     return;
@@ -497,6 +506,9 @@ void Pokemon::ApplyStatus(const StatusNames &status_name) {
       break;
     case StatusNames::kParalyzed:
       ApplyParalysis();
+      break;
+    case StatusNames::kPoisoned:
+      ApplyPoison();
       break;
     default:
       break;
@@ -518,7 +530,8 @@ void Pokemon::DoBurnDamage() {
 }
 
 void Pokemon::ApplyLeechSeed() {
-  if (IsType(TypeNames::kGrass) || flags_.seeded || SubstituteIsActive()) {
+  if (IsType(TypeNames::kGrass) || flags_.seeded || SubstituteIsActive() ||
+      flags_.seeded) {
     Gui::DisplayMoveFailedMessage();
   } else {
     flags_.seeded = true;
@@ -543,6 +556,16 @@ bool Pokemon::IsFrozen() const {
 
 bool Pokemon::IsStatused() const {
   return flags_.status != StatusNames::kClear;
+}
+
+bool Pokemon::IsPoisoned() const {
+  return flags_.status == StatusNames::kPoisoned;
+}
+
+void Pokemon::DoPoisonDamage() {
+  Gui::DisplayIsPoisonedMessage(species_name_, false);
+  Gui::DisplayTookPoisonDamageMessage(species_name_,
+                                      DoOneSixteenthStatusDamage());
 }
 
 void Pokemon::ResetEndOfTurnFlags() {

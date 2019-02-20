@@ -32,7 +32,7 @@ struct InGameFlags {
   Confusion confusion{};
   Disable disable{};
   Substitute substitute{};
-  StatusNames status;
+  StatusNames status = StatusNames::kClear;
 };
 
 class Pokemon {
@@ -100,6 +100,8 @@ class Pokemon {
   bool IsStatused() const;
   bool IsParalyzed() const;
   bool IsFullyParalyzed() const;
+  bool IsPoisoned() const;
+  void DoPoisonDamage();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
@@ -122,6 +124,7 @@ class Pokemon {
   void ApplyBurn();
   void ApplyFreeze();
   void ApplyParalysis();
+  void ApplyPoison();
   int DoOneSixteenthStatusDamage();
 };
 

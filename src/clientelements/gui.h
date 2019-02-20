@@ -81,6 +81,12 @@ class Gui {
   static void DisplayIsFrozenMessage(const SpeciesNames &species_name);
   static void DisplayParalysisStartedMessage(const SpeciesNames &species_name);
   static void DisplayFullyParalyzedMessage(const SpeciesNames &species_name);
+  static void DisplayPoisonStartedMessage(const SpeciesNames &species_name,
+                                          const bool &is_toxic);
+  static void DisplayIsPoisonedMessage(const SpeciesNames &species_name,
+                                       const bool &is_toxic);
+  static void DisplayTookPoisonDamageMessage(const SpeciesNames &species_name,
+                                             const int &damage_done);
 };
 
 } // namespace artificialtrainer
