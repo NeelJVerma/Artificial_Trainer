@@ -487,7 +487,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       attacker->UseFocusEnergy();
       break;
     case MoveNames::kGlare:
-      if (defender->IsStatused() || defender->SubstituteIsActive()) {
+      if (defender->HasStatus() || defender->SubstituteIsActive()) {
         Gui::DisplayMoveFailedMessage();
       } else {
         defender->ApplyStatus(StatusNames::kParalyzed);
@@ -495,7 +495,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
       break;
     case MoveNames::kStunSpore:
-      if (defender->IsStatused() || defender->SubstituteIsActive() ||
+      if (defender->HasStatus() || defender->SubstituteIsActive() ||
           defender->IsType(TypeNames::kGrass)) {
         Gui::DisplayMoveFailedMessage();
       } else {
@@ -504,7 +504,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
       break;
     case MoveNames::kThunderWave:
-      if (defender->IsStatused() || defender->SubstituteIsActive() ||
+      if (defender->HasStatus() || defender->SubstituteIsActive() ||
           defender->IsType(TypeNames::kElectric) ||
           defender->IsType(TypeNames::kGround)) {
         Gui::DisplayMoveFailedMessage();
@@ -583,7 +583,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kPoisonGas:
     case MoveNames::kPoisonPowder:
       if (defender->SubstituteIsActive() ||
-          defender->IsType(TypeNames::kPoison) || defender->IsStatused()) {
+          defender->IsType(TypeNames::kPoison) || defender->HasStatus()) {
         Gui::DisplayMoveFailedMessage();
       } else {
         defender->ApplyStatus(StatusNames::kPoisoned);
@@ -647,7 +647,13 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       attacker->ChangeStat(StatNames::kAttack, 2);
       break;
     case MoveNames::kToxic:
-      // use toxic
+      if (defender->SubstituteIsActive() ||
+          defender->IsType(TypeNames::kPoison) || defender->HasStatus()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        defender->ApplyStatus(StatusNames::kPoisonedToxic);
+      }
+
       break;
     case MoveNames::kTransform:
       // use transform. May have to add a transform state class

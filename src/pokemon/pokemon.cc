@@ -492,6 +492,13 @@ void Pokemon::ApplyPoison() {
   }
 }
 
+void Pokemon::ApplyToxic() {
+  if (!IsType(TypeNames::kPoison)) {
+    flags_.status = StatusNames::kPoisonedToxic;
+    Gui::DisplayPoisonStartedMessage(species_name_, true);
+  }
+}
+
 void Pokemon::ApplyStatus(const StatusNames &status_name) {
   if (flags_.status != StatusNames::kClear || SubstituteIsActive()) {
     return;
@@ -510,15 +517,20 @@ void Pokemon::ApplyStatus(const StatusNames &status_name) {
     case StatusNames::kPoisoned:
       ApplyPoison();
       break;
+    case StatusNames::kPoisonedToxic:
+      ApplyToxic();
+      break;
     default:
       break;
   }
 }
 
-int Pokemon::DoOneSixteenthStatusDamage() {
+int Pokemon::DoStatusDamage() {
   std::shared_ptr<Hp> hp_stat = normal_stats_container_.HpStat();
   int damage_done = hp_stat->MaxHp() >> 4;
   damage_done = !damage_done ? 1 : damage_done;
+  damage_done = flags_.status == StatusNames::kPoisonedToxic ?
+                flags_.toxic_n_factor * damage_done : damage_done;
   hp_stat->SubtractHp(damage_done);
   return damage_done;
 }
@@ -526,7 +538,7 @@ int Pokemon::DoOneSixteenthStatusDamage() {
 void Pokemon::DoBurnDamage() {
   Gui::DisplayIsBurnedMessage(species_name_);
   Gui::DisplayTookBurnDamageMessage(species_name_,
-                                    DoOneSixteenthStatusDamage());
+                                    DoStatusDamage());
 }
 
 void Pokemon::ApplyLeechSeed() {
@@ -545,7 +557,7 @@ bool Pokemon::IsSeeded() const {
 
 int Pokemon::DoLeechSeedDamage() {
   Gui::DisplayIsSeededMessage(species_name_);
-  int sapped = DoOneSixteenthStatusDamage();
+  int sapped = DoStatusDamage();
   Gui::DisplayHadHpSappedMessage(species_name_, sapped);
   return sapped;
 }
@@ -554,7 +566,7 @@ bool Pokemon::IsFrozen() const {
   return flags_.status == StatusNames::kFrozen;
 }
 
-bool Pokemon::IsStatused() const {
+bool Pokemon::HasStatus() const {
   return flags_.status != StatusNames::kClear;
 }
 
@@ -565,7 +577,18 @@ bool Pokemon::IsPoisoned() const {
 void Pokemon::DoPoisonDamage() {
   Gui::DisplayIsPoisonedMessage(species_name_, false);
   Gui::DisplayTookPoisonDamageMessage(species_name_,
-                                      DoOneSixteenthStatusDamage());
+                                      DoStatusDamage());
+}
+
+bool Pokemon::IsUnderToxic() const {
+  return flags_.status == StatusNames::kPoisonedToxic;
+}
+
+void Pokemon::DoToxicDamage() {
+  Gui::DisplayIsPoisonedMessage(species_name_, true);
+  Gui::DisplayTookPoisonDamageMessage(species_name_,
+                                      DoStatusDamage());
+  flags_.toxic_n_factor++;
 }
 
 void Pokemon::ResetEndOfTurnFlags() {
@@ -586,6 +609,7 @@ void Pokemon::ResetSwitchFlags() {
   flags_.behind_reflect = false;
   flags_.behind_light_screen = false;
   flags_.seeded = false;
+  flags_.toxic_n_factor = 1;
 }
 
 } //namespace artificialtrainer

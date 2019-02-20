@@ -29,6 +29,7 @@ struct InGameFlags {
   int old_attack_stat = 0;
   int old_speed_stat = 0;
   int mimic_index = 0;
+  int toxic_n_factor = 1;
   Confusion confusion{};
   Disable disable{};
   Substitute substitute{};
@@ -97,11 +98,13 @@ class Pokemon {
   int DoLeechSeedDamage();
   void DoBurnDamage();
   bool IsFrozen() const;
-  bool IsStatused() const;
+  bool HasStatus() const;
   bool IsParalyzed() const;
   bool IsFullyParalyzed() const;
   bool IsPoisoned() const;
   void DoPoisonDamage();
+  bool IsUnderToxic() const;
+  void DoToxicDamage();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
@@ -125,7 +128,8 @@ class Pokemon {
   void ApplyFreeze();
   void ApplyParalysis();
   void ApplyPoison();
-  int DoOneSixteenthStatusDamage();
+  void ApplyToxic();
+  int DoStatusDamage();
 };
 
 } //namespace artificialtrainer
