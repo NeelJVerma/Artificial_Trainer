@@ -332,4 +332,26 @@ void Gui::DisplayIsBurnedMessage(const SpeciesNames &species_name) {
             << " is burned" << std::endl;
 }
 
+void Gui::DisplayTookBurnDamageMessage(const SpeciesNames &species_name,
+                                       const int &damage_done) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " took " << damage_done << " damage from its burn" << std::endl;
+}
+
+void Gui::DisplayIsSeededMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is seeded" << std::endl;
+}
+
+void Gui::DisplayLeechSeedStartedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is now under the effects of leech seed" << std::endl;
+}
+
+void Gui::DisplayHadHpSappedMessage(const SpeciesNames &species_name,
+                                    const int &sapped) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " had " << sapped << " hp sapped from it" << std::endl;
+}
+
 } //namespace artificialtrainer

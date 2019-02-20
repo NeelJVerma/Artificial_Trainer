@@ -459,7 +459,6 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kFlamethrower:
       if (VariableEffectActivates(move_name) &&
           !defender->SubstituteIsActive() && !defender->IsStatused()) {
-        Gui::DisplayBurnStartedMessage(defender->SpeciesName());
         defender->ApplyStatus(StatusNames::kBurned);
       }
 
@@ -521,7 +520,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       // put target to sleep
       break;
     case MoveNames::kLeechSeed:
-      // use leech seed
+      defender->ApplyLeechSeed();
       break;
     case MoveNames::kLeer:
     case MoveNames::kTailWhip:

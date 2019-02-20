@@ -131,8 +131,8 @@ void Pokemon::RaiseStat(const StatNames &stat_name,
 }
 
 void Pokemon::LowerStat(const StatNames &stat_name,
-                        const int &num_stages) {
-  if (stat_name != StatNames::kEvasion && flags_.under_mist) {
+                        const int &num_stages, const bool &ignore_mist) {
+  if (!ignore_mist && stat_name != StatNames::kEvasion && flags_.under_mist) {
     Gui::DisplayIsUnderMistMessage(species_name_);
     return;
   }
@@ -172,8 +172,8 @@ void Pokemon::LowerStat(const StatNames &stat_name,
 
 void Pokemon::ChangeStat(const StatNames &stat_name,
                          const int &num_stages) {
-  num_stages < 0 ? LowerStat(stat_name, num_stages) : RaiseStat(stat_name,
-                                                                num_stages);
+  num_stages < 0 ? LowerStat(stat_name, num_stages, flags_.burned) :
+  RaiseStat(stat_name, num_stages);
 }
 
 void Pokemon::UseFocusEnergy() {
@@ -442,11 +442,21 @@ bool Pokemon::IsBurned() const {
   return flags_.burned;
 }
 
+void Pokemon::ApplyBurn() {
+  if (!IsType(TypeNames::kFire)) {
+    flags_.burned = true;
+    flags_.statused = true;
+    flags_.old_attack_stat =
+        normal_stats_container_[StatNames::kAttack]->InGameStat();
+    ChangeStat(StatNames::kAttack, -2);
+    Gui::DisplayBurnStartedMessage(species_name_);
+  }
+}
+
 void Pokemon::ApplyStatus(const StatusNames &status_name) {
   switch (status_name) {
     case StatusNames::kBurned:
-      flags_.burned = true;
-      flags_.statused = true;
+      ApplyBurn();
       break;
     default:
       break;
@@ -457,13 +467,38 @@ bool Pokemon::IsStatused() const {
   return flags_.statused;
 }
 
-void Pokemon::DoBurnDamage() {
-  Gui::DisplayIsBurnedMessage(species_name_);
+int Pokemon::DoOneSixteenthStatusDamage() {
   std::shared_ptr<Hp> hp_stat = normal_stats_container_.HpStat();
-  int damage_done = hp_stat->MaxHp() >> 16;
+  int damage_done = hp_stat->MaxHp() >> 4;
   damage_done = !damage_done ? 1 : damage_done;
   hp_stat->SubtractHp(damage_done);
-  Gui::DisplayDamageDoneMessage(damage_done);
+  return damage_done;
+}
+
+void Pokemon::DoBurnDamage() {
+  Gui::DisplayIsBurnedMessage(species_name_);
+  Gui::DisplayTookBurnDamageMessage(species_name_,
+                                    DoOneSixteenthStatusDamage());
+}
+
+void Pokemon::ApplyLeechSeed() {
+  if (IsType(TypeNames::kGrass) || flags_.seeded || SubstituteIsActive()) {
+    Gui::DisplayMoveFailedMessage();
+  } else {
+    flags_.seeded = true;
+    Gui::DisplayLeechSeedStartedMessage(species_name_);
+  }
+}
+
+bool Pokemon::IsSeeded() const {
+  return flags_.seeded;
+}
+
+int Pokemon::DoLeechSeedDamage() {
+  Gui::DisplayIsSeededMessage(species_name_);
+  int sapped = DoOneSixteenthStatusDamage();
+  Gui::DisplayHadHpSappedMessage(species_name_, sapped);
+  return sapped;
 }
 
 void Pokemon::ResetEndOfTurnFlags() {

@@ -71,6 +71,12 @@ class Gui {
   static void DisplayIsBehindSubstituteMessage();
   static void DisplayBurnStartedMessage(const SpeciesNames &species_name);
   static void DisplayIsBurnedMessage(const SpeciesNames &species_name);
+  static void DisplayTookBurnDamageMessage(const SpeciesNames &species_name,
+                                           const int &damage_done);
+  static void DisplayIsSeededMessage(const SpeciesNames &species_name);
+  static void DisplayLeechSeedStartedMessage(const SpeciesNames &species_name);
+  static void DisplayHadHpSappedMessage(const SpeciesNames &species_name,
+                                        const int &sapped);
 };
 
 } // namespace artificialtrainer

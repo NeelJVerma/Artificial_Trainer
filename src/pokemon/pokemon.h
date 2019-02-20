@@ -27,6 +27,7 @@ struct InGameFlags {
   bool executed_move = false;
   bool burned = false;
   bool statused = false;
+  bool seeded = false;
   int old_attack_stat = 0;
   int mimic_index = 0;
   Confusion confusion{};
@@ -77,7 +78,7 @@ class Pokemon {
   bool IsType(const TypeNames &type_name) const;
   int EndOfNormalMovesIndex() const;
   void UseMimic();
-  void SetMimicIndex(const int& index_in_move_container);
+  void SetMimicIndex(const int &index_in_move_container);
   void SetExecutedMove(const bool &executed_move);
   bool ExecutedMove() const;
   void UseMist();
@@ -92,6 +93,9 @@ class Pokemon {
   bool IsBurned() const;
   void ApplyStatus(const StatusNames &status_name);
   bool IsStatused() const;
+  void ApplyLeechSeed();
+  bool IsSeeded() const;
+  int DoLeechSeedDamage();
   void DoBurnDamage();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
@@ -106,11 +110,14 @@ class Pokemon {
   InGameFlags flags_;
   int level_;
   bool is_active_;
-  void LowerStat(const StatNames &stat_name, const int &num_stages);
+  void LowerStat(const StatNames &stat_name, const int &num_stages,
+                 const bool &ignore_mist);
   void RaiseStat(const StatNames &stat_name, const int &num_stages);
   void ResetStats();
   void ReEnableDisabledMove();
   void RestoreMimic();
+  void ApplyBurn();
+  int DoOneSixteenthStatusDamage();
 };
 
 } //namespace artificialtrainer
