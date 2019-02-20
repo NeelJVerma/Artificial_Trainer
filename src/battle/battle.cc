@@ -225,6 +225,11 @@ bool Battle::HandleMove(Team &attacker, Team &defender) {
 void Battle::HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
                                      const std::shared_ptr<Pokemon> &defender,
                                      Team &team) {
+  if (!attacker->GetNormalStatsContainer().HpStat()->CurrentHp() ||
+      !defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    return;
+  }
+
   if (attacker->IsBurned()) {
     attacker->DoBurnDamage();
   } else if (attacker->IsPoisoned()) {
@@ -277,14 +282,22 @@ void Battle::HandleTurn() {
   }
 
   // TODO: burn/toxic/leech seed/other end of turn statuses: put in function
-  if (one_moves_first && HandleMove(team_one_, team_two_)) {
-    HandleMove(team_two_, team_one_);
-    HandleEndOfTurnStatuses(active_pokemon_one, active_pokemon_two, team_one_);
-    HandleEndOfTurnStatuses(active_pokemon_two, active_pokemon_one, team_two_);
-  } else if (!one_moves_first && HandleMove(team_two_, team_one_)) {
-    HandleMove(team_one_, team_two_);
-    HandleEndOfTurnStatuses(active_pokemon_two, active_pokemon_one, team_two_);
-    HandleEndOfTurnStatuses(active_pokemon_one, active_pokemon_two, team_one_);
+  if (one_moves_first && HandleMove(team_one_, team_two_) &&
+      HandleMove(team_two_, team_one_)) {
+    HandleEndOfTurnStatuses(active_pokemon_one,
+                            active_pokemon_two,
+                            team_one_);
+    HandleEndOfTurnStatuses(active_pokemon_two,
+                            active_pokemon_one,
+                            team_two_);
+  } else if (!one_moves_first && HandleMove(team_two_, team_one_) &&
+      HandleMove(team_one_, team_two_)) {
+    HandleEndOfTurnStatuses(active_pokemon_two,
+                            active_pokemon_one,
+                            team_two_);
+    HandleEndOfTurnStatuses(active_pokemon_one,
+                            active_pokemon_two,
+                            team_one_);
   }
 
   active_pokemon_one->ResetEndOfTurnFlags();

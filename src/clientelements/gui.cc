@@ -397,4 +397,24 @@ void Gui::DisplayTookPoisonDamageMessage(const SpeciesNames &species_name,
             << " took " << damage_done << " damage from poison" << std::endl;
 }
 
+void Gui::DisplaySleepStartedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is now asleep" << std::endl;
+}
+
+void Gui::DisplayIsAsleepMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is asleep. It can't attack" << std::endl;
+}
+
+void Gui::DisplayWokeUpMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " woke up" << std::endl;
+}
+
+void Gui::DisplayRecoveredAllHpMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " recovered all of its hp" << std::endl;
+}
+
 } //namespace artificialtrainer

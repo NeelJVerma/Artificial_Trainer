@@ -260,8 +260,7 @@ void Pokemon::UseConversion() {
 }
 
 bool Pokemon::HandleConfusion() {
-  // TODO: IF POKEMON IS RECHARGING OR STATUS PREVENTS THEM FROM ATTACKING,
-  //  RETURN TRUE
+  // TODO: IF POKEMON IS RECHARGING OR ASLEEP OR FROZEN
   if (!flags_.confusion.IsActive()) {
     return true;
   }
@@ -499,6 +498,55 @@ void Pokemon::ApplyToxic() {
   }
 }
 
+void Pokemon::ApplySleep() {
+  flags_.status = StatusNames::kAsleep;
+  flags_.turns_asleep = 1;
+  Gui::DisplaySleepStartedMessage(species_name_);
+}
+
+void Pokemon::AdvanceRegularSleepCounter() {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(1, 7);
+
+  if (flags_.turns_asleep == distribution(generator) ||
+      flags_.turns_asleep == 7) {
+    Gui::DisplayWokeUpMessage(species_name_);
+    flags_.status = StatusNames::kClear;
+  }
+}
+
+void Pokemon::ApplyRestSleep() {
+  std::shared_ptr<Hp> hp = normal_stats_container_.HpStat();
+  int max_minus_current = hp->MaxHp() - hp->CurrentHp();
+
+  if (max_minus_current == 255 || max_minus_current == 511 ||
+      hp->CurrentHp() == hp->MaxHp()) {
+    Gui::DisplayMoveFailedMessage();
+  } else {
+    flags_.status = StatusNames::kAsleepRest;
+    hp->AddHp(hp->MaxHp());
+    Gui::DisplaySleepStartedMessage(species_name_);
+    Gui::DisplayRecoveredAllHpMessage(species_name_);
+  }
+}
+
+bool Pokemon::IsAsleep() const {
+  return flags_.status == StatusNames::kAsleep;
+}
+
+bool Pokemon::IsResting() const {
+  return flags_.status == StatusNames::kAsleepRest;
+}
+
+void Pokemon::AdvanceRestCounter() {
+  if (flags_.rest_counter++ == 3) {
+    Gui::DisplayWokeUpMessage(species_name_);
+    flags_.rest_counter = 1;
+    flags_.status = StatusNames::kClear;
+  }
+}
+
 void Pokemon::ApplyStatus(const StatusNames &status_name) {
   if (flags_.status != StatusNames::kClear || SubstituteIsActive()) {
     return;
@@ -519,6 +567,12 @@ void Pokemon::ApplyStatus(const StatusNames &status_name) {
       break;
     case StatusNames::kPoisonedToxic:
       ApplyToxic();
+      break;
+    case StatusNames::kAsleep:
+      ApplySleep();
+      break;
+    case StatusNames::kAsleepRest:
+      ApplyRestSleep();
       break;
     default:
       break;
@@ -603,6 +657,7 @@ void Pokemon::ResetSwitchFlags() {
   flags_.disable = Disable{};
   flags_.substitute = Substitute{};
   type_container_ = TypeContainer(species_name_);
+  move_used_ = nullptr;
   flags_.used_focus_energy = false;
   flags_.executed_move = false;
   flags_.under_mist = false;

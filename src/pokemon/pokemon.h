@@ -30,6 +30,8 @@ struct InGameFlags {
   int old_speed_stat = 0;
   int mimic_index = 0;
   int toxic_n_factor = 1;
+  int rest_counter = 1;
+  int turns_asleep = 1;
   Confusion confusion{};
   Disable disable{};
   Substitute substitute{};
@@ -105,6 +107,10 @@ class Pokemon {
   void DoPoisonDamage();
   bool IsUnderToxic() const;
   void DoToxicDamage();
+  bool IsAsleep() const;
+  bool IsResting() const;
+  void AdvanceRestCounter();
+  void AdvanceRegularSleepCounter();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
@@ -129,6 +135,8 @@ class Pokemon {
   void ApplyParalysis();
   void ApplyPoison();
   void ApplyToxic();
+  void ApplySleep();
+  void ApplyRestSleep();
   int DoStatusDamage();
 };
 

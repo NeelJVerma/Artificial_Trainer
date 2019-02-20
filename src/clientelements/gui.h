@@ -87,6 +87,10 @@ class Gui {
                                        const bool &is_toxic);
   static void DisplayTookPoisonDamageMessage(const SpeciesNames &species_name,
                                              const int &damage_done);
+  static void DisplaySleepStartedMessage(const SpeciesNames &species_name);
+  static void DisplayIsAsleepMessage(const SpeciesNames &species_name);
+  static void DisplayWokeUpMessage(const SpeciesNames &species_name);
+  static void DisplayRecoveredAllHpMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

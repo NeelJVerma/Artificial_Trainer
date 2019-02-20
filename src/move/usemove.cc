@@ -137,7 +137,9 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
 
   if (!static_cast<int>(type_product) ||
       (move_used->MoveName() == MoveNames::kLick &&
-          defender->IsType(TypeNames::kPsychic))) {
+          defender->IsType(TypeNames::kPsychic)) ||
+      (move_used->MoveName() == MoveNames::kDreamEater &&
+          !defender->IsAsleep())) {
     Gui::DisplayMoveHadNoEffectMessage();
     return 0;
   }
@@ -452,7 +454,10 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       DoDirectDamage(defender, 40);
       break;
     case MoveNames::kDreamEater:
-      // if defender is sleeping, absorb hp
+      if (defender->IsAsleep()) {
+        attacker->AbsorbHp(damage_done);
+      }
+
       break;
     case MoveNames::kExplosion:
     case MoveNames::kSelfDestruct:
@@ -541,9 +546,22 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kHypnosis:
     case MoveNames::kLovelyKiss:
     case MoveNames::kSing:
+      if (defender->SubstituteIsActive() || defender->HasStatus()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        defender->ApplyStatus(StatusNames::kAsleep);
+      }
+
+      break;
     case MoveNames::kSleepPowder:
     case MoveNames::kSpore:
-      // put target to sleep
+      if (defender->SubstituteIsActive() ||
+          defender->HasStatus() || defender->IsType(TypeNames::kGrass)) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        defender->ApplyStatus(StatusNames::kAsleep);
+      }
+
       break;
     case MoveNames::kLeechSeed:
       defender->ApplyLeechSeed();
@@ -616,7 +634,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       attacker->UseReflect();
       break;
     case MoveNames::kRest:
-      // rest
+      attacker->ApplyStatus(StatusNames::kAsleepRest);
       break;
     case MoveNames::kScreech:
       if (!defender->SubstituteIsActive()) {
@@ -667,6 +685,18 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender) {
   if (!attacker->GetNormalStatsContainer().HpStat()->CurrentHp() ||
       !defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+    return false;
+  }
+
+  if (attacker->IsAsleep()) {
+    Gui::DisplayIsAsleepMessage(attacker->SpeciesName());
+    attacker->AdvanceRegularSleepCounter();
+    return false;
+  }
+
+  if (attacker->IsResting()) {
+    Gui::DisplayIsAsleepMessage(attacker->SpeciesName());
+    attacker->AdvanceRestCounter();
     return false;
   }
 
