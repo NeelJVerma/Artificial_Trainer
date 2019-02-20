@@ -449,8 +449,10 @@ bool Pokemon::IsBurned() const {
 void Pokemon::ApplyBurn() {
   if (!IsType(TypeNames::kFire)) {
     flags_.status = StatusNames::kBurned;
-    flags_.old_attack_stat =
-        normal_stats_container_[StatNames::kAttack]->InGameStat();
+    flags_.old_attack_numerator =
+        normal_stats_container_[StatNames::kAttack]->Numerator();
+    flags_.old_attack_denominator =
+        normal_stats_container_[StatNames::kAttack]->Denominator();
     ChangeStat(StatNames::kAttack, -2);
     Gui::DisplayBurnStartedMessage(species_name_);
   }
@@ -466,8 +468,10 @@ void Pokemon::ApplyFreeze() {
 void Pokemon::ApplyParalysis() {
   if (!IsType(TypeNames::kElectric)) {
     flags_.status = StatusNames::kParalyzed;
-    flags_.old_speed_stat =
-        normal_stats_container_[StatNames::kSpeed]->InGameStat();
+    flags_.old_speed_numerator =
+        normal_stats_container_[StatNames::kSpeed]->Numerator();
+    flags_.old_speed_denominator =
+        normal_stats_container_[StatNames::kSpeed]->Denominator();
     ChangeStat(StatNames::kSpeed, -6);
     Gui::DisplayParalysisStartedMessage(species_name_);
   }
@@ -516,6 +520,18 @@ void Pokemon::AdvanceRegularSleepCounter() {
   }
 }
 
+void Pokemon::RestoreStatsFromStatuses() {
+  if (flags_.status == StatusNames::kBurned) {
+    normal_stats_container_[
+        StatNames::kAttack]->ResetStat(flags_.old_attack_numerator,
+                                       flags_.old_attack_denominator);
+  } else if (flags_.status == StatusNames::kParalyzed) {
+    normal_stats_container_[
+        StatNames::kSpeed]->ResetStat(flags_.old_speed_numerator,
+                                      flags_.old_speed_denominator);
+  }
+}
+
 void Pokemon::ApplyRestSleep() {
   std::shared_ptr<Hp> hp = normal_stats_container_.HpStat();
   int max_minus_current = hp->MaxHp() - hp->CurrentHp();
@@ -524,6 +540,7 @@ void Pokemon::ApplyRestSleep() {
       hp->CurrentHp() == hp->MaxHp()) {
     Gui::DisplayMoveFailedMessage();
   } else {
+    RestoreStatsFromStatuses();
     flags_.status = StatusNames::kAsleepRest;
     hp->AddHp(hp->MaxHp());
     Gui::DisplaySleepStartedMessage(species_name_);
@@ -643,6 +660,16 @@ void Pokemon::DoToxicDamage() {
   Gui::DisplayTookPoisonDamageMessage(species_name_,
                                       DoStatusDamage());
   flags_.toxic_n_factor++;
+}
+
+void Pokemon::ResetFlagsFromHaze() {
+  ResetStats();
+  flags_.status = StatusNames::kClear;
+  flags_.seeded = false;
+  flags_.behind_light_screen = false;
+  flags_.behind_reflect = false;
+  flags_.confusion = Confusion{};
+  flags_.toxic_n_factor = 1;
 }
 
 void Pokemon::ResetEndOfTurnFlags() {

@@ -417,4 +417,10 @@ void Gui::DisplayRecoveredAllHpMessage(const SpeciesNames &species_name) {
             << " recovered all of its hp" << std::endl;
 }
 
+void Gui::DisplayHazeResetMessage() {
+  std::cout << "All Pokemon had all stat changes and statuses reset. They "
+               "also had all light screens, reflects, and leech seeds removed"
+            << std::endl;
+}
+
 } //namespace artificialtrainer

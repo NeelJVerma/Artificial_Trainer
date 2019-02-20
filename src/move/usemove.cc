@@ -316,6 +316,13 @@ void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
   }
 }
 
+void HazeField(const std::shared_ptr<Pokemon> &attacker,
+               const std::shared_ptr<Pokemon> &defender) {
+  attacker->ResetFlagsFromHaze();
+  defender->ResetFlagsFromHaze();
+  Gui::DisplayHazeResetMessage();
+}
+
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
                   const int &damage_done, const bool &move_hit) {
@@ -530,7 +537,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       attacker->ChangeStat(StatNames::kSpecial, 1);
       break;
     case MoveNames::kHaze:
-      // haze the field
+      HazeField(attacker, defender);
       break;
     case MoveNames::kHighJumpKick:
     case MoveNames::kJumpKick:

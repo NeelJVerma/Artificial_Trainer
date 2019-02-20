@@ -1318,6 +1318,12 @@ int NormalStat::InGameStat() const {
       static_cast<double>(numerator_) / denominator_)));
 }
 
+void NormalStat::ResetStat(const int &new_numerator,
+                           const int &new_denominator) {
+  numerator_ = new_numerator;
+  denominator_ = new_denominator;
+}
+
 int NormalStat::InitialStat() {
   int old_numerator = numerator_;
   int old_denominator = denominator_;

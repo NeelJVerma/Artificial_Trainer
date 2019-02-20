@@ -91,6 +91,7 @@ class Gui {
   static void DisplayIsAsleepMessage(const SpeciesNames &species_name);
   static void DisplayWokeUpMessage(const SpeciesNames &species_name);
   static void DisplayRecoveredAllHpMessage(const SpeciesNames &species_name);
+  static void DisplayHazeResetMessage();
 };
 
 } // namespace artificialtrainer

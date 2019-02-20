@@ -30,6 +30,7 @@ class NormalStat {
   int Denominator() const;
   int InGameStat() const;
   void ResetStat();
+  void ResetStat(const int &new_numerator, const int &new_denominator);
   int InitialStat();
 
  private:
