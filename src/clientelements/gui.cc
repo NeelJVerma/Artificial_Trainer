@@ -364,4 +364,14 @@ void Gui::DisplayIsFrozenMessage(const SpeciesNames &species_name) {
             << " is frozen. It can't attack" << std::endl;
 }
 
+void Gui::DisplayParalysisStartedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is now paralyzed" << std::endl;
+}
+
+void Gui::DisplayFullyParalyzedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is fully paralyzed. It can't attack" << std::endl;
+}
+
 } //namespace artificialtrainer

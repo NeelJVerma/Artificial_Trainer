@@ -79,6 +79,8 @@ class Gui {
                                         const int &sapped);
   static void DisplayFreezeStartedMessage(const SpeciesNames &species_name);
   static void DisplayIsFrozenMessage(const SpeciesNames &species_name);
+  static void DisplayParalysisStartedMessage(const SpeciesNames &species_name);
+  static void DisplayFullyParalyzedMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

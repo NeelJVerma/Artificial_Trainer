@@ -174,7 +174,8 @@ void Pokemon::ChangeStat(const StatNames &stat_name,
                          const int &num_stages) {
   num_stages < 0 ? LowerStat(stat_name,
                              num_stages,
-                             flags_.status == StatusNames::kBurned) :
+                             (flags_.status == StatusNames::kBurned ||
+                                 flags_.status == StatusNames::kParalyzed)) :
   RaiseStat(stat_name, num_stages);
 }
 
@@ -461,6 +462,27 @@ void Pokemon::ApplyFreeze() {
   }
 }
 
+void Pokemon::ApplyParalysis() {
+  if (!IsType(TypeNames::kElectric)) {
+    flags_.status = StatusNames::kParalyzed;
+    flags_.old_speed_stat =
+        normal_stats_container_[StatNames::kSpeed]->InGameStat();
+    ChangeStat(StatNames::kSpeed, -6);
+    Gui::DisplayParalysisStartedMessage(species_name_);
+  }
+}
+
+bool Pokemon::IsParalyzed() const {
+  return flags_.status == StatusNames::kParalyzed;
+}
+
+bool Pokemon::IsFullyParalyzed() const {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(1, 100);
+  return distribution(generator) <= 25;
+}
+
 void Pokemon::ApplyStatus(const StatusNames &status_name) {
   if (flags_.status != StatusNames::kClear || SubstituteIsActive()) {
     return;
@@ -472,6 +494,9 @@ void Pokemon::ApplyStatus(const StatusNames &status_name) {
       break;
     case StatusNames::kFrozen:
       ApplyFreeze();
+      break;
+    case StatusNames::kParalyzed:
+      ApplyParalysis();
       break;
     default:
       break;
@@ -514,6 +539,10 @@ int Pokemon::DoLeechSeedDamage() {
 
 bool Pokemon::IsFrozen() const {
   return flags_.status == StatusNames::kFrozen;
+}
+
+bool Pokemon::IsStatused() const {
+  return flags_.status != StatusNames::kClear;
 }
 
 void Pokemon::ResetEndOfTurnFlags() {

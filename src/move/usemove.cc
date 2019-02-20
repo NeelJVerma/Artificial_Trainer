@@ -388,7 +388,10 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kThunder:
     case MoveNames::kThunderbolt:
     case MoveNames::kThunderShock:
-      // variable paralyze defender
+      if (VariableEffectActivates(move_name)) {
+        defender->ApplyStatus(StatusNames::kParalyzed);
+      }
+
       break;
     case MoveNames::kBubble:
     case MoveNames::kBubbleBeam:
@@ -487,7 +490,12 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kGlare:
     case MoveNames::kStunSpore:
     case MoveNames::kThunderWave:
-      // paralyze the target
+      if (defender->IsStatused() || defender->SubstituteIsActive()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        defender->ApplyStatus(StatusNames::kParalyzed);
+      }
+
       break;
     case MoveNames::kGrowl:
       if (!defender->SubstituteIsActive()) {
@@ -638,6 +646,11 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
 
   if (attacker->IsFlinched()) {
     Gui::DisplayFlinchedMessage(attacker->SpeciesName());
+    return false;
+  }
+
+  if (attacker->IsParalyzed() && attacker->IsFullyParalyzed()) {
+    Gui::DisplayFullyParalyzedMessage(attacker->SpeciesName());
     return false;
   }
 

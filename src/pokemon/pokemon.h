@@ -27,6 +27,7 @@ struct InGameFlags {
   bool executed_move = false;
   bool seeded = false;
   int old_attack_stat = 0;
+  int old_speed_stat = 0;
   int mimic_index = 0;
   Confusion confusion{};
   Disable disable{};
@@ -96,6 +97,9 @@ class Pokemon {
   int DoLeechSeedDamage();
   void DoBurnDamage();
   bool IsFrozen() const;
+  bool IsStatused() const;
+  bool IsParalyzed() const;
+  bool IsFullyParalyzed() const;
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
 
@@ -117,6 +121,7 @@ class Pokemon {
   void RestoreMimic();
   void ApplyBurn();
   void ApplyFreeze();
+  void ApplyParalysis();
   int DoOneSixteenthStatusDamage();
 };
 
