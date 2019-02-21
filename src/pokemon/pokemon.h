@@ -26,6 +26,7 @@ struct InGameFlags {
   bool behind_reflect = false;
   bool executed_move = false;
   bool seeded = false;
+  bool charging_up = false;
   int old_attack_numerator = 0;
   int old_attack_denominator = 0;
   int old_speed_numerator = 0;
@@ -113,6 +114,8 @@ class Pokemon {
   bool IsResting() const;
   void AdvanceRestCounter();
   void AdvanceRegularSleepCounter();
+  void UseChargeUpMove();
+  bool IsChargingUp() const;
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();

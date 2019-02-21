@@ -232,6 +232,28 @@ bool WorksIfDefenderIsVanished(const MoveNames &move_name) {
   }
 }
 
+bool IsVanish(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kFly:
+    case MoveNames::kDig:
+      return true;
+    default:
+      return false;
+  }
+}
+
+bool IsChargeUp(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kRazorWind:
+    case MoveNames::kSkullBash:
+    case MoveNames::kSkyAttack:
+    case MoveNames::kSolarBeam:
+      return true;
+    default:
+      return false;
+  }
+}
+
 int VariableEffectChance(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAcid:

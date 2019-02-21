@@ -428,4 +428,9 @@ void Gui::DisplayPokemonVanishedMessage(const SpeciesNames &species_name) {
             << " just vanished" << std::endl;
 }
 
+void Gui::DisplayChargingUpMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is charging up for the move" << std::endl;
+}
+
 } //namespace artificialtrainer

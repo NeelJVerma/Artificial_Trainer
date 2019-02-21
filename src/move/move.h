@@ -42,6 +42,8 @@ bool IsDraining(const MoveNames &move_name);
 bool AlwaysHitsTwice(const MoveNames &move_name);
 bool HitsTwoToFiveTimes(const MoveNames &move_name);
 bool WorksIfDefenderIsVanished(const MoveNames &move_name);
+bool IsVanish(const MoveNames &move_name);
+bool IsChargeUp(const MoveNames &move_name);
 int VariableEffectChance(const MoveNames &move_name);
 
 } //namespace artificialtrainer

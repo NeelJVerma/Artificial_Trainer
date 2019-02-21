@@ -629,7 +629,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kSkullBash:
     case MoveNames::kSkyAttack:
     case MoveNames::kSolarBeam:
-      // use charge up move. may have to handle separately
+      attacker->UseChargeUpMove();
       break;
     case MoveNames::kRecover:
     case MoveNames::kSoftBoiled:
@@ -765,14 +765,10 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
                  const std::shared_ptr<Pokemon> &defender,
                  const bool &move_hit) {
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
-
-  // have to call recursively for moves that hit multiple times in one turn
-  // maybe ?
-
   int damage_done;
 
-  if ((move_used->MoveName() == MoveNames::kDig ||
-      move_used->MoveName() == MoveNames::kFly) && !attacker->IsVanished()) {
+  if ((IsVanish(move_used->MoveName()) && !attacker->IsVanished()) ||
+      (IsChargeUp(move_used->MoveName()) && !attacker->IsChargingUp())) {
     damage_done = 0;
   } else {
     damage_done = IsSelfKo(move_used->MoveName()) ?

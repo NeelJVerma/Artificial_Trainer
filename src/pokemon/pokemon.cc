@@ -243,6 +243,19 @@ bool Pokemon::IsVanished() const {
   return flags_.vanished;
 }
 
+void Pokemon::UseChargeUpMove() {
+  if (!flags_.charging_up) {
+    flags_.charging_up = true;
+    Gui::DisplayChargingUpMessage(species_name_);
+  } else {
+    flags_.charging_up = false;
+  }
+}
+
+bool Pokemon::IsChargingUp() const {
+  return flags_.charging_up;
+}
+
 int Pokemon::EndOfNormalMovesIndex() const {
   int end_normal_moves_index = 0;
 
