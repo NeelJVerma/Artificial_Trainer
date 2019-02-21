@@ -28,6 +28,7 @@ struct InGameFlags {
   bool seeded = false;
   bool charging_up = false;
   bool recharging = false;
+  int num_turns_locked_in = 0;
   int old_attack_numerator = 0;
   int old_attack_denominator = 0;
   int old_speed_numerator = 0;
@@ -69,7 +70,7 @@ class Pokemon {
   bool UsedFocusEnergy() const;
   void Flinch();
   bool IsFlinched() const;
-  void Confuse();
+  void Confuse(const bool &confused_self);
   bool IsConfused() const;
   void DisableMove();
   void UseVanishMove();
@@ -117,9 +118,10 @@ class Pokemon {
   void AdvanceRegularSleepCounter();
   void UseChargeUpMove();
   bool IsChargingUp() const;
-  void UseRechargeMove();
   void SetRecharging(const bool &recharging);
   bool IsRecharging() const;
+  void UseLockInMove();
+  bool IsUsingLockInMove() const;
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();

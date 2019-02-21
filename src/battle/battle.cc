@@ -141,7 +141,13 @@ bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
     return false;
   }
 
+  if (active_member->IsUsingLockInMove() &&
+      move->MoveName() != active_member->MoveUsed()->MoveName()) {
+    return false;
+  }
+
   if (active_member->IsRecharging() && move->MoveName() != MoveNames::kPass) {
+    Gui::DisplayIsRechargingMessage(active_member->SpeciesName());
     return false;
   }
 

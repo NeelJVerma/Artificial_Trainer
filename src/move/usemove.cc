@@ -122,7 +122,8 @@ std::pair<int, int> AttackAndDefenseUsed(
 
 int DamageDone(const std::shared_ptr<Pokemon> &attacker,
                const std::shared_ptr<Pokemon> &defender,
-               const bool &self_ko_move, const bool &move_hit) {
+               const bool &self_ko_move, const bool &move_hit,
+               const bool &confusion_damage) {
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
 
   if (!move_hit ||
@@ -131,7 +132,8 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
     return 0;
   }
 
-  double type_product = TypeProduct(move_used, defender);
+  double type_product = confusion_damage ? 10.0 : TypeProduct(
+      move_used, defender);
 
   if (!static_cast<int>(type_product) ||
       (move_used->MoveName() == MoveNames::kLick &&
@@ -414,16 +416,14 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       if (defender->IsConfused() || defender->SubstituteIsActive()) {
         Gui::DisplayMoveFailedMessage();
       } else {
-        defender->Confuse();
-        Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
+        defender->Confuse(false);
       }
 
       break;
     case MoveNames::kConfusion:
     case MoveNames::kPsybeam:
       if (VariableEffectActivates(move_name)) {
-        defender->Confuse();
-        Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
+        defender->Confuse(false);
       }
 
       break;
@@ -598,10 +598,12 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kSeismicToss:
       DoDamageEqualToAttackerLevel(attacker, defender);
       break;
-    case MoveNames::kPetalDance:
     case MoveNames::kRage:
+      // use rage
+      break;
+    case MoveNames::kPetalDance:
     case MoveNames::kThrash:
-      // lock in. Might need to handle rage separately
+      attacker->UseLockInMove();
       break;
     case MoveNames::kPoisonGas:
     case MoveNames::kPoisonPowder:
@@ -721,7 +723,9 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   }
 
   if (!attacker->HandleConfusion()) {
-    attacker->DoConfusionDamage(DamageDone(attacker, attacker, false, true));
+    Gui::DisplayHitSelfMessage(attacker->SpeciesName());
+    attacker->DoConfusionDamage(DamageDone(attacker, attacker, false, true,
+                                           true));
     return false;
   }
 
@@ -772,8 +776,8 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
     damage_done = 0;
   } else {
     damage_done = IsSelfKo(move_used->MoveName()) ?
-                  DamageDone(attacker, defender, true, move_hit) :
-                  DamageDone(attacker, defender, false, move_hit);
+                  DamageDone(attacker, defender, true, move_hit, false) :
+                  DamageDone(attacker, defender, false, move_hit, false);
   }
 
   if (damage_done && move_hit) {

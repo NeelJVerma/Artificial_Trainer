@@ -438,4 +438,14 @@ void Gui::DisplayIsRechargingMessage(const SpeciesNames &species_name) {
             << " is recharging. It can only use pass" << std::endl;
 }
 
+void Gui::DisplayIsLockedInMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " will be locked in for 2-3 turns" << std::endl;
+}
+
+void Gui::DisplayLockInEndedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is no longer locked in" << std::endl;
+}
+
 } //namespace artificialtrainer

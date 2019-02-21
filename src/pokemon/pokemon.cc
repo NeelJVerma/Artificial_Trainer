@@ -198,9 +198,11 @@ bool Pokemon::IsFlinched() const {
   return flags_.flinched;
 }
 
-void Pokemon::Confuse() {
-  if (!flags_.confusion.IsActive() && !SubstituteIsActive()) {
+void Pokemon::Confuse(const bool &confused_self) {
+  if (!flags_.confusion.IsActive() && (!SubstituteIsActive() ||
+      !confused_self)) {
     flags_.confusion.Activate();
+    Gui::DisplayConfusionStartedMessage(species_name_);
   }
 }
 
@@ -297,7 +299,6 @@ bool Pokemon::HandleConfusion() {
       flags_.vanished = false;
     }
 
-    Gui::DisplayHitSelfMessage(species_name_);
     flags_.confusion.AdvanceOneTurn();
     return false;
   }
@@ -695,9 +696,28 @@ bool Pokemon::IsRecharging() const {
   return flags_.recharging;
 }
 
-void Pokemon::UseRechargeMove() {
-  flags_.recharging = true;
-  Gui::DisplayIsRechargingMessage(species_name_);
+void Pokemon::UseLockInMove() {
+  if (!flags_.num_turns_locked_in) {
+    flags_.num_turns_locked_in = 1;
+    Gui::DisplayIsLockedInMessage(species_name_);
+  }
+
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(2, 3);
+
+  if (flags_.num_turns_locked_in == distribution(generator) ||
+      flags_.num_turns_locked_in == 3) {
+    Gui::DisplayLockInEndedMessage(species_name_);
+    Confuse(true);
+    flags_.num_turns_locked_in = 0;
+  } else {
+    flags_.num_turns_locked_in++;
+  }
+}
+
+bool Pokemon::IsUsingLockInMove() const {
+  return static_cast<bool>(flags_.num_turns_locked_in);
 }
 
 void Pokemon::ResetFlagsFromHaze() {
