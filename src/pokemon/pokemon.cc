@@ -687,6 +687,19 @@ void Pokemon::DoToxicDamage() {
   flags_.toxic_n_factor++;
 }
 
+void Pokemon::SetRecharging(const bool &recharging) {
+  flags_.recharging = recharging;
+}
+
+bool Pokemon::IsRecharging() const {
+  return flags_.recharging;
+}
+
+void Pokemon::UseRechargeMove() {
+  flags_.recharging = true;
+  Gui::DisplayIsRechargingMessage(species_name_);
+}
+
 void Pokemon::ResetFlagsFromHaze() {
   ResetStats();
   flags_.status = StatusNames::kClear;

@@ -433,4 +433,9 @@ void Gui::DisplayChargingUpMessage(const SpeciesNames &species_name) {
             << " is charging up for the move" << std::endl;
 }
 
+void Gui::DisplayIsRechargingMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is recharging. It can only use pass" << std::endl;
+}
+
 } //namespace artificialtrainer

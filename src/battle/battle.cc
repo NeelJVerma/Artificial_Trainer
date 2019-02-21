@@ -141,6 +141,14 @@ bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
     return false;
   }
 
+  if (active_member->IsRecharging() && move->MoveName() != MoveNames::kPass) {
+    return false;
+  }
+
+  if (move->MoveName() == MoveNames::kPass && !active_member->IsRecharging()) {
+    return false;
+  }
+
   if (move->IsDisabled()) {
     return false;
   }

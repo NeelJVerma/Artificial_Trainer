@@ -546,7 +546,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
       break;
     case MoveNames::kHyperBeam:
-      // recharge
+      attacker->SetRecharging(true);
       break;
     case MoveNames::kHypnosis:
     case MoveNames::kLovelyKiss:
@@ -848,6 +848,11 @@ void UseMove(Team &attacker, Team &defender) {
   move_used->DecrementPp(1);
   Gui::DisplayPokemonUsedMoveMessage(attacking_member->SpeciesName(),
                                      move_used->MoveName());
+
+  if (move_used->MoveName() == MoveNames::kPass) {
+    attacking_member->SetRecharging(false);
+    return;
+  }
 
   if ((defending_member->SubstituteIsActive() &&
       (move_used_name == MoveNames::kSuperFang || IsBinding(move_used_name) ||
