@@ -185,7 +185,7 @@ void UseCounter(const std::shared_ptr<Pokemon> &attacker,
   }
 
   int damage_done = defender->MoveUsed()->DamageDone() << 1;
-  defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
+  defender->HpStat()->SubtractHp(damage_done);
   Gui::DisplayDamageDoneMessage(damage_done);
 }
 
@@ -276,7 +276,7 @@ void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
   if (defender->SubstituteIsActive()) {
     defender->DoDamageToSubstitute(adjusted_damage);
   } else {
-    defender->GetNormalStatsContainer().HpStat()->SubtractHp(adjusted_damage);
+    defender->HpStat()->SubtractHp(adjusted_damage);
     Gui::DisplayDamageDoneMessage(adjusted_damage);
   }
 }
@@ -290,7 +290,7 @@ void DoDirectDamage(const std::shared_ptr<Pokemon> &defender,
       defender->ChangeStat(StatNames::kAttack, 1);
     }
 
-    defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
+    defender->HpStat()->SubtractHp(damage_done);
     Gui::DisplayDamageDoneMessage(damage_done);
   }
 }
@@ -314,9 +314,7 @@ void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
   if (!static_cast<int>(TypeProduct(attacker->MoveUsed(), defender))) {
     Gui::DisplayMoveHadNoEffectMessage();
   } else {
-    DoDirectDamage(
-        defender,
-        defender->GetNormalStatsContainer().HpStat()->CurrentHp() >> 1);
+    DoDirectDamage(defender, defender->HpStat()->CurrentHp() >> 1);
   }
 }
 
@@ -550,7 +548,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kHighJumpKick:
     case MoveNames::kJumpKick:
       if (!move_hit || !damage_done) {
-        attacker->GetNormalStatsContainer().HpStat()->SubtractHp(1);
+        attacker->HpStat()->SubtractHp(1);
         Gui::DisplayRecoilDamageMessage(attacker->SpeciesName(), 1);
       }
 
@@ -693,7 +691,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
       break;
     case MoveNames::kTransform:
-      // use transform. May have to add a transform state class
+      attacker->Transform(defender);
       break;
     default:
       break;
@@ -702,8 +700,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
 bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender) {
-  if (!attacker->GetNormalStatsContainer().HpStat()->CurrentHp() ||
-      !defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+  if (!attacker->HpStat()->CurrentHp() || !defender->HpStat()->CurrentHp()) {
     return false;
   }
 

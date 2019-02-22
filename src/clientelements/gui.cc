@@ -75,9 +75,7 @@ void Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) {
   for (const auto &pokemon : active_team) {
     std::cout << i++ << ". "
               << StringConverter::SpeciesToString(pokemon->SpeciesName())
-              << ": "
-              << pokemon->GetNormalStatsContainer().HpStat()->CurrentHp()
-              << " hp." << std::endl;
+              << ": " << pokemon->HpStat()->CurrentHp() << " hp." << std::endl;
   }
 
   std::cout << std::endl;
@@ -111,7 +109,7 @@ void Gui::DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
             << StringConverter::TypeToString(type_container.SecondType())
             << std::endl;
   NormalStatsContainer stats_container = pokemon->GetNormalStatsContainer();
-  std::shared_ptr<Hp> hp_stat = stats_container.HpStat();
+  std::shared_ptr<Hp> hp_stat = pokemon->HpStat();
   std::cout << "Hp: " << hp_stat->HpAsPercent() << "% ("
             << hp_stat->CurrentHp() << '/' << hp_stat->MaxHp() << ')'
             << std::endl;
@@ -216,9 +214,7 @@ void Gui::DisplayAvailableSwitchOptions(const Team &team) {
   for (const auto &pokemon : team.ActiveTeam()) {
     std::cout << i++ << ". "
               << StringConverter::SpeciesToString(pokemon->SpeciesName())
-              << ": "
-              << pokemon->GetNormalStatsContainer().HpStat()->CurrentHp()
-              << " hp." << std::endl;
+              << ": " << pokemon->HpStat()->CurrentHp() << " hp." << std::endl;
   }
 }
 
@@ -475,6 +471,13 @@ void Gui::DisplayUsedTrapMoveMessage(const SpeciesNames &species_name) {
 void Gui::DisplayTrapEndedMessage(const SpeciesNames &species_name) {
   std::cout << StringConverter::SpeciesToString(species_name)
             << " is no longer trapped" << std::endl;
+}
+
+void Gui::DisplayTransformMessage(const SpeciesNames &user,
+                                  const SpeciesNames &target) {
+  std::cout << StringConverter::SpeciesToString(user)
+            << " transformed into "
+            << StringConverter::SpeciesToString(target) << std::endl;
 }
 
 } //namespace artificialtrainer

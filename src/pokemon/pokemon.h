@@ -14,6 +14,7 @@
 #include "confusion.h"
 #include "disable.h"
 #include "substitute.h"
+#include "beforetransformstate.h"
 
 namespace artificialtrainer {
 struct InGameFlags {
@@ -44,6 +45,7 @@ struct InGameFlags {
   Confusion confusion{};
   Disable disable{};
   Substitute substitute{};
+  BeforeTransformState before_transform_state{};
   StatusNames status = StatusNames::kClear;
 };
 
@@ -57,7 +59,8 @@ class Pokemon {
   Pokemon(const SpeciesNames &species_name,
           const NormalStatsContainer &stats_container,
           const MovesContainer &moves_container,
-          const TypeContainer &type_container, const int &level);
+          const TypeContainer &type_container, const int &level,
+          const std::shared_ptr<Hp> &hp_stat);
   NormalStatsContainer GetNormalStatsContainer() const;
   ExclusiveInGameStatsContainer GetExclusiveInGameStatsContainer() const;
   MovesContainer GetMovesContainer() const;
@@ -131,6 +134,8 @@ class Pokemon {
   void Trap(const bool &user, const int &random_threshold);
   bool UsedTrapMove() const;
   bool IsTrapped() const;
+  void Transform(const std::shared_ptr<Pokemon> &target);
+  std::shared_ptr<Hp> HpStat() const;
   void ResetFaintFlags();
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();
@@ -138,6 +143,7 @@ class Pokemon {
 
  private:
   NormalStatsContainer normal_stats_container_;
+  std::shared_ptr<Hp> hp_stat_;
   ExclusiveInGameStatsContainer exclusive_in_game_stats_container_;
   MovesContainer moves_container_;
   std::shared_ptr<Move> move_used_;
@@ -160,6 +166,7 @@ class Pokemon {
   void ApplySleep();
   void ApplyRestSleep();
   void RestoreStatsFromStatuses();
+  void RestoreStateFromTransform();
   int DoStatusDamage();
 };
 

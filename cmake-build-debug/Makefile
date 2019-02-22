@@ -447,6 +447,33 @@ src/move/usemove.cc.s:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.s
 .PHONY : src/move/usemove.cc.s
 
+src/pokemon/beforetransformstate.o: src/pokemon/beforetransformstate.cc.o
+
+.PHONY : src/pokemon/beforetransformstate.o
+
+# target to build an object file
+src/pokemon/beforetransformstate.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/beforetransformstate.cc.o
+.PHONY : src/pokemon/beforetransformstate.cc.o
+
+src/pokemon/beforetransformstate.i: src/pokemon/beforetransformstate.cc.i
+
+.PHONY : src/pokemon/beforetransformstate.i
+
+# target to preprocess a source file
+src/pokemon/beforetransformstate.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/beforetransformstate.cc.i
+.PHONY : src/pokemon/beforetransformstate.cc.i
+
+src/pokemon/beforetransformstate.s: src/pokemon/beforetransformstate.cc.s
+
+.PHONY : src/pokemon/beforetransformstate.s
+
+# target to generate assembly for a file
+src/pokemon/beforetransformstate.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/pokemon/beforetransformstate.cc.s
+.PHONY : src/pokemon/beforetransformstate.cc.s
+
 src/pokemon/confusion.o: src/pokemon/confusion.cc.o
 
 .PHONY : src/pokemon/confusion.o
@@ -951,6 +978,9 @@ help:
 	@echo "... src/move/usemove.o"
 	@echo "... src/move/usemove.i"
 	@echo "... src/move/usemove.s"
+	@echo "... src/pokemon/beforetransformstate.o"
+	@echo "... src/pokemon/beforetransformstate.i"
+	@echo "... src/pokemon/beforetransformstate.s"
 	@echo "... src/pokemon/confusion.o"
 	@echo "... src/pokemon/confusion.i"
 	@echo "... src/pokemon/confusion.s"

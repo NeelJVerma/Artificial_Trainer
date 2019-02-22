@@ -102,13 +102,10 @@ void SelectTeam(Team &team, const bool &team_one) {
     }
 
     team.AddPokemon(std::make_shared<Pokemon>(pokemon_species,
-                                              NormalStatsContainer(
-                                                  pokemon_species,
-                                                  hp,
-                                                  stats),
+                                              NormalStatsContainer(stats),
                                               moves_container,
                                               TypeContainer(pokemon_species),
-                                              level_selection));
+                                              level_selection, hp));
   }
 }
 
@@ -240,7 +237,7 @@ void Battle::PlayerPicksMove(Team &team, const bool &team_one) {
 
 bool Battle::CheckIfActivePokemonIsStillAlive(
     const std::shared_ptr<Pokemon> &pokemon, Team &team) {
-  if (!pokemon->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+  if (!pokemon->HpStat()->CurrentHp()) {
     Gui::DisplayPokemonFaintedMessage(pokemon->SpeciesName());
     team.FaintActivePokemon();
     PlayerPicksForcedSwitch(team);
@@ -269,8 +266,7 @@ bool Battle::HandleMove(Team &attacker, Team &defender) {
 void Battle::HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
                                      const std::shared_ptr<Pokemon> &defender,
                                      Team &team) {
-  if (!attacker->GetNormalStatsContainer().HpStat()->CurrentHp() ||
-      !defender->GetNormalStatsContainer().HpStat()->CurrentHp()) {
+  if (!attacker->HpStat()->CurrentHp() || !defender->HpStat()->CurrentHp()) {
     return;
   }
 

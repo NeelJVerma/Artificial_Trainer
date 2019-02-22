@@ -102,6 +102,8 @@ class Gui {
   static void DisplayIsTrappedMessage(const SpeciesNames &species_name);
   static void DisplayUsedTrapMoveMessage(const SpeciesNames &species_name);
   static void DisplayTrapEndedMessage(const SpeciesNames &species_name);
+  static void DisplayTransformMessage(const SpeciesNames &user,
+                                      const SpeciesNames &target);
 };
 
 } // namespace artificialtrainer

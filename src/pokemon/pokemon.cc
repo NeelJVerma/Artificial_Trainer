@@ -13,13 +13,15 @@
 namespace artificialtrainer {
 Pokemon::Pokemon(const SpeciesNames &species_name,
                  const NormalStatsContainer &stats_container,
-                 const MovesContainer &moves_container, const TypeContainer
-                 &type_container, const int &level)
+                 const MovesContainer &moves_container,
+                 const TypeContainer &type_container, const int &level,
+                 const std::shared_ptr<Hp> &hp_stat)
     : species_name_(species_name),
       normal_stats_container_(stats_container),
       exclusive_in_game_stats_container_{},
       moves_container_(moves_container),
       type_container_(type_container),
+      hp_stat_(hp_stat),
       move_used_(nullptr),
       level_(level),
       is_active_(false) {
@@ -228,7 +230,7 @@ bool Pokemon::IsConfused() const {
 void Pokemon::DoConfusionDamage(const int &damage_done) {
   SetMoveUsed(std::make_shared<Move>(
       MoveNames::kHitSelf, Pp(MoveNames::kHitSelf)));
-  normal_stats_container_.HpStat()->SubtractHp(damage_done);
+  hp_stat_->SubtractHp(damage_done);
   Gui::DisplayDamageDoneMessage(damage_done);
 }
 
@@ -326,19 +328,19 @@ void Pokemon::HandleDisable() {
 void Pokemon::AbsorbHp(const int &damage_done) {
   int absored = damage_done >> 1;
   absored = !absored ? 1 : absored;
-  normal_stats_container_.HpStat()->AddHp(absored);
+  hp_stat_->AddHp(absored);
   Gui::DisplayHpAbsorbedMessage(species_name_, absored);
 }
 
 void Pokemon::TakeRecoilDamage(const int &damage_done) {
   int recoil_damage = damage_done >> 2;
   recoil_damage = !recoil_damage ? 1 : recoil_damage;
-  normal_stats_container_.HpStat()->SubtractHp(recoil_damage);
+  hp_stat_->SubtractHp(recoil_damage);
   Gui::DisplayRecoilDamageMessage(species_name_, recoil_damage);
 }
 
 void Pokemon::AutoFaint() {
-  normal_stats_container_.HpStat()->SubtractAllHp();
+  hp_stat_->SubtractAllHp();
 }
 
 void Pokemon::UseMetronome() {
@@ -404,14 +406,13 @@ void Pokemon::UseMist() {
 }
 
 void Pokemon::RecoverHp() {
-  std::shared_ptr<Hp> hp = normal_stats_container_.HpStat();
-  int max_minus_current = hp->MaxHp() - hp->CurrentHp();
+  int max_minus_current = hp_stat_->MaxHp() - hp_stat_->CurrentHp();
 
   if (max_minus_current == 255 || max_minus_current == 511 ||
-      hp->CurrentHp() == hp->MaxHp()) {
+      hp_stat_->CurrentHp() == hp_stat_->MaxHp()) {
     Gui::DisplayMoveFailedMessage();
   } else {
-    hp->AddHp(hp->MaxHp() >> 1);
+    hp_stat_->AddHp(hp_stat_->MaxHp() >> 1);
   }
 }
 
@@ -440,14 +441,12 @@ bool Pokemon::IsBehindReflect() const {
 }
 
 void Pokemon::UseSubstitute() {
-  std::shared_ptr<Hp> hp_stat = normal_stats_container_.HpStat();
-
-  if (flags_.substitute.IsActive() || hp_stat->HpAsPercent() <= 25.0) {
+  if (flags_.substitute.IsActive() || hp_stat_->HpAsPercent() <= 25.0) {
     Gui::DisplayMoveFailedMessage();
   } else {
-    int damage_taken = hp_stat->MaxHp() >> 2;
+    int damage_taken = hp_stat_->MaxHp() >> 2;
     flags_.substitute.Activate(damage_taken);
-    hp_stat->SubtractHp(damage_taken);
+    hp_stat_->SubtractHp(damage_taken);
     Gui::DisplayIsBehindSubstituteMessage(species_name_);
   }
 }
@@ -559,16 +558,15 @@ void Pokemon::RestoreStatsFromStatuses() {
 }
 
 void Pokemon::ApplyRestSleep() {
-  std::shared_ptr<Hp> hp = normal_stats_container_.HpStat();
-  int max_minus_current = hp->MaxHp() - hp->CurrentHp();
+  int max_minus_current = hp_stat_->MaxHp() - hp_stat_->CurrentHp();
 
   if (max_minus_current == 255 || max_minus_current == 511 ||
-      hp->CurrentHp() == hp->MaxHp()) {
+      hp_stat_->CurrentHp() == hp_stat_->MaxHp()) {
     Gui::DisplayMoveFailedMessage();
   } else {
     RestoreStatsFromStatuses();
     flags_.status = StatusNames::kAsleepRest;
-    hp->AddHp(hp->MaxHp());
+    hp_stat_->AddHp(hp_stat_->MaxHp());
     Gui::DisplaySleepStartedMessage(species_name_);
     Gui::DisplayRecoveredAllHpMessage(species_name_);
   }
@@ -623,12 +621,11 @@ void Pokemon::ApplyStatus(const StatusNames &status_name) {
 }
 
 int Pokemon::DoStatusDamage() {
-  std::shared_ptr<Hp> hp_stat = normal_stats_container_.HpStat();
-  int damage_done = hp_stat->MaxHp() >> 4;
+  int damage_done = hp_stat_->MaxHp() >> 4;
   damage_done = !damage_done ? 1 : damage_done;
   damage_done = flags_.status == StatusNames::kPoisonedToxic ?
                 flags_.toxic_n_factor * damage_done : damage_done;
-  hp_stat->SubtractHp(damage_done);
+  hp_stat_->SubtractHp(damage_done);
   return damage_done;
 }
 
@@ -763,7 +760,35 @@ bool Pokemon::IsTrapped() const {
   return flags_.trapped;
 }
 
+std::shared_ptr<Hp> Pokemon::HpStat() const {
+  return hp_stat_;
+}
+
+void Pokemon::RestoreStateFromTransform() {
+  normal_stats_container_ =
+      flags_.before_transform_state.GetNormalStatsContainer();
+  exclusive_in_game_stats_container_ =
+      flags_.before_transform_state.GetExclusiveInGameStatsContainer();
+  type_container_ = flags_.before_transform_state.GetTypeContainer();
+  moves_container_ = flags_.before_transform_state.GetMovesContainer();
+  species_name_ = flags_.before_transform_state.SpeciesName();
+}
+
+void Pokemon::Transform(const std::shared_ptr<Pokemon> &target) {
+  Gui::DisplayTransformMessage(species_name_, target->SpeciesName());
+  flags_.before_transform_state = BeforeTransformState
+      (normal_stats_container_, exclusive_in_game_stats_container_,
+       type_container_, moves_container_, species_name_);
+  normal_stats_container_ = target->GetNormalStatsContainer();
+  exclusive_in_game_stats_container_ =
+      target->GetExclusiveInGameStatsContainer();
+  type_container_ = target->GetTypeContainer();
+  moves_container_ = target->GetMovesContainer();
+  species_name_ = target->SpeciesName();
+}
+
 void Pokemon::ResetFaintFlags() {
+  RestoreStateFromTransform();
   flags_.num_turns_trapped = 0;
   flags_.trapped = false;
   flags_.used_trap_move = false;
@@ -789,6 +814,7 @@ void Pokemon::ResetEndOfTurnFlags() {
 void Pokemon::ResetSwitchFlags() {
   ResetStats();
   RestoreMimic();
+  RestoreStateFromTransform();
   flags_.confusion = Confusion{};
   flags_.disable = Disable{};
   flags_.substitute = Substitute{};
