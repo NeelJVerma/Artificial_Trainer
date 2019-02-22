@@ -28,6 +28,7 @@ struct InGameFlags {
   bool seeded = false;
   bool charging_up = false;
   bool recharging = false;
+  bool raging = false;
   int num_turns_locked_in = 0;
   int old_attack_numerator = 0;
   int old_attack_denominator = 0;
@@ -122,6 +123,9 @@ class Pokemon {
   bool IsRecharging() const;
   void UseLockInMove();
   bool IsUsingLockInMove() const;
+  void UseRage();
+  bool IsRaging() const;
+  void StopRaging();
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();

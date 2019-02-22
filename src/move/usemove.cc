@@ -286,6 +286,10 @@ void DoDirectDamage(const std::shared_ptr<Pokemon> &defender,
   if (defender->SubstituteIsActive()) {
     defender->DoDamageToSubstitute(damage_done);
   } else {
+    if (defender->IsRaging()) {
+      defender->ChangeStat(StatNames::kAttack, 1);
+    }
+
     defender->GetNormalStatsContainer().HpStat()->SubtractHp(damage_done);
     Gui::DisplayDamageDoneMessage(damage_done);
   }
@@ -599,7 +603,9 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       DoDamageEqualToAttackerLevel(attacker, defender);
       break;
     case MoveNames::kRage:
-      // use rage
+      if (damage_done) {
+        attacker->UseRage();
+      }
       break;
     case MoveNames::kPetalDance:
     case MoveNames::kThrash:
@@ -781,6 +787,10 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
   }
 
   if (damage_done && move_hit) {
+    if (defender->IsRaging()) {
+      defender->ChangeStat(StatNames::kAttack, 1);
+    }
+
     move_used->SetDamageDone(damage_done);
     DoConditionalDamage(defender, attacker->MoveUsed()->MoveName(),
                         damage_done);
@@ -849,7 +859,11 @@ void UseMove(Team &attacker, Team &defender) {
   attacking_member->HandleDisable();
   defending_member->HandleDisable();
   std::shared_ptr<Move> move_used = attacking_member->MoveUsed();
-  move_used->DecrementPp(1);
+
+  if (!attacking_member->IsVanished()) {
+    move_used->DecrementPp(1);
+  }
+
   Gui::DisplayPokemonUsedMoveMessage(attacking_member->SpeciesName(),
                                      move_used->MoveName());
 

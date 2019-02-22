@@ -159,7 +159,9 @@ bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
     return false;
   }
 
-  // TODO: ADD CHECKS FOR PASSING AS WELL
+  if (active_member->IsRaging() && move->MoveName() != MoveNames::kRage) {
+    return false;
+  }
 
   return static_cast<bool>(move->CurrentPp());
 }
@@ -227,8 +229,8 @@ void Battle::PlayerPicksMove(Team &team, const bool &team_one) {
   pokemon->SetMoveUsed(move_choice - 1);
 }
 
-bool Battle::DoPokemonActiveCheck(const std::shared_ptr<Pokemon> &pokemon,
-                                  Team &team) {
+bool Battle::CheckIfActivePokemonIsStillAlive(
+    const std::shared_ptr<Pokemon> &pokemon, Team &team) {
   if (!pokemon->GetNormalStatsContainer().HpStat()->CurrentHp()) {
     Gui::DisplayPokemonFaintedMessage(pokemon->SpeciesName());
     team.FaintActivePokemon();
@@ -244,8 +246,15 @@ bool Battle::HandleMove(Team &attacker, Team &defender) {
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
   std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
 
-  return DoPokemonActiveCheck(active_attacker, attacker) ||
-      DoPokemonActiveCheck(active_defender, defender);
+  if (!CheckIfActivePokemonIsStillAlive(active_attacker, attacker) ||
+      !CheckIfActivePokemonIsStillAlive(active_defender, defender)) {
+    active_attacker->StopRaging();
+    active_defender->StopRaging();
+    Gui::DisplayRageEndedMessage();
+    return false;
+  }
+
+  return true;
 }
 
 void Battle::HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
@@ -268,7 +277,7 @@ void Battle::HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
     defender->AbsorbHp(attacker->DoLeechSeedDamage());
   }
 
-  DoPokemonActiveCheck(attacker, team);
+  CheckIfActivePokemonIsStillAlive(attacker, team);
 }
 
 void Battle::HandleTurn() {

@@ -720,6 +720,21 @@ bool Pokemon::IsUsingLockInMove() const {
   return static_cast<bool>(flags_.num_turns_locked_in);
 }
 
+void Pokemon::UseRage() {
+  if (!flags_.raging) {
+    flags_.raging = true;
+    Gui::DisplayIsRagingMessage(species_name_);
+  }
+}
+
+bool Pokemon::IsRaging() const {
+  return flags_.raging;
+}
+
+void Pokemon::StopRaging() {
+  flags_.raging = false;
+}
+
 void Pokemon::ResetFlagsFromHaze() {
   ResetStats();
   flags_.status = StatusNames::kClear;

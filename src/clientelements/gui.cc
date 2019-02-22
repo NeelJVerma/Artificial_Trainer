@@ -448,4 +448,16 @@ void Gui::DisplayLockInEndedMessage(const SpeciesNames &species_name) {
             << " is no longer locked in" << std::endl;
 }
 
+void Gui::DisplayIsRagingMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is now raging. It will only stop when either Pokemon faints."
+               " Its attack will raise by 1 step each turn it is damaged"
+               " by the opponent until it ends"
+            << std::endl;
+}
+
+void Gui::DisplayRageEndedMessage() {
+  std::cout << "Rage ended for all active Pokemon" << std::endl;
+}
+
 } //namespace artificialtrainer

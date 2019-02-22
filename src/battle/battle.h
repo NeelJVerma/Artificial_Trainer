@@ -26,8 +26,8 @@ class Battle {
   void HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
                                const std::shared_ptr<Pokemon> &defender,
                                Team &team);
-  bool DoPokemonActiveCheck(const std::shared_ptr<Pokemon> &pokemon,
-                            Team &team);
+  bool CheckIfActivePokemonIsStillAlive(const std::shared_ptr<Pokemon> &pokemon,
+                                        Team &team);
 };
 
 } //namespace artificialtrainer
