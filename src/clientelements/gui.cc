@@ -460,4 +460,21 @@ void Gui::DisplayRageEndedMessage() {
   std::cout << "Rage ended for all active Pokemon" << std::endl;
 }
 
+void Gui::DisplayIsTrappedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is now partially trapped. It can't make attacks of its own"
+            << std::endl;
+}
+
+void Gui::DisplayUsedTrapMoveMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " used a partial trap move. It must use this move until this"
+            << " wears off" << std::endl;
+}
+
+void Gui::DisplayTrapEndedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is no longer trapped" << std::endl;
+}
+
 } //namespace artificialtrainer

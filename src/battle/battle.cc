@@ -119,7 +119,6 @@ bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
     int switch_beg = static_cast<int>(MoveNames::kSwitch1);
     int selected = static_cast<int>(move->MoveName());
 
-    // TODO: ADD CHECKS FOR DIGGING/FLYING/RECHARGING FLAGS
     if (team.ActiveTeam().size() <= 1 ||
         selected >= switch_beg + team.ActiveTeam().size()) {
       return false;
@@ -146,12 +145,17 @@ bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
     return false;
   }
 
+  if (active_member->IsTrapped() && move->MoveName() != MoveNames::kPass) {
+    return false;
+  }
+
   if (active_member->IsRecharging() && move->MoveName() != MoveNames::kPass) {
     Gui::DisplayIsRechargingMessage(active_member->SpeciesName());
     return false;
   }
 
-  if (move->MoveName() == MoveNames::kPass && !active_member->IsRecharging()) {
+  if (move->MoveName() == MoveNames::kPass && !active_member->IsRecharging() &&
+      !active_member->IsTrapped()) {
     return false;
   }
 
@@ -160,6 +164,11 @@ bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
   }
 
   if (active_member->IsRaging() && move->MoveName() != MoveNames::kRage) {
+    return false;
+  }
+
+  if (active_member->UsedTrapMove() &&
+      move->MoveName() != active_member->MoveUsed()->MoveName()) {
     return false;
   }
 
@@ -248,8 +257,8 @@ bool Battle::HandleMove(Team &attacker, Team &defender) {
 
   if (!CheckIfActivePokemonIsStillAlive(active_attacker, attacker) ||
       !CheckIfActivePokemonIsStillAlive(active_defender, defender)) {
-    active_attacker->StopRaging();
-    active_defender->StopRaging();
+    active_attacker->ResetFaintFlags();
+    active_defender->ResetFaintFlags();
     Gui::DisplayRageEndedMessage();
     return false;
   }

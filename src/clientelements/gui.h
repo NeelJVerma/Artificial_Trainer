@@ -99,6 +99,9 @@ class Gui {
   static void DisplayLockInEndedMessage(const SpeciesNames &species_name);
   static void DisplayIsRagingMessage(const SpeciesNames &species_name);
   static void DisplayRageEndedMessage();
+  static void DisplayIsTrappedMessage(const SpeciesNames &species_name);
+  static void DisplayUsedTrapMoveMessage(const SpeciesNames &species_name);
+  static void DisplayTrapEndedMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

@@ -29,6 +29,8 @@ struct InGameFlags {
   bool charging_up = false;
   bool recharging = false;
   bool raging = false;
+  bool used_trap_move = false;
+  bool trapped = false;
   int num_turns_locked_in = 0;
   int old_attack_numerator = 0;
   int old_attack_denominator = 0;
@@ -38,6 +40,7 @@ struct InGameFlags {
   int toxic_n_factor = 1;
   int rest_counter = 1;
   int turns_asleep = 1;
+  int num_turns_trapped = 0;
   Confusion confusion{};
   Disable disable{};
   Substitute substitute{};
@@ -125,7 +128,10 @@ class Pokemon {
   bool IsUsingLockInMove() const;
   void UseRage();
   bool IsRaging() const;
-  void StopRaging();
+  void Trap(const bool &user, const int &random_threshold);
+  bool UsedTrapMove() const;
+  bool IsTrapped() const;
+  void ResetFaintFlags();
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();

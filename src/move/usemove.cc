@@ -192,8 +192,8 @@ void UseCounter(const std::shared_ptr<Pokemon> &attacker,
 void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
                      const std::shared_ptr<Pokemon> &defender,
                      const int &damage_done) {
-  // in this case, damage done is damage that would have been done. if it's
-  // 0, the move didn't affect the target
+  // In this case, damage done is damage that would have been done. If it's
+  // 0, the move didn't affect the target.
   int attacker_speed =
       attacker->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
   int defender_speed =
@@ -385,9 +385,15 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kBind:
     case MoveNames::kClamp:
     case MoveNames::kFireSpin:
-    case MoveNames::kWrap:
-      // trap defender
+    case MoveNames::kWrap: {
+      std::random_device device;
+      std::mt19937 generator(device());
+      std::uniform_int_distribution<> distribution(2, 5);
+      int random_threshold = distribution(generator);
+      attacker->Trap(true, random_threshold);
+      defender->Trap(false, random_threshold);
       break;
+    }
     case MoveNames::kBlizzard:
     case MoveNames::kIcePunch:
     case MoveNames::kIceBeam:
@@ -735,17 +741,15 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
     return false;
   }
 
+  if (attacker->IsTrapped()) {
+    Gui::DisplayIsTrappedMessage(attacker->SpeciesName());
+    return false;
+  }
+
   if (attacker->MoveUsed()->IsDisabled()) {
     Gui::DisplayMoveDisabledMessage(attacker->MoveUsed()->MoveName());
     return false;
   }
-
-  // SLEEP, FROZEN: RETURN FALSE
-  // FLINCHED: RETURN FALSE
-  // FULLY PARA: RETURN FALSE
-  // HIT SELF: RETURN FALSE
-  // IS LOCKED IN TO CLAMP, BIND, ETC
-  // DISABLED
 
   return true;
 }
@@ -860,7 +864,7 @@ void UseMove(Team &attacker, Team &defender) {
   defending_member->HandleDisable();
   std::shared_ptr<Move> move_used = attacking_member->MoveUsed();
 
-  if (!attacking_member->IsVanished()) {
+  if (!attacking_member->IsVanished() && !attacking_member->IsChargingUp()) {
     move_used->DecrementPp(1);
   }
 

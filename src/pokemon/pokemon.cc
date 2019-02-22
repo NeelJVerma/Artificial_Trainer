@@ -731,7 +731,43 @@ bool Pokemon::IsRaging() const {
   return flags_.raging;
 }
 
-void Pokemon::StopRaging() {
+void Pokemon::Trap(const bool &user, const int &random_threshold) {
+  if (!flags_.num_turns_trapped) {
+    if (user) {
+      Gui::DisplayUsedTrapMoveMessage(species_name_);
+      flags_.used_trap_move = true;
+    } else {
+      Gui::DisplayIsTrappedMessage(species_name_);
+      flags_.trapped = true;
+    }
+
+    flags_.num_turns_trapped = 1;
+  }
+
+  if (flags_.num_turns_trapped == random_threshold ||
+      flags_.num_turns_trapped == 5) {
+    Gui::DisplayTrapEndedMessage(species_name_);
+    flags_.trapped = false;
+    flags_.used_trap_move = false;
+    flags_.num_turns_trapped = 0;
+  } else {
+    flags_.num_turns_trapped++;
+  }
+}
+
+bool Pokemon::UsedTrapMove() const {
+  return flags_.used_trap_move;
+}
+
+bool Pokemon::IsTrapped() const {
+  return flags_.trapped;
+}
+
+void Pokemon::ResetFaintFlags() {
+  flags_.num_turns_trapped = 0;
+  flags_.trapped = false;
+  flags_.used_trap_move = false;
+  flags_.vanished = false;
   flags_.raging = false;
 }
 
