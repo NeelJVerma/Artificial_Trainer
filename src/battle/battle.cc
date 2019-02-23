@@ -146,13 +146,17 @@ bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
     return false;
   }
 
+  if (active_member->BideIsActive() && move->MoveName() != MoveNames::kPass) {
+    return false;
+  }
+
   if (active_member->IsRecharging() && move->MoveName() != MoveNames::kPass) {
     Gui::DisplayIsRechargingMessage(active_member->SpeciesName());
     return false;
   }
 
   if (move->MoveName() == MoveNames::kPass && !active_member->IsRecharging() &&
-      !active_member->IsTrapped()) {
+      !active_member->IsTrapped() && !active_member->BideIsActive()) {
     return false;
   }
 

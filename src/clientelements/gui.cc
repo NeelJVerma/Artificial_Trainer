@@ -480,4 +480,15 @@ void Gui::DisplayTransformMessage(const SpeciesNames &user,
             << StringConverter::SpeciesToString(target) << std::endl;
 }
 
+void Gui::DisplayIsBidingMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is now biding" << std::endl;
+}
+
+void Gui::DisplayBideEndedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << "\'s bide ended. It will now send back 2x the damage it took"
+            << std::endl;
+}
+
 } //namespace artificialtrainer

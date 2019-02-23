@@ -787,6 +787,40 @@ void Pokemon::Transform(const std::shared_ptr<Pokemon> &target) {
   species_name_ = target->SpeciesName();
 }
 
+void Pokemon::UseBide() {
+  flags_.bide.Activate();
+  Gui::DisplayIsBidingMessage(species_name_);
+}
+
+bool Pokemon::BideWillEnd() {
+  if (flags_.bide.IsActive() && flags_.bide.AdvanceOneTurn()) {
+    Gui::DisplayBideEndedMessage(species_name_);
+    return true;
+  }
+
+  return false;
+}
+
+bool Pokemon::BideIsActive() const {
+  return flags_.bide.IsActive();
+}
+
+int Pokemon::BideDamage() const {
+  return flags_.bide.TotalDamage();
+}
+
+void Pokemon::ResetBide() {
+  flags_.bide = Bide{};
+}
+
+void Pokemon::SetBideDamage(const int &damage) {
+  flags_.bide.SetDamageAdded(damage);
+}
+
+void Pokemon::AddDamageToBide() {
+  flags_.bide.AddDamage();
+}
+
 void Pokemon::ResetFaintFlags() {
   RestoreStateFromTransform();
   flags_.num_turns_trapped = 0;

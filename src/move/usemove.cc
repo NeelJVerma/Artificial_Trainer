@@ -279,6 +279,14 @@ void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
     defender->HpStat()->SubtractHp(adjusted_damage);
     Gui::DisplayDamageDoneMessage(adjusted_damage);
   }
+
+  if (defender->BideIsActive()) {
+    if (!defender->BideDamage()) {
+      defender->SetBideDamage(adjusted_damage);
+    }
+
+    defender->AddDamageToBide();
+  }
 }
 
 void DoDirectDamage(const std::shared_ptr<Pokemon> &defender,
@@ -293,10 +301,26 @@ void DoDirectDamage(const std::shared_ptr<Pokemon> &defender,
     defender->HpStat()->SubtractHp(damage_done);
     Gui::DisplayDamageDoneMessage(damage_done);
   }
+
+  if (defender->BideIsActive()) {
+    if (!defender->BideDamage()) {
+      defender->SetBideDamage(damage_done);
+    }
+
+    defender->AddDamageToBide();
+  }
 }
 
 void DoDamageEqualToAttackerLevel(const std::shared_ptr<Pokemon> &attacker,
                                   const std::shared_ptr<Pokemon> &defender) {
+  if (defender->BideIsActive()) {
+    if (!defender->BideDamage()) {
+      defender->SetBideDamage(attacker->Level());
+    }
+
+    defender->AddDamageToBide();
+  }
+
   DoDirectDamage(defender, attacker->Level());
 }
 
@@ -378,7 +402,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
       break;
     case MoveNames::kBide:
-      // use bide
+      attacker->UseBide();
       break;
     case MoveNames::kBind:
     case MoveNames::kClamp:
@@ -868,7 +892,8 @@ void UseMove(Team &attacker, Team &defender) {
   Gui::DisplayPokemonUsedMoveMessage(attacking_member->SpeciesName(),
                                      move_used->MoveName());
 
-  if (move_used->MoveName() == MoveNames::kPass) {
+  if (move_used->MoveName() == MoveNames::kPass &&
+      !attacking_member->BideIsActive()) {
     attacking_member->SetRecharging(false);
     return;
   }
@@ -908,6 +933,12 @@ void UseMove(Team &attacker, Team &defender) {
     UseMoveThatHitsTwoToFiveTimes(attacking_member, defending_member, move_hit);
   } else {
     ExecuteMove(attacking_member, defending_member, move_hit);
+  }
+
+  if (attacking_member->BideWillEnd()) {
+    Gui::DisplayBideEndedMessage(attacking_member->SpeciesName());
+    DoDirectDamage(defending_member, attacking_member->BideDamage() << 1);
+    attacking_member->ResetBide();
   }
 
   attacking_member->SetExecutedMove(true);

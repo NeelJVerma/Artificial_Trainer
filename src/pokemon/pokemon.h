@@ -15,6 +15,7 @@
 #include "disable.h"
 #include "substitute.h"
 #include "beforetransformstate.h"
+#include "bide.h"
 
 namespace artificialtrainer {
 struct InGameFlags {
@@ -46,6 +47,7 @@ struct InGameFlags {
   Disable disable{};
   Substitute substitute{};
   BeforeTransformState before_transform_state{};
+  Bide bide{};
   StatusNames status = StatusNames::kClear;
 };
 
@@ -136,6 +138,13 @@ class Pokemon {
   bool IsTrapped() const;
   void Transform(const std::shared_ptr<Pokemon> &target);
   std::shared_ptr<Hp> HpStat() const;
+  void UseBide();
+  bool BideWillEnd();
+  bool BideIsActive() const;
+  int BideDamage() const;
+  void ResetBide();
+  void SetBideDamage(const int &damage);
+  void AddDamageToBide();
   void ResetFaintFlags();
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();
