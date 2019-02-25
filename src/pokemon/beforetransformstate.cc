@@ -5,6 +5,14 @@
 #include "beforetransformstate.h"
 
 namespace artificialtrainer {
+// We can't use the compiler generated default constructor because we have to
+// initialize this enum type. Although, it shouldn't really matter because of
+// how this class is used, it's just for cleanliness sake.
+
+BeforeTransformState::BeforeTransformState() :
+    species_name_(SpeciesNames::kBulbasaur) {
+}
+
 BeforeTransformState::BeforeTransformState(
     const NormalStatsContainer &normal_stats_container,
     const ExclusiveInGameStatsContainer &exclusive_in_game_stats_container,

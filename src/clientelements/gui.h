@@ -94,7 +94,6 @@ class Gui {
   static void DisplayHazeResetMessage();
   static void DisplayPokemonVanishedMessage(const SpeciesNames &species_name);
   static void DisplayChargingUpMessage(const SpeciesNames &species_name);
-  static void DisplayIsRechargingMessage(const SpeciesNames &species_name);
   static void DisplayIsLockedInMessage(const SpeciesNames &species_name);
   static void DisplayLockInEndedMessage(const SpeciesNames &species_name);
   static void DisplayIsRagingMessage(const SpeciesNames &species_name);
@@ -106,6 +105,16 @@ class Gui {
                                       const SpeciesNames &target);
   static void DisplayIsBidingMessage(const SpeciesNames &species_name);
   static void DisplayBideEndedMessage(const SpeciesNames &species_name);
+  static void DisplayMustFinishVanishMessage(const SpeciesNames &species_name);
+  static void DisplayMustFinishChargingUpMessage(
+      const SpeciesNames &species_name);
+  static void DisplayMustFinishLockInMessage(const SpeciesNames &species_name);
+  static void DisplayMustRemainTrappedMessage(const SpeciesNames &species_name);
+  static void DisplayMustRechargeMessage(const SpeciesNames &species_name);
+  static void DisplayMustFinishBideMessage(const SpeciesNames &species_name);
+  static void DisplayCantPassMessage(const SpeciesNames &species_name);
+  static void DisplayMustFinishRagingMessage(const SpeciesNames &species_name);
+  static void DisplayMustFinishTrapMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

@@ -215,7 +215,7 @@ void Pokemon::DisableMove() {
     std::random_device device;
     std::mt19937 generator(device());
     std::uniform_int_distribution<>
-        distribution(0, EndOfNormalMovesIndex() - 1);
+        distribution(0, moves_container_.EndOfNormalMovesIndex() - 1);
     int random_index = distribution(generator);
     moves_container_[random_index]->SetDisabled(true);
     Gui::DisplayMoveDisabledMessage(moves_container_[random_index]->MoveName());
@@ -260,23 +260,11 @@ bool Pokemon::IsChargingUp() const {
   return flags_.charging_up;
 }
 
-int Pokemon::EndOfNormalMovesIndex() const {
-  int end_normal_moves_index = 0;
-
-  for (int i = 0; i < moves_container_.Size(); i++) {
-    if (moves_container_[i]->MoveName() == MoveNames::kPass) {
-      end_normal_moves_index = i;
-      break;
-    }
-  }
-
-  return end_normal_moves_index;
-}
-
 void Pokemon::UseConversion() {
   std::random_device device;
   std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(0, EndOfNormalMovesIndex() - 1);
+  std::uniform_int_distribution<> distribution(
+      0, moves_container_.EndOfNormalMovesIndex() - 1);
   TypeNames random_type = Type(
       moves_container_[distribution(generator)]->MoveName());
   type_container_.ResetTypeFromConversion(random_type);
@@ -310,7 +298,7 @@ bool Pokemon::HandleConfusion() {
 }
 
 void Pokemon::ReEnableDisabledMove() {
-  for (int i = 0; i < EndOfNormalMovesIndex(); i++) {
+  for (int i = 0; i < moves_container_.EndOfNormalMovesIndex(); i++) {
     if (moves_container_[i]->IsDisabled()) {
       moves_container_[i]->SetDisabled(false);
     }
@@ -819,6 +807,16 @@ void Pokemon::SetBideDamage(const int &damage) {
 
 void Pokemon::AddDamageToBide() {
   flags_.bide.AddDamage();
+}
+
+bool Pokemon::MustUseStruggle() const {
+  for (int i = 0; i < moves_container_.Size(); i++) {
+    if (moves_container_[i]->CurrentPp()) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 void Pokemon::ResetFaintFlags() {

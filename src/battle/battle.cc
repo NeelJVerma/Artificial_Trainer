@@ -111,65 +111,73 @@ void SelectTeam(Team &team, const bool &team_one) {
 
 bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
   std::shared_ptr<Pokemon> active_member = team.ActiveMember();
+  MoveNames selected_move_name = move->MoveName();
 
-  if (IsSwitch(move->MoveName())) {
+  if (IsSwitch(selected_move_name)) {
     int switch_beg = static_cast<int>(MoveNames::kSwitch1);
-    int selected = static_cast<int>(move->MoveName());
+    int selected = static_cast<int>(selected_move_name);
 
     if (team.ActiveTeam().size() <= 1 ||
-        selected >= switch_beg + team.ActiveTeam().size()) {
-      return false;
-    }
-
-    if (selected - static_cast<int>(MoveNames::kPass) - 1 ==
-        team.IndexOfActiveMember()) {
+        selected >= switch_beg + team.ActiveTeam().size() ||
+        selected - static_cast<int>(MoveNames::kPass) - 1 ==
+            team.IndexOfActiveMember()) {
       return false;
     }
   }
 
-  if (active_member->IsVanished() &&
-      move->MoveName() != active_member->MoveUsed()->MoveName()) {
+  MoveNames last_move_name = active_member->MoveUsed()->MoveName();
+  SpeciesNames species_name = active_member->SpeciesName();
+
+  if (active_member->IsVanished() && selected_move_name != last_move_name) {
+    Gui::DisplayMustFinishVanishMessage(species_name);
     return false;
   }
 
-  if (active_member->IsChargingUp() &&
-      move->MoveName() != active_member->MoveUsed()->MoveName()) {
+  if (active_member->IsChargingUp() && selected_move_name != last_move_name) {
+    Gui::DisplayMustFinishChargingUpMessage(species_name);
     return false;
   }
 
   if (active_member->IsUsingLockInMove() &&
-      move->MoveName() != active_member->MoveUsed()->MoveName()) {
+      selected_move_name != last_move_name) {
+    Gui::DisplayMustFinishLockInMessage(species_name);
     return false;
   }
 
-  if (active_member->IsTrapped() && move->MoveName() != MoveNames::kPass) {
+  if (active_member->IsTrapped() && selected_move_name != MoveNames::kPass) {
+    Gui::DisplayMustRemainTrappedMessage(species_name);
     return false;
   }
 
-  if (active_member->BideIsActive() && move->MoveName() != MoveNames::kPass) {
+  if (active_member->BideIsActive() && selected_move_name != MoveNames::kPass) {
+    Gui::DisplayMustFinishBideMessage(species_name);
     return false;
   }
 
-  if (active_member->IsRecharging() && move->MoveName() != MoveNames::kPass) {
-    Gui::DisplayIsRechargingMessage(active_member->SpeciesName());
+  if (active_member->IsRecharging() && selected_move_name != MoveNames::kPass) {
+    Gui::DisplayMustRechargeMessage(active_member->SpeciesName());
     return false;
   }
 
-  if (move->MoveName() == MoveNames::kPass && !active_member->IsRecharging() &&
-      !active_member->IsTrapped() && !active_member->BideIsActive()) {
+  if (selected_move_name == MoveNames::kPass &&
+      !active_member->IsRecharging() && !active_member->IsTrapped() &&
+      !active_member->BideIsActive()) {
+    Gui::DisplayCantPassMessage(species_name);
     return false;
   }
 
   if (move->IsDisabled()) {
+    Gui::DisplayMoveDisabledMessage(selected_move_name);
     return false;
   }
 
-  if (active_member->IsRaging() && move->MoveName() != MoveNames::kRage) {
+  if (active_member->IsRaging() && selected_move_name != last_move_name) {
+    Gui::DisplayMustFinishRagingMessage(species_name);
     return false;
   }
 
-  if (active_member->UsedTrapMove() &&
-      move->MoveName() != active_member->MoveUsed()->MoveName()) {
+  if (active_member->UsedTrapMove() && selected_move_name != last_move_name) {
+    Gui::DisplayMustFinishTrapMessage(species_name);
     return false;
   }
 
@@ -226,6 +234,10 @@ void Battle::PlayerPicksMove(Team &team, const bool &team_one) {
   MovesContainer moves = team.ActiveMember()->GetMovesContainer();
   int move_choice;
 
+  if (pokemon->MustUseStruggle()) {
+    moves.ReplaceAllWithStruggle();
+  }
+
   while (true) {
     move_choice = InputHandler::GetIntInput(1, moves.Size());
 
@@ -258,9 +270,12 @@ bool Battle::HandleMove(Team &attacker, Team &defender) {
 
   if (!CheckIfActivePokemonIsStillAlive(active_attacker, attacker) ||
       !CheckIfActivePokemonIsStillAlive(active_defender, defender)) {
+    if (active_attacker->IsRaging() || active_defender->IsRaging()) {
+      Gui::DisplayRageEndedMessage();
+    }
+
     active_attacker->ResetFaintFlags();
     active_defender->ResetFaintFlags();
-    Gui::DisplayRageEndedMessage();
     return false;
   }
 
@@ -325,7 +340,6 @@ void Battle::HandleTurn() {
     one_moves_first = true;
   }
 
-  // TODO: burn/toxic/leech seed/other end of turn statuses: put in function
   if (one_moves_first && HandleMove(team_one_, team_two_) &&
       HandleMove(team_two_, team_one_)) {
     HandleEndOfTurnStatuses(active_pokemon_one,

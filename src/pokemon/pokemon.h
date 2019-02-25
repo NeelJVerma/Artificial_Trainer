@@ -93,7 +93,6 @@ class Pokemon {
   void AutoFaint();
   void UseMetronome();
   bool IsType(const TypeNames &type_name) const;
-  int EndOfNormalMovesIndex() const;
   void UseMimic();
   void SetMimicIndex(const int &index_in_move_container);
   void SetExecutedMove(const bool &executed_move);
@@ -145,6 +144,7 @@ class Pokemon {
   void ResetBide();
   void SetBideDamage(const int &damage);
   void AddDamageToBide();
+  bool MustUseStruggle() const;
   void ResetFaintFlags();
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();

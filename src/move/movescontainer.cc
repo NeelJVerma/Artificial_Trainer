@@ -2,7 +2,9 @@
 // Created by neel on 1/29/19.
 //
 
+#include <cassert>
 #include "movescontainer.h"
+#include "pp.h"
 
 namespace artificialtrainer {
 void MovesContainer::AddMove(const std::shared_ptr<Move> &move) {
@@ -31,13 +33,34 @@ int MovesContainer::IndexOfMimic() const {
   }
 
   // Will never reach here because of how this function is used.
-  return -1;
+  assert(false);
 }
 
 void MovesContainer::ResetMoveAtIndex(const int &index,
                                       const MoveNames &move_name,
                                       const int &move_pp) {
   current_moves_[index]->ResetMove(move_name, move_pp);
+}
+
+int MovesContainer::EndOfNormalMovesIndex() const {
+  int end_normal_moves_index = 0;
+
+  for (int i = 0; i < current_moves_.size(); i++) {
+    if (current_moves_[i]->MoveName() == MoveNames::kPass) {
+      end_normal_moves_index = i;
+      break;
+    }
+  }
+
+  return end_normal_moves_index;
+}
+
+void MovesContainer::ReplaceAllWithStruggle() {
+  current_moves_.erase(current_moves_.begin(),
+                       current_moves_.begin() + EndOfNormalMovesIndex());
+  current_moves_.insert(
+      current_moves_.begin(), std::make_shared<Move>(
+          MoveNames::kStruggle, Pp(MoveNames::kStruggle)));;
 }
 
 std::shared_ptr<Move> MovesContainer::operator[](const int &index) const {

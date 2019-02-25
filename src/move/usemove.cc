@@ -164,6 +164,13 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
       move_used->MoveName()) * (self_ko_move ? 2 : 1) / used_stats.second) /
       50) + 2) * StabBonus(attacker)) * type_product / 10) *
       DamageRandomFactor()) / 255)));
+
+  if (((defender->IsBehindReflect() && IsPhysical(move_used->MoveName())) ||
+      (defender->IsBehindLightScreen() && IsSpecial(move_used->MoveName()))) &&
+      !move_crit) {
+    damage_done >>= 1;
+  }
+
   return !damage_done ? 1 : damage_done;
 }
 
@@ -233,7 +240,7 @@ MoveNames MoveFromMimic(const std::shared_ptr<Pokemon> &attacker,
   std::random_device device;
   std::mt19937 generator(device());
   std::uniform_int_distribution<> distribution(
-      0, defender->EndOfNormalMovesIndex() - 1);
+      0, defender->GetMovesContainer().EndOfNormalMovesIndex() - 1);
   MoveNames random_move;
 
   while (true) {
@@ -265,24 +272,16 @@ void UseMimic(const std::shared_ptr<Pokemon> &attacker,
 void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
                          const MoveNames &attacker_move,
                          const int &damage_done) {
-  int adjusted_damage = damage_done;
-
-  if ((defender->IsBehindReflect() && IsPhysical(attacker_move)) ||
-      (defender->IsBehindLightScreen() && IsSpecial(attacker_move))) {
-    adjusted_damage >>= 1;
-    adjusted_damage = !adjusted_damage ? 1 : adjusted_damage;
-  }
-
   if (defender->SubstituteIsActive()) {
-    defender->DoDamageToSubstitute(adjusted_damage);
+    defender->DoDamageToSubstitute(damage_done);
   } else {
-    defender->HpStat()->SubtractHp(adjusted_damage);
-    Gui::DisplayDamageDoneMessage(adjusted_damage);
+    defender->HpStat()->SubtractHp(damage_done);
+    Gui::DisplayDamageDoneMessage(damage_done);
   }
 
   if (defender->BideIsActive()) {
     if (!defender->BideDamage()) {
-      defender->SetBideDamage(adjusted_damage);
+      defender->SetBideDamage(damage_done);
     }
 
     defender->AddDamageToBide();

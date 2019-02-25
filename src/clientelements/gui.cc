@@ -429,9 +429,9 @@ void Gui::DisplayChargingUpMessage(const SpeciesNames &species_name) {
             << " is charging up for the move" << std::endl;
 }
 
-void Gui::DisplayIsRechargingMessage(const SpeciesNames &species_name) {
+void Gui::DisplayMustRechargeMessage(const SpeciesNames &species_name) {
   std::cout << StringConverter::SpeciesToString(species_name)
-            << " is recharging. It can only use pass" << std::endl;
+            << " is recharging. It must use passe" << std::endl;
 }
 
 void Gui::DisplayIsLockedInMessage(const SpeciesNames &species_name) {
@@ -489,6 +489,46 @@ void Gui::DisplayBideEndedMessage(const SpeciesNames &species_name) {
   std::cout << StringConverter::SpeciesToString(species_name)
             << "\'s bide ended. It will now send back 2x the damage it took"
             << std::endl;
+}
+
+void Gui::DisplayMustFinishVanishMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is vanished. It must complete its move" << std::endl;
+}
+
+void Gui::DisplayMustFinishChargingUpMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is charging up. It must complete its move" << std::endl;
+}
+
+void Gui::DisplayMustFinishLockInMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is locked in. It must complete its move" << std::endl;
+}
+
+void Gui::DisplayMustRemainTrappedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is trapped. It must use pass" << std::endl;
+}
+
+void Gui::DisplayMustFinishBideMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is biding. It must use pass" << std::endl;
+}
+
+void Gui::DisplayCantPassMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " cannot use pass at this time" << std::endl;
+}
+
+void Gui::DisplayMustFinishRagingMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " must finish its rage" << std::endl;
+}
+
+void Gui::DisplayMustFinishTrapMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is using a trap move. It must complete its move" << std::endl;
 }
 
 } //namespace artificialtrainer

@@ -17,7 +17,7 @@ class BeforeTransformState {
       const BeforeTransformState &before_transform_state) = default;
   BeforeTransformState &operator=(
       const BeforeTransformState &before_transform_state) = default;
-  BeforeTransformState() = default;
+  BeforeTransformState();
   BeforeTransformState(const NormalStatsContainer &normal_stats_container,
                        const ExclusiveInGameStatsContainer
                        &exclusive_in_game_stats_container,
