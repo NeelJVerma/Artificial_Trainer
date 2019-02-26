@@ -812,11 +812,11 @@ void Pokemon::AddDamageToBide() {
 bool Pokemon::MustUseStruggle() const {
   for (int i = 0; i < moves_container_.Size(); i++) {
     if (moves_container_[i]->CurrentPp()) {
-      return true;
+      return false;
     }
   }
 
-  return false;
+  return true;
 }
 
 void Pokemon::ResetFaintFlags() {

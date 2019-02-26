@@ -125,23 +125,36 @@ bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
     }
   }
 
-  MoveNames last_move_name = active_member->MoveUsed()->MoveName();
   SpeciesNames species_name = active_member->SpeciesName();
 
-  if (active_member->IsVanished() && selected_move_name != last_move_name) {
-    Gui::DisplayMustFinishVanishMessage(species_name);
-    return false;
-  }
+  if (active_member->MoveUsed()) {
+    MoveNames last_move_name = active_member->MoveUsed()->MoveName();
 
-  if (active_member->IsChargingUp() && selected_move_name != last_move_name) {
-    Gui::DisplayMustFinishChargingUpMessage(species_name);
-    return false;
-  }
+    if (active_member->IsVanished() && selected_move_name != last_move_name) {
+      Gui::DisplayMustFinishVanishMessage(species_name);
+      return false;
+    }
 
-  if (active_member->IsUsingLockInMove() &&
-      selected_move_name != last_move_name) {
-    Gui::DisplayMustFinishLockInMessage(species_name);
-    return false;
+    if (active_member->IsChargingUp() && selected_move_name != last_move_name) {
+      Gui::DisplayMustFinishChargingUpMessage(species_name);
+      return false;
+    }
+
+    if (active_member->IsUsingLockInMove() &&
+        selected_move_name != last_move_name) {
+      Gui::DisplayMustFinishLockInMessage(species_name);
+      return false;
+    }
+
+    if (active_member->IsRaging() && selected_move_name != last_move_name) {
+      Gui::DisplayMustFinishRagingMessage(species_name);
+      return false;
+    }
+
+    if (active_member->UsedTrapMove() && selected_move_name != last_move_name) {
+      Gui::DisplayMustFinishTrapMessage(species_name);
+      return false;
+    }
   }
 
   if (active_member->IsTrapped() && selected_move_name != MoveNames::kPass) {
@@ -168,16 +181,6 @@ bool IsValidMoveChoice(const Team &team, const std::shared_ptr<Move> &move) {
 
   if (move->IsDisabled()) {
     Gui::DisplayMoveDisabledMessage(selected_move_name);
-    return false;
-  }
-
-  if (active_member->IsRaging() && selected_move_name != last_move_name) {
-    Gui::DisplayMustFinishRagingMessage(species_name);
-    return false;
-  }
-
-  if (active_member->UsedTrapMove() && selected_move_name != last_move_name) {
-    Gui::DisplayMustFinishTrapMessage(species_name);
     return false;
   }
 
@@ -233,10 +236,6 @@ void Battle::PlayerPicksMove(Team &team, const bool &team_one) {
   std::shared_ptr<Pokemon> pokemon = team.ActiveMember();
   MovesContainer moves = team.ActiveMember()->GetMovesContainer();
   int move_choice;
-
-  if (pokemon->MustUseStruggle()) {
-    moves.ReplaceAllWithStruggle();
-  }
 
   while (true) {
     move_choice = InputHandler::GetIntInput(1, moves.Size());
@@ -360,6 +359,14 @@ void Battle::HandleTurn() {
 
   active_pokemon_one->ResetEndOfTurnFlags();
   active_pokemon_two->ResetEndOfTurnFlags();
+
+  if (active_pokemon_one->MustUseStruggle()) {
+    active_pokemon_one->GetMovesContainer().ReplaceAllWithStruggle();
+  }
+
+  if (active_pokemon_two->MustUseStruggle()) {
+    active_pokemon_two->GetMovesContainer().ReplaceAllWithStruggle();
+  }
 }
 
 void Battle::Play() {

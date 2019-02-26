@@ -20,7 +20,7 @@ double ChanceToHit(const std::shared_ptr<Pokemon> &attacker,
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
 
   if (BaseAccuracy(move_used->MoveName()) == kNeverMiss) {
-    return (move_used->MoveName() == MoveNames::kSwift ? 255.0 / 256.0 : 100.0);
+    return (move_used->MoveName() == MoveNames::kSwift ? 255.0 / 256 : 100.0);
   }
 
   ExclusiveInGameStatsContainer attacker_stats =
@@ -132,8 +132,8 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
     return 0;
   }
 
-  double type_product = confusion_damage ? 10.0 : TypeProduct(
-      move_used, defender);
+  double type_product = confusion_damage ? 10.0 : TypeProduct(move_used,
+                                                              defender);
 
   if (!static_cast<int>(type_product) ||
       (move_used->MoveName() == MoveNames::kLick &&
@@ -150,8 +150,8 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
     Gui::DisplaySuperEffectiveMessage();
   }
 
-  bool move_crit = IsDamaging(move_used->MoveName())
-                   ? MoveCrit(CriticalHitChance(attacker)) : false;
+  bool move_crit = IsDamaging(move_used->MoveName()) ?
+                   MoveCrit(CriticalHitChance(attacker)) : false;
   std::pair<int, int> used_stats = AttackAndDefenseUsed(attacker, defender,
                                                         move_crit);
 
@@ -197,8 +197,7 @@ void UseCounter(const std::shared_ptr<Pokemon> &attacker,
 }
 
 void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
-                     const std::shared_ptr<Pokemon> &defender,
-                     const int &damage_done) {
+                     const std::shared_ptr<Pokemon> &defender) {
   // In this case, damage done is damage that would have been done. If it's
   // 0, the move didn't affect the target.
   int attacker_speed =
@@ -207,13 +206,13 @@ void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
       defender->GetNormalStatsContainer()[StatNames::kSpeed]->InGameStat();
 
   if (attacker->Level() < defender->Level() ||
-      attacker_speed < defender_speed || !damage_done) {
+      attacker_speed < defender_speed) {
     Gui::DisplayMoveFailedMessage();
     return;
   }
 
   if (defender->SubstituteIsActive()) {
-    defender->DoDamageToSubstitute(damage_done);
+    defender->DoDamageToSubstitute(defender->HpStat()->CurrentHp());
   } else {
     defender->AutoFaint();
   }
@@ -275,6 +274,10 @@ void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
   if (defender->SubstituteIsActive()) {
     defender->DoDamageToSubstitute(damage_done);
   } else {
+    if (defender->IsRaging()) {
+      defender->ChangeStat(StatNames::kAttack, 1);
+    }
+
     defender->HpStat()->SubtractHp(damage_done);
     Gui::DisplayDamageDoneMessage(damage_done);
   }
@@ -511,7 +514,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kFissure:
     case MoveNames::kGuillotine:
     case MoveNames::kHornDrill:
-      UseOneHitKoMove(attacker, defender, damage_done);
+      UseOneHitKoMove(attacker, defender);
       break;
     case MoveNames::kFlash:
     case MoveNames::kKinesis:
@@ -811,10 +814,6 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
   }
 
   if (damage_done && move_hit) {
-    if (defender->IsRaging()) {
-      defender->ChangeStat(StatNames::kAttack, 1);
-    }
-
     move_used->SetDamageDone(damage_done);
     DoConditionalDamage(defender, attacker->MoveUsed()->MoveName(),
                         damage_done);
@@ -869,6 +868,7 @@ void UseMoveThatHitsTwoToFiveTimes(const std::shared_ptr<Pokemon> &attacker,
 void UseMove(Team &attacker, Team &defender) {
   std::shared_ptr<Pokemon> attacking_member = attacker.ActiveMember();
   std::shared_ptr<Pokemon> defending_member = defender.ActiveMember();
+  std::shared_ptr<Move> move_used = attacking_member->MoveUsed();
 
   if (IsSwitch(attacking_member->MoveUsed()->MoveName())) {
     HardSwitch(attacker);
@@ -879,10 +879,9 @@ void UseMove(Team &attacker, Team &defender) {
     return;
   }
 
-  MoveNames move_used_name = attacking_member->MoveUsed()->MoveName();
+  MoveNames move_used_name = move_used->MoveName();
   attacking_member->HandleDisable();
   defending_member->HandleDisable();
-  std::shared_ptr<Move> move_used = attacking_member->MoveUsed();
 
   if (!attacking_member->IsVanished() && !attacking_member->IsChargingUp()) {
     move_used->DecrementPp(1);
