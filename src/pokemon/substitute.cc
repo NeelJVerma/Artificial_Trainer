@@ -17,7 +17,11 @@ bool Substitute::IsActive() const {
 }
 
 void Substitute::TakeDamage(const int &damage_done) {
-  current_hp_ -= damage_done;
+  if (current_hp_ - damage_done <= 0) {
+    current_hp_ = 0;
+  } else {
+    current_hp_ -= damage_done;
+  }
 }
 
 int Substitute::CurrentHp() const {

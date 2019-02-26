@@ -79,17 +79,18 @@ class Pokemon {
   bool UsedFocusEnergy() const;
   void Flinch();
   bool IsFlinched() const;
-  void Confuse(const bool &confused_self);
+  void Confuse();
   bool IsConfused() const;
-  void DisableMove();
+  void DisableMove(const int &disable_index);
+  bool HasMoveDisabled() const;
   void UseVanishMove();
   bool IsVanished() const;
   bool HandleConfusion();
   void DoConfusionDamage(const int &damage_done);
   void HandleDisable();
   void UseConversion();
-  void AbsorbHp(const int &damage_done);
-  void TakeRecoilDamage(const int &damage_done);
+  void AbsorbHp(const int &absorbed);
+  void TakeRecoilDamage(const int &recoil);
   void AutoFaint();
   void UseMetronome();
   bool IsType(const TypeNames &type_name) const;
@@ -98,6 +99,7 @@ class Pokemon {
   void SetExecutedMove(const bool &executed_move);
   bool ExecutedMove() const;
   void UseMist();
+  bool IsUnderMist() const;
   void UseLightScreen();
   bool IsBehindLightScreen() const;
   void UseReflect();
@@ -119,7 +121,7 @@ class Pokemon {
   bool IsPoisoned() const;
   void DoPoisonDamage();
   bool IsUnderToxic() const;
-  void DoToxicDamage();
+  void AdvanceToxicFactor();
   bool IsAsleep() const;
   bool IsResting() const;
   void AdvanceRestCounter();
@@ -145,10 +147,12 @@ class Pokemon {
   void SetBideDamage(const int &damage);
   void AddDamageToBide();
   bool MustUseStruggle() const;
+  bool CanHaveMoveDisabled() const;
   void ResetFaintFlags();
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
+  int DoStatusDamage();
 
  private:
   NormalStatsContainer normal_stats_container_;
@@ -176,7 +180,6 @@ class Pokemon {
   void ApplyRestSleep();
   void RestoreStatsFromStatuses();
   void RestoreStateFromTransform();
-  int DoStatusDamage();
 };
 
 } //namespace artificialtrainer

@@ -14,7 +14,6 @@ namespace artificialtrainer {
 class MovesContainer {
  public:
   static const int kMaxMoves = 4;
-
   MovesContainer() = default;
   MovesContainer(const MovesContainer &moves_container) = default;
   MovesContainer &operator=(const MovesContainer &moves_container) = default;

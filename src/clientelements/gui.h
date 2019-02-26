@@ -55,8 +55,8 @@ class Gui {
   static void DisplayConfusedMessage(const SpeciesNames &species_name);
   static void DisplayConfusionStartedMessage(const SpeciesNames &species_name);
   static void DisplayHitSelfMessage(const SpeciesNames &species_name);
-  static void DisplayConfusionEndedMessage();
-  static void DisplayDisableEndedMessage();
+  static void DisplayConfusionEndedMessage(const SpeciesNames &species_name);
+  static void DisplayDisableEndedMessage(const SpeciesNames &species_name);
   static void DisplayMoveDisabledMessage(const MoveNames &move_name);
   static void DisplayRecoilDamageMessage(const SpeciesNames &species_name,
                                          const int &damage_done);
@@ -64,11 +64,12 @@ class Gui {
                                               const MoveNames &move_name);
   static void DisplayMistStartedMessage(const SpeciesNames &species_name);
   static void DisplayIsUnderMistMessage(const SpeciesNames &species_name);
+  static void DisplaySubstituteStartedMessage(
+      const SpeciesNames &species_name);
+  static void DisplaySubstituteTookDamageMessage(const int &damage_done);
+  static void DisplaySubstituteFadedMessage(const SpeciesNames &species_name);
   static void DisplayIsBehindSubstituteMessage(
       const SpeciesNames &species_name);
-  static void DisplaySubstituteTooKDamageMessage(const int &damage_done);
-  static void DisplaySubstituteFadedMessage(const SpeciesNames &species_name);
-  static void DisplayIsBehindSubstituteMessage();
   static void DisplayBurnStartedMessage(const SpeciesNames &species_name);
   static void DisplayIsBurnedMessage(const SpeciesNames &species_name);
   static void DisplayTookBurnDamageMessage(const SpeciesNames &species_name,

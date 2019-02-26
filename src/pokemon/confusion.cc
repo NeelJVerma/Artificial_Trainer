@@ -28,7 +28,6 @@ void Confusion::AdvanceOneTurn() {
   }
 
   if (num_turns_confused_ == kMaxTurns || WillBreakOut()) {
-    Gui::DisplayConfusionEndedMessage();
     num_turns_confused_ = 0;
   } else {
     num_turns_confused_++;

@@ -245,37 +245,14 @@ CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/team/team.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/type/typecontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/type/typenames.h
 
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/clientelements/gui.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/move/move.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/move/movenames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/move/movescontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/beforetransformstate.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/bide.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/confusion.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/disable.cc
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/disable.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/pokemon.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/speciesnames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/statusnames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/substitute.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/stat/ev.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/stat/exclusiveingamestat.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/stat/exclusiveingamestatscontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/stat/hp.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/stat/iv.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/stat/normalstat.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/stat/normalstatscontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/stat/statnames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/team/team.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/type/typecontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o: ../src/pokemon/learnset.cc
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o: ../src/pokemon/learnset.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o: ../src/pokemon/speciesnames.h
 
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/clientelements/gui.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/move/move.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/move/movescontainer.h
@@ -297,7 +274,6 @@ CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/iv.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/normalstat.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/normalstatscontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/statnames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/team/team.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/type/typecontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/type/typenames.h

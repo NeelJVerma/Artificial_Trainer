@@ -212,7 +212,12 @@ void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
   }
 
   if (defender->SubstituteIsActive()) {
-    defender->DoDamageToSubstitute(defender->HpStat()->CurrentHp());
+    Gui::DisplaySubstituteTookDamageMessage(defender->HpStat()->MaxHp());
+    defender->DoDamageToSubstitute(defender->HpStat()->MaxHp());
+
+    if (!defender->SubstituteIsActive()) {
+      Gui::DisplaySubstituteFadedMessage(defender->SpeciesName());
+    }
   } else {
     defender->AutoFaint();
   }
@@ -272,7 +277,12 @@ void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
                          const MoveNames &attacker_move,
                          const int &damage_done) {
   if (defender->SubstituteIsActive()) {
+    Gui::DisplaySubstituteTookDamageMessage(damage_done);
     defender->DoDamageToSubstitute(damage_done);
+
+    if (!defender->SubstituteIsActive()) {
+      Gui::DisplaySubstituteFadedMessage(defender->SpeciesName());
+    }
   } else {
     if (defender->IsRaging()) {
       defender->ChangeStat(StatNames::kAttack, 1);
@@ -294,7 +304,12 @@ void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
 void DoDirectDamage(const std::shared_ptr<Pokemon> &defender,
                     const int &damage_done) {
   if (defender->SubstituteIsActive()) {
+    Gui::DisplaySubstituteTookDamageMessage(damage_done);
     defender->DoDamageToSubstitute(damage_done);
+
+    if (!defender->SubstituteIsActive()) {
+      Gui::DisplaySubstituteFadedMessage(defender->SpeciesName());
+    }
   } else {
     if (defender->IsRaging()) {
       defender->ChangeStat(StatNames::kAttack, 1);
@@ -351,6 +366,14 @@ void HazeField(const std::shared_ptr<Pokemon> &attacker,
   Gui::DisplayHazeResetMessage();
 }
 
+int DisableIndex(const std::shared_ptr<Pokemon> &target) {
+  std::random_device device;
+  std::mt19937 generator(device());
+  std::uniform_int_distribution<> distribution(
+      0, target->GetMovesContainer().EndOfNormalMovesIndex() - 1);
+  return distribution(generator);
+}
+
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
                   const int &damage_done, const bool &move_hit) {
@@ -360,16 +383,23 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     return;
   }
 
+  if (IsDamaging(move_name) && !damage_done) {
+    return;
+  }
+
   switch (move_name) {
     case MoveNames::kAbsorb:
     case MoveNames::kMegaDrain:
-    case MoveNames::kLeechLife:
-      attacker->AbsorbHp(damage_done);
+    case MoveNames::kLeechLife: {
+      int absorbed = !(damage_done >> 1) ? 1 : damage_done >> 1;
+      attacker->AbsorbHp(absorbed);
+      Gui::DisplayHpAbsorbedMessage(attacker->SpeciesName(), absorbed);
       break;
+    }
     case MoveNames::kAcid:
     case MoveNames::kPsychic:
       if (VariableEffectActivates(move_name) &&
-          !defender->SubstituteIsActive()) {
+          !defender->SubstituteIsActive() && !defender->IsUnderMist()) {
         defender->ChangeStat(StatNames::kSpecial, -1);
       }
 
@@ -398,13 +428,14 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
     case MoveNames::kAuroraBeam:
       if (VariableEffectActivates(move_name) &&
-          !defender->SubstituteIsActive()) {
+          !defender->SubstituteIsActive() && !defender->IsUnderMist()) {
         defender->ChangeStat(StatNames::kAttack, -1);
       }
 
       break;
     case MoveNames::kBide:
       attacker->UseBide();
+      Gui::DisplayIsBidingMessage(attacker->SpeciesName());
       break;
     case MoveNames::kBind:
     case MoveNames::kClamp:
@@ -415,14 +446,25 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       std::uniform_int_distribution<> distribution(2, 5);
       int random_threshold = distribution(generator);
       attacker->Trap(true, random_threshold);
+      Gui::DisplayUsedTrapMoveMessage(attacker->SpeciesName());
       defender->Trap(false, random_threshold);
+      Gui::DisplayIsTrappedMessage(defender->SpeciesName());
+
+      if (!attacker->IsTrapped() || !defender->IsTrapped()) {
+        Gui::DisplayTrapEndedMessage(attacker->SpeciesName());
+        Gui::DisplayTrapEndedMessage(defender->SpeciesName());
+      }
+
       break;
     }
     case MoveNames::kBlizzard:
     case MoveNames::kIcePunch:
     case MoveNames::kIceBeam:
-      if (VariableEffectActivates(move_name)) {
+      if (VariableEffectActivates(move_name) &&
+          !defender->IsType(TypeNames::kIce) &&
+          !defender->SubstituteIsActive() && !defender->HasStatus()) {
         defender->ApplyStatus(StatusNames::kFrozen);
+        Gui::DisplayFreezeStartedMessage(defender->SpeciesName());
       }
 
       break;
@@ -431,8 +473,11 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kThunder:
     case MoveNames::kThunderbolt:
     case MoveNames::kThunderShock:
-      if (VariableEffectActivates(move_name)) {
+      if (VariableEffectActivates(move_name) &&
+          !defender->IsType(TypeNames::kElectric) &&
+          !defender->SubstituteIsActive()) {
         defender->ApplyStatus(StatusNames::kParalyzed);
+        Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
       }
 
       break;
@@ -440,7 +485,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kBubbleBeam:
     case MoveNames::kConstrict:
       if (VariableEffectActivates(move_name) &&
-          !defender->SubstituteIsActive()) {
+          !defender->SubstituteIsActive() && !defender->IsUnderMist()) {
         defender->ChangeStat(StatNames::kSpeed, -1);
       }
 
@@ -450,14 +495,16 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       if (defender->IsConfused() || defender->SubstituteIsActive()) {
         Gui::DisplayMoveFailedMessage();
       } else {
-        defender->Confuse(false);
+        defender->Confuse();
+        Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
       }
 
       break;
     case MoveNames::kConfusion:
     case MoveNames::kPsybeam:
-      if (VariableEffectActivates(move_name)) {
-        defender->Confuse(false);
+      if (VariableEffectActivates(move_name) && !defender->IsConfused()) {
+        defender->Confuse();
+        Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
       }
 
       break;
@@ -474,11 +521,24 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
     case MoveNames::kDig:
     case MoveNames::kFly:
+      if (!attacker->IsVanished()) {
+        Gui::DisplayPokemonVanishedMessage(attacker->SpeciesName());
+      }
+
       attacker->UseVanishMove();
       break;
-    case MoveNames::kDisable:
-      defender->DisableMove();
+    case MoveNames::kDisable: {
+      if (defender->SubstituteIsActive() || !defender->CanHaveMoveDisabled()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        int disable_index = DisableIndex(defender);
+        defender->DisableMove(disable_index);
+        Gui::DisplayMoveDisabledMessage(
+            defender->GetMovesContainer()[disable_index]->MoveName());
+      }
+
       break;
+    }
     case MoveNames::kDoubleTeam:
     case MoveNames::kMinimize:
       attacker->ChangeStat(StatNames::kEvasion, -1);
@@ -486,18 +546,24 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kDoubleEdge:
     case MoveNames::kTakeDown:
     case MoveNames::kSubmission:
-    case MoveNames::kStruggle:
-      attacker->TakeRecoilDamage(damage_done);
+    case MoveNames::kStruggle: {
+      int recoil_damage = !(damage_done >> 2) ? 1 : damage_done >> 2;
+      attacker->TakeRecoilDamage(recoil_damage);
+      Gui::DisplayRecoilDamageMessage(attacker->SpeciesName(), recoil_damage);
       break;
+    }
     case MoveNames::kDragonRage:
       DoDirectDamage(defender, 40);
       break;
-    case MoveNames::kDreamEater:
-      if (defender->IsAsleep()) {
-        attacker->AbsorbHp(damage_done);
+    case MoveNames::kDreamEater: {
+      if (defender->IsAsleep() || defender->IsResting()) {
+        int absorbed = !(damage_done >> 1) ? 1 : damage_done >> 1;
+        attacker->AbsorbHp(absorbed);
+        Gui::DisplayHpAbsorbedMessage(attacker->SpeciesName(), absorbed);
       }
 
       break;
+    }
     case MoveNames::kExplosion:
     case MoveNames::kSelfDestruct:
       attacker->AutoFaint();
@@ -506,8 +572,11 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kFireBlast:
     case MoveNames::kFirePunch:
     case MoveNames::kFlamethrower:
-      if (VariableEffectActivates(move_name)) {
+      if (VariableEffectActivates(move_name) &&
+          !defender->IsType(TypeNames::kFire) &&
+          !defender->SubstituteIsActive() && !defender->HasStatus()) {
         defender->ApplyStatus(StatusNames::kBurned);
+        Gui::DisplayBurnStartedMessage(defender->SpeciesName());
       }
 
       break;
@@ -520,10 +589,12 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kKinesis:
     case MoveNames::kSmokescreen:
     case MoveNames::kSandAttack:
-      if (!defender->SubstituteIsActive()) {
-        defender->ChangeStat(StatNames::kAccuracy, -1);
+      if (defender->SubstituteIsActive()) {
+        Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+      } else if (defender->IsUnderMist()) {
+        Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
       } else {
-        Gui::DisplayIsBehindSubstituteMessage();
+        defender->ChangeStat(StatNames::kAccuracy, -1);
       }
 
       break;
@@ -531,19 +602,23 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       attacker->UseFocusEnergy();
       break;
     case MoveNames::kGlare:
-      if (defender->HasStatus() || defender->SubstituteIsActive()) {
+      if (defender->HasStatus() || defender->SubstituteIsActive() ||
+          defender->IsType(TypeNames::kElectric)) {
         Gui::DisplayMoveFailedMessage();
       } else {
         defender->ApplyStatus(StatusNames::kParalyzed);
+        Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
       }
 
       break;
     case MoveNames::kStunSpore:
       if (defender->HasStatus() || defender->SubstituteIsActive() ||
-          defender->IsType(TypeNames::kGrass)) {
+          defender->IsType(TypeNames::kGrass) ||
+          defender->IsType(TypeNames::kElectric)) {
         Gui::DisplayMoveFailedMessage();
       } else {
         defender->ApplyStatus(StatusNames::kParalyzed);
+        Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
       }
 
       break;
@@ -554,14 +629,17 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         Gui::DisplayMoveFailedMessage();
       } else {
         defender->ApplyStatus(StatusNames::kParalyzed);
+        Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
       }
 
       break;
     case MoveNames::kGrowl:
-      if (!defender->SubstituteIsActive()) {
-        defender->ChangeStat(StatNames::kAttack, -1);
+      if (defender->SubstituteIsActive()) {
+        Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+      } else if (defender->IsUnderMist()) {
+        Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
       } else {
-        Gui::DisplayIsBehindSubstituteMessage();
+        defender->ChangeStat(StatNames::kAttack, -1);
       }
 
       break;
@@ -574,7 +652,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kHighJumpKick:
     case MoveNames::kJumpKick:
       if (!move_hit || !damage_done) {
-        attacker->HpStat()->SubtractHp(1);
+        attacker->TakeRecoilDamage(1);
         Gui::DisplayRecoilDamageMessage(attacker->SpeciesName(), 1);
       }
 
@@ -589,6 +667,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         Gui::DisplayMoveFailedMessage();
       } else {
         defender->ApplyStatus(StatusNames::kAsleep);
+        Gui::DisplaySleepStartedMessage(defender->SpeciesName());
       }
 
       break;
@@ -599,23 +678,37 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         Gui::DisplayMoveFailedMessage();
       } else {
         defender->ApplyStatus(StatusNames::kAsleep);
+        Gui::DisplaySleepStartedMessage(defender->SpeciesName());
       }
 
       break;
     case MoveNames::kLeechSeed:
-      defender->ApplyLeechSeed();
+      if (defender->IsType(TypeNames::kGrass) || defender->IsSeeded() ||
+          defender->SubstituteIsActive()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        defender->ApplyLeechSeed();
+        Gui::DisplayLeechSeedStartedMessage(defender->SpeciesName());
+      }
       break;
     case MoveNames::kLeer:
     case MoveNames::kTailWhip:
-      if (!defender->SubstituteIsActive()) {
-        defender->ChangeStat(StatNames::kDefense, -1);
+      if (defender->SubstituteIsActive()) {
+        Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+      } else if (defender->IsUnderMist()) {
+        Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
       } else {
-        Gui::DisplayMoveFailedMessage();
+        defender->ChangeStat(StatNames::kDefense, -1);
       }
 
       break;
     case MoveNames::kLightScreen:
-      attacker->UseLightScreen();
+      if (attacker->IsBehindLightScreen()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        attacker->UseLightScreen();
+      }
+
       break;
     case MoveNames::kMeditate:
     case MoveNames::kSharpen:
@@ -626,20 +719,39 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       UseMimic(attacker, defender) : Gui::DisplayMoveFailedMessage();
       break;
     case MoveNames::kMist:
-      attacker->UseMist();
+      if (attacker->IsUnderMist()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        attacker->UseMist();
+        Gui::DisplayMistStartedMessage(attacker->SpeciesName());
+      }
+
       break;
     case MoveNames::kNightShade:
     case MoveNames::kSeismicToss:
       DoDamageEqualToAttackerLevel(attacker, defender);
       break;
     case MoveNames::kRage:
-      if (damage_done) {
-        attacker->UseRage();
+      if (!attacker->IsRaging()) {
+        Gui::DisplayIsRagingMessage(attacker->SpeciesName());
       }
+
+      attacker->UseRage();
+
       break;
     case MoveNames::kPetalDance:
     case MoveNames::kThrash:
+      if (!attacker->IsUsingLockInMove()) {
+        Gui::DisplayIsLockedInMessage(attacker->SpeciesName());
+      }
+
       attacker->UseLockInMove();
+
+      if (!attacker->IsUsingLockInMove()) {
+        Gui::DisplayLockInEndedMessage(attacker->SpeciesName());
+        Gui::DisplayConfusionStartedMessage(attacker->SpeciesName());
+      }
+
       break;
     case MoveNames::kPoisonGas:
     case MoveNames::kPoisonPowder:
@@ -648,6 +760,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         Gui::DisplayMoveFailedMessage();
       } else {
         defender->ApplyStatus(StatusNames::kPoisoned);
+        Gui::DisplayPoisonStartedMessage(defender->SpeciesName(), false);
       }
 
       break;
@@ -655,8 +768,11 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kSludge:
     case MoveNames::kSmog:
     case MoveNames::kTwineedle:
-      if (VariableEffectActivates(move_name)) {
+      if (VariableEffectActivates(move_name) &&
+          !defender->IsType(TypeNames::kPoison) &&
+          !defender->SubstituteIsActive()) {
         defender->ApplyStatus(StatusNames::kPoisoned);
+        Gui::DisplayPoisonStartedMessage(defender->SpeciesName(), false);
       }
 
       break;
@@ -667,23 +783,56 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kSkullBash:
     case MoveNames::kSkyAttack:
     case MoveNames::kSolarBeam:
+      if (!attacker->IsChargingUp()) {
+        Gui::DisplayChargingUpMessage(attacker->SpeciesName());
+      }
+
       attacker->UseChargeUpMove();
       break;
     case MoveNames::kRecover:
-    case MoveNames::kSoftBoiled:
-      attacker->RecoverHp();
-      break;
-    case MoveNames::kReflect:
-      attacker->UseReflect();
-      break;
-    case MoveNames::kRest:
-      attacker->ApplyStatus(StatusNames::kAsleepRest);
-      break;
-    case MoveNames::kScreech:
-      if (!defender->SubstituteIsActive()) {
-        defender->ChangeStat(StatNames::kDefense, -2);
-      } else {
+    case MoveNames::kSoftBoiled: {
+      int max_minus_current =
+          attacker->HpStat()->MaxHp() - attacker->HpStat()->CurrentHp();
+
+      if (max_minus_current == 255 || max_minus_current == 511 ||
+          attacker->HpStat()->CurrentHp() == attacker->HpStat()->MaxHp()) {
         Gui::DisplayMoveFailedMessage();
+      } else {
+        attacker->RecoverHp();
+      }
+
+      break;
+    }
+    case MoveNames::kReflect:
+      if (attacker->IsBehindReflect()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        attacker->UseReflect();
+      }
+
+      break;
+    case MoveNames::kRest: {
+      int max_minus_current =
+          attacker->HpStat()->MaxHp() - attacker->HpStat()->CurrentHp();
+
+      if (max_minus_current == 255 || max_minus_current == 511 ||
+          attacker->HpStat()->CurrentHp() == attacker->HpStat()->MaxHp()) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        attacker->ApplyStatus(StatusNames::kAsleepRest);
+        Gui::DisplaySleepStartedMessage(defender->SpeciesName());
+        Gui::DisplayRecoveredAllHpMessage(defender->SpeciesName());
+      }
+
+      break;
+    }
+    case MoveNames::kScreech:
+      if (defender->SubstituteIsActive()) {
+        Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+      } else if (defender->IsUnderMist()) {
+        Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+      } else {
+        defender->ChangeStat(StatNames::kDefense, -2);
       }
 
       break;
@@ -691,15 +840,24 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       DoDirectDamage(defender, 20);
       break;
     case MoveNames::kStringShot:
-      if (!defender->SubstituteIsActive()) {
-        defender->ChangeStat(StatNames::kSpeed, -1);
+      if (defender->SubstituteIsActive()) {
+        Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+      } else if (defender->IsUnderMist()) {
+        Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
       } else {
-        Gui::DisplayMoveFailedMessage();
+        defender->ChangeStat(StatNames::kSpeed, -1);
       }
 
       break;
     case MoveNames::kSubstitute:
-      attacker->UseSubstitute();
+      if (attacker->SubstituteIsActive() ||
+          attacker->HpStat()->HpAsPercent() <= 25.0) {
+        Gui::DisplayMoveFailedMessage();
+      } else {
+        attacker->UseSubstitute();
+        Gui::DisplaySubstituteStartedMessage(attacker->SpeciesName());
+      }
+
       break;
     case MoveNames::kSuperFang:
       UseSuperFang(attacker, defender);
@@ -713,11 +871,14 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         Gui::DisplayMoveFailedMessage();
       } else {
         defender->ApplyStatus(StatusNames::kPoisonedToxic);
+        Gui::DisplayPoisonStartedMessage(defender->SpeciesName(), true);
       }
 
       break;
     case MoveNames::kTransform:
       attacker->Transform(defender);
+      Gui::DisplayTransformMessage(attacker->SpeciesName(),
+                                   defender->SpeciesName());
       break;
     default:
       break;
@@ -733,12 +894,22 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   if (attacker->IsAsleep()) {
     Gui::DisplayIsAsleepMessage(attacker->SpeciesName());
     attacker->AdvanceRegularSleepCounter();
+
+    if (!attacker->HasStatus()) {
+      Gui::DisplayWokeUpMessage(attacker->SpeciesName());
+    }
+
     return false;
   }
 
   if (attacker->IsResting()) {
     Gui::DisplayIsAsleepMessage(attacker->SpeciesName());
     attacker->AdvanceRestCounter();
+
+    if (!attacker->HasStatus()) {
+      Gui::DisplayWokeUpMessage(attacker->SpeciesName());
+    }
+
     return false;
   }
 
@@ -757,11 +928,22 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
     return false;
   }
 
-  if (!attacker->HandleConfusion()) {
-    Gui::DisplayHitSelfMessage(attacker->SpeciesName());
-    attacker->DoConfusionDamage(DamageDone(attacker, attacker, false, true,
-                                           true));
-    return false;
+  if (attacker->IsConfused() && !attacker->IsAsleep() &&
+      !attacker->IsFrozen() && !attacker->IsResting()) {
+    Gui::DisplayConfusedMessage(attacker->SpeciesName());
+
+    if (!attacker->HandleConfusion()) {
+      Gui::DisplayHitSelfMessage(attacker->SpeciesName());
+      int damage_done = DamageDone(attacker, attacker, false, true, true);
+      attacker->DoConfusionDamage(damage_done);
+      Gui::DisplayDamageDoneMessage(damage_done);
+
+      if (!attacker->IsConfused()) {
+        Gui::DisplayConfusionEndedMessage(attacker->SpeciesName());
+      }
+
+      return false;
+    }
   }
 
   if (attacker->IsTrapped()) {
@@ -881,7 +1063,16 @@ void UseMove(Team &attacker, Team &defender) {
 
   MoveNames move_used_name = move_used->MoveName();
   attacking_member->HandleDisable();
+
+  if (!attacking_member->HasMoveDisabled()) {
+    Gui::DisplayDisableEndedMessage(attacking_member->SpeciesName());
+  }
+
   defending_member->HandleDisable();
+
+  if (!defending_member->HasMoveDisabled()) {
+    Gui::DisplayDisableEndedMessage(defending_member->SpeciesName());
+  }
 
   if (!attacking_member->IsVanished() && !attacking_member->IsChargingUp()) {
     move_used->DecrementPp(1);
@@ -917,6 +1108,9 @@ void UseMove(Team &attacker, Team &defender) {
   // Pokemon->UseMetronome() for a reference.
   if (move_used->MoveName() == MoveNames::kMetronome) {
     attacking_member->UseMetronome();
+    Gui::DisplayPokemonUsedMoveMessage(
+        attacking_member->SpeciesName(),
+        attacking_member->MoveUsed()->MoveName());
   }
 
   // Mirror move must be handled separately for the same reason. The attacker

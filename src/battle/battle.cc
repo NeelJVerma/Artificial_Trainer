@@ -289,29 +289,46 @@ void Battle::HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
   }
 
   if (attacker->IsBurned()) {
-    attacker->DoBurnDamage();
+    Gui::DisplayIsBurnedMessage(attacker->SpeciesName());
+    int burn_damage = attacker->DoStatusDamage();
+    Gui::DisplayTookBurnDamageMessage(attacker->SpeciesName(), burn_damage);
   } else if (attacker->IsPoisoned()) {
-    attacker->DoPoisonDamage();
+    Gui::DisplayIsPoisonedMessage(attacker->SpeciesName(), false);
+    int poison_damage = attacker->DoStatusDamage();
+    Gui::DisplayTookPoisonDamageMessage(attacker->SpeciesName(), poison_damage);
   } else if (attacker->IsUnderToxic()) {
-    attacker->DoToxicDamage();
+    Gui::DisplayIsPoisonedMessage(attacker->SpeciesName(), true);
+    int poison_damage = attacker->DoStatusDamage();
+    Gui::DisplayTookPoisonDamageMessage(attacker->SpeciesName(), poison_damage);
+    attacker->AdvanceToxicFactor();
   }
 
   if (attacker->IsSeeded()) {
-    defender->AbsorbHp(attacker->DoLeechSeedDamage());
+    Gui::DisplayIsSeededMessage(attacker->SpeciesName());
+    int sapped = attacker->DoStatusDamage();
+    Gui::DisplayHadHpSappedMessage(attacker->SpeciesName(), sapped);
+    defender->AbsorbHp(sapped);
+    Gui::DisplayHpAbsorbedMessage(defender->SpeciesName(), sapped);
   }
 
   CheckIfActivePokemonIsStillAlive(attacker, team);
 }
 
-void Battle::HandleTurn() {
-  Gui::DisplayPlayerTeam(team_one_, true);
-  Gui::DisplayPlayerTeam(team_two_, false);
-  std::shared_ptr<Pokemon> active_pokemon_one = team_one_.ActiveMember();
-  Gui::DisplayActivePokemonData(active_pokemon_one, true);
-  std::shared_ptr<Pokemon> active_pokemon_two = team_two_.ActiveMember();
-  Gui::DisplayActivePokemonData(active_pokemon_two, false);
-  PlayerPicksMove(team_one_, true);
-  PlayerPicksMove(team_two_, false);
+void Battle::ReplaceMovesWithStruggleIfNeeded(
+    const std::shared_ptr<Pokemon> &active_pokemon_one,
+    const std::shared_ptr<Pokemon> &active_pokemon_two) {
+  if (active_pokemon_one->MustUseStruggle()) {
+    active_pokemon_one->GetMovesContainer().ReplaceAllWithStruggle();
+  }
+
+  if (active_pokemon_two->MustUseStruggle()) {
+    active_pokemon_two->GetMovesContainer().ReplaceAllWithStruggle();
+  }
+}
+
+bool Battle::OneMovesFirst(
+    const std::shared_ptr<Pokemon> &active_pokemon_one,
+    const std::shared_ptr<Pokemon> &active_pokemon_two) const {
   bool one_moves_first = false;
   NormalStatsContainer normal_active_stats_one =
       active_pokemon_one->GetNormalStatsContainer();
@@ -339,15 +356,28 @@ void Battle::HandleTurn() {
     one_moves_first = true;
   }
 
-  if (one_moves_first && HandleMove(team_one_, team_two_) &&
-      HandleMove(team_two_, team_one_)) {
+  return one_moves_first;
+}
+
+void Battle::HandleTurn() {
+  Gui::DisplayPlayerTeam(team_one_, true);
+  Gui::DisplayPlayerTeam(team_two_, false);
+  std::shared_ptr<Pokemon> active_pokemon_one = team_one_.ActiveMember();
+  Gui::DisplayActivePokemonData(active_pokemon_one, true);
+  std::shared_ptr<Pokemon> active_pokemon_two = team_two_.ActiveMember();
+  Gui::DisplayActivePokemonData(active_pokemon_two, false);
+  PlayerPicksMove(team_one_, true);
+  PlayerPicksMove(team_two_, false);
+
+  if (OneMovesFirst(active_pokemon_one, active_pokemon_two) &&
+      HandleMove(team_one_, team_two_) && HandleMove(team_two_, team_one_)) {
     HandleEndOfTurnStatuses(active_pokemon_one,
                             active_pokemon_two,
                             team_one_);
     HandleEndOfTurnStatuses(active_pokemon_two,
                             active_pokemon_one,
                             team_two_);
-  } else if (!one_moves_first && HandleMove(team_two_, team_one_) &&
+  } else if (HandleMove(team_two_, team_one_) &&
       HandleMove(team_one_, team_two_)) {
     HandleEndOfTurnStatuses(active_pokemon_two,
                             active_pokemon_one,
@@ -359,14 +389,7 @@ void Battle::HandleTurn() {
 
   active_pokemon_one->ResetEndOfTurnFlags();
   active_pokemon_two->ResetEndOfTurnFlags();
-
-  if (active_pokemon_one->MustUseStruggle()) {
-    active_pokemon_one->GetMovesContainer().ReplaceAllWithStruggle();
-  }
-
-  if (active_pokemon_two->MustUseStruggle()) {
-    active_pokemon_two->GetMovesContainer().ReplaceAllWithStruggle();
-  }
+  ReplaceMovesWithStruggleIfNeeded(active_pokemon_one, active_pokemon_two);
 }
 
 void Battle::Play() {

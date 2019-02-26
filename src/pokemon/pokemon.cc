@@ -6,7 +6,6 @@
 #include <random>
 #include <cassert>
 #include "pokemon.h"
-#include "../clientelements/gui.h"
 #include "../type/type.h"
 #include "../move/pp.h"
 
@@ -95,11 +94,6 @@ void Pokemon::ResetStats() {
 
 void Pokemon::RaiseStat(const StatNames &stat_name,
                         const int &num_stages) {
-  if (stat_name == StatNames::kEvasion && flags_.under_mist) {
-    Gui::DisplayIsUnderMistMessage(species_name_);
-    return;
-  }
-
   if (stat_name != StatNames::kAccuracy && stat_name != StatNames::kEvasion) {
     std::shared_ptr<NormalStat> stat_to_boost =
         normal_stats_container_[stat_name];
@@ -135,11 +129,6 @@ void Pokemon::RaiseStat(const StatNames &stat_name,
 
 void Pokemon::LowerStat(const StatNames &stat_name,
                         const int &num_stages, const bool &ignore_mist) {
-  if (!ignore_mist && stat_name != StatNames::kEvasion && flags_.under_mist) {
-    Gui::DisplayIsUnderMistMessage(species_name_);
-    return;
-  }
-
   if (stat_name != StatNames::kAccuracy && stat_name != StatNames::kEvasion) {
     std::shared_ptr<NormalStat> stat_to_lower =
         normal_stats_container_[stat_name];
@@ -175,8 +164,7 @@ void Pokemon::LowerStat(const StatNames &stat_name,
 
 void Pokemon::ChangeStat(const StatNames &stat_name,
                          const int &num_stages) {
-  num_stages < 0 ? LowerStat(stat_name,
-                             num_stages,
+  num_stages < 0 ? LowerStat(stat_name, num_stages,
                              (flags_.status == StatusNames::kBurned ||
                                  flags_.status == StatusNames::kParalyzed)) :
   RaiseStat(stat_name, num_stages);
@@ -200,27 +188,13 @@ bool Pokemon::IsFlinched() const {
   return flags_.flinched;
 }
 
-void Pokemon::Confuse(const bool &confused_self) {
-  if (!flags_.confusion.IsActive() && (!SubstituteIsActive() ||
-      !confused_self)) {
-    flags_.confusion.Activate();
-    Gui::DisplayConfusionStartedMessage(species_name_);
-  }
+void Pokemon::Confuse() {
+  flags_.confusion.Activate();
 }
 
-void Pokemon::DisableMove() {
-  if (SubstituteIsActive()) {
-    Gui::DisplayMoveFailedMessage();
-  } else {
-    std::random_device device;
-    std::mt19937 generator(device());
-    std::uniform_int_distribution<>
-        distribution(0, moves_container_.EndOfNormalMovesIndex() - 1);
-    int random_index = distribution(generator);
-    moves_container_[random_index]->SetDisabled(true);
-    Gui::DisplayMoveDisabledMessage(moves_container_[random_index]->MoveName());
-    flags_.disable.Activate();
-  }
+void Pokemon::DisableMove(const int &disable_index) {
+  moves_container_[disable_index]->SetDisabled(true);
+  flags_.disable.Activate();
 }
 
 bool Pokemon::IsConfused() const {
@@ -231,16 +205,10 @@ void Pokemon::DoConfusionDamage(const int &damage_done) {
   SetMoveUsed(std::make_shared<Move>(
       MoveNames::kHitSelf, Pp(MoveNames::kHitSelf)));
   hp_stat_->SubtractHp(damage_done);
-  Gui::DisplayDamageDoneMessage(damage_done);
 }
 
 void Pokemon::UseVanishMove() {
-  if (!flags_.vanished) {
-    flags_.vanished = true;
-    Gui::DisplayPokemonVanishedMessage(species_name_);
-  } else {
-    flags_.vanished = false;
-  }
+  flags_.vanished = !flags_.vanished;
 }
 
 bool Pokemon::IsVanished() const {
@@ -248,12 +216,7 @@ bool Pokemon::IsVanished() const {
 }
 
 void Pokemon::UseChargeUpMove() {
-  if (!flags_.charging_up) {
-    flags_.charging_up = true;
-    Gui::DisplayChargingUpMessage(species_name_);
-  } else {
-    flags_.charging_up = false;
-  }
+  flags_.charging_up = !flags_.charging_up;
 }
 
 bool Pokemon::IsChargingUp() const {
@@ -271,15 +234,6 @@ void Pokemon::UseConversion() {
 }
 
 bool Pokemon::HandleConfusion() {
-  StatusNames status = flags_.status;
-
-  if (!flags_.confusion.IsActive() || status == StatusNames::kAsleepRest ||
-      status == StatusNames::kAsleep || status == StatusNames::kFrozen) {
-    return true;
-  }
-
-  Gui::DisplayConfusedMessage(species_name_);
-
   std::random_device device;
   std::mt19937 generator(device());
   std::uniform_int_distribution<> distribution(1, 100);
@@ -313,18 +267,16 @@ void Pokemon::HandleDisable() {
   }
 }
 
-void Pokemon::AbsorbHp(const int &damage_done) {
-  int absored = damage_done >> 1;
-  absored = !absored ? 1 : absored;
-  hp_stat_->AddHp(absored);
-  Gui::DisplayHpAbsorbedMessage(species_name_, absored);
+bool Pokemon::HasMoveDisabled() const {
+  return flags_.disable.IsActive();
 }
 
-void Pokemon::TakeRecoilDamage(const int &damage_done) {
-  int recoil_damage = damage_done >> 2;
-  recoil_damage = !recoil_damage ? 1 : recoil_damage;
-  hp_stat_->SubtractHp(recoil_damage);
-  Gui::DisplayRecoilDamageMessage(species_name_, recoil_damage);
+void Pokemon::AbsorbHp(const int &absorbed) {
+  hp_stat_->AddHp(absorbed);
+}
+
+void Pokemon::TakeRecoilDamage(const int &recoil) {
+  hp_stat_->SubtractHp(recoil);
 }
 
 void Pokemon::AutoFaint() {
@@ -349,7 +301,6 @@ void Pokemon::UseMetronome() {
   }
 
   move_used_ = std::make_shared<Move>(random_move, Pp(random_move));
-  Gui::DisplayPokemonUsedMoveMessage(species_name_, random_move);
 }
 
 bool Pokemon::IsType(const TypeNames &type_name) const {
@@ -385,31 +336,19 @@ bool Pokemon::ExecutedMove() const {
 }
 
 void Pokemon::UseMist() {
-  if (flags_.under_mist) {
-    Gui::DisplayMoveFailedMessage();
-  } else {
-    flags_.under_mist = true;
-    Gui::DisplayMistStartedMessage(species_name_);
-  }
+  flags_.under_mist = true;
+}
+
+bool Pokemon::IsUnderMist() const {
+  return flags_.under_mist;
 }
 
 void Pokemon::RecoverHp() {
-  int max_minus_current = hp_stat_->MaxHp() - hp_stat_->CurrentHp();
-
-  if (max_minus_current == 255 || max_minus_current == 511 ||
-      hp_stat_->CurrentHp() == hp_stat_->MaxHp()) {
-    Gui::DisplayMoveFailedMessage();
-  } else {
-    hp_stat_->AddHp(hp_stat_->MaxHp() >> 1);
-  }
+  hp_stat_->AddHp(hp_stat_->MaxHp() >> 1);
 }
 
 void Pokemon::UseLightScreen() {
-  if (flags_.behind_light_screen) {
-    Gui::DisplayMoveFailedMessage();
-  } else {
-    flags_.behind_light_screen = true;
-  }
+  flags_.behind_light_screen = true;
 }
 
 bool Pokemon::IsBehindLightScreen() const {
@@ -417,11 +356,7 @@ bool Pokemon::IsBehindLightScreen() const {
 }
 
 void Pokemon::UseReflect() {
-  if (flags_.behind_reflect) {
-    Gui::DisplayMoveFailedMessage();
-  } else {
-    flags_.behind_reflect = true;
-  }
+  flags_.behind_reflect = true;
 }
 
 bool Pokemon::IsBehindReflect() const {
@@ -429,14 +364,9 @@ bool Pokemon::IsBehindReflect() const {
 }
 
 void Pokemon::UseSubstitute() {
-  if (flags_.substitute.IsActive() || hp_stat_->HpAsPercent() <= 25.0) {
-    Gui::DisplayMoveFailedMessage();
-  } else {
-    int damage_taken = hp_stat_->MaxHp() >> 2;
-    flags_.substitute.Activate(damage_taken);
-    hp_stat_->SubtractHp(damage_taken);
-    Gui::DisplayIsBehindSubstituteMessage(species_name_);
-  }
+  int damage_taken = hp_stat_->MaxHp() >> 2;
+  flags_.substitute.Activate(damage_taken);
+  hp_stat_->SubtractHp(damage_taken);
 }
 
 bool Pokemon::SubstituteIsActive() const {
@@ -444,15 +374,7 @@ bool Pokemon::SubstituteIsActive() const {
 }
 
 void Pokemon::DoDamageToSubstitute(const int &damage_done) {
-  int sub_current_hp = flags_.substitute.CurrentHp();
-  Gui::DisplaySubstituteTooKDamageMessage(damage_done);
-
-  if (sub_current_hp - damage_done <= 0) {
-    flags_.substitute.TakeDamage(sub_current_hp);
-    Gui::DisplaySubstituteFadedMessage(species_name_);
-  } else {
-    flags_.substitute.TakeDamage(damage_done);
-  }
+  flags_.substitute.TakeDamage(damage_done);
 }
 
 bool Pokemon::IsBurned() const {
@@ -460,34 +382,25 @@ bool Pokemon::IsBurned() const {
 }
 
 void Pokemon::ApplyBurn() {
-  if (!IsType(TypeNames::kFire)) {
-    flags_.status = StatusNames::kBurned;
-    flags_.old_attack_numerator =
-        normal_stats_container_[StatNames::kAttack]->Numerator();
-    flags_.old_attack_denominator =
-        normal_stats_container_[StatNames::kAttack]->Denominator();
-    ChangeStat(StatNames::kAttack, -2);
-    Gui::DisplayBurnStartedMessage(species_name_);
-  }
+  flags_.status = StatusNames::kBurned;
+  flags_.old_attack_numerator =
+      normal_stats_container_[StatNames::kAttack]->Numerator();
+  flags_.old_attack_denominator =
+      normal_stats_container_[StatNames::kAttack]->Denominator();
+  ChangeStat(StatNames::kAttack, -2);
 }
 
 void Pokemon::ApplyFreeze() {
-  if (!IsType(TypeNames::kIce)) {
-    flags_.status = StatusNames::kFrozen;
-    Gui::DisplayFreezeStartedMessage(species_name_);
-  }
+  flags_.status = StatusNames::kFrozen;
 }
 
 void Pokemon::ApplyParalysis() {
-  if (!IsType(TypeNames::kElectric)) {
-    flags_.status = StatusNames::kParalyzed;
-    flags_.old_speed_numerator =
-        normal_stats_container_[StatNames::kSpeed]->Numerator();
-    flags_.old_speed_denominator =
-        normal_stats_container_[StatNames::kSpeed]->Denominator();
-    ChangeStat(StatNames::kSpeed, -6);
-    Gui::DisplayParalysisStartedMessage(species_name_);
-  }
+  flags_.status = StatusNames::kParalyzed;
+  flags_.old_speed_numerator =
+      normal_stats_container_[StatNames::kSpeed]->Numerator();
+  flags_.old_speed_denominator =
+      normal_stats_container_[StatNames::kSpeed]->Denominator();
+  ChangeStat(StatNames::kSpeed, -6);
 }
 
 bool Pokemon::IsParalyzed() const {
@@ -502,23 +415,16 @@ bool Pokemon::IsFullyParalyzed() const {
 }
 
 void Pokemon::ApplyPoison() {
-  if (!IsType(TypeNames::kPoison)) {
-    flags_.status = StatusNames::kPoisoned;
-    Gui::DisplayPoisonStartedMessage(species_name_, false);
-  }
+  flags_.status = StatusNames::kPoisoned;
 }
 
 void Pokemon::ApplyToxic() {
-  if (!IsType(TypeNames::kPoison)) {
-    flags_.status = StatusNames::kPoisonedToxic;
-    Gui::DisplayPoisonStartedMessage(species_name_, true);
-  }
+  flags_.status = StatusNames::kPoisonedToxic;
 }
 
 void Pokemon::ApplySleep() {
   flags_.status = StatusNames::kAsleep;
   flags_.turns_asleep = 1;
-  Gui::DisplaySleepStartedMessage(species_name_);
 }
 
 void Pokemon::AdvanceRegularSleepCounter() {
@@ -528,7 +434,6 @@ void Pokemon::AdvanceRegularSleepCounter() {
 
   if (flags_.turns_asleep == distribution(generator) ||
       flags_.turns_asleep == 7) {
-    Gui::DisplayWokeUpMessage(species_name_);
     flags_.status = StatusNames::kClear;
   }
 }
@@ -546,18 +451,9 @@ void Pokemon::RestoreStatsFromStatuses() {
 }
 
 void Pokemon::ApplyRestSleep() {
-  int max_minus_current = hp_stat_->MaxHp() - hp_stat_->CurrentHp();
-
-  if (max_minus_current == 255 || max_minus_current == 511 ||
-      hp_stat_->CurrentHp() == hp_stat_->MaxHp()) {
-    Gui::DisplayMoveFailedMessage();
-  } else {
-    RestoreStatsFromStatuses();
-    flags_.status = StatusNames::kAsleepRest;
-    hp_stat_->AddHp(hp_stat_->MaxHp());
-    Gui::DisplaySleepStartedMessage(species_name_);
-    Gui::DisplayRecoveredAllHpMessage(species_name_);
-  }
+  RestoreStatsFromStatuses();
+  flags_.status = StatusNames::kAsleepRest;
+  hp_stat_->AddHp(hp_stat_->MaxHp());
 }
 
 bool Pokemon::IsAsleep() const {
@@ -570,17 +466,12 @@ bool Pokemon::IsResting() const {
 
 void Pokemon::AdvanceRestCounter() {
   if (flags_.rest_counter++ == 3) {
-    Gui::DisplayWokeUpMessage(species_name_);
     flags_.rest_counter = 1;
     flags_.status = StatusNames::kClear;
   }
 }
 
 void Pokemon::ApplyStatus(const StatusNames &status_name) {
-  if (flags_.status != StatusNames::kClear || SubstituteIsActive()) {
-    return;
-  }
-
   switch (status_name) {
     case StatusNames::kBurned:
       ApplyBurn();
@@ -617,31 +508,12 @@ int Pokemon::DoStatusDamage() {
   return damage_done;
 }
 
-void Pokemon::DoBurnDamage() {
-  Gui::DisplayIsBurnedMessage(species_name_);
-  Gui::DisplayTookBurnDamageMessage(species_name_,
-                                    DoStatusDamage());
-}
-
 void Pokemon::ApplyLeechSeed() {
-  if (IsType(TypeNames::kGrass) || flags_.seeded || SubstituteIsActive() ||
-      flags_.seeded) {
-    Gui::DisplayMoveFailedMessage();
-  } else {
-    flags_.seeded = true;
-    Gui::DisplayLeechSeedStartedMessage(species_name_);
-  }
+  flags_.seeded = true;
 }
 
 bool Pokemon::IsSeeded() const {
   return flags_.seeded;
-}
-
-int Pokemon::DoLeechSeedDamage() {
-  Gui::DisplayIsSeededMessage(species_name_);
-  int sapped = DoStatusDamage();
-  Gui::DisplayHadHpSappedMessage(species_name_, sapped);
-  return sapped;
 }
 
 bool Pokemon::IsFrozen() const {
@@ -656,20 +528,11 @@ bool Pokemon::IsPoisoned() const {
   return flags_.status == StatusNames::kPoisoned;
 }
 
-void Pokemon::DoPoisonDamage() {
-  Gui::DisplayIsPoisonedMessage(species_name_, false);
-  Gui::DisplayTookPoisonDamageMessage(species_name_,
-                                      DoStatusDamage());
-}
-
 bool Pokemon::IsUnderToxic() const {
   return flags_.status == StatusNames::kPoisonedToxic;
 }
 
-void Pokemon::DoToxicDamage() {
-  Gui::DisplayIsPoisonedMessage(species_name_, true);
-  Gui::DisplayTookPoisonDamageMessage(species_name_,
-                                      DoStatusDamage());
+void Pokemon::AdvanceToxicFactor() {
   flags_.toxic_n_factor++;
 }
 
@@ -684,7 +547,6 @@ bool Pokemon::IsRecharging() const {
 void Pokemon::UseLockInMove() {
   if (!flags_.num_turns_locked_in) {
     flags_.num_turns_locked_in = 1;
-    Gui::DisplayIsLockedInMessage(species_name_);
   }
 
   std::random_device device;
@@ -693,8 +555,7 @@ void Pokemon::UseLockInMove() {
 
   if (flags_.num_turns_locked_in == distribution(generator) ||
       flags_.num_turns_locked_in == 3) {
-    Gui::DisplayLockInEndedMessage(species_name_);
-    Confuse(true);
+    Confuse();
     flags_.num_turns_locked_in = 0;
   } else {
     flags_.num_turns_locked_in++;
@@ -706,10 +567,7 @@ bool Pokemon::IsUsingLockInMove() const {
 }
 
 void Pokemon::UseRage() {
-  if (!flags_.raging) {
-    flags_.raging = true;
-    Gui::DisplayIsRagingMessage(species_name_);
-  }
+  flags_.raging = true;
 }
 
 bool Pokemon::IsRaging() const {
@@ -719,10 +577,8 @@ bool Pokemon::IsRaging() const {
 void Pokemon::Trap(const bool &user, const int &random_threshold) {
   if (!flags_.num_turns_trapped) {
     if (user) {
-      Gui::DisplayUsedTrapMoveMessage(species_name_);
       flags_.used_trap_move = true;
     } else {
-      Gui::DisplayIsTrappedMessage(species_name_);
       flags_.trapped = true;
     }
 
@@ -731,7 +587,6 @@ void Pokemon::Trap(const bool &user, const int &random_threshold) {
 
   if (flags_.num_turns_trapped == random_threshold ||
       flags_.num_turns_trapped == 5) {
-    Gui::DisplayTrapEndedMessage(species_name_);
     flags_.trapped = false;
     flags_.used_trap_move = false;
     flags_.num_turns_trapped = 0;
@@ -763,7 +618,6 @@ void Pokemon::RestoreStateFromTransform() {
 }
 
 void Pokemon::Transform(const std::shared_ptr<Pokemon> &target) {
-  Gui::DisplayTransformMessage(species_name_, target->SpeciesName());
   flags_.before_transform_state = BeforeTransformState
       (normal_stats_container_, exclusive_in_game_stats_container_,
        type_container_, moves_container_, species_name_);
@@ -777,16 +631,10 @@ void Pokemon::Transform(const std::shared_ptr<Pokemon> &target) {
 
 void Pokemon::UseBide() {
   flags_.bide.Activate();
-  Gui::DisplayIsBidingMessage(species_name_);
 }
 
 bool Pokemon::BideWillEnd() {
-  if (flags_.bide.IsActive() && flags_.bide.AdvanceOneTurn()) {
-    Gui::DisplayBideEndedMessage(species_name_);
-    return true;
-  }
-
-  return false;
+  return flags_.bide.IsActive() && flags_.bide.AdvanceOneTurn();
 }
 
 bool Pokemon::BideIsActive() const {
@@ -817,6 +665,19 @@ bool Pokemon::MustUseStruggle() const {
   }
 
   return true;
+}
+
+bool Pokemon::CanHaveMoveDisabled() const {
+  int num_valid_moves = 0;
+
+  for (int i = 0; i < moves_container_.Size(); i++) {
+    if (!moves_container_[i]->IsDisabled() &&
+        moves_container_[i]->CurrentPp()) {
+      num_valid_moves++;
+    }
+  }
+
+  return num_valid_moves > 1;
 }
 
 void Pokemon::ResetFaintFlags() {

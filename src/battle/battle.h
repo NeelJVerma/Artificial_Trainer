@@ -21,6 +21,11 @@ class Battle {
   void StartBattle();
   void HandleTurn();
   void PlayerPicksMove(Team &team, const bool &team_one);
+  void ReplaceMovesWithStruggleIfNeeded(
+      const std::shared_ptr<Pokemon> &active_pokemon_one,
+      const std::shared_ptr<Pokemon> &active_pokemon_two);
+  bool OneMovesFirst(const std::shared_ptr<Pokemon> &active_pokemon_one,
+                     const std::shared_ptr<Pokemon> &active_pokemon_two) const;
   bool HandleMove(Team &attacker, Team &defender);
   void PlayerPicksForcedSwitch(Team &team);
   void HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,

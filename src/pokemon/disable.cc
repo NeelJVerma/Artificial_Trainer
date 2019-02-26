@@ -4,7 +4,6 @@
 
 #include <random>
 #include "disable.h"
-#include "../clientelements/gui.h"
 
 namespace artificialtrainer {
 Disable::Disable() : num_turns_disabled_(0) {
@@ -28,7 +27,6 @@ void Disable::AdvanceOneTurn() {
   }
 
   if (num_turns_disabled_ == kMaxTurns || WillReEnable()) {
-    Gui::DisplayDisableEndedMessage();
     num_turns_disabled_ = 0;
   } else {
     num_turns_disabled_++;

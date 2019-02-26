@@ -259,8 +259,9 @@ void Gui::DisplayHpAbsorbedMessage(const SpeciesNames &species_name,
             << " absorbed " << absorbed << " hp" << std::endl;
 }
 
-void Gui::DisplayConfusionEndedMessage() {
-  std::cout << "The confusion ended" << std::endl;
+void Gui::DisplayConfusionEndedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << "\'s confusion ended" << std::endl;
 }
 
 void Gui::DisplayConfusionStartedMessage(const SpeciesNames &species_name) {
@@ -268,8 +269,9 @@ void Gui::DisplayConfusionStartedMessage(const SpeciesNames &species_name) {
             << " became confused" << std::endl;
 }
 
-void Gui::DisplayDisableEndedMessage() {
-  std::cout << "The disable ended" << std::endl;
+void Gui::DisplayDisableEndedMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << "\'s disable ended" << std::endl;
 }
 
 void Gui::DisplayMoveDisabledMessage(const MoveNames &move_name) {
@@ -301,12 +303,12 @@ void Gui::DisplayIsUnderMistMessage(const SpeciesNames &species_name) {
             << " is under mist. Its stats won't go lower" << std::endl;
 }
 
-void Gui::DisplayIsBehindSubstituteMessage(const SpeciesNames &species_name) {
+void Gui::DisplaySubstituteStartedMessage(const SpeciesNames &species_name) {
   std::cout << StringConverter::SpeciesToString(species_name)
             << " is now behind a substitute" << std::endl;
 }
 
-void Gui::DisplaySubstituteTooKDamageMessage(const int &damage_done) {
+void Gui::DisplaySubstituteTookDamageMessage(const int &damage_done) {
   std::cout << "The substitute took " << damage_done << " damage" << std::endl;
 }
 
@@ -315,9 +317,9 @@ void Gui::DisplaySubstituteFadedMessage(const SpeciesNames &species_name) {
             << "\'s substitute faded" << std::endl;
 }
 
-void Gui::DisplayIsBehindSubstituteMessage() {
-  std::cout << "Opponent can't change stats, confuse, or status "
-               "pokemon behind a substitute" << std::endl;
+void Gui::DisplayIsBehindSubstituteMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is behind a substitute. The move failed" << std::endl;
 }
 
 void Gui::DisplayBurnStartedMessage(const SpeciesNames &species_name) {
@@ -458,13 +460,12 @@ void Gui::DisplayRageEndedMessage() {
 
 void Gui::DisplayIsTrappedMessage(const SpeciesNames &species_name) {
   std::cout << StringConverter::SpeciesToString(species_name)
-            << " is now partially trapped. It can't make attacks of its own"
-            << std::endl;
+            << " is now trapped. It can't make attacks of its own" << std::endl;
 }
 
 void Gui::DisplayUsedTrapMoveMessage(const SpeciesNames &species_name) {
   std::cout << StringConverter::SpeciesToString(species_name)
-            << " used a partial trap move. It must use this move until this"
+            << " used a trap move. It must use this move until this"
             << " wears off" << std::endl;
 }
 
