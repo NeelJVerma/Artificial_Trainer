@@ -116,6 +116,9 @@ class Gui {
   static void DisplayCantPassMessage(const SpeciesNames &species_name);
   static void DisplayMustFinishRagingMessage(const SpeciesNames &species_name);
   static void DisplayMustFinishTrapMessage(const SpeciesNames &species_name);
+  static void DisplayStatChangeMessage(const SpeciesNames &species_name,
+                                       const StatNames &stat_name,
+                                       const int &num_stages);
 };
 
 } // namespace artificialtrainer

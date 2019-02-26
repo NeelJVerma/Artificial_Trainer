@@ -4,7 +4,6 @@
 
 #include <random>
 #include "confusion.h"
-#include "../clientelements/gui.h"
 
 namespace artificialtrainer {
 Confusion::Confusion() : num_turns_confused_(0) {

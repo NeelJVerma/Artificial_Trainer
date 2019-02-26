@@ -4,7 +4,6 @@
 
 #include <random>
 #include "bide.h"
-#include "../clientelements/gui.h"
 
 namespace artificialtrainer {
 Bide::Bide() : num_turns_active_(0), damage_added_(0) {

@@ -532,4 +532,13 @@ void Gui::DisplayMustFinishTrapMessage(const SpeciesNames &species_name) {
             << " is using a trap move. It must complete its move" << std::endl;
 }
 
+void Gui::DisplayStatChangeMessage(const SpeciesNames &species_name,
+                                   const StatNames &stat_name,
+                                   const int &num_stages) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " had its " << StringConverter::StatToString(stat_name)
+            << (num_stages < 0 ? "lowered" : "raised") << " by "
+            << abs(num_stages) << " stages" << std::endl;
+}
+
 } //namespace artificialtrainer

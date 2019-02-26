@@ -286,6 +286,8 @@ void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
   } else {
     if (defender->IsRaging()) {
       defender->ChangeStat(StatNames::kAttack, 1);
+      Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                    StatNames::kAttack, 1);
     }
 
     defender->HpStat()->SubtractHp(damage_done);
@@ -313,6 +315,8 @@ void DoDirectDamage(const std::shared_ptr<Pokemon> &defender,
   } else {
     if (defender->IsRaging()) {
       defender->ChangeStat(StatNames::kAttack, 1);
+      Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                    StatNames::kAttack, 1);
     }
 
     defender->HpStat()->SubtractHp(damage_done);
@@ -401,15 +405,21 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       if (VariableEffectActivates(move_name) &&
           !defender->SubstituteIsActive() && !defender->IsUnderMist()) {
         defender->ChangeStat(StatNames::kSpecial, -1);
+        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                      StatNames::kSpecial, -1);
       }
 
       break;
     case MoveNames::kBarrier:
     case MoveNames::kAcidArmor:
       attacker->ChangeStat(StatNames::kDefense, 2);
+      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                    StatNames::kDefense, 2);
       break;
     case MoveNames::kAgility:
       attacker->ChangeStat(StatNames::kSpeed, 2);
+      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                    StatNames::kSpeed, 2);
       break;
     case MoveNames::kBite:
     case MoveNames::kBoneClub:
@@ -424,12 +434,16 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
       break;
     case MoveNames::kAmnesia:
-      attacker->ChangeStat(StatNames::kSpeed, 2);
+      attacker->ChangeStat(StatNames::kSpecial, 2);
+      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                    StatNames::kSpecial, 2);
       break;
     case MoveNames::kAuroraBeam:
       if (VariableEffectActivates(move_name) &&
           !defender->SubstituteIsActive() && !defender->IsUnderMist()) {
         defender->ChangeStat(StatNames::kAttack, -1);
+        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                      StatNames::kAttack, -1);
       }
 
       break;
@@ -487,6 +501,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       if (VariableEffectActivates(move_name) &&
           !defender->SubstituteIsActive() && !defender->IsUnderMist()) {
         defender->ChangeStat(StatNames::kSpeed, -1);
+        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                      StatNames::kSpeed, -1);
       }
 
       break;
@@ -518,6 +534,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kHarden:
     case MoveNames::kWithdraw:
       attacker->ChangeStat(StatNames::kDefense, 1);
+      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                    StatNames::kDefense, 1);
       break;
     case MoveNames::kDig:
     case MoveNames::kFly:
@@ -542,6 +560,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kDoubleTeam:
     case MoveNames::kMinimize:
       attacker->ChangeStat(StatNames::kEvasion, -1);
+      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                    StatNames::kEvasion, 1);
       break;
     case MoveNames::kDoubleEdge:
     case MoveNames::kTakeDown:
@@ -595,6 +615,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
       } else {
         defender->ChangeStat(StatNames::kAccuracy, -1);
+        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                      StatNames::kAccuracy, -1);
       }
 
       break;
@@ -640,11 +662,15 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
       } else {
         defender->ChangeStat(StatNames::kAttack, -1);
+        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                      StatNames::kAttack, -1);
       }
 
       break;
     case MoveNames::kGrowth:
       attacker->ChangeStat(StatNames::kSpecial, 1);
+      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                    StatNames::kSpecial, 1);
       break;
     case MoveNames::kHaze:
       HazeField(attacker, defender);
@@ -699,6 +725,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
       } else {
         defender->ChangeStat(StatNames::kDefense, -1);
+        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                      StatNames::kDefense, -1);
       }
 
       break;
@@ -713,6 +741,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kMeditate:
     case MoveNames::kSharpen:
       attacker->ChangeStat(StatNames::kAttack, 1);
+      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                    StatNames::kAttack, 1);
       break;
     case MoveNames::kMimic:
       MimicWillSucceed(attacker, defender) ?
@@ -833,6 +863,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
       } else {
         defender->ChangeStat(StatNames::kDefense, -2);
+        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                      StatNames::kDefense, -2);
       }
 
       break;
@@ -846,6 +878,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
       } else {
         defender->ChangeStat(StatNames::kSpeed, -1);
+        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                      StatNames::kSpeed, -1);
       }
 
       break;
@@ -864,6 +898,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
     case MoveNames::kSwordsDance:
       attacker->ChangeStat(StatNames::kAttack, 2);
+      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                    StatNames::kAttack, 2);
       break;
     case MoveNames::kToxic:
       if (defender->SubstituteIsActive() ||
