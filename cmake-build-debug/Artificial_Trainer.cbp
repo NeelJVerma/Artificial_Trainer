@@ -204,6 +204,12 @@
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/pokemon/substitute.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/random/randomgenerator.cc">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/random/randomgenerator.h">
+			<Option target="Artificial_Trainer"/>
+		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/stat/ev.cc">
 			<Option target="Artificial_Trainer"/>
 		</Unit>

@@ -2,7 +2,6 @@
 // Created by neel on 1/25/19.
 //
 
-#include <random>
 #include <ctime>
 #include "battle.h"
 #include "../clientelements/gui.h"
@@ -16,6 +15,7 @@
 #include "../stringconverter/stringconverter.h"
 #include "../move/priority.h"
 #include "../move/usemove.h"
+#include "../random/randomgenerator.h"
 
 namespace artificialtrainer {
 namespace {
@@ -344,11 +344,8 @@ bool Battle::OneMovesFirst(
       one_moves_first = true;
     } else if (normal_active_stats_one[StatNames::kSpeed]->InGameStat() ==
         normal_active_stats_two[StatNames::kSpeed]->InGameStat()) {
-      std::random_device device;
-      std::mt19937 generator(device());
-      std::uniform_int_distribution<> distribution(0, 1);
 
-      if (distribution(generator) & 1) {
+      if (RandomIntDistribution(0, 1) & 1) {
         one_moves_first = true;
       }
     }

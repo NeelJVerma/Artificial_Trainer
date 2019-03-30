@@ -2,12 +2,11 @@
 // Created by neel on 1/23/19.
 //
 
-#include <iostream>
-#include <random>
 #include <cassert>
 #include "pokemon.h"
 #include "../type/type.h"
 #include "../move/pp.h"
+#include "../random/randomgenerator.h"
 
 namespace artificialtrainer {
 Pokemon::Pokemon(const SpeciesNames &species_name,
@@ -166,8 +165,8 @@ void Pokemon::ChangeStat(const StatNames &stat_name,
                          const int &num_stages) {
   num_stages < 0 ? LowerStat(stat_name, num_stages,
                              (flags_.status == StatusNames::kBurned ||
-                                 flags_.status == StatusNames::kParalyzed)) :
-  RaiseStat(stat_name, num_stages);
+                                 flags_.status == StatusNames::kParalyzed))
+                 : RaiseStat(stat_name, num_stages);
 }
 
 void Pokemon::UseFocusEnergy() {
@@ -179,9 +178,7 @@ bool Pokemon::UsedFocusEnergy() const {
 }
 
 void Pokemon::Flinch() {
-  if (!SubstituteIsActive()) {
-    flags_.flinched = true;
-  }
+  flags_.flinched = true;
 }
 
 bool Pokemon::IsFlinched() const {
@@ -224,21 +221,14 @@ bool Pokemon::IsChargingUp() const {
 }
 
 void Pokemon::UseConversion() {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(
-      0, moves_container_.EndOfNormalMovesIndex() - 1);
   TypeNames random_type = Type(
-      moves_container_[distribution(generator)]->MoveName());
+      moves_container_[RandomIntDistribution(
+          0, moves_container_.EndOfNormalMovesIndex() - 1)]->MoveName());
   type_container_.ResetTypeFromConversion(random_type);
 }
 
 bool Pokemon::HandleConfusion() {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(1, 100);
-
-  if (distribution(generator) <= 50) {
+  if (RandomIntDistribution(1, 100) <= 50) {
     if (flags_.vanished) {
       flags_.vanished = false;
     }
@@ -284,14 +274,11 @@ void Pokemon::AutoFaint() {
 }
 
 void Pokemon::UseMetronome() {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(1, static_cast<int>(
-      MoveNames::kPass) - 1);
   MoveNames random_move;
 
   while (true) {
-    random_move = static_cast<MoveNames>(distribution(generator));
+    random_move = static_cast<MoveNames>(RandomIntDistribution(
+        1, static_cast<int>(MoveNames::kPass) - 1));
 
     if (!moves_container_.SeenMove(random_move) &&
         random_move != MoveNames::kStruggle &&
@@ -408,10 +395,7 @@ bool Pokemon::IsParalyzed() const {
 }
 
 bool Pokemon::IsFullyParalyzed() const {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(1, 100);
-  return distribution(generator) <= 25;
+  return RandomIntDistribution(1, 100) <= 25;
 }
 
 void Pokemon::ApplyPoison() {
@@ -428,11 +412,7 @@ void Pokemon::ApplySleep() {
 }
 
 void Pokemon::AdvanceRegularSleepCounter() {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(1, 7);
-
-  if (flags_.turns_asleep == distribution(generator) ||
+  if (flags_.turns_asleep == RandomIntDistribution(1, 7) ||
       flags_.turns_asleep == 7) {
     flags_.status = StatusNames::kClear;
   }
@@ -549,11 +529,7 @@ void Pokemon::UseLockInMove() {
     flags_.num_turns_locked_in = 1;
   }
 
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(2, 3);
-
-  if (flags_.num_turns_locked_in == distribution(generator) ||
+  if (flags_.num_turns_locked_in == RandomIntDistribution(2, 3) ||
       flags_.num_turns_locked_in == 3) {
     Confuse();
     flags_.num_turns_locked_in = 0;

@@ -30,6 +30,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Artificial_Trainer.dir/src/pokemon/substitute.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/pokemon/beforetransformstate.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/random/randomgenerator.cc.o"
   "Artificial_Trainer.pdb"
   "Artificial_Trainer"
 )

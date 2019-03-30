@@ -112,14 +112,11 @@ class Pokemon {
   void ApplyStatus(const StatusNames &status_name);
   void ApplyLeechSeed();
   bool IsSeeded() const;
-  int DoLeechSeedDamage();
-  void DoBurnDamage();
   bool IsFrozen() const;
   bool HasStatus() const;
   bool IsParalyzed() const;
   bool IsFullyParalyzed() const;
   bool IsPoisoned() const;
-  void DoPoisonDamage();
   bool IsUnderToxic() const;
   void AdvanceToxicFactor();
   bool IsAsleep() const;

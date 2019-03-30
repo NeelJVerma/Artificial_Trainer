@@ -163,6 +163,7 @@ CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/pokemon/pokemon.
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/pokemon/speciesnames.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/pokemon/statusnames.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/pokemon/substitute.h
+CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/random/randomgenerator.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/ev.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/exclusiveingamestat.h
 CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o: ../src/stat/exclusiveingamestatscontainer.h
@@ -195,55 +196,11 @@ CMakeFiles/Artificial_Trainer.dir/src/pokemon/beforetransformstate.cc.o: ../src/
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/beforetransformstate.cc.o: ../src/type/typecontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/beforetransformstate.cc.o: ../src/type/typenames.h
 
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/clientelements/gui.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/move/move.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/move/movenames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/move/movescontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/pokemon/beforetransformstate.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/pokemon/bide.cc
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/pokemon/bide.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/pokemon/confusion.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/pokemon/disable.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/pokemon/pokemon.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/pokemon/speciesnames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/pokemon/statusnames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/pokemon/substitute.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/stat/ev.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/stat/exclusiveingamestat.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/stat/exclusiveingamestatscontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/stat/hp.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/stat/iv.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/stat/normalstat.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/stat/normalstatscontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/stat/statnames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/team/team.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/type/typecontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/type/typenames.h
 
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/clientelements/gui.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/move/move.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/move/movenames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/move/movescontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/beforetransformstate.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/bide.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/confusion.cc
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/confusion.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/disable.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/pokemon.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/speciesnames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/statusnames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/substitute.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/stat/ev.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/stat/exclusiveingamestat.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/stat/exclusiveingamestatscontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/stat/hp.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/stat/iv.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/stat/normalstat.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/stat/normalstatscontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/stat/statnames.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/team/team.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/type/typecontainer.h
-CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/type/typenames.h
 
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/disable.cc
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/disable.h
@@ -280,6 +237,8 @@ CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/type/typename
 
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/substitute.cc.o: ../src/pokemon/substitute.cc
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/substitute.cc.o: ../src/pokemon/substitute.h
+
+CMakeFiles/Artificial_Trainer.dir/src/random/randomgenerator.cc.o: ../src/random/randomgenerator.cc
 
 CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.o: ../src/stat/ev.cc
 CMakeFiles/Artificial_Trainer.dir/src/stat/ev.cc.o: ../src/stat/ev.h

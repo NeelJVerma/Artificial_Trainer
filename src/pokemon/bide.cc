@@ -6,7 +6,7 @@
 #include "bide.h"
 
 namespace artificialtrainer {
-Bide::Bide() : num_turns_active_(0), damage_added_(0) {
+Bide::Bide() : num_turns_active_(0), damage_added_(0), total_damage_(0) {
 }
 
 bool Bide::IsActive() const {

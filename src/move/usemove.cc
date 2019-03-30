@@ -3,7 +3,6 @@
 //
 
 #include <cmath>
-#include <random>
 #include <cassert>
 #include "usemove.h"
 #include "../stringconverter/stringconverter.h"
@@ -12,6 +11,7 @@
 #include "../clientelements/gui.h"
 #include "../type/effectiveness.h"
 #include "pp.h"
+#include "../random/randomgenerator.h"
 
 namespace artificialtrainer {
 namespace {
@@ -43,31 +43,19 @@ double TypeProduct(const std::shared_ptr<Move> &move_used,
 }
 
 bool MoveCrit(const double &crit_chance) {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_real_distribution<> distribution(0.0, 1.0);
-  return distribution(generator) <= crit_chance;
+  return RandomRealDistribution(0.0, 1.0) <= crit_chance;
 }
 
 bool MoveHit(const double &chance_to_hit) {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_real_distribution<> distribution(1.0, 100.0);
-  return distribution(generator) <= chance_to_hit;
+  return RandomRealDistribution(1.0, 100.0) <= chance_to_hit;
 }
 
 bool VariableEffectActivates(const MoveNames &move_name) {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(1, 100);
-  return distribution(generator) <= VariableEffectChance(move_name);
+  return RandomIntDistribution(1, 100) <= VariableEffectChance(move_name);
 }
 
 int DamageRandomFactor() {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(217, 255);
-  return distribution(generator);
+  return RandomIntDistribution(217, 255);
 }
 
 double StabBonus(const std::shared_ptr<Pokemon> &attacker) {
@@ -241,15 +229,13 @@ bool MimicWillSucceed(const std::shared_ptr<Pokemon> &attacker,
 
 MoveNames MoveFromMimic(const std::shared_ptr<Pokemon> &attacker,
                         const std::shared_ptr<Pokemon> &defender) {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(
-      0, defender->GetMovesContainer().EndOfNormalMovesIndex() - 1);
   MoveNames random_move;
 
   while (true) {
     random_move =
-        defender->GetMovesContainer()[distribution(generator)]->MoveName();
+        defender->GetMovesContainer()[RandomIntDistribution(
+            0, defender->GetMovesContainer().EndOfNormalMovesIndex()
+                - 1)]->MoveName();
 
     if (random_move != MoveNames::kStruggle &&
         random_move != MoveNames::kMimic &&
@@ -347,11 +333,8 @@ void DoDamageEqualToAttackerLevel(const std::shared_ptr<Pokemon> &attacker,
 
 void UsePsywave(const std::shared_ptr<Pokemon> &attacker,
                 const std::shared_ptr<Pokemon> &defender) {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(1, static_cast<int>(
-      1.5 * attacker->Level()));
-  DoDirectDamage(defender, distribution(generator));
+  DoDirectDamage(defender, RandomIntDistribution(1, static_cast<int>(
+      1.5 * attacker->Level())));
 }
 
 void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
@@ -371,11 +354,8 @@ void HazeField(const std::shared_ptr<Pokemon> &attacker,
 }
 
 int DisableIndex(const std::shared_ptr<Pokemon> &target) {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(
+  return RandomIntDistribution(
       0, target->GetMovesContainer().EndOfNormalMovesIndex() - 1);
-  return distribution(generator);
 }
 
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
@@ -428,7 +408,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kLowKick:
     case MoveNames::kRollingKick:
     case MoveNames::kStomp:
-      if (VariableEffectActivates(move_name)) {
+      if (VariableEffectActivates(move_name) &&
+          !defender->SubstituteIsActive()) {
         defender->Flinch();
       }
 
@@ -455,10 +436,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kClamp:
     case MoveNames::kFireSpin:
     case MoveNames::kWrap: {
-      std::random_device device;
-      std::mt19937 generator(device());
-      std::uniform_int_distribution<> distribution(2, 5);
-      int random_threshold = distribution(generator);
+      int random_threshold = RandomIntDistribution(2, 5);
       attacker->Trap(true, random_threshold);
       Gui::DisplayUsedTrapMoveMessage(attacker->SpeciesName());
       defender->Trap(false, random_threshold);
@@ -1050,10 +1028,6 @@ void UseMoveThatAlwaysHitsTwice(const std::shared_ptr<Pokemon> &attacker,
 void UseMoveThatHitsTwoToFiveTimes(const std::shared_ptr<Pokemon> &attacker,
                                    const std::shared_ptr<Pokemon> &defender,
                                    const bool &move_hit) {
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_real_distribution<> distribution(0.0, 100.0);
-
   for (int i = 0; i < 5; i++) {
     switch (i) {
       case 0:
@@ -1061,7 +1035,7 @@ void UseMoveThatHitsTwoToFiveTimes(const std::shared_ptr<Pokemon> &attacker,
         ExecuteMove(attacker, defender, move_hit);
         break;
       case 2:
-        if (distribution(generator) > 37.5) {
+        if (RandomRealDistribution(0.0, 100.0) > 37.5) {
           return;
         }
 
@@ -1069,7 +1043,7 @@ void UseMoveThatHitsTwoToFiveTimes(const std::shared_ptr<Pokemon> &attacker,
         break;
       case 3:
       case 4:
-        if (distribution(generator) > 12.5) {
+        if (RandomRealDistribution(0.0, 100.0) > 12.5) {
           return;
         }
 

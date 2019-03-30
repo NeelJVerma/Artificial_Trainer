@@ -2,8 +2,8 @@
 // Created by neel on 2/16/19.
 //
 
-#include <random>
 #include "disable.h"
+#include "../random/randomgenerator.h"
 
 namespace artificialtrainer {
 Disable::Disable() : num_turns_disabled_(0) {
@@ -38,10 +38,7 @@ bool Disable::WillReEnable() const {
     return false;
   }
 
-  std::random_device device;
-  std::mt19937 generator(device());
-  std::uniform_int_distribution<> distribution(2, kMaxTurns);
-  return distribution(generator) == num_turns_disabled_;
+  return RandomIntDistribution(2, kMaxTurns) == num_turns_disabled_;
 }
 
 } //namespace artificialtrainer
