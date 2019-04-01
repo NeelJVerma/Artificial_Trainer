@@ -16,7 +16,7 @@ class Confusion {
   void AdvanceOneTurn();
 
  private:
-  static const int kMaxTurns = 4;
+  static const int kMaxTurns;
   int num_turns_confused_;
   bool WillBreakOut() const;
 };

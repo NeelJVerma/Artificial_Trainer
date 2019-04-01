@@ -524,7 +524,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       attacker->UseVanishMove();
       break;
     case MoveNames::kDisable: {
-      if (defender->SubstituteIsActive() || !defender->CanHaveMoveDisabled()) {
+      if (defender->SubstituteIsActive() || !defender->CanHaveMoveDisabled() ||
+          defender->HasMoveDisabled()) {
         Gui::DisplayMoveFailedMessage();
       } else {
         int disable_index = DisableIndex(defender);
@@ -1072,16 +1073,21 @@ void UseMove(Team &attacker, Team &defender) {
   }
 
   MoveNames move_used_name = move_used->MoveName();
-  attacking_member->HandleDisable();
 
-  if (!attacking_member->HasMoveDisabled()) {
-    Gui::DisplayDisableEndedMessage(attacking_member->SpeciesName());
+  if (attacking_member->HasMoveDisabled()) {
+    attacking_member->HandleDisable();
+
+    if (!attacking_member->HasMoveDisabled()) {
+      Gui::DisplayDisableEndedMessage(attacking_member->SpeciesName());
+    }
   }
 
-  defending_member->HandleDisable();
+  if (defending_member->HasMoveDisabled()) {
+    defending_member->HandleDisable();
 
-  if (!defending_member->HasMoveDisabled()) {
-    Gui::DisplayDisableEndedMessage(defending_member->SpeciesName());
+    if (!defending_member->HasMoveDisabled()) {
+      Gui::DisplayDisableEndedMessage(defending_member->SpeciesName());
+    }
   }
 
   if (!attacking_member->IsVanished() && !attacking_member->IsChargingUp()) {

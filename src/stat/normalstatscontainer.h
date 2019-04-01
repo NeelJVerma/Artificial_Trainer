@@ -13,7 +13,7 @@ namespace artificialtrainer {
 class NormalStatsContainer {
  public:
   NormalStatsContainer() = default;
-  NormalStatsContainer(
+  explicit NormalStatsContainer(
       const std::shared_ptr<NormalStat> stats[kNumNormalStats]);
   NormalStatsContainer(const NormalStatsContainer &stats_container) = default;
   NormalStatsContainer &operator=(

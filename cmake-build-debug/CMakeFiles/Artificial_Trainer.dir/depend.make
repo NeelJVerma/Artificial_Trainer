@@ -20,6 +20,7 @@ CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/pokemon/pokemon
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/pokemon/speciesnames.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/pokemon/statusnames.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/pokemon/substitute.h
+CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/random/randomgenerator.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stat/ev.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stat/exclusiveingamestat.h
 CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o: ../src/stat/exclusiveingamestatscontainer.h
@@ -201,9 +202,11 @@ CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o: ../src/pokemon/bide.h
 
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/confusion.cc
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/pokemon/confusion.h
+CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o: ../src/random/randomgenerator.h
 
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/disable.cc
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/pokemon/disable.h
+CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o: ../src/random/randomgenerator.h
 
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o: ../src/move/movenames.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/learnset.cc.o: ../src/pokemon/learnset.cc
@@ -223,6 +226,7 @@ CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/pokemon/pokem
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/pokemon/speciesnames.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/pokemon/statusnames.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/pokemon/substitute.h
+CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/random/randomgenerator.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/ev.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/exclusiveingamestat.h
 CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o: ../src/stat/exclusiveingamestatscontainer.h

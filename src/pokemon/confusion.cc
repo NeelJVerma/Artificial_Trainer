@@ -6,6 +6,8 @@
 #include "../random/randomgenerator.h"
 
 namespace artificialtrainer {
+const int Confusion::kMaxTurns = 4;
+
 Confusion::Confusion() : num_turns_confused_(0) {
 }
 
@@ -21,6 +23,14 @@ void Confusion::Activate() {
   num_turns_confused_ = 1;
 }
 
+bool Confusion::WillBreakOut() const {
+  if (num_turns_confused_ == 1) {
+    return false;
+  }
+
+  return RandomIntDistribution(2, kMaxTurns) == num_turns_confused_;
+}
+
 void Confusion::AdvanceOneTurn() {
   if (!IsActive()) {
     return;
@@ -31,14 +41,6 @@ void Confusion::AdvanceOneTurn() {
   } else {
     num_turns_confused_++;
   }
-}
-
-bool Confusion::WillBreakOut() const {
-  if (num_turns_confused_ == 1) {
-    return false;
-  }
-
-  return RandomIntDistribution(2, kMaxTurns) == num_turns_confused_;
 }
 
 } //namespace artificialtrainer

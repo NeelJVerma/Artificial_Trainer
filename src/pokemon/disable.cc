@@ -6,6 +6,8 @@
 #include "../random/randomgenerator.h"
 
 namespace artificialtrainer {
+const int Disable::kMaxTurns = 7;
+
 Disable::Disable() : num_turns_disabled_(0) {
 }
 
@@ -21,6 +23,14 @@ void Disable::Activate() {
   num_turns_disabled_ = 1;
 }
 
+bool Disable::WillReEnable() const {
+  if (num_turns_disabled_ == 1) {
+    return false;
+  }
+
+  return RandomIntDistribution(2, kMaxTurns) == num_turns_disabled_;
+}
+
 void Disable::AdvanceOneTurn() {
   if (!IsActive()) {
     return;
@@ -31,14 +41,6 @@ void Disable::AdvanceOneTurn() {
   } else {
     num_turns_disabled_++;
   }
-}
-
-bool Disable::WillReEnable() const {
-  if (num_turns_disabled_ == 1) {
-    return false;
-  }
-
-  return RandomIntDistribution(2, kMaxTurns) == num_turns_disabled_;
 }
 
 } //namespace artificialtrainer
