@@ -20,7 +20,8 @@ double ChanceToHit(const std::shared_ptr<Pokemon> &attacker,
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
 
   if (BaseAccuracy(move_used->MoveName()) == kNeverMiss) {
-    return (move_used->MoveName() == MoveNames::kSwift ? 255.0 / 256 : 100.0);
+    return (move_used->MoveName() == MoveNames::kSwift ? (255.0 / 256) * 100 :
+            100.0);
   }
 
   ExclusiveInGameStatsContainer attacker_stats =
@@ -360,14 +361,15 @@ int DisableIndex(const std::shared_ptr<Pokemon> &target) {
 
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
-                  const int &damage_done, const bool &move_hit) {
+                  const int &damage_done, const bool &move_hit,
+                  const bool &is_charge_or_vanish) {
   MoveNames move_name = attacker->MoveUsed()->MoveName();
 
   if (!HasSideEffectIfMissed(move_name) && !move_hit) {
     return;
   }
 
-  if (IsDamaging(move_name) && !damage_done) {
+  if (IsDamaging(move_name) && !damage_done && !is_charge_or_vanish) {
     return;
   }
 
@@ -1000,9 +1002,11 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
                  const bool &move_hit) {
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
   int damage_done;
+  bool is_charge_or_vanish = false;
 
   if ((IsVanish(move_used->MoveName()) && !attacker->IsVanished()) ||
       (IsChargeUp(move_used->MoveName()) && !attacker->IsChargingUp())) {
+    is_charge_or_vanish = true;
     damage_done = 0;
   } else {
     damage_done = IsSelfKo(move_used->MoveName()) ?
@@ -1016,7 +1020,7 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
                         damage_done);
   }
 
-  DoSideEffect(attacker, defender, damage_done, move_hit);
+  DoSideEffect(attacker, defender, damage_done, move_hit, is_charge_or_vanish);
 }
 
 void UseMoveThatAlwaysHitsTwice(const std::shared_ptr<Pokemon> &attacker,

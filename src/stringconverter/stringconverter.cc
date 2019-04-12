@@ -663,7 +663,7 @@ std::string StringConverter::MoveToString(const MoveNames &move_name) {
     case MoveNames::kWhirlwind:
       return "Whirlwind";
     case MoveNames::kWingAttack:
-      return "Wind Attack";
+      return "Wing Attack";
     case MoveNames::kWithdraw:
       return "Withdraw";
     case MoveNames::kWrap:

@@ -16,6 +16,8 @@
 #include "../move/priority.h"
 #include "../move/usemove.h"
 #include "../random/randomgenerator.h"
+#include "../ai/pickleadingpokemon.h"
+#include "../ai/pickforcedswitch.h"
 
 namespace artificialtrainer {
 namespace {
@@ -30,60 +32,44 @@ bool MoveInLearnset(const std::vector<MoveNames> &learnset,
   return false;
 }
 
-void SelectTeam(Team &team, const bool &team_one) {
-  Gui::DisplayPokemonChoices();
-  Gui::DisplayPickTeamMessage(team_one);
-
-  // TODO: CHANGE BACK TO ACTUAL TEAM SIZE WHEN DONE TESTING
-  for (int i = 0; i < Team::kMaxTeamSize - 5; i++) {
-    Gui::DisplayPickPokemonMessage(i + 1);
-    int pokemon_selection = InputHandler::GetIntInput(1, kNumSpecies);
-    auto pokemon_species = static_cast<SpeciesNames>(pokemon_selection - 1);
+void PickRandomTeam(Team &team) {
+  for (int i = 0; i < Team::kMaxTeamSize; i++) {
+    auto pokemon_species = static_cast<SpeciesNames>(
+        RandomIntDistribution(1, kNumSpecies) - 1);
 
     if (team.SeenPokemon(pokemon_species)) {
-      Gui::DisplayInvalidChoiceMessage();
       i--;
       continue;
     }
 
-    Gui::DisplayPickLevelMessage();
-    int level_selection = InputHandler::GetIntInput(1, Pokemon::kMaxLevel);
     int normal_stats_count = 0;
     std::shared_ptr<NormalStat> stats[kNumNormalStats];
     std::shared_ptr<Hp> hp;
 
     for (int j = 0; j < kNumNormalStats + 1; j++) {
       auto stat_name = static_cast<StatNames>(j);
-      Gui::DisplayPickEvMessage(stat_name);
-      int ev_selection = InputHandler::GetIntInput(1, Ev::kMaxEv);
-      Gui::DisplayPickIvMessage(stat_name);
-      int iv_selection = InputHandler::GetIntInput(1, Iv::kMaxIv);
 
       if (stat_name == StatNames::kHp) {
-        hp = std::make_shared<Hp>(pokemon_species, level_selection,
-                                  Ev(ev_selection), Iv(iv_selection));
+        hp = std::make_shared<Hp>(pokemon_species, Pokemon::kMaxLevel,
+                                  Ev(Ev::kMaxEv), Iv(Iv::kMaxIv));
       } else {
         stats[normal_stats_count++] = std::make_shared<NormalStat>
             (pokemon_species,
-             level_selection,
+             Pokemon::kMaxLevel,
              stat_name,
-             Ev(ev_selection),
-             Iv(iv_selection));
+             Ev(Ev::kMaxEv),
+             Iv(Iv::kMaxIv));
       }
     }
 
     std::vector<MoveNames> learnset = Learnset(pokemon_species);
-    Gui::DisplayPokemonLearnset(learnset);
     MovesContainer moves_container{};
 
     for (int j = 0; j < learnset.size() && j < MovesContainer::kMaxMoves; j++) {
-      Gui::DisplayPickMoveMessage(j + 1);
-      int move_selection = InputHandler::GetIntInput(1, kNumMoves);
-      auto move_name = static_cast<MoveNames>(move_selection);
+      MoveNames move_name = learnset[RandomIntDistribution(
+          0, learnset.size() - 1)];
 
-      if (!MoveInLearnset(learnset, move_name) ||
-          moves_container.SeenMove(move_name)) {
-        Gui::DisplayInvalidChoiceMessage();
+      if (moves_container.SeenMove(move_name)) {
         j--;
         continue;
       }
@@ -105,7 +91,7 @@ void SelectTeam(Team &team, const bool &team_one) {
                                               NormalStatsContainer(stats),
                                               moves_container,
                                               TypeContainer(pokemon_species),
-                                              level_selection, hp));
+                                              Pokemon::kMaxLevel, hp));
   }
 }
 
@@ -194,18 +180,18 @@ bool IsValidSwitchChoice(const Team &team, const int &index) {
 } //namespace
 
 bool Battle::BattleOver() const {
-  return team_one_.ActiveTeam().empty() || team_two_.ActiveTeam().empty();
+  return human_team_.ActiveTeam().empty() || ai_team_.ActiveTeam().empty();
 }
 
 void Battle::StartBattle() {
-  Gui::DisplayPlayerTeam(team_one_, true);
-  Gui::DisplayPlayerTeam(team_two_, false);
+  Gui::DisplayPlayerTeam(human_team_, true);
+  Gui::DisplayPlayerTeam(ai_team_, false);
   Gui::DisplayPickLeadingPokemonMessage(true);
-  team_one_.SetActiveMember(
+  human_team_.SetActiveMember(
       InputHandler::GetIntInput(1, Team::kMaxTeamSize) - 1);
-  Gui::DisplayPickLeadingPokemonMessage(false);
-  team_two_.SetActiveMember(
-      InputHandler::GetIntInput(1, Team::kMaxTeamSize) - 1);
+  PickLeadingPokemon(ai_team_, human_team_);
+  Gui::DisplayAiPickedLeadingPokemonMessage(
+      ai_team_.ActiveMember()->SpeciesName());
 }
 
 void Battle::PlayerPicksForcedSwitch(Team &team) {
@@ -228,7 +214,7 @@ void Battle::PlayerPicksForcedSwitch(Team &team) {
     Gui::DisplayInvalidChoiceMessage();
   }
 
-  team.SwitchAction(switch_choice - 1);
+  team.SetActiveMember(switch_choice - 1);
 }
 
 void Battle::PlayerPicksMove(Team &team, const bool &team_one) {
@@ -251,24 +237,20 @@ void Battle::PlayerPicksMove(Team &team, const bool &team_one) {
 }
 
 bool Battle::CheckIfActivePokemonIsStillAlive(
-    const std::shared_ptr<Pokemon> &pokemon, Team &team) {
-  if (!pokemon->HpStat()->CurrentHp()) {
-    Gui::DisplayPokemonFaintedMessage(pokemon->SpeciesName());
-    team.FaintActivePokemon();
-    PlayerPicksForcedSwitch(team);
-    return false;
-  }
-
-  return true;
+    const std::shared_ptr<Pokemon> &pokemon, Team &attacking_team,
+    const Team &defending_team, const bool &is_ai) {
+  return pokemon->HpStat()->CurrentHp() != 0;
 }
 
-bool Battle::HandleMove(Team &attacker, Team &defender) {
+bool Battle::HandleMove(Team &attacker, Team &defender, const bool &is_ai) {
   UseMove(attacker, defender);
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
   std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
 
-  if (!CheckIfActivePokemonIsStillAlive(active_attacker, attacker) ||
-      !CheckIfActivePokemonIsStillAlive(active_defender, defender)) {
+  if (!CheckIfActivePokemonIsStillAlive(active_attacker, attacker, defender,
+                                        is_ai) ||
+      !CheckIfActivePokemonIsStillAlive(active_defender, defender, attacker,
+                                        !is_ai)) {
     if (active_attacker->IsRaging() || active_defender->IsRaging()) {
       Gui::DisplayRageEndedMessage();
     }
@@ -283,7 +265,9 @@ bool Battle::HandleMove(Team &attacker, Team &defender) {
 
 void Battle::HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
                                      const std::shared_ptr<Pokemon> &defender,
-                                     Team &team) {
+                                     Team &attacking_team,
+                                     const Team &defending_team,
+                                     const bool &is_ai) {
   if (!attacker->HpStat()->CurrentHp() || !defender->HpStat()->CurrentHp()) {
     return;
   }
@@ -310,8 +294,6 @@ void Battle::HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
     defender->AbsorbHp(sapped);
     Gui::DisplayHpAbsorbedMessage(defender->SpeciesName(), sapped);
   }
-
-  CheckIfActivePokemonIsStillAlive(attacker, team);
 }
 
 void Battle::ReplaceMovesWithStruggleIfNeeded(
@@ -326,10 +308,10 @@ void Battle::ReplaceMovesWithStruggleIfNeeded(
   }
 }
 
-bool Battle::OneMovesFirst(
+bool Battle::HumanMovesFirst(
     const std::shared_ptr<Pokemon> &active_pokemon_one,
     const std::shared_ptr<Pokemon> &active_pokemon_two) const {
-  bool one_moves_first = false;
+  bool human_moves_first = false;
   NormalStatsContainer normal_active_stats_one =
       active_pokemon_one->GetNormalStatsContainer();
   NormalStatsContainer normal_active_stats_two =
@@ -341,58 +323,75 @@ bool Battle::OneMovesFirst(
       Priority(move_two->MoveName())) {
     if (normal_active_stats_one[StatNames::kSpeed]->InGameStat() >
         normal_active_stats_two[StatNames::kSpeed]->InGameStat()) {
-      one_moves_first = true;
+      human_moves_first = true;
     } else if (normal_active_stats_one[StatNames::kSpeed]->InGameStat() ==
         normal_active_stats_two[StatNames::kSpeed]->InGameStat()) {
 
       if (RandomIntDistribution(0, 1) & 1) {
-        one_moves_first = true;
+        human_moves_first = true;
       }
     }
   } else if (Priority(move_one->MoveName()) > Priority(move_two->MoveName())) {
-    one_moves_first = true;
+    human_moves_first = true;
   }
 
-  return one_moves_first;
+  return human_moves_first;
 }
 
 void Battle::HandleTurn() {
-  Gui::DisplayPlayerTeam(team_one_, true);
-  Gui::DisplayPlayerTeam(team_two_, false);
-  std::shared_ptr<Pokemon> active_pokemon_one = team_one_.ActiveMember();
-  Gui::DisplayActivePokemonData(active_pokemon_one, true);
-  std::shared_ptr<Pokemon> active_pokemon_two = team_two_.ActiveMember();
-  Gui::DisplayActivePokemonData(active_pokemon_two, false);
-  PlayerPicksMove(team_one_, true);
-  PlayerPicksMove(team_two_, false);
+  Gui::DisplayPlayerTeam(human_team_, true);
+  Gui::DisplayPlayerTeam(ai_team_, false);
+  std::shared_ptr<Pokemon> active_pokemon_human = human_team_.ActiveMember();
+  Gui::DisplayActivePokemonData(active_pokemon_human, true);
+  std::shared_ptr<Pokemon> active_pokemon_ai = ai_team_.ActiveMember();
+  Gui::DisplayActivePokemonData(active_pokemon_ai, false);
+  PlayerPicksMove(human_team_, true);
+  PlayerPicksMove(ai_team_, false);
 
-  if (OneMovesFirst(active_pokemon_one, active_pokemon_two) &&
-      HandleMove(team_one_, team_two_) && HandleMove(team_two_, team_one_)) {
-    HandleEndOfTurnStatuses(active_pokemon_one,
-                            active_pokemon_two,
-                            team_one_);
-    HandleEndOfTurnStatuses(active_pokemon_two,
-                            active_pokemon_one,
-                            team_two_);
-  } else if (HandleMove(team_two_, team_one_) &&
-      HandleMove(team_one_, team_two_)) {
-    HandleEndOfTurnStatuses(active_pokemon_two,
-                            active_pokemon_one,
-                            team_two_);
-    HandleEndOfTurnStatuses(active_pokemon_one,
-                            active_pokemon_two,
-                            team_one_);
+  if (HumanMovesFirst(active_pokemon_human, active_pokemon_ai) &&
+      HandleMove(human_team_, ai_team_, false) &&
+      HandleMove(ai_team_, human_team_, true)) {
+    HandleEndOfTurnStatuses(active_pokemon_human,
+                            active_pokemon_ai,
+                            human_team_, ai_team_, false);
+    HandleEndOfTurnStatuses(active_pokemon_ai,
+                            active_pokemon_human,
+                            ai_team_, human_team_, true);
+  } else if (HandleMove(ai_team_, human_team_, true) &&
+      HandleMove(human_team_, ai_team_, false)) {
+    HandleEndOfTurnStatuses(active_pokemon_ai,
+                            active_pokemon_human,
+                            ai_team_, human_team_, true);
+    HandleEndOfTurnStatuses(active_pokemon_human,
+                            active_pokemon_ai,
+                            human_team_, ai_team_, false);
   }
 
-  active_pokemon_one->ResetEndOfTurnFlags();
-  active_pokemon_two->ResetEndOfTurnFlags();
-  ReplaceMovesWithStruggleIfNeeded(active_pokemon_one, active_pokemon_two);
+  if (!CheckIfActivePokemonIsStillAlive(active_pokemon_human, human_team_,
+                                   ai_team_, false)) {
+    Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+    human_team_.FaintActivePokemon();
+    PlayerPicksForcedSwitch(human_team_);
+  }
+
+  if (!CheckIfActivePokemonIsStillAlive(active_pokemon_ai, ai_team_,
+                                   human_team_, false)) {
+    Gui::DisplayPokemonFaintedMessage(active_pokemon_ai->SpeciesName());
+    ai_team_.FaintActivePokemon();
+    PlayerPicksForcedSwitch(ai_team_);
+  }
+
+  active_pokemon_human->ResetEndOfTurnFlags();
+  active_pokemon_ai->ResetEndOfTurnFlags();
+  ReplaceMovesWithStruggleIfNeeded(active_pokemon_human, active_pokemon_ai);
 }
 
 void Battle::Play() {
   Gui::DisplayWelcomeMessage();
-  SelectTeam(team_one_, true);
-  SelectTeam(team_two_, false);
+  Gui::DisplayPickingTeamMessage(true);
+  PickRandomTeam(human_team_);
+  Gui::DisplayPickingTeamMessage(false);
+  PickRandomTeam(ai_team_);
   StartBattle();
   int num_turns_elapsed = 0;
 
@@ -402,8 +401,8 @@ void Battle::Play() {
   }
 
   Gui::DisplayBattleOverMessage();
-  Gui::DisplayPlayerTeam(team_one_, true);
-  Gui::DisplayPlayerTeam(team_two_, false);
+  Gui::DisplayPlayerTeam(human_team_, true);
+  Gui::DisplayPlayerTeam(ai_team_, false);
 }
 
 } //namespace artificialtrainer

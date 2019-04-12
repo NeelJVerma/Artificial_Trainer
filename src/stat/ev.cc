@@ -5,6 +5,8 @@
 #include "ev.h"
 
 namespace artificialtrainer {
+const int Ev::kMaxEv = 65535;
+
 Ev::Ev(const int &value) {
   value_ = value;
 }

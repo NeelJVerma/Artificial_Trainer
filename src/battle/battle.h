@@ -15,8 +15,8 @@ class Battle {
 
  private:
   const int kMaxNumTurns = 100;
-  Team team_one_;
-  Team team_two_;
+  Team human_team_;
+  Team ai_team_;
   bool BattleOver() const;
   void StartBattle();
   void HandleTurn();
@@ -24,15 +24,19 @@ class Battle {
   void ReplaceMovesWithStruggleIfNeeded(
       const std::shared_ptr<Pokemon> &active_pokemon_one,
       const std::shared_ptr<Pokemon> &active_pokemon_two);
-  bool OneMovesFirst(const std::shared_ptr<Pokemon> &active_pokemon_one,
-                     const std::shared_ptr<Pokemon> &active_pokemon_two) const;
-  bool HandleMove(Team &attacker, Team &defender);
+  bool HumanMovesFirst(const std::shared_ptr<Pokemon> &active_pokemon_one,
+                       const std::shared_ptr<Pokemon> &active_pokemon_two) const;
+  bool HandleMove(Team &attacker, Team &defender, const bool &is_ai);
   void PlayerPicksForcedSwitch(Team &team);
   void HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
                                const std::shared_ptr<Pokemon> &defender,
-                               Team &team);
+                               Team &attacking_team,
+                               const Team &defending_team,
+                               const bool &is_ai);
   bool CheckIfActivePokemonIsStillAlive(const std::shared_ptr<Pokemon> &pokemon,
-                                        Team &team);
+                                        Team &attacking_team,
+                                        const Team &defending_team,
+                                        const bool &is_ai);
 };
 
 } //namespace artificialtrainer

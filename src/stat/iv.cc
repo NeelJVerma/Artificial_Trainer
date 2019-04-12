@@ -5,6 +5,8 @@
 #include "iv.h"
 
 namespace artificialtrainer {
+const int Iv::kMaxIv = 15;
+
 Iv::Iv(const int &value) {
   value_ = value;
 }

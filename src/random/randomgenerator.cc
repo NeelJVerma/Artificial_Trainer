@@ -6,7 +6,6 @@
 
 namespace artificialtrainer {
 namespace {
-
 std::mt19937& RandomGenerator() {
   static std::random_device device;
   static std::mt19937 generator(device());

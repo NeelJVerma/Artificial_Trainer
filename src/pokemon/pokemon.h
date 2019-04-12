@@ -53,7 +53,7 @@ struct InGameFlags {
 
 class Pokemon {
  public:
-  static const int kMaxLevel = 100;
+  static const int kMaxLevel;
 
   Pokemon(const Pokemon &pokemon) = default;
   Pokemon &operator=(const Pokemon &pokemon) = default;

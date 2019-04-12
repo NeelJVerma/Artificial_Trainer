@@ -4,6 +4,7 @@
 
 #include <stdexcept>
 #include "../clientelements/gui.h"
+#include "../stringconverter/stringconverter.h"
 
 namespace artificialtrainer {
 void Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) {
@@ -63,11 +64,6 @@ int Team::IndexOfActiveMember() const {
   return -1;
 }
 
-void Team::SwitchAction(const int &switch_index) {
-  active_team_[switch_index]->SetIsActive(true);
-  SetActiveMember(switch_index);
-}
-
 void Team::HardSwitch() {
   std::shared_ptr<Pokemon> old_active_pokemon = ActiveMember();
   int switch_index = static_cast<int>(
@@ -75,7 +71,7 @@ void Team::HardSwitch() {
       MoveNames::kSwitch1);
   old_active_pokemon->SetIsActive(false);
   old_active_pokemon->ResetSwitchFlags();
-  SwitchAction(switch_index);
+  active_team_[switch_index]->SetIsActive(true);
 }
 
 } //namespace artificialtrainer

@@ -8,7 +8,7 @@
 namespace artificialtrainer {
 class Ev {
  public:
-  static const int kMaxEv = 65535;
+  static const int kMaxEv;
   Ev(const Ev &ev) = default;
   Ev &operator=(const Ev &ev) = default;
   Ev() = default;

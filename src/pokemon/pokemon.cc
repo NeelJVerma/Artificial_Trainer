@@ -9,6 +9,8 @@
 #include "../random/randomgenerator.h"
 
 namespace artificialtrainer {
+const int Pokemon::kMaxLevel = 100;
+
 Pokemon::Pokemon(const SpeciesNames &species_name,
                  const NormalStatsContainer &stats_container,
                  const MovesContainer &moves_container,
@@ -23,6 +25,9 @@ Pokemon::Pokemon(const SpeciesNames &species_name,
       move_used_(nullptr),
       level_(level),
       is_active_(false) {
+  flags_.before_transform_state = BeforeTransformState
+      (normal_stats_container_, exclusive_in_game_stats_container_,
+          type_container_, moves_container_, species_name_);
 }
 
 Pokemon::Pokemon() : species_name_(SpeciesNames::kBulbasaur),
@@ -677,7 +682,10 @@ void Pokemon::ResetFlagsFromHaze() {
 
 void Pokemon::ResetEndOfTurnFlags() {
   flags_.flinched = false;
-  move_used_->SetDamageDone(0);
+
+  if (move_used_) {
+    move_used_->SetDamageDone(0);
+  }
 }
 
 void Pokemon::ResetSwitchFlags() {

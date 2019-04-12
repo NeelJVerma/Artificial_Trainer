@@ -123,6 +123,141 @@ Artificial_Trainer/fast:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/build
 .PHONY : Artificial_Trainer/fast
 
+src/ai/estimatedminimax.o: src/ai/estimatedminimax.cc.o
+
+.PHONY : src/ai/estimatedminimax.o
+
+# target to build an object file
+src/ai/estimatedminimax.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/estimatedminimax.cc.o
+.PHONY : src/ai/estimatedminimax.cc.o
+
+src/ai/estimatedminimax.i: src/ai/estimatedminimax.cc.i
+
+.PHONY : src/ai/estimatedminimax.i
+
+# target to preprocess a source file
+src/ai/estimatedminimax.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/estimatedminimax.cc.i
+.PHONY : src/ai/estimatedminimax.cc.i
+
+src/ai/estimatedminimax.s: src/ai/estimatedminimax.cc.s
+
+.PHONY : src/ai/estimatedminimax.s
+
+# target to generate assembly for a file
+src/ai/estimatedminimax.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/estimatedminimax.cc.s
+.PHONY : src/ai/estimatedminimax.cc.s
+
+src/ai/movenode.o: src/ai/movenode.cc.o
+
+.PHONY : src/ai/movenode.o
+
+# target to build an object file
+src/ai/movenode.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/movenode.cc.o
+.PHONY : src/ai/movenode.cc.o
+
+src/ai/movenode.i: src/ai/movenode.cc.i
+
+.PHONY : src/ai/movenode.i
+
+# target to preprocess a source file
+src/ai/movenode.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/movenode.cc.i
+.PHONY : src/ai/movenode.cc.i
+
+src/ai/movenode.s: src/ai/movenode.cc.s
+
+.PHONY : src/ai/movenode.s
+
+# target to generate assembly for a file
+src/ai/movenode.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/movenode.cc.s
+.PHONY : src/ai/movenode.cc.s
+
+src/ai/pickforcedswitch.o: src/ai/pickforcedswitch.cc.o
+
+.PHONY : src/ai/pickforcedswitch.o
+
+# target to build an object file
+src/ai/pickforcedswitch.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/pickforcedswitch.cc.o
+.PHONY : src/ai/pickforcedswitch.cc.o
+
+src/ai/pickforcedswitch.i: src/ai/pickforcedswitch.cc.i
+
+.PHONY : src/ai/pickforcedswitch.i
+
+# target to preprocess a source file
+src/ai/pickforcedswitch.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/pickforcedswitch.cc.i
+.PHONY : src/ai/pickforcedswitch.cc.i
+
+src/ai/pickforcedswitch.s: src/ai/pickforcedswitch.cc.s
+
+.PHONY : src/ai/pickforcedswitch.s
+
+# target to generate assembly for a file
+src/ai/pickforcedswitch.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/pickforcedswitch.cc.s
+.PHONY : src/ai/pickforcedswitch.cc.s
+
+src/ai/pickleadingpokemon.o: src/ai/pickleadingpokemon.cc.o
+
+.PHONY : src/ai/pickleadingpokemon.o
+
+# target to build an object file
+src/ai/pickleadingpokemon.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/pickleadingpokemon.cc.o
+.PHONY : src/ai/pickleadingpokemon.cc.o
+
+src/ai/pickleadingpokemon.i: src/ai/pickleadingpokemon.cc.i
+
+.PHONY : src/ai/pickleadingpokemon.i
+
+# target to preprocess a source file
+src/ai/pickleadingpokemon.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/pickleadingpokemon.cc.i
+.PHONY : src/ai/pickleadingpokemon.cc.i
+
+src/ai/pickleadingpokemon.s: src/ai/pickleadingpokemon.cc.s
+
+.PHONY : src/ai/pickleadingpokemon.s
+
+# target to generate assembly for a file
+src/ai/pickleadingpokemon.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/pickleadingpokemon.cc.s
+.PHONY : src/ai/pickleadingpokemon.cc.s
+
+src/ai/typesum.o: src/ai/typesum.cc.o
+
+.PHONY : src/ai/typesum.o
+
+# target to build an object file
+src/ai/typesum.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/typesum.cc.o
+.PHONY : src/ai/typesum.cc.o
+
+src/ai/typesum.i: src/ai/typesum.cc.i
+
+.PHONY : src/ai/typesum.i
+
+# target to preprocess a source file
+src/ai/typesum.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/typesum.cc.i
+.PHONY : src/ai/typesum.cc.i
+
+src/ai/typesum.s: src/ai/typesum.cc.s
+
+.PHONY : src/ai/typesum.s
+
+# target to generate assembly for a file
+src/ai/typesum.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ai/typesum.cc.s
+.PHONY : src/ai/typesum.cc.s
+
 src/battle/battle.o: src/battle/battle.cc.o
 
 .PHONY : src/battle/battle.o
@@ -996,6 +1131,21 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Artificial_Trainer"
 	@echo "... edit_cache"
+	@echo "... src/ai/estimatedminimax.o"
+	@echo "... src/ai/estimatedminimax.i"
+	@echo "... src/ai/estimatedminimax.s"
+	@echo "... src/ai/movenode.o"
+	@echo "... src/ai/movenode.i"
+	@echo "... src/ai/movenode.s"
+	@echo "... src/ai/pickforcedswitch.o"
+	@echo "... src/ai/pickforcedswitch.i"
+	@echo "... src/ai/pickforcedswitch.s"
+	@echo "... src/ai/pickleadingpokemon.o"
+	@echo "... src/ai/pickleadingpokemon.i"
+	@echo "... src/ai/pickleadingpokemon.s"
+	@echo "... src/ai/typesum.o"
+	@echo "... src/ai/typesum.i"
+	@echo "... src/ai/typesum.s"
 	@echo "... src/battle/battle.o"
 	@echo "... src/battle/battle.i"
 	@echo "... src/battle/battle.s"

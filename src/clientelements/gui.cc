@@ -13,55 +13,20 @@ void Gui::DisplayWelcomeMessage() {
             << std::endl;
 }
 
-void Gui::DisplayPickTeamMessage(const bool &player_one) {
-  std::cout << "Player " << (player_one ? "one" : "two") << ", select your "
-                                                            "team" << std::endl;
-}
-
-void Gui::DisplayPokemonChoices() {
-  std::cout << "Team choices:" << std::endl;
-
-  for (int i = 0; i < kNumSpecies; ++i) {
-    std::cout << std::to_string(i + 1) << ". "
-              << StringConverter::SpeciesToString(static_cast<SpeciesNames>(i))
-              << std::endl;
-  }
-}
-
-void Gui::DisplayPickPokemonMessage(const int &num) {
-  std::cout << "Pick Pokemon number " << num << '.' << std::endl;
-}
-
 void Gui::DisplayInvalidChoiceMessage() {
   std::cout << "Invalid choice. Select again." << std::endl;
 }
 
-void Gui::DisplayPickEvMessage(const StatNames &stat_name) {
-  std::cout << "Pick the " << StringConverter::StatToString(stat_name) << " ev."
+void Gui::DisplayPickingTeamMessage(const bool &player_one) {
+  std::cout << "Picking team for player " << (player_one ? "one" : "two")
             << std::endl;
 }
 
-void Gui::DisplayPickIvMessage(const StatNames &stat_name) {
-  std::cout << "Pick the " << StringConverter::StatToString(stat_name) << " iv."
-            << std::endl;
-}
-
-void Gui::DisplayPickLevelMessage() {
-  std::cout << "Pick this Pokemon's level." << std::endl;
-}
-
-void Gui::DisplayPokemonLearnset(const std::vector<MoveNames> &moveset) {
-  std::cout << "Learned moves:" << std::endl;
-
-  for (MoveNames move_name : moveset) {
-    std::cout << static_cast<int>(move_name) << ". "
-              << StringConverter::MoveToString(move_name) << std::endl;
-  }
-}
-
-void Gui::DisplayPickMoveMessage(const int &move_number) {
-  std::cout << "Pick move number " << move_number << " for this Pokemon"
-            << std::endl;
+void Gui::DisplayAiPickedLeadingPokemonMessage(
+    const SpeciesNames &species_name) {
+  std::cout << "The AI picked "
+            << StringConverter::SpeciesToString(species_name)
+            << " as its leading Pokemon" << std::endl;
 }
 
 void Gui::DisplayPlayerTeam(const Team &team, const bool &player_one) {
@@ -537,7 +502,7 @@ void Gui::DisplayStatChangeMessage(const SpeciesNames &species_name,
                                    const int &num_stages) {
   std::cout << StringConverter::SpeciesToString(species_name)
             << " had its " << StringConverter::StatToString(stat_name)
-            << (num_stages < 0 ? "lowered" : "raised") << " by "
+            << (num_stages < 0 ? " lowered" : " raised") << " by "
             << abs(num_stages) << " stages" << std::endl;
 }
 

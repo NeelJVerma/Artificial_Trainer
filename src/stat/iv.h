@@ -8,7 +8,7 @@
 namespace artificialtrainer {
 class Iv {
  public:
-  static const int kMaxIv = 15;
+  static const int kMaxIv;
   Iv(const Iv &iv) = default;
   Iv &operator=(const Iv &iv) = default;
   Iv() = default;

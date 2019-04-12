@@ -15,19 +15,13 @@ namespace artificialtrainer {
 class Gui {
  public:
   static void DisplayWelcomeMessage();
-  static void DisplayPickTeamMessage(const bool &player_one);
-  static void DisplayPokemonChoices();
-  static void DisplayPickPokemonMessage(const int &num);
   static void DisplayInvalidChoiceMessage();
-  static void DisplayPickEvMessage(const StatNames &stat_name);
-  static void DisplayPickIvMessage(const StatNames &stat_name);
-  static void DisplayPickLevelMessage();
-  static void DisplayPokemonLearnset(
-      const std::vector<MoveNames> &moveset);
-  static void DisplayPickMoveMessage(const int &move_number);
+  static void DisplayPickingTeamMessage(const bool &player_one);
   static void DisplayPlayerTeam(const Team &team,
                                 const bool &player_one);
   static void DisplayPickLeadingPokemonMessage(const bool &player_one);
+  static void DisplayAiPickedLeadingPokemonMessage(
+      const SpeciesNames &species_name);
   static void DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
                                        const bool &player_one);
   static void DisplayTurnNumber(const int &turn_number);
