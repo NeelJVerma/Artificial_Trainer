@@ -236,9 +236,7 @@ void Battle::PlayerPicksMove(Team &team, const bool &team_one) {
   pokemon->SetMoveUsed(move_choice - 1);
 }
 
-bool Battle::CheckIfActivePokemonIsStillAlive(
-    const std::shared_ptr<Pokemon> &pokemon, Team &attacking_team,
-    const Team &defending_team, const bool &is_ai) {
+bool Battle::PokemonHasHp(const std::shared_ptr<Pokemon> &pokemon) {
   return pokemon->HpStat()->CurrentHp() != 0;
 }
 
@@ -247,10 +245,7 @@ bool Battle::HandleMove(Team &attacker, Team &defender, const bool &is_ai) {
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
   std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
 
-  if (!CheckIfActivePokemonIsStillAlive(active_attacker, attacker, defender,
-                                        is_ai) ||
-      !CheckIfActivePokemonIsStillAlive(active_defender, defender, attacker,
-                                        !is_ai)) {
+  if (!PokemonHasHp(active_attacker) || !PokemonHasHp(active_defender)) {
     if (active_attacker->IsRaging() || active_defender->IsRaging()) {
       Gui::DisplayRageEndedMessage();
     }
@@ -338,6 +333,38 @@ bool Battle::HumanMovesFirst(
   return human_moves_first;
 }
 
+void Battle::HandleFainting(const bool &human_moves_first,
+                            std::shared_ptr<Pokemon> active_pokemon_human,
+                            std::shared_ptr<Pokemon> active_pokemon_ai) {
+  if (human_moves_first) {
+    if (!PokemonHasHp(active_pokemon_human)) {
+      Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+      human_team_.FaintActivePokemon();
+      PlayerPicksForcedSwitch(human_team_);
+    }
+
+    if (!PokemonHasHp(active_pokemon_ai)) {
+      Gui::DisplayPokemonFaintedMessage(active_pokemon_ai->SpeciesName());
+      ai_team_.FaintActivePokemon();
+      PickForcedSwitch(ai_team_, active_pokemon_human);
+      Gui::DisplayAiForceSwitchMessage(ai_team_.ActiveMember()->SpeciesName());
+    }
+  } else {
+    if (!PokemonHasHp(active_pokemon_ai)) {
+      Gui::DisplayPokemonFaintedMessage(active_pokemon_ai->SpeciesName());
+      ai_team_.FaintActivePokemon();
+      PickForcedSwitch(ai_team_, active_pokemon_human);
+      Gui::DisplayAiForceSwitchMessage(ai_team_.ActiveMember()->SpeciesName());
+    }
+
+    if (!PokemonHasHp(active_pokemon_human)) {
+      Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+      human_team_.FaintActivePokemon();
+      PlayerPicksForcedSwitch(human_team_);
+    }
+  }
+}
+
 void Battle::HandleTurn() {
   Gui::DisplayPlayerTeam(human_team_, true);
   Gui::DisplayPlayerTeam(ai_team_, false);
@@ -347,9 +374,10 @@ void Battle::HandleTurn() {
   Gui::DisplayActivePokemonData(active_pokemon_ai, false);
   PlayerPicksMove(human_team_, true);
   PlayerPicksMove(ai_team_, false);
+  bool human_moves_first = HumanMovesFirst(active_pokemon_human,
+                                           active_pokemon_ai);
 
-  if (HumanMovesFirst(active_pokemon_human, active_pokemon_ai) &&
-      HandleMove(human_team_, ai_team_, false) &&
+  if (human_moves_first && HandleMove(human_team_, ai_team_, false) &&
       HandleMove(ai_team_, human_team_, true)) {
     HandleEndOfTurnStatuses(active_pokemon_human,
                             active_pokemon_ai,
@@ -367,20 +395,7 @@ void Battle::HandleTurn() {
                             human_team_, ai_team_, false);
   }
 
-  if (!CheckIfActivePokemonIsStillAlive(active_pokemon_human, human_team_,
-                                   ai_team_, false)) {
-    Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
-    human_team_.FaintActivePokemon();
-    PlayerPicksForcedSwitch(human_team_);
-  }
-
-  if (!CheckIfActivePokemonIsStillAlive(active_pokemon_ai, ai_team_,
-                                   human_team_, false)) {
-    Gui::DisplayPokemonFaintedMessage(active_pokemon_ai->SpeciesName());
-    ai_team_.FaintActivePokemon();
-    PlayerPicksForcedSwitch(ai_team_);
-  }
-
+  HandleFainting(human_moves_first, active_pokemon_human, active_pokemon_ai);
   active_pokemon_human->ResetEndOfTurnFlags();
   active_pokemon_ai->ResetEndOfTurnFlags();
   ReplaceMovesWithStruggleIfNeeded(active_pokemon_human, active_pokemon_ai);

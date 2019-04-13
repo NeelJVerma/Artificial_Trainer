@@ -33,10 +33,10 @@ class Battle {
                                Team &attacking_team,
                                const Team &defending_team,
                                const bool &is_ai);
-  bool CheckIfActivePokemonIsStillAlive(const std::shared_ptr<Pokemon> &pokemon,
-                                        Team &attacking_team,
-                                        const Team &defending_team,
-                                        const bool &is_ai);
+  bool PokemonHasHp(const std::shared_ptr<Pokemon> &pokemon);
+  void HandleFainting(const bool &human_moves_first,
+                      std::shared_ptr<Pokemon> active_pokemon_human,
+                      std::shared_ptr<Pokemon> active_pokemon_ai);
 };
 
 } //namespace artificialtrainer

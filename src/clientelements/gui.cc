@@ -506,4 +506,9 @@ void Gui::DisplayStatChangeMessage(const SpeciesNames &species_name,
             << abs(num_stages) << " stages" << std::endl;
 }
 
+void Gui::DisplayAiForceSwitchMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " is the ai's switch choice. It is now active" << std::endl;
+}
+
 } //namespace artificialtrainer

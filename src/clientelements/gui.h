@@ -113,6 +113,7 @@ class Gui {
   static void DisplayStatChangeMessage(const SpeciesNames &species_name,
                                        const StatNames &stat_name,
                                        const int &num_stages);
+  static void DisplayAiForceSwitchMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer
