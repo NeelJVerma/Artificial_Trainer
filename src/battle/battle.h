@@ -20,23 +20,17 @@ class Battle {
   bool BattleOver() const;
   void StartBattle();
   void HandleTurn();
+
+  // WILL UPDATE AFTER MINIMAX
   void PlayerPicksMove(Team &team, const bool &team_one);
-  void ReplaceMovesWithStruggleIfNeeded(
-      const std::shared_ptr<Pokemon> &active_pokemon_one,
-      const std::shared_ptr<Pokemon> &active_pokemon_two);
-  bool HumanMovesFirst(const std::shared_ptr<Pokemon> &active_pokemon_one,
-                       const std::shared_ptr<Pokemon> &active_pokemon_two) const;
-  bool HandleMove(Team &attacker, Team &defender, const bool &is_ai);
-  void PlayerPicksForcedSwitch(Team &team);
+  void ReplaceMovesWithStruggleIfNeeded();
+  bool HumanMovesFirst() const;
+  bool HandleMove(Team &attacker, Team &defender);
+  void HumanPicksForcedSwitch();
   void HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
-                               const std::shared_ptr<Pokemon> &defender,
-                               Team &attacking_team,
-                               const Team &defending_team,
-                               const bool &is_ai);
-  bool PokemonHasHp(const std::shared_ptr<Pokemon> &pokemon);
-  void HandleFainting(const bool &human_moves_first,
-                      std::shared_ptr<Pokemon> active_pokemon_human,
-                      std::shared_ptr<Pokemon> active_pokemon_ai);
+                               const std::shared_ptr<Pokemon> &defender);
+  void HandleFainting(const bool &human_moves_first);
+  void HandleBothTeamsMoves(const bool &human_moves_first);
 };
 
 } //namespace artificialtrainer

@@ -145,6 +145,7 @@ class Pokemon {
   void AddDamageToBide();
   bool MustUseStruggle() const;
   bool CanHaveMoveDisabled() const;
+  bool IsFainted() const;
   void ResetFaintFlags();
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();

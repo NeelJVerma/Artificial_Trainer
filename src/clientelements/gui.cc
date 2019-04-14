@@ -398,7 +398,7 @@ void Gui::DisplayChargingUpMessage(const SpeciesNames &species_name) {
 
 void Gui::DisplayMustRechargeMessage(const SpeciesNames &species_name) {
   std::cout << StringConverter::SpeciesToString(species_name)
-            << " is recharging. It must use passe" << std::endl;
+            << " is recharging. It must use pass" << std::endl;
 }
 
 void Gui::DisplayIsLockedInMessage(const SpeciesNames &species_name) {

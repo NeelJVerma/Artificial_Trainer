@@ -588,6 +588,10 @@ std::shared_ptr<Hp> Pokemon::HpStat() const {
   return hp_stat_;
 }
 
+bool Pokemon::IsFainted() const {
+  return !static_cast<bool>(hp_stat_);
+}
+
 void Pokemon::RestoreStateFromTransform() {
   normal_stats_container_ =
       flags_.before_transform_state.GetNormalStatsContainer();

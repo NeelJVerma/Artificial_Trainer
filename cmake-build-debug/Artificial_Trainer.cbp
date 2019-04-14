@@ -84,34 +84,34 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ai/estimatedminimax.cc">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/estimatedminimax.cc">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ai/estimatedminimax.h">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/estimatedminimax.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ai/movenode.cc">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/movenode.cc">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ai/movenode.h">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/movenode.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ai/pickforcedswitch.cc">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/pickforcedswitch.cc">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ai/pickforcedswitch.h">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/pickforcedswitch.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ai/pickleadingpokemon.cc">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/pickleadingpokemon.cc">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ai/pickleadingpokemon.h">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/pickleadingpokemon.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ai/typesum.cc">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/typesum.cc">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
-		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ai/typesum.h">
+		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/typesum.h">
 			<Option target="Artificial_Trainer"/>
 		</Unit>
 		<Unit filename="/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/battle/battle.cc">
