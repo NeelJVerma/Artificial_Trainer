@@ -27,7 +27,29 @@ Pokemon::Pokemon(const SpeciesNames &species_name,
       is_active_(false) {
   flags_.before_transform_state = BeforeTransformState
       (normal_stats_container_, exclusive_in_game_stats_container_,
-          type_container_, moves_container_, species_name_);
+       type_container_, moves_container_, species_name_);
+}
+
+Pokemon::Pokemon(const SpeciesNames &species_name,
+                 const NormalStatsContainer &stats_container,
+                 const ExclusiveInGameStatsContainer
+                 &exclusive_in_game_stats_container,
+                 const MovesContainer &moves_container,
+                 const TypeContainer &type_container,
+                 const int &level, const std::shared_ptr<Hp> &hp_stat,
+                 const std::shared_ptr<Move> &move_used,
+                 const InGameFlags &in_game_flags,
+                 const bool &is_active)
+    : species_name_(species_name),
+    normal_stats_container_(stats_container),
+    exclusive_in_game_stats_container_(exclusive_in_game_stats_container),
+    moves_container_(moves_container),
+    type_container_(type_container),
+    level_(level),
+    hp_stat_(hp_stat),
+    move_used_(move_used),
+    flags_(in_game_flags),
+    is_active_(is_active) {
 }
 
 Pokemon::Pokemon() : species_name_(SpeciesNames::kBulbasaur),
@@ -287,7 +309,8 @@ void Pokemon::UseMetronome() {
 
     if (!moves_container_.SeenMove(random_move) &&
         random_move != MoveNames::kStruggle &&
-        random_move != MoveNames::kMetronome) {
+        random_move != MoveNames::kMetronome && !IsLockIn(random_move) &&
+        !IsChargeUp(random_move) && !IsVanish(random_move)) {
       break;
     }
   }
@@ -589,7 +612,7 @@ std::shared_ptr<Hp> Pokemon::HpStat() const {
 }
 
 bool Pokemon::IsFainted() const {
-  return !static_cast<bool>(hp_stat_);
+  return !static_cast<bool>(hp_stat_->CurrentHp());
 }
 
 void Pokemon::RestoreStateFromTransform() {
@@ -643,8 +666,9 @@ void Pokemon::AddDamageToBide() {
 }
 
 bool Pokemon::MustUseStruggle() const {
-  for (int i = 0; i < moves_container_.Size(); i++) {
-    if (moves_container_[i]->CurrentPp()) {
+  for (int i = 0; i < moves_container_.EndOfNormalMovesIndex(); i++) {
+    if (moves_container_[i]->CurrentPp() &&
+        !moves_container_[i]->IsDisabled()) {
       return false;
     }
   }
@@ -655,7 +679,7 @@ bool Pokemon::MustUseStruggle() const {
 bool Pokemon::CanHaveMoveDisabled() const {
   int num_valid_moves = 0;
 
-  for (int i = 0; i < moves_container_.Size(); i++) {
+  for (int i = 0; i < moves_container_.EndOfNormalMovesIndex(); i++) {
     if (!moves_container_[i]->IsDisabled() &&
         moves_container_[i]->CurrentPp()) {
       num_valid_moves++;
@@ -663,6 +687,10 @@ bool Pokemon::CanHaveMoveDisabled() const {
   }
 
   return num_valid_moves > 1;
+}
+
+InGameFlags Pokemon::Flags() const {
+  return flags_;
 }
 
 void Pokemon::ResetFaintFlags() {

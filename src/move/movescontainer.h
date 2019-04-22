@@ -24,7 +24,6 @@ class MovesContainer {
   void ResetMoveAtIndex(const int &index, const MoveNames &move_name,
                         const int &move_pp);
   int EndOfNormalMovesIndex() const;
-  void ReplaceAllWithStruggle();
   std::shared_ptr<Move> operator[](const int &index) const;
 
  private:

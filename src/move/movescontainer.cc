@@ -55,14 +55,6 @@ int MovesContainer::EndOfNormalMovesIndex() const {
   return end_normal_moves_index;
 }
 
-void MovesContainer::ReplaceAllWithStruggle() {
-  current_moves_.erase(current_moves_.begin(),
-                       current_moves_.begin() + EndOfNormalMovesIndex());
-  current_moves_.insert(
-      current_moves_.begin(), std::make_shared<Move>(
-          MoveNames::kStruggle, Pp(MoveNames::kStruggle)));;
-}
-
 std::shared_ptr<Move> MovesContainer::operator[](const int &index) const {
   return current_moves_[index];
 }

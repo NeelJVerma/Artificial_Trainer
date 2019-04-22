@@ -142,9 +142,10 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
   bool move_crit = IsDamaging(move_used->MoveName()) ?
                    MoveCrit(CriticalHitChance(attacker)) : false;
   std::pair<int, int> used_stats = AttackAndDefenseUsed(attacker, defender,
-                                                        move_crit);
+                                                        confusion_damage ?
+                                                        move_crit : false);
 
-  if (move_crit) {
+  if (move_crit && !confusion_damage) {
     Gui::DisplayMoveCritMessage();
   }
 
@@ -165,7 +166,8 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
 
 void UseCounter(const std::shared_ptr<Pokemon> &attacker,
                 const std::shared_ptr<Pokemon> &defender) {
-  if (!static_cast<int>(TypeProduct(attacker->MoveUsed(), defender))) {
+  if (!defender->MoveUsed() ||
+  !static_cast<int>(TypeProduct(attacker->MoveUsed(), defender))) {
     Gui::DisplayMoveHadNoEffectMessage();
     return;
   }
@@ -218,7 +220,7 @@ bool MimicWillSucceed(const std::shared_ptr<Pokemon> &attacker,
                       const std::shared_ptr<Pokemon> &defender) {
   MovesContainer defender_moves = defender->GetMovesContainer();
 
-  for (int i = 0; i < defender_moves.Size(); i++) {
+  for (int i = 0; i < defender_moves.EndOfNormalMovesIndex(); i++) {
     if (!attacker->GetMovesContainer().SeenMove(
         defender_moves[i]->MoveName())) {
       return true;
@@ -951,6 +953,8 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
 
     if (!attacker->HandleConfusion()) {
       Gui::DisplayHitSelfMessage(attacker->SpeciesName());
+      attacker->SetMoveUsed(std::make_shared<Move>(MoveNames::kHitSelf,
+                                                   Pp(MoveNames::kHitSelf)));
       int damage_done = DamageDone(attacker, attacker, false, true, true);
       attacker->DoConfusionDamage(damage_done);
       Gui::DisplayDamageDoneMessage(damage_done);
@@ -1094,10 +1098,6 @@ void UseMove(Team &attacker, Team &defender) {
     }
   }
 
-  if (!attacking_member->IsVanished() && !attacking_member->IsChargingUp()) {
-    move_used->DecrementPp(1);
-  }
-
   Gui::DisplayPokemonUsedMoveMessage(attacking_member->SpeciesName(),
                                      move_used->MoveName());
 
@@ -1154,6 +1154,11 @@ void UseMove(Team &attacker, Team &defender) {
   }
 
   attacking_member->SetExecutedMove(true);
+
+  if (!attacking_member->IsVanished() && !attacking_member->IsChargingUp() &&
+      move_used_name != MoveNames::kStruggle) {
+    move_used->DecrementPp(1);
+  }
 }
 
 } //namespace artificialtrainer

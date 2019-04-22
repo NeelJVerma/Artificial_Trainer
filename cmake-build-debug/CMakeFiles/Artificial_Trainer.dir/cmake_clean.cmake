@@ -31,11 +31,12 @@ file(REMOVE_RECURSE
   "CMakeFiles/Artificial_Trainer.dir/src/pokemon/beforetransformstate.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/random/randomgenerator.cc.o"
-  "CMakeFiles/Artificial_Trainer.dir/src/ailogic/estimatedminimax.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/ailogic/movenode.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/ailogic/pickleadingpokemon.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/ailogic/typesum.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/ailogic/pickforcedswitch.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.o"
   "Artificial_Trainer.pdb"
   "Artificial_Trainer"
 )

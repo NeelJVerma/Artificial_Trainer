@@ -25,7 +25,7 @@ class Gui {
   static void DisplayActivePokemonData(const std::shared_ptr<Pokemon> &pokemon,
                                        const bool &player_one);
   static void DisplayTurnNumber(const int &turn_number);
-  static void DisplayPickInBattleMoveMessage(const bool &player_one);
+  static void DisplayPickInBattleMoveMessage();
   static void DisplayMoveFailedMessage();
   static void DisplayMoveMissedMessage();
   static void DisplayOneHitKoMoveLandedMessage();
@@ -114,6 +114,7 @@ class Gui {
                                        const StatNames &stat_name,
                                        const int &num_stages);
   static void DisplayAiForceSwitchMessage(const SpeciesNames &species_name);
+  static void DisplayCantUseStruggleMessage(const SpeciesNames &species_name);
 };
 
 } // namespace artificialtrainer

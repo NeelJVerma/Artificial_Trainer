@@ -8,6 +8,13 @@
 namespace artificialtrainer {
 class MoveNode {
  public:
+  MoveNode() = default;
+  MoveNode(const MoveNode &move_node) = default;
+  MoveNode &operator=(const MoveNode &move_node) = default;
+  explicit MoveNode(const int &move_index);
+  void SetHeuristicValue(const int &heuristic_value);
+  int MoveIndex() const;
+  int HeuristicValue() const;
 
  private:
   int move_index_;

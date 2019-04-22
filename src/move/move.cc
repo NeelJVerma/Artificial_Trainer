@@ -254,6 +254,17 @@ bool IsChargeUp(const MoveNames &move_name) {
   }
 }
 
+bool IsLockIn(const MoveNames &move_name) {
+  switch (move_name) {
+    case MoveNames::kPetalDance:
+    case MoveNames::kThrash:
+    case MoveNames::kRage:
+      return true;
+    default:
+      return false;
+  }
+}
+
 int VariableEffectChance(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kAcid:

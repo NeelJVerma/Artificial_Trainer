@@ -13,6 +13,10 @@ void PickForcedSwitch(Team &picking_team,
   int i = 0;
 
   for (const auto &picking : picking_team.ActiveTeam()) {
+    if (picking->IsActive()) {
+      continue;
+    }
+
     int type_sum = TypeSum(picking, active_defender);
 
     if (type_sum > max_score) {

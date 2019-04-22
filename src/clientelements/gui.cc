@@ -123,9 +123,8 @@ void Gui::DisplayTurnNumber(const int &turn_number) {
   std::cout << "Turn number: " << turn_number << std::endl;
 }
 
-void Gui::DisplayPickInBattleMoveMessage(const bool &player_one) {
-  std::cout << "Player " << (player_one ? "one" : "two") << ", select your move"
-            << std::endl;
+void Gui::DisplayPickInBattleMoveMessage() {
+  std::cout << "Human player,, select your move" << std::endl;
 }
 
 void Gui::DisplayMoveFailedMessage() {
@@ -509,6 +508,11 @@ void Gui::DisplayStatChangeMessage(const SpeciesNames &species_name,
 void Gui::DisplayAiForceSwitchMessage(const SpeciesNames &species_name) {
   std::cout << StringConverter::SpeciesToString(species_name)
             << " is the ai's switch choice. It is now active" << std::endl;
+}
+
+void Gui::DisplayCantUseStruggleMessage(const SpeciesNames &species_name) {
+  std::cout << StringConverter::SpeciesToString(species_name)
+            << " can't use struggle at this time" << std::endl;
 }
 
 } //namespace artificialtrainer

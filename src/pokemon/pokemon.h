@@ -63,6 +63,15 @@ class Pokemon {
           const MovesContainer &moves_container,
           const TypeContainer &type_container, const int &level,
           const std::shared_ptr<Hp> &hp_stat);
+  Pokemon(const SpeciesNames &species_name,
+          const NormalStatsContainer &stats_container,
+          const ExclusiveInGameStatsContainer
+          &exclusive_in_game_stats_container,
+          const MovesContainer &moves_container,
+          const TypeContainer &type_container, const int &level,
+          const std::shared_ptr<Hp> &hp_stat,
+          const std::shared_ptr<Move> &move_used,
+          const InGameFlags &in_game_flags, const bool &is_active);
   NormalStatsContainer GetNormalStatsContainer() const;
   ExclusiveInGameStatsContainer GetExclusiveInGameStatsContainer() const;
   MovesContainer GetMovesContainer() const;
@@ -151,6 +160,7 @@ class Pokemon {
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
   int DoStatusDamage();
+  InGameFlags Flags() const;
 
  private:
   NormalStatsContainer normal_stats_container_;
