@@ -25,4 +25,21 @@ std::shared_ptr<ExclusiveInGameStat> ExclusiveInGameStatsContainer::operator[](
       kNumExclusiveInGameStats - 1)];
 }
 
+void ExclusiveInGameStatsContainer::AddStat(const ExclusiveInGameStat &stat,
+                                            const int &index) {
+  exclusive_in_game_stats_[index] = std::make_shared<ExclusiveInGameStat>(stat);
+}
+
+ExclusiveInGameStatsContainer ExclusiveInGameStatsContainer::DeepCopy() const {
+  ExclusiveInGameStatsContainer copy;
+
+  for (int i = kNumNormalStats + 1;
+       i <= kNumExclusiveInGameStats + kNumNormalStats; i++) {
+    int index = i - kNumNormalStats - 1;
+    copy.AddStat(*exclusive_in_game_stats_[index], index);
+  }
+
+  return copy;
+}
+
 } //namespace artificialtrainer

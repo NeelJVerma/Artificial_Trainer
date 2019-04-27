@@ -8,7 +8,7 @@
 #include "../team/team.h"
 
 namespace artificialtrainer {
-void UseMove(Team &attacker, Team &defender);
+void UseMove(Team &attacker, Team &defender, const bool &is_called_by_ai);
 
 } //namespace artificialtrainer
 

@@ -59,4 +59,18 @@ std::shared_ptr<Move> MovesContainer::operator[](const int &index) const {
   return current_moves_[index];
 }
 
+void MovesContainer::AddMove(const Move &move) {
+  current_moves_.push_back(std::make_shared<Move>(move));
+}
+
+MovesContainer MovesContainer::DeepCopy() const {
+  MovesContainer copy;
+
+  for (const auto &move : current_moves_) {
+    copy.AddMove(*move);
+  }
+
+  return copy;
+}
+
 } //namespace artificialtrainer

@@ -8,32 +8,17 @@
 
 namespace artificialtrainer {
 Team::Team(const std::vector<std::shared_ptr<Pokemon>> &active_team,
-           const std::vector<std::shared_ptr<Pokemon>> &fainted_team) {
+           const std::vector<std::shared_ptr<Pokemon>> &fainted_team,
+           const bool &is_human) {
   for (const auto &active : active_team) {
-    Pokemon deref_active = *active;
-    active_team_.push_back(std::make_shared<Pokemon>(
-        deref_active.SpeciesName(),
-        deref_active.GetNormalStatsContainer(),
-        deref_active.GetExclusiveInGameStatsContainer(),
-        deref_active.GetMovesContainer(),
-        deref_active.GetTypeContainer(),
-        deref_active.Level(), deref_active.HpStat(),
-        deref_active.MoveUsed(), deref_active.Flags(),
-        deref_active.IsActive()));
+    active_team_.push_back(std::make_shared<Pokemon>(active->DeepCopy()));
   }
 
   for (const auto &fainted : fainted_team) {
-    Pokemon deref_fainted = *fainted;
-    fainted_team_.push_back(std::make_shared<Pokemon>(
-        deref_fainted.SpeciesName(),
-        deref_fainted.GetNormalStatsContainer(),
-        deref_fainted.GetExclusiveInGameStatsContainer(),
-        deref_fainted.GetMovesContainer(),
-        deref_fainted.GetTypeContainer(),
-        deref_fainted.Level(), deref_fainted.HpStat(),
-        deref_fainted.MoveUsed(), deref_fainted.Flags(),
-        deref_fainted.IsActive()));
+    fainted_team_.push_back(std::make_shared<Pokemon>(fainted->DeepCopy()));
   }
+
+  is_human_ = is_human;
 }
 
 void Team::AddPokemon(const std::shared_ptr<Pokemon> &pokemon) {
@@ -101,6 +86,14 @@ void Team::HardSwitch() {
   old_active_pokemon->SetIsActive(false);
   old_active_pokemon->ResetSwitchFlags();
   active_team_[switch_index]->SetIsActive(true);
+}
+
+void Team::SetIsHuman(const bool &is_human) {
+  is_human_ = is_human;
+}
+
+bool Team::IsHuman() const {
+  return is_human_;
 }
 
 } //namespace artificialtrainer

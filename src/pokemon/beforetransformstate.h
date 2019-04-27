@@ -29,6 +29,7 @@ class BeforeTransformState {
   TypeContainer GetTypeContainer() const;
   MovesContainer GetMovesContainer() const;
   SpeciesNames SpeciesName() const;
+  BeforeTransformState DeepCopy() const;
 
  private:
   NormalStatsContainer normal_stats_container_;
@@ -36,6 +37,13 @@ class BeforeTransformState {
   TypeContainer type_container_;
   MovesContainer moves_container_;
   SpeciesNames species_name_;
+  void SetNormalStatsContainer(
+      const NormalStatsContainer &normal_stats_container);
+  void SetExclusiveInGameStatsContainer(
+      const ExclusiveInGameStatsContainer &exclusive_in_game_stats_container);
+  void SetMovesContainer(const MovesContainer &moves_container);
+  void SetTypeContainer(const TypeContainer &type_container);
+  void SetSpeciesName(const SpeciesNames &species_name);
 };
 
 } //namespace artificialtrainer

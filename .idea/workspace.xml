@@ -12,61 +12,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f761d81-71cd-48eb-84a4-b5d508f52e87" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ailogic/expectdfs.cc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ailogic/expectdfs.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/battlemanager/battlemanager.cc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/battlemanager/battlemanager.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ailogic/expectimax.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Artificial_Trainer" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Artificial_Trainer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Artificial_Trainer.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Artificial_Trainer.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/DependInfo.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/build.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/cmake_clean.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/depend.internal" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/flags.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/estimatedminimax.cc.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/movenode.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/movenode.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/pickforcedswitch.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/pickforcedswitch.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/pickleadingpokemon.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/pickleadingpokemon.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/typesum.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/typesum.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/clientelements/gui.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/clientelements/gui.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/main.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/main.cc.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/move/move.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/move/movescontainer.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/beforetransformstate.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/beforetransformstate.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/bide.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/confusion.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/disable.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/pokemon.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/substitute.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/pokemon/substitute.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/stat/exclusiveingamestatscontainer.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/stat/exclusiveingamestatscontainer.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/stat/normalstatscontainer.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/stat/normalstatscontainer.cc.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/team/team.cc.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ailogic/estimatedminimax.cc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ailogic/estimatedminimax.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ailogic/expectdfs.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ailogic/expectdfs.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ailogic/expectimax.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ailogic/movenode.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/ailogic/movenode.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ailogic/movenode.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ailogic/movenode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ailogic/pickforcedswitch.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/ailogic/pickforcedswitch.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/battle/battle.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/battle/battle.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/battle/battle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/battle/battle.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientelements/gui.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientelements/gui.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientelements/gui.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientelements/gui.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/move/move.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/move.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/move/move.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/move.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/battlemanager/battlemanager.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/battlemanager/battlemanager.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/battlemanager/battlemanager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/battlemanager/battlemanager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/move/movescontainer.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/movescontainer.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/move/movescontainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/movescontainer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/move/usemove.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/usemove.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/move/usemove.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/usemove.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/beforetransformstate.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/beforetransformstate.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/beforetransformstate.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/beforetransformstate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/bide.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/bide.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/confusion.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/confusion.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/confusion.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/confusion.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/disable.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/disable.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/disable.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/disable.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pokemon/pokemon.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/pokemon.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pokemon/pokemon.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/pokemon.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/substitute.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/substitute.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pokemon/substitute.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/substitute.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/normalstatscontainer.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/normalstatscontainer.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stat/normalstatscontainer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stat/normalstatscontainer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/team.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/team.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/team/team.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/team/team.h" afterDir="false" />
     </list>
@@ -87,10 +92,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ailogic/expectdfs.cc">
+        <entry file="file://$PROJECT_DIR$/src/ailogic/expectimax.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="46" column="3" lean-forward="true" selection-start-line="46" selection-start-column="3" selection-end-line="46" selection-end-column="3" />
+            <state relative-caret-position="80">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#38#57#0" expanded="true" />
               </folding>
@@ -99,88 +104,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/team/team.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
-              <folding>
-                <element signature="e#107#124#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/team/team.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="6" column="47" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="93" column="31" lean-forward="true" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
-              <folding>
-                <element signature="e#113#138#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ailogic/expectdfs.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="692" column="16" selection-start-line="692" selection-start-column="16" selection-end-line="692" selection-end-column="16" />
-              <folding>
-                <element signature="e#38#56#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/battlemanager/battlemanager.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="312" selection-start-line="312" selection-end-line="312" />
-              <folding>
-                <element signature="e#38#64#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/battle/battle.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="109" column="38" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="38" />
-              <folding>
-                <element signature="e#38#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/move/usemove.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="983" column="71" lean-forward="true" selection-start-line="983" selection-start-column="71" selection-end-line="983" selection-end-column="71" />
+            <state relative-caret-position="31">
+              <caret line="1216" column="7" lean-forward="true" selection-start-line="1216" selection-start-column="7" selection-end-line="1216" selection-end-column="7" />
               <folding>
                 <element signature="e#37#53#0" expanded="true" />
               </folding>
@@ -189,10 +116,79 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/battle/battle.h">
+        <entry file="file://$PROJECT_DIR$/src/clientelements/gui.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="468">
+              <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/clientelements/gui.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="115" column="37" selection-start-line="115" selection-start-column="14" selection-end-line="115" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ailogic/pickforcedswitch.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="356">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ailogic/pickleadingpokemon.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/battle/battle.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="117" column="23" selection-start-line="117" selection-start-column="23" selection-end-line="117" selection-end-column="23" />
+              <folding>
+                <element signature="e#38#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/move/usemove.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/battlemanager/battlemanager.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="455">
+              <caret line="357" column="30" lean-forward="true" selection-start-line="357" selection-start-column="30" selection-end-line="357" selection-end-column="30" />
+              <folding>
+                <element signature="e#38#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/battlemanager/battlemanager.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -201,36 +197,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>confusion_da</find>
-      <find>confusion_dama</find>
-      <find>stabbonus</find>
-      <find>movema</find>
-      <find>isconfused</find>
-      <find>setmoveused</find>
-      <find>handlebothteams</find>
-      <find>Battle::</find>
-      <find>pickinba</find>
-      <find>isvalidmov</find>
-      <find>playerpicks</find>
-      <find>humanmoves</find>
-      <find>handlemove</find>
-      <find>pickinbatt</find>
-      <find>humanpicksfor</find>
-      <find>isvalidsw</find>
-      <find>handleendoftur</find>
-      <find>handlefainting</find>
+      <find>no lon</find>
+      <find>humanpicks</find>
+      <find>roa</find>
+      <find>trap</find>
+      <find>reflect</find>
+      <find>useme</find>
+      <find>istrap</find>
+      <find>isbind</find>
+      <find>usemimic</find>
+      <find>omanyte: level</find>
+      <find>mimic</find>
+      <find>is fully</find>
+      <find>recharging</find>
+      <find>mirrormove</find>
+      <find>usemetr</find>
+      <find>resetfa</find>
+      <find>isgoodtom</find>
+      <find>hyperbe</find>
+      <find>executem</find>
+      <find>handlefa</find>
+      <find>gui::</find>
+      <find>is_called_</find>
+      <find>gui</find>
+      <find>handleendofturn</find>
       <find>handleboth</find>
-      <find>handleturn</find>
-      <find>struggle</find>
-      <find>isvalidmove</find>
-      <find>fainted</find>
-      <find>depth:</find>
-      <find>hardswit</find>
-      <find>setisac</find>
-      <find>normalstats</find>
-      <find>hardsw</find>
-      <find>setmoves</find>
-      <find>team &amp;</find>
+      <find>substitutefa</find>
+      <find>handlemove</find>
+      <find>statnames::kdefense</find>
+      <find>seismic</find>
+      <find>dodirec</find>
     </findStrings>
     <replaceStrings>
       <replace>int</replace>
@@ -255,18 +251,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/pokemon/beforetransformstate.cc" />
-        <option value="$PROJECT_DIR$/src/main.cc" />
-        <option value="$PROJECT_DIR$/src/move/baseaccuracy.cc" />
-        <option value="$PROJECT_DIR$/src/pokemon/substitute.cc" />
-        <option value="$PROJECT_DIR$/src/random/randomgenerator.h" />
-        <option value="$PROJECT_DIR$/src/pokemon/bide.cc" />
-        <option value="$PROJECT_DIR$/src/pokemon/disable.cc" />
-        <option value="$PROJECT_DIR$/src/pokemon/disable.h" />
-        <option value="$PROJECT_DIR$/src/pokemon/confusion.h" />
-        <option value="$PROJECT_DIR$/src/pokemon/confusion.cc" />
-        <option value="$PROJECT_DIR$/src/minimax/movenode.cc" />
-        <option value="$PROJECT_DIR$/src/minimax/movenode.h" />
         <option value="$PROJECT_DIR$/src/minimax/estimatedminimax.cc" />
         <option value="$PROJECT_DIR$/src/minimax/estimatedminimax.h" />
         <option value="$PROJECT_DIR$/src/random/randomgenerator.cc" />
@@ -282,38 +266,51 @@
         <option value="$PROJECT_DIR$/src/ai/pickforcedswitch.h" />
         <option value="$PROJECT_DIR$/src/ai/pickforcedswitch.cc" />
         <option value="$PROJECT_DIR$/src/stringconverter/stringconverter.cc" />
-        <option value="$PROJECT_DIR$/src/ailogic/movenode.h" />
-        <option value="$PROJECT_DIR$/src/ailogic/movenode.cc" />
         <option value="$PROJECT_DIR$/src/ailogic/estimatedminimax.h" />
         <option value="$PROJECT_DIR$/src/ailogic/pickforcedswitch.cc" />
-        <option value="$PROJECT_DIR$/src/move/movescontainer.h" />
-        <option value="$PROJECT_DIR$/src/move/movescontainer.cc" />
-        <option value="$PROJECT_DIR$/src/move/move.h" />
-        <option value="$PROJECT_DIR$/src/move/move.cc" />
         <option value="$PROJECT_DIR$/src/ailogic/estimatedminimax.cc" />
         <option value="$PROJECT_DIR$/src/clientelements/gui.h" />
         <option value="$PROJECT_DIR$/src/clientelements/gui.cc" />
-        <option value="$PROJECT_DIR$/src/battle/battle.h" />
-        <option value="$PROJECT_DIR$/src/battlemanager/battlemanager.h" />
-        <option value="$PROJECT_DIR$/src/battlemanager/battlemanager.cc" />
-        <option value="$PROJECT_DIR$/src/battle/battle.cc" />
-        <option value="$PROJECT_DIR$/src/ailogic/expectdfs.h" />
-        <option value="$PROJECT_DIR$/src/team/team.h" />
+        <option value="$PROJECT_DIR$/src/move/move.cc" />
+        <option value="$PROJECT_DIR$/src/move/movescontainer.cc" />
         <option value="$PROJECT_DIR$/src/stat/normalstatscontainer.h" />
         <option value="$PROJECT_DIR$/src/stat/normalstatscontainer.cc" />
-        <option value="$PROJECT_DIR$/src/move/usemove.cc" />
-        <option value="$PROJECT_DIR$/src/ailogic/expectdfs.cc" />
+        <option value="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.h" />
+        <option value="$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc" />
+        <option value="$PROJECT_DIR$/src/pokemon/beforetransformstate.cc" />
+        <option value="$PROJECT_DIR$/src/pokemon/beforetransformstate.h" />
+        <option value="$PROJECT_DIR$/src/move/movescontainer.h" />
+        <option value="$PROJECT_DIR$/src/pokemon/bide.h" />
+        <option value="$PROJECT_DIR$/src/pokemon/substitute.cc" />
+        <option value="$PROJECT_DIR$/src/pokemon/substitute.h" />
+        <option value="$PROJECT_DIR$/src/ailogic/expectdfs.h" />
+        <option value="$PROJECT_DIR$/src/ailogic/movenode.h" />
+        <option value="$PROJECT_DIR$/src/ailogic/movenode.cc" />
+        <option value="$PROJECT_DIR$/src/pokemon/disable.h" />
+        <option value="$PROJECT_DIR$/src/pokemon/confusion.h" />
         <option value="$PROJECT_DIR$/src/pokemon/pokemon.h" />
-        <option value="$PROJECT_DIR$/src/pokemon/pokemon.cc" />
+        <option value="$PROJECT_DIR$/src/team/team.h" />
         <option value="$PROJECT_DIR$/src/team/team.cc" />
+        <option value="$PROJECT_DIR$/src/battle/battle.h" />
+        <option value="$PROJECT_DIR$/src/ailogic/expectdfs.cc" />
+        <option value="$PROJECT_DIR$/src/ailogic/expectimax.h" />
+        <option value="$PROJECT_DIR$/src/move/move.h" />
+        <option value="$PROJECT_DIR$/src/pokemon/pokemon.cc" />
+        <option value="$PROJECT_DIR$/src/move/usemove.h" />
+        <option value="$PROJECT_DIR$/src/battlemanager/battlemanager.h" />
+        <option value="$PROJECT_DIR$/src/battle/battle.cc" />
+        <option value="$PROJECT_DIR$/src/battlemanager/battlemanager.cc" />
+        <option value="$PROJECT_DIR$/src/ailogic/expectimax.cc" />
+        <option value="$PROJECT_DIR$/src/move/usemove.cc" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="27" />
-    <option name="width" value="1920" />
-    <option name="height" value="1053" />
+    <option name="x" value="74" />
+    <option name="y" value="-5" />
+    <option name="width" value="1918" />
+    <option name="height" value="1049" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -474,11 +471,13 @@
       <workItem from="1555792357785" duration="5819000" />
       <workItem from="1555872985909" duration="6836000" />
       <workItem from="1555880000651" duration="5698000" />
+      <workItem from="1556231522176" duration="21000" />
+      <workItem from="1556297195290" duration="20564000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="679494000" />
+    <option name="totallyTimeSpent" value="738903000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -491,20 +490,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-5" width="1920" height="1085" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49892932" visible="true" weight="0.24356224" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49892932" visible="true" weight="0.3106223" />
       <window_info id="Structure" order="1" sideWeight="0.5010707" side_tool="true" weight="0.22263949" />
       <window_info id="Favorites" order="2" sideWeight="0.5008489" side_tool="true" weight="0.17328326" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.33471933" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.960499" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.18814969" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32224533" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.9574944" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.960499" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32848233" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.39501038" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.35239086" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32848233" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32976446" />
@@ -518,369 +516,375 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>saved_ai.active_team_[0].get()-&gt;moves_container_.current_moves_</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>AllValidMoves</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/move/movescontainer.h">
+    <entry file="file://$PROJECT_DIR$/src/stat/hp.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/movescontainer.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="51" column="5" lean-forward="true" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/iv.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="31" lean-forward="true" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/iv.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/ev.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/hp.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="331" column="60" selection-start-line="331" selection-start-column="60" selection-end-line="331" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="258">
+          <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="227">
+          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/normalstat.cc">
+    <entry file="file://$PROJECT_DIR$/src/stat/statnames.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23850">
-          <caret line="1325" selection-start-line="1325" selection-end-line="1325" />
+        <state relative-caret-position="270">
+          <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/normalstat.h">
+    <entry file="file://$PROJECT_DIR$/src/move/priority.cc">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/beforetransformstate.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="846">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
+        <state relative-caret-position="630">
+          <caret line="38" column="29" lean-forward="true" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestat.h">
+    <entry file="file://$PROJECT_DIR$/src/move/movescontainer.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+        <state relative-caret-position="504">
+          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/move.h">
+    <entry file="file://$PROJECT_DIR$/src/pokemon/confusion.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
+        <state relative-caret-position="756">
+          <caret line="43" column="1" lean-forward="true" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/type/typecontainer.cc">
+    <entry file="file://$PROJECT_DIR$/src/pokemon/learnset.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5994">
-          <caret line="333" column="26" selection-start-line="333" selection-start-column="20" selection-end-line="333" selection-end-column="26" />
+        <state relative-caret-position="821">
+          <caret line="2684" column="31" lean-forward="true" selection-start-line="2684" selection-start-column="31" selection-end-line="2684" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/movenames.h">
+    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestatscontainer.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3258">
-          <caret line="181" column="8" selection-start-line="181" selection-start-column="2" selection-end-line="181" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/baseaccuracy.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6282">
-          <caret line="349" column="20" selection-start-line="349" selection-start-column="20" selection-end-line="349" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/pp.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6354">
-          <caret line="353" column="20" selection-start-line="353" selection-start-column="20" selection-end-line="353" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestat.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clientelements/gui.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="126" column="62" lean-forward="true" selection-start-line="126" selection-start-column="62" selection-end-line="126" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ailogic/estimatedminimax.h" />
-    <entry file="file://$PROJECT_DIR$/src/ailogic/estimatedminimax.cc" />
-    <entry file="file://$PROJECT_DIR$/src/ailogic/typesum.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        <state relative-caret-position="702">
+          <caret line="39" column="3" lean-forward="true" selection-start-line="39" selection-start-column="3" selection-end-line="39" selection-end-column="3" />
           <folding>
             <element signature="e#37#57#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ailogic/typesum.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ailogic/pickleadingpokemon.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ailogic/pickleadingpokemon.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding>
-            <element signature="e#37#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ailogic/movenode.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ailogic/movenode.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/ext/alloc_traits.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="139" selection-start-line="139" selection-end-line="139" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/bits/alloc_traits.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="559" selection-start-line="559" selection-end-line="559" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/ext/new_allocator.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/bits/stl_vector.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/bits/allocator.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="115" selection-start-line="115" selection-end-line="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stringconverter/stringconverter.h">
+    <entry file="file://$PROJECT_DIR$/src/pokemon/speciesnames.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/normalstatscontainer.h">
+    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestat.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="75" selection-start-line="20" selection-start-column="75" selection-end-line="20" selection-end-column="75" />
+        <state relative-caret-position="378">
+          <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stat/normalstatscontainer.cc">
+    <entry file="file://$PROJECT_DIR$/src/stat/exclusiveingamestat.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pokemon/beforetransformstate.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pokemon/learnset.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/battlemanager/battlemanager.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="41" selection-start-line="12" selection-start-column="41" selection-end-line="12" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clientelements/gui.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="40" column="39" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/move.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="e#38#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ailogic/pickforcedswitch.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#37#66#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="396">
+          <caret line="22" column="19" lean-forward="true" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ailogic/pickforcedswitch.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
+    <entry file="file:///usr/include/c++/5/bits/shared_ptr.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="692" column="16" selection-start-line="692" selection-start-column="16" selection-end-line="692" selection-end-column="16" />
+        <state relative-caret-position="148">
+          <caret line="635" selection-start-line="635" selection-end-line="635" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/ext/new_allocator.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="103" selection-start-line="103" selection-end-line="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stat/normalstatscontainer.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ailogic/movenode.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="2" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ailogic/movenode.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/beforetransformstate.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="82" column="14" lean-forward="true" selection-start-line="82" selection-start-column="14" selection-end-line="82" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/disable.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2" selection-start-column="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/bide.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/bide.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="864">
+          <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/substitute.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/confusion.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/disable.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="40" column="10" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/pp.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/team.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+          <folding>
+            <element signature="e#107#124#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/pp.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="10" column="54" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/statusnames.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/substitute.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ailogic/expectimax.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battle/battle.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/team/team.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/movenames.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/move.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/move.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="138" column="11" selection-start-line="138" selection-start-column="5" selection-end-line="138" selection-end-column="11" />
           <folding>
             <element signature="e#38#56#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/team.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="6" column="47" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="93" column="31" lean-forward="true" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
+        <state relative-caret-position="65">
+          <caret line="49" column="14" lean-forward="true" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
           <folding>
             <element signature="e#113#138#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ailogic/expectdfs.h">
+    <entry file="file://$PROJECT_DIR$/src/stat/normalstatscontainer.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+        <state relative-caret-position="342">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ailogic/expectdfs.cc">
+    <entry file="file://$PROJECT_DIR$/src/pokemon/learnset.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="46" column="3" lean-forward="true" selection-start-line="46" selection-start-column="3" selection-end-line="46" selection-end-column="3" />
+        <state relative-caret-position="131">
+          <caret line="634" column="21" selection-start-line="634" selection-start-column="14" selection-end-line="634" selection-end-column="21" />
           <folding>
-            <element signature="e#38#57#0" expanded="true" />
+            <element signature="e#38#56#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/battlemanager/battlemanager.cc">
+    <entry file="file://$PROJECT_DIR$/src/move/movescontainer.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="312" selection-start-line="312" selection-end-line="312" />
-          <folding>
-            <element signature="e#38#64#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="228">
+          <caret line="40" column="19" lean-forward="true" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battlemanager/battlemanager.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/battle/battle.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="109" column="38" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="38" />
+        <state relative-caret-position="185">
+          <caret line="117" column="23" selection-start-line="117" selection-start-column="23" selection-end-line="117" selection-end-column="23" />
           <folding>
             <element signature="e#38#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/battle/battle.h">
+    <entry file="file://$PROJECT_DIR$/src/ailogic/pickforcedswitch.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="356">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ailogic/pickleadingpokemon.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clientelements/gui.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="115" column="37" selection-start-line="115" selection-start-column="14" selection-end-line="115" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/battlemanager/battlemanager.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="357" column="30" lean-forward="true" selection-start-line="357" selection-start-column="30" selection-end-line="357" selection-end-column="30" />
+          <folding>
+            <element signature="e#38#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clientelements/gui.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ailogic/expectimax.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#38#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/usemove.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/move/usemove.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="983" column="71" lean-forward="true" selection-start-line="983" selection-start-column="71" selection-end-line="983" selection-end-column="71" />
+        <state relative-caret-position="31">
+          <caret line="1216" column="7" lean-forward="true" selection-start-line="1216" selection-start-column="7" selection-end-line="1216" selection-end-column="7" />
           <folding>
             <element signature="e#37#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/team/team.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
-          <folding>
-            <element signature="e#107#124#0" expanded="true" />
           </folding>
         </state>
       </provider>

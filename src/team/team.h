@@ -17,7 +17,8 @@ class Team {
   Team &operator=(const Team &team) = default;
   Team() = default;
   Team(const std::vector<std::shared_ptr<Pokemon>> &active_team,
-       const std::vector<std::shared_ptr<Pokemon>> &fainted_team);
+       const std::vector<std::shared_ptr<Pokemon>> &fainted_team,
+       const bool &is_human);
   void FaintActivePokemon();
   void AddPokemon(const std::shared_ptr<Pokemon> &pokemon);
   std::vector<std::shared_ptr<Pokemon>> ActiveTeam() const;
@@ -27,10 +28,13 @@ class Team {
   std::shared_ptr<Pokemon> ActiveMember() const;
   int IndexOfActiveMember() const;
   void HardSwitch();
+  void SetIsHuman(const bool &is_human);
+  bool IsHuman() const;
 
  private:
   std::vector<std::shared_ptr<Pokemon>> active_team_;
   std::vector<std::shared_ptr<Pokemon>> fainted_team_;
+  bool is_human_;
 };
 
 } //namespace artificialtrainer

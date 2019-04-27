@@ -19,11 +19,16 @@ class BattleManager {
   static void HumanPicksForcedSwitch(Team &human_team);
   static bool IsValidSwitchChoice(const Team &team, const int &index);
   static void HandleEndOfTurnStatuses(const std::shared_ptr<Pokemon> &attacker,
-                                      const std::shared_ptr<Pokemon> &defender);
+                                      const std::shared_ptr<Pokemon> &defender,
+                                      const bool &is_called_by_ai);
   static void HandleFainting(const bool &human_moves_first, Team &human_team,
-                             Team &ai_team);
+                             Team &ai_team, const bool &is_called_by_ai);
   static void HandleBothTeamsMoves(const bool &human_moves_first,
-                                   Team &human_team, Team &ai_team);
+                                   Team &human_team, Team &ai_team,
+                                   const bool &is_called_by_ai);
+
+ private:
+  static bool CanSwitch(const Team &team);
 };
 
 } //namespace artificialtrainer

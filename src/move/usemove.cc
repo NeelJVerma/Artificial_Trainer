@@ -112,7 +112,7 @@ std::pair<int, int> AttackAndDefenseUsed(
 int DamageDone(const std::shared_ptr<Pokemon> &attacker,
                const std::shared_ptr<Pokemon> &defender,
                const bool &self_ko_move, const bool &move_hit,
-               const bool &confusion_damage) {
+               const bool &confusion_damage, const bool &is_called_by_ai) {
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
 
   if (!move_hit ||
@@ -129,13 +129,16 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
           defender->IsType(TypeNames::kPsychic)) ||
       (move_used->MoveName() == MoveNames::kDreamEater &&
           !defender->IsAsleep())) {
-    Gui::DisplayMoveHadNoEffectMessage();
+    if (!is_called_by_ai) {
+      Gui::DisplayMoveHadNoEffectMessage();
+    }
+
     return 0;
   }
 
-  if (type_product < 10.0) {
+  if (type_product < 10.0 && !is_called_by_ai) {
     Gui::DisplayNotVeryEffectiveMessage();
-  } else if (type_product > 10.0) {
+  } else if (type_product > 10.0 && !is_called_by_ai) {
     Gui::DisplaySuperEffectiveMessage();
   }
 
@@ -145,7 +148,7 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
                                                         confusion_damage ?
                                                         move_crit : false);
 
-  if (move_crit && !confusion_damage) {
+  if (move_crit && !confusion_damage && !is_called_by_ai) {
     Gui::DisplayMoveCritMessage();
   }
 
@@ -165,10 +168,14 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
 }
 
 void UseCounter(const std::shared_ptr<Pokemon> &attacker,
-                const std::shared_ptr<Pokemon> &defender) {
+                const std::shared_ptr<Pokemon> &defender,
+                const bool &is_called_by_ai) {
   if (!defender->MoveUsed() ||
-  !static_cast<int>(TypeProduct(attacker->MoveUsed(), defender))) {
-    Gui::DisplayMoveHadNoEffectMessage();
+      !static_cast<int>(TypeProduct(attacker->MoveUsed(), defender))) {
+    if (!is_called_by_ai) {
+      Gui::DisplayMoveHadNoEffectMessage();
+    }
+
     return;
   }
 
@@ -178,17 +185,24 @@ void UseCounter(const std::shared_ptr<Pokemon> &attacker,
   if (!IsPhysical(defender_move_name) || !IsDamaging(defender_move_name) ||
       (defender_move_type != TypeNames::kNormal &&
           defender_move_type != TypeNames::kFighting)) {
-    Gui::DisplayMoveFailedMessage();
+    if (!is_called_by_ai) {
+      Gui::DisplayMoveFailedMessage();
+    }
+
     return;
   }
 
   int damage_done = defender->MoveUsed()->DamageDone() << 1;
   defender->HpStat()->SubtractHp(damage_done);
-  Gui::DisplayDamageDoneMessage(damage_done);
+
+  if (!is_called_by_ai) {
+    Gui::DisplayDamageDoneMessage(damage_done);
+  }
 }
 
 void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
-                     const std::shared_ptr<Pokemon> &defender) {
+                     const std::shared_ptr<Pokemon> &defender,
+                     const bool &is_called_by_ai) {
   // In this case, damage done is damage that would have been done. If it's
   // 0, the move didn't affect the target.
   int attacker_speed =
@@ -198,26 +212,38 @@ void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
 
   if (attacker->Level() < defender->Level() ||
       attacker_speed < defender_speed) {
-    Gui::DisplayMoveFailedMessage();
+    if (!is_called_by_ai) {
+      Gui::DisplayMoveFailedMessage();
+    }
+
     return;
   }
 
   if (defender->SubstituteIsActive()) {
-    Gui::DisplaySubstituteTookDamageMessage(defender->HpStat()->MaxHp());
+    if (!is_called_by_ai) {
+      Gui::DisplaySubstituteTookDamageMessage(defender->HpStat()->MaxHp());
+    }
+
     defender->DoDamageToSubstitute(defender->HpStat()->MaxHp());
 
-    if (!defender->SubstituteIsActive()) {
+    if (!defender->SubstituteIsActive() && !is_called_by_ai) {
       Gui::DisplaySubstituteFadedMessage(defender->SpeciesName());
     }
   } else {
     defender->AutoFaint();
   }
 
-  Gui::DisplayOneHitKoMoveLandedMessage();
+  if (!is_called_by_ai) {
+    Gui::DisplayOneHitKoMoveLandedMessage();
+  }
 }
 
 bool MimicWillSucceed(const std::shared_ptr<Pokemon> &attacker,
                       const std::shared_ptr<Pokemon> &defender) {
+  if (attacker->UsedMimic()) {
+    return false;
+  }
+
   MovesContainer defender_moves = defender->GetMovesContainer();
 
   for (int i = 0; i < defender_moves.EndOfNormalMovesIndex(); i++) {
@@ -251,7 +277,8 @@ MoveNames MoveFromMimic(const std::shared_ptr<Pokemon> &attacker,
 }
 
 void UseMimic(const std::shared_ptr<Pokemon> &attacker,
-              const std::shared_ptr<Pokemon> &defender) {
+              const std::shared_ptr<Pokemon> &defender,
+              const bool &is_called_by_ai) {
   MoveNames random_move = MoveFromMimic(attacker, defender);
   MovesContainer attacker_moves = attacker->GetMovesContainer();
   int index_of_mimic = attacker_moves.IndexOfMimic();
@@ -259,93 +286,112 @@ void UseMimic(const std::shared_ptr<Pokemon> &attacker,
   attacker_moves.ResetMoveAtIndex(index_of_mimic, random_move, mimic_pp);
   attacker->SetMimicIndex(index_of_mimic);
   attacker->UseMimic();
-  Gui::DisplayPokemonCopiedMoveMessage(attacker->SpeciesName(), random_move);
+
+  if (!is_called_by_ai) {
+    Gui::DisplayPokemonCopiedMoveMessage(attacker->SpeciesName(), random_move);
+  }
 }
 
 void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
                          const MoveNames &attacker_move,
-                         const int &damage_done) {
+                         const int &damage_done,
+                         const bool &is_called_by_ai) {
   if (defender->SubstituteIsActive()) {
-    Gui::DisplaySubstituteTookDamageMessage(damage_done);
+    if (!is_called_by_ai) {
+      Gui::DisplaySubstituteTookDamageMessage(damage_done);
+    }
+
     defender->DoDamageToSubstitute(damage_done);
 
-    if (!defender->SubstituteIsActive()) {
+    if (!defender->SubstituteIsActive() && !is_called_by_ai) {
       Gui::DisplaySubstituteFadedMessage(defender->SpeciesName());
     }
   } else {
     if (defender->IsRaging()) {
       defender->ChangeStat(StatNames::kAttack, 1);
-      Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                    StatNames::kAttack, 1);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                      StatNames::kAttack, 1);
+      }
     }
 
     defender->HpStat()->SubtractHp(damage_done);
-    Gui::DisplayDamageDoneMessage(damage_done);
+
+    if (!is_called_by_ai) {
+      Gui::DisplayDamageDoneMessage(damage_done);
+    }
   }
 
-  if (defender->BideIsActive()) {
-    if (!defender->BideDamage()) {
-      defender->SetBideDamage(damage_done);
-    }
-
+  if (defender->BideIsActive() && !defender->BideDamage()) {
+    defender->SetBideDamage(damage_done);
     defender->AddDamageToBide();
   }
 }
 
 void DoDirectDamage(const std::shared_ptr<Pokemon> &defender,
-                    const int &damage_done) {
+                    const int &damage_done,
+                    const bool &is_called_by_ai) {
   if (defender->SubstituteIsActive()) {
-    Gui::DisplaySubstituteTookDamageMessage(damage_done);
+    if (!is_called_by_ai) {
+      Gui::DisplaySubstituteTookDamageMessage(damage_done);
+    }
+
     defender->DoDamageToSubstitute(damage_done);
 
-    if (!defender->SubstituteIsActive()) {
+    if (!defender->SubstituteIsActive() && !is_called_by_ai) {
       Gui::DisplaySubstituteFadedMessage(defender->SpeciesName());
     }
   } else {
     if (defender->IsRaging()) {
       defender->ChangeStat(StatNames::kAttack, 1);
-      Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                    StatNames::kAttack, 1);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                      StatNames::kAttack, 1);
+      }
     }
 
     defender->HpStat()->SubtractHp(damage_done);
-    Gui::DisplayDamageDoneMessage(damage_done);
+
+    if (!is_called_by_ai) {
+      Gui::DisplayDamageDoneMessage(damage_done);
+    }
   }
 
-  if (defender->BideIsActive()) {
-    if (!defender->BideDamage()) {
-      defender->SetBideDamage(damage_done);
-    }
-
+  if (defender->BideIsActive() && !defender->BideDamage()) {
+    defender->SetBideDamage(damage_done);
     defender->AddDamageToBide();
   }
 }
 
 void DoDamageEqualToAttackerLevel(const std::shared_ptr<Pokemon> &attacker,
-                                  const std::shared_ptr<Pokemon> &defender) {
-  if (defender->BideIsActive()) {
-    if (!defender->BideDamage()) {
-      defender->SetBideDamage(attacker->Level());
-    }
-
+                                  const std::shared_ptr<Pokemon> &defender,
+                                  const bool &is_called_by_ai) {
+  if (defender->BideIsActive() && !defender->BideDamage()) {
+    defender->SetBideDamage(attacker->Level());
     defender->AddDamageToBide();
   }
 
-  DoDirectDamage(defender, attacker->Level());
+  DoDirectDamage(defender, attacker->Level(), is_called_by_ai);
 }
 
 void UsePsywave(const std::shared_ptr<Pokemon> &attacker,
-                const std::shared_ptr<Pokemon> &defender) {
+                const std::shared_ptr<Pokemon> &defender,
+                const bool &is_called_by_ai) {
   DoDirectDamage(defender, RandomIntDistribution(1, static_cast<int>(
-      1.5 * attacker->Level())));
+      1.5 * attacker->Level())), is_called_by_ai);
 }
 
 void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
-                  const std::shared_ptr<Pokemon> &defender) {
-  if (!static_cast<int>(TypeProduct(attacker->MoveUsed(), defender))) {
+                  const std::shared_ptr<Pokemon> &defender,
+                  const bool &is_called_by_ai) {
+  if (!static_cast<int>(TypeProduct(attacker->MoveUsed(), defender)) &&
+      !is_called_by_ai) {
     Gui::DisplayMoveHadNoEffectMessage();
   } else {
-    DoDirectDamage(defender, defender->HpStat()->CurrentHp() >> 1);
+    DoDirectDamage(
+        defender, defender->HpStat()->CurrentHp() >> 1, is_called_by_ai);
   }
 }
 
@@ -356,15 +402,11 @@ void HazeField(const std::shared_ptr<Pokemon> &attacker,
   Gui::DisplayHazeResetMessage();
 }
 
-int DisableIndex(const std::shared_ptr<Pokemon> &target) {
-  return RandomIntDistribution(
-      0, target->GetMovesContainer().EndOfNormalMovesIndex() - 1);
-}
-
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
                   const int &damage_done, const bool &move_hit,
-                  const bool &is_charge_or_vanish) {
+                  const bool &is_charge_or_vanish,
+                  const bool &is_called_by_ai) {
   MoveNames move_name = attacker->MoveUsed()->MoveName();
 
   if (!HasSideEffectIfMissed(move_name) && !move_hit) {
@@ -381,7 +423,11 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kLeechLife: {
       int absorbed = !(damage_done >> 1) ? 1 : damage_done >> 1;
       attacker->AbsorbHp(absorbed);
-      Gui::DisplayHpAbsorbedMessage(attacker->SpeciesName(), absorbed);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayHpAbsorbedMessage(attacker->SpeciesName(), absorbed);
+      }
+
       break;
     }
     case MoveNames::kAcid:
@@ -389,21 +435,32 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       if (VariableEffectActivates(move_name) &&
           !defender->SubstituteIsActive() && !defender->IsUnderMist()) {
         defender->ChangeStat(StatNames::kSpecial, -1);
-        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                      StatNames::kSpecial, -1);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                        StatNames::kSpecial, -1);
+        }
       }
 
       break;
     case MoveNames::kBarrier:
     case MoveNames::kAcidArmor:
       attacker->ChangeStat(StatNames::kDefense, 2);
-      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
-                                    StatNames::kDefense, 2);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                      StatNames::kDefense, 2);
+      }
+
       break;
     case MoveNames::kAgility:
       attacker->ChangeStat(StatNames::kSpeed, 2);
-      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
-                                    StatNames::kSpeed, 2);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                      StatNames::kSpeed, 2);
+      }
+
       break;
     case MoveNames::kBite:
     case MoveNames::kBoneClub:
@@ -420,33 +477,48 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
     case MoveNames::kAmnesia:
       attacker->ChangeStat(StatNames::kSpecial, 2);
-      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
-                                    StatNames::kSpecial, 2);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                      StatNames::kSpecial, 2);
+      }
+
       break;
     case MoveNames::kAuroraBeam:
       if (VariableEffectActivates(move_name) &&
           !defender->SubstituteIsActive() && !defender->IsUnderMist()) {
         defender->ChangeStat(StatNames::kAttack, -1);
-        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                      StatNames::kAttack, -1);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                        StatNames::kAttack, -1);
+        }
       }
 
       break;
     case MoveNames::kBide:
       attacker->UseBide();
-      Gui::DisplayIsBidingMessage(attacker->SpeciesName());
+
+      if (!is_called_by_ai) {
+        Gui::DisplayIsBidingMessage(attacker->SpeciesName());
+      }
+
       break;
     case MoveNames::kBind:
     case MoveNames::kClamp:
     case MoveNames::kFireSpin:
     case MoveNames::kWrap: {
+      if (!attacker->UsedTrapMove() && !is_called_by_ai) {
+        Gui::DisplayUsedTrapMoveMessage(attacker->SpeciesName());
+        Gui::DisplayIsTrappedMessage(defender->SpeciesName());
+      }
+
       int random_threshold = RandomIntDistribution(2, 5);
       attacker->Trap(true, random_threshold);
-      Gui::DisplayUsedTrapMoveMessage(attacker->SpeciesName());
       defender->Trap(false, random_threshold);
-      Gui::DisplayIsTrappedMessage(defender->SpeciesName());
 
-      if (!attacker->IsTrapped() || !defender->IsTrapped()) {
+      if ((!attacker->UsedTrapMove() || !defender->IsTrapped()) &&
+          !is_called_by_ai) {
         Gui::DisplayTrapEndedMessage(attacker->SpeciesName());
         Gui::DisplayTrapEndedMessage(defender->SpeciesName());
       }
@@ -460,7 +532,10 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
           !defender->IsType(TypeNames::kIce) &&
           !defender->SubstituteIsActive() && !defender->HasStatus()) {
         defender->ApplyStatus(StatusNames::kFrozen);
-        Gui::DisplayFreezeStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplayFreezeStartedMessage(defender->SpeciesName());
+        }
       }
 
       break;
@@ -473,7 +548,10 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
           !defender->IsType(TypeNames::kElectric) &&
           !defender->SubstituteIsActive()) {
         defender->ApplyStatus(StatusNames::kParalyzed);
-        Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
+        }
       }
 
       break;
@@ -483,18 +561,26 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       if (VariableEffectActivates(move_name) &&
           !defender->SubstituteIsActive() && !defender->IsUnderMist()) {
         defender->ChangeStat(StatNames::kSpeed, -1);
-        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                      StatNames::kSpeed, -1);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                        StatNames::kSpeed, -1);
+        }
       }
 
       break;
     case MoveNames::kConfuseRay:
     case MoveNames::kSupersonic:
       if (defender->IsConfused() || defender->SubstituteIsActive()) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         defender->Confuse();
-        Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
+        }
       }
 
       break;
@@ -502,7 +588,10 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kPsybeam:
       if (VariableEffectActivates(move_name) && !defender->IsConfused()) {
         defender->Confuse();
-        Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplayConfusionStartedMessage(defender->SpeciesName());
+        }
       }
 
       break;
@@ -510,41 +599,47 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       attacker->UseConversion();
       break;
     case MoveNames::kCounter:
-      UseCounter(attacker, defender);
+      UseCounter(attacker, defender, is_called_by_ai);
       break;
     case MoveNames::kDefenseCurl:
     case MoveNames::kHarden:
     case MoveNames::kWithdraw:
       attacker->ChangeStat(StatNames::kDefense, 1);
-      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
-                                    StatNames::kDefense, 1);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                      StatNames::kDefense, 1);
+      }
+
       break;
     case MoveNames::kDig:
     case MoveNames::kFly:
-      if (!attacker->IsVanished()) {
+      if (!attacker->IsVanished() && !is_called_by_ai) {
         Gui::DisplayPokemonVanishedMessage(attacker->SpeciesName());
       }
 
       attacker->UseVanishMove();
       break;
-    case MoveNames::kDisable: {
-      if (defender->SubstituteIsActive() || !defender->CanHaveMoveDisabled() ||
-          defender->HasMoveDisabled()) {
-        Gui::DisplayMoveFailedMessage();
-      } else {
-        int disable_index = DisableIndex(defender);
-        defender->DisableMove(disable_index);
-        Gui::DisplayMoveDisabledMessage(
-            defender->GetMovesContainer()[disable_index]->MoveName());
+    case MoveNames::kDisable:
+      if (!is_called_by_ai) {
+        if (defender->SubstituteIsActive() ||
+            !defender->CanHaveMoveDisabled() || defender->HasMoveDisabled()) {
+          Gui::DisplayMoveFailedMessage();
+        } else {
+          Gui::DisplayMoveDisabledMessage(defender->DisableMove());
+        }
       }
 
       break;
-    }
     case MoveNames::kDoubleTeam:
     case MoveNames::kMinimize:
       attacker->ChangeStat(StatNames::kEvasion, -1);
-      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
-                                    StatNames::kEvasion, 1);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                      StatNames::kEvasion, 1);
+      }
+
       break;
     case MoveNames::kDoubleEdge:
     case MoveNames::kTakeDown:
@@ -552,17 +647,24 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kStruggle: {
       int recoil_damage = !(damage_done >> 2) ? 1 : damage_done >> 2;
       attacker->TakeRecoilDamage(recoil_damage);
-      Gui::DisplayRecoilDamageMessage(attacker->SpeciesName(), recoil_damage);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayRecoilDamageMessage(attacker->SpeciesName(), recoil_damage);
+      }
+
       break;
     }
     case MoveNames::kDragonRage:
-      DoDirectDamage(defender, 40);
+      DoDirectDamage(defender, 40, is_called_by_ai);
       break;
     case MoveNames::kDreamEater: {
       if (defender->IsAsleep() || defender->IsResting()) {
         int absorbed = !(damage_done >> 1) ? 1 : damage_done >> 1;
         attacker->AbsorbHp(absorbed);
-        Gui::DisplayHpAbsorbedMessage(attacker->SpeciesName(), absorbed);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayHpAbsorbedMessage(attacker->SpeciesName(), absorbed);
+        }
       }
 
       break;
@@ -579,27 +681,37 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
           !defender->IsType(TypeNames::kFire) &&
           !defender->SubstituteIsActive() && !defender->HasStatus()) {
         defender->ApplyStatus(StatusNames::kBurned);
-        Gui::DisplayBurnStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplayBurnStartedMessage(defender->SpeciesName());
+        }
       }
 
       break;
     case MoveNames::kFissure:
     case MoveNames::kGuillotine:
     case MoveNames::kHornDrill:
-      UseOneHitKoMove(attacker, defender);
+      UseOneHitKoMove(attacker, defender, is_called_by_ai);
       break;
     case MoveNames::kFlash:
     case MoveNames::kKinesis:
     case MoveNames::kSmokescreen:
     case MoveNames::kSandAttack:
       if (defender->SubstituteIsActive()) {
-        Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+        if (!is_called_by_ai) {
+          Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+        }
       } else if (defender->IsUnderMist()) {
-        Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+        if (!is_called_by_ai) {
+          Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+        }
       } else {
         defender->ChangeStat(StatNames::kAccuracy, -1);
-        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                      StatNames::kAccuracy, -1);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                        StatNames::kAccuracy, -1);
+        }
       }
 
       break;
@@ -609,10 +721,15 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kGlare:
       if (defender->HasStatus() || defender->SubstituteIsActive() ||
           defender->IsType(TypeNames::kElectric)) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         defender->ApplyStatus(StatusNames::kParalyzed);
-        Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
+        }
       }
 
       break;
@@ -620,10 +737,15 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       if (defender->HasStatus() || defender->SubstituteIsActive() ||
           defender->IsType(TypeNames::kGrass) ||
           defender->IsType(TypeNames::kElectric)) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         defender->ApplyStatus(StatusNames::kParalyzed);
-        Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
+        }
       }
 
       break;
@@ -631,29 +753,45 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       if (defender->HasStatus() || defender->SubstituteIsActive() ||
           defender->IsType(TypeNames::kElectric) ||
           defender->IsType(TypeNames::kGround)) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         defender->ApplyStatus(StatusNames::kParalyzed);
-        Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplayParalysisStartedMessage(defender->SpeciesName());
+        }
       }
 
       break;
     case MoveNames::kGrowl:
       if (defender->SubstituteIsActive()) {
-        Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+        if (!is_called_by_ai) {
+          Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+        }
       } else if (defender->IsUnderMist()) {
-        Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+        if (!is_called_by_ai) {
+          Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+        }
       } else {
         defender->ChangeStat(StatNames::kAttack, -1);
-        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                      StatNames::kAttack, -1);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                        StatNames::kAttack, -1);
+        }
       }
 
       break;
     case MoveNames::kGrowth:
       attacker->ChangeStat(StatNames::kSpecial, 1);
-      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
-                                    StatNames::kSpecial, 1);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                      StatNames::kSpecial, 1);
+      }
+
       break;
     case MoveNames::kHaze:
       HazeField(attacker, defender);
@@ -662,7 +800,10 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kJumpKick:
       if (!move_hit || !damage_done) {
         attacker->TakeRecoilDamage(1);
-        Gui::DisplayRecoilDamageMessage(attacker->SpeciesName(), 1);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayRecoilDamageMessage(attacker->SpeciesName(), 1);
+        }
       }
 
       break;
@@ -673,10 +814,15 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kLovelyKiss:
     case MoveNames::kSing:
       if (defender->SubstituteIsActive() || defender->HasStatus()) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         defender->ApplyStatus(StatusNames::kAsleep);
-        Gui::DisplaySleepStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplaySleepStartedMessage(defender->SpeciesName());
+        }
       }
 
       break;
@@ -684,38 +830,57 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kSpore:
       if (defender->SubstituteIsActive() ||
           defender->HasStatus() || defender->IsType(TypeNames::kGrass)) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         defender->ApplyStatus(StatusNames::kAsleep);
-        Gui::DisplaySleepStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplaySleepStartedMessage(defender->SpeciesName());
+        }
       }
 
       break;
     case MoveNames::kLeechSeed:
       if (defender->IsType(TypeNames::kGrass) || defender->IsSeeded() ||
           defender->SubstituteIsActive()) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         defender->ApplyLeechSeed();
-        Gui::DisplayLeechSeedStartedMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplayLeechSeedStartedMessage(defender->SpeciesName());
+        }
       }
       break;
     case MoveNames::kLeer:
     case MoveNames::kTailWhip:
       if (defender->SubstituteIsActive()) {
-        Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+        if (!is_called_by_ai) {
+          Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+        }
       } else if (defender->IsUnderMist()) {
-        Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+        if (!is_called_by_ai) {
+          Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+        }
       } else {
         defender->ChangeStat(StatNames::kDefense, -1);
-        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                      StatNames::kDefense, -1);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                        StatNames::kDefense, -1);
+        }
       }
 
       break;
     case MoveNames::kLightScreen:
       if (attacker->IsBehindLightScreen()) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         attacker->UseLightScreen();
       }
@@ -724,43 +889,57 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kMeditate:
     case MoveNames::kSharpen:
       attacker->ChangeStat(StatNames::kAttack, 1);
-      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
-                                    StatNames::kAttack, 1);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                      StatNames::kAttack, 1);
+      }
+
       break;
     case MoveNames::kMimic:
-      MimicWillSucceed(attacker, defender) ?
-      UseMimic(attacker, defender) : Gui::DisplayMoveFailedMessage();
+      if (!MimicWillSucceed(attacker, defender)) {
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
+      } else {
+        UseMimic(attacker, defender, is_called_by_ai);
+      }
+
       break;
     case MoveNames::kMist:
       if (attacker->IsUnderMist()) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         attacker->UseMist();
-        Gui::DisplayMistStartedMessage(attacker->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplayMistStartedMessage(attacker->SpeciesName());
+        }
       }
 
       break;
     case MoveNames::kNightShade:
     case MoveNames::kSeismicToss:
-      DoDamageEqualToAttackerLevel(attacker, defender);
+      DoDamageEqualToAttackerLevel(attacker, defender, is_called_by_ai);
       break;
     case MoveNames::kRage:
-      if (!attacker->IsRaging()) {
+      if (!attacker->IsRaging() && !is_called_by_ai) {
         Gui::DisplayIsRagingMessage(attacker->SpeciesName());
       }
 
       attacker->UseRage();
-
       break;
     case MoveNames::kPetalDance:
     case MoveNames::kThrash:
-      if (!attacker->IsUsingLockInMove()) {
+      if (!attacker->IsUsingLockInMove() && !is_called_by_ai) {
         Gui::DisplayIsLockedInMessage(attacker->SpeciesName());
       }
 
       attacker->UseLockInMove();
 
-      if (!attacker->IsUsingLockInMove()) {
+      if (!attacker->IsUsingLockInMove() && !is_called_by_ai) {
         Gui::DisplayLockInEndedMessage(attacker->SpeciesName());
         Gui::DisplayConfusionStartedMessage(attacker->SpeciesName());
       }
@@ -770,10 +949,15 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     case MoveNames::kPoisonPowder:
       if (defender->SubstituteIsActive() ||
           defender->IsType(TypeNames::kPoison) || defender->HasStatus()) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         defender->ApplyStatus(StatusNames::kPoisoned);
-        Gui::DisplayPoisonStartedMessage(defender->SpeciesName(), false);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayPoisonStartedMessage(defender->SpeciesName(), false);
+        }
       }
 
       break;
@@ -785,18 +969,21 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
           !defender->IsType(TypeNames::kPoison) &&
           !defender->SubstituteIsActive()) {
         defender->ApplyStatus(StatusNames::kPoisoned);
-        Gui::DisplayPoisonStartedMessage(defender->SpeciesName(), false);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayPoisonStartedMessage(defender->SpeciesName(), false);
+        }
       }
 
       break;
     case MoveNames::kPsywave:
-      UsePsywave(attacker, defender);
+      UsePsywave(attacker, defender, is_called_by_ai);
       break;
     case MoveNames::kRazorWind:
     case MoveNames::kSkullBash:
     case MoveNames::kSkyAttack:
     case MoveNames::kSolarBeam:
-      if (!attacker->IsChargingUp()) {
+      if (!attacker->IsChargingUp() && !is_called_by_ai) {
         Gui::DisplayChargingUpMessage(attacker->SpeciesName());
       }
 
@@ -809,7 +996,9 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
       if (max_minus_current == 255 || max_minus_current == 511 ||
           attacker->HpStat()->CurrentHp() == attacker->HpStat()->MaxHp()) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         attacker->RecoverHp();
       }
@@ -818,7 +1007,9 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
     }
     case MoveNames::kReflect:
       if (attacker->IsBehindReflect()) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         attacker->UseReflect();
       }
@@ -830,74 +1021,111 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
       if (max_minus_current == 255 || max_minus_current == 511 ||
           attacker->HpStat()->CurrentHp() == attacker->HpStat()->MaxHp()) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         attacker->ApplyStatus(StatusNames::kAsleepRest);
-        Gui::DisplaySleepStartedMessage(defender->SpeciesName());
-        Gui::DisplayRecoveredAllHpMessage(defender->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplaySleepStartedMessage(defender->SpeciesName());
+          Gui::DisplayRecoveredAllHpMessage(defender->SpeciesName());
+        }
       }
 
       break;
     }
     case MoveNames::kScreech:
       if (defender->SubstituteIsActive()) {
-        Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+        if (!is_called_by_ai) {
+          Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+        }
       } else if (defender->IsUnderMist()) {
-        Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+        if (!is_called_by_ai) {
+          Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+        }
       } else {
         defender->ChangeStat(StatNames::kDefense, -2);
-        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                      StatNames::kDefense, -2);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                        StatNames::kDefense, -2);
+        }
       }
 
       break;
     case MoveNames::kSonicBoom:
-      DoDirectDamage(defender, 20);
+      DoDirectDamage(defender, 20, is_called_by_ai);
       break;
     case MoveNames::kStringShot:
       if (defender->SubstituteIsActive()) {
-        Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+        if (!is_called_by_ai) {
+          Gui::DisplayIsBehindSubstituteMessage(defender->SpeciesName());
+        }
       } else if (defender->IsUnderMist()) {
-        Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+        if (!is_called_by_ai) {
+          Gui::DisplayIsUnderMistMessage(defender->SpeciesName());
+        }
       } else {
         defender->ChangeStat(StatNames::kSpeed, -1);
-        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                      StatNames::kSpeed, -1);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayStatChangeMessage(defender->SpeciesName(),
+                                        StatNames::kSpeed, -1);
+        }
       }
 
       break;
     case MoveNames::kSubstitute:
       if (attacker->SubstituteIsActive() ||
           attacker->HpStat()->HpAsPercent() <= 25.0) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         attacker->UseSubstitute();
-        Gui::DisplaySubstituteStartedMessage(attacker->SpeciesName());
+
+        if (!is_called_by_ai) {
+          Gui::DisplaySubstituteStartedMessage(attacker->SpeciesName());
+        }
       }
 
       break;
     case MoveNames::kSuperFang:
-      UseSuperFang(attacker, defender);
+      UseSuperFang(attacker, defender, is_called_by_ai);
       break;
     case MoveNames::kSwordsDance:
       attacker->ChangeStat(StatNames::kAttack, 2);
-      Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
-                                    StatNames::kAttack, 2);
+
+      if (!is_called_by_ai) {
+        Gui::DisplayStatChangeMessage(attacker->SpeciesName(),
+                                      StatNames::kAttack, 2);
+      }
+
       break;
     case MoveNames::kToxic:
       if (defender->SubstituteIsActive() ||
           defender->IsType(TypeNames::kPoison) || defender->HasStatus()) {
-        Gui::DisplayMoveFailedMessage();
+        if (!is_called_by_ai) {
+          Gui::DisplayMoveFailedMessage();
+        }
       } else {
         defender->ApplyStatus(StatusNames::kPoisonedToxic);
-        Gui::DisplayPoisonStartedMessage(defender->SpeciesName(), true);
+
+        if (!is_called_by_ai) {
+          Gui::DisplayPoisonStartedMessage(defender->SpeciesName(), true);
+        }
       }
 
       break;
     case MoveNames::kTransform:
       attacker->Transform(defender);
-      Gui::DisplayTransformMessage(attacker->SpeciesName(),
-                                   defender->SpeciesName());
+
+      if (!is_called_by_ai) {
+        Gui::DisplayTransformMessage(attacker->SpeciesName(),
+                                     defender->SpeciesName());
+      }
+
       break;
     default:
       break;
@@ -905,16 +1133,20 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 }
 
 bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
-                  const std::shared_ptr<Pokemon> &defender) {
-  if (!attacker->HpStat()->CurrentHp() || !defender->HpStat()->CurrentHp()) {
+                  const std::shared_ptr<Pokemon> &defender,
+                  const bool &is_called_by_ai) {
+  if (attacker->IsFainted() || defender->IsFainted()) {
     return false;
   }
 
   if (attacker->IsAsleep()) {
-    Gui::DisplayIsAsleepMessage(attacker->SpeciesName());
+    if (!is_called_by_ai) {
+      Gui::DisplayIsAsleepMessage(attacker->SpeciesName());
+    }
+
     attacker->AdvanceRegularSleepCounter();
 
-    if (!attacker->HasStatus()) {
+    if (!attacker->HasStatus() && !is_called_by_ai) {
       Gui::DisplayWokeUpMessage(attacker->SpeciesName());
     }
 
@@ -922,10 +1154,13 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   }
 
   if (attacker->IsResting()) {
-    Gui::DisplayIsAsleepMessage(attacker->SpeciesName());
+    if (!is_called_by_ai) {
+      Gui::DisplayIsAsleepMessage(attacker->SpeciesName());
+    }
+
     attacker->AdvanceRestCounter();
 
-    if (!attacker->HasStatus()) {
+    if (!attacker->HasStatus() && !is_called_by_ai) {
       Gui::DisplayWokeUpMessage(attacker->SpeciesName());
     }
 
@@ -933,33 +1168,51 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   }
 
   if (attacker->IsFrozen()) {
-    Gui::DisplayIsFrozenMessage(attacker->SpeciesName());
+    if (!is_called_by_ai) {
+      Gui::DisplayIsFrozenMessage(attacker->SpeciesName());
+    }
+
     return false;
   }
 
   if (attacker->IsFlinched()) {
-    Gui::DisplayFlinchedMessage(attacker->SpeciesName());
+    if (!is_called_by_ai) {
+      Gui::DisplayFlinchedMessage(attacker->SpeciesName());
+    }
+
     return false;
   }
 
   if (attacker->IsParalyzed() && attacker->IsFullyParalyzed()) {
-    Gui::DisplayFullyParalyzedMessage(attacker->SpeciesName());
+    if (!is_called_by_ai) {
+      Gui::DisplayFullyParalyzedMessage(attacker->SpeciesName());
+    }
+
     return false;
   }
 
   if (attacker->IsConfused() && !attacker->IsAsleep() &&
       !attacker->IsFrozen() && !attacker->IsResting()) {
-    Gui::DisplayConfusedMessage(attacker->SpeciesName());
+    if (!is_called_by_ai) {
+      Gui::DisplayConfusedMessage(attacker->SpeciesName());
+    }
 
     if (!attacker->HandleConfusion()) {
-      Gui::DisplayHitSelfMessage(attacker->SpeciesName());
+      if (!is_called_by_ai) {
+        Gui::DisplayHitSelfMessage(attacker->SpeciesName());
+      }
+
       attacker->SetMoveUsed(std::make_shared<Move>(MoveNames::kHitSelf,
                                                    Pp(MoveNames::kHitSelf)));
-      int damage_done = DamageDone(attacker, attacker, false, true, true);
+      int damage_done = DamageDone(
+          attacker, attacker, false, true, true, is_called_by_ai);
       attacker->DoConfusionDamage(damage_done);
-      Gui::DisplayDamageDoneMessage(damage_done);
 
-      if (!attacker->IsConfused()) {
+      if (!is_called_by_ai) {
+        Gui::DisplayDamageDoneMessage(damage_done);
+      }
+
+      if (!attacker->IsConfused() && !is_called_by_ai) {
         Gui::DisplayConfusionEndedMessage(attacker->SpeciesName());
       }
 
@@ -968,42 +1221,65 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   }
 
   if (attacker->IsTrapped()) {
-    Gui::DisplayIsTrappedMessage(attacker->SpeciesName());
+    if (!is_called_by_ai) {
+      Gui::DisplayIsTrappedMessage(attacker->SpeciesName());
+    }
+
     return false;
   }
 
   if (attacker->MoveUsed()->IsDisabled()) {
-    Gui::DisplayMoveDisabledMessage(attacker->MoveUsed()->MoveName());
+    if (!is_called_by_ai) {
+      Gui::DisplayMoveDisabledMessage(attacker->MoveUsed()->MoveName());
+    }
+
     return false;
   }
 
   return true;
 }
 
-void HardSwitch(Team &attacker) {
+void HardSwitch(Team &attacker, const bool &is_called_by_ai) {
   std::shared_ptr<Pokemon> old_active_member = attacker.ActiveMember();
   attacker.HardSwitch();
-  Gui::DisplaySwitchMessage(old_active_member->SpeciesName(),
-                            attacker.ActiveMember()->SpeciesName());
+
+  if (!is_called_by_ai) {
+    Gui::DisplaySwitchMessage(old_active_member->SpeciesName(),
+                              attacker.ActiveMember()->SpeciesName());
+  }
+}
+
+bool MirrorMoveWillFail(const MoveNames &defender_move) {
+  return !(defender_move != MoveNames::kStruggle && !IsLockIn(defender_move) &&
+      !IsChargeUp(defender_move) && !IsVanish(defender_move) &&
+      !IsBinding(defender_move) && defender_move != MoveNames::kMimic);
 }
 
 void UseMirrorMove(const std::shared_ptr<Pokemon> &attacker,
-                   const std::shared_ptr<Pokemon> &defender) {
-  if (!defender->ExecutedMove()) {
-    Gui::DisplayMoveFailedMessage();
+                   const std::shared_ptr<Pokemon> &defender,
+                   const bool &is_called_by_ai) {
+  if (!defender->ExecutedMove() ||
+      (defender->MoveUsed() &&
+          MirrorMoveWillFail(defender->MoveUsed()->MoveName()))) {
+    if (!is_called_by_ai) {
+      Gui::DisplayMoveFailedMessage();
+    }
   } else {
     MoveNames defender_move_name = defender->MoveUsed()->MoveName();
     std::shared_ptr<Move> move_used = std::make_shared<Move>(
         defender_move_name, Pp(defender_move_name));
     attacker->SetMoveUsed(defender->MoveUsed());
-    Gui::DisplayPokemonUsedMoveMessage(attacker->SpeciesName(),
-                                       defender_move_name);
+
+    if (!is_called_by_ai) {
+      Gui::DisplayPokemonUsedMoveMessage(attacker->SpeciesName(),
+                                         defender_move_name);
+    }
   }
 }
 
 void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
                  const std::shared_ptr<Pokemon> &defender,
-                 const bool &move_hit) {
+                 const bool &move_hit, const bool &is_called_by_ai) {
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
   int damage_done;
   bool is_charge_or_vanish = false;
@@ -1014,41 +1290,54 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
     damage_done = 0;
   } else {
     damage_done = IsSelfKo(move_used->MoveName()) ?
-                  DamageDone(attacker, defender, true, move_hit, false) :
-                  DamageDone(attacker, defender, false, move_hit, false);
+                  DamageDone(attacker,
+                             defender,
+                             true,
+                             move_hit,
+                             false,
+                             is_called_by_ai) :
+                  DamageDone(attacker,
+                             defender,
+                             false,
+                             move_hit,
+                             false,
+                             is_called_by_ai);
   }
 
   if (damage_done && move_hit) {
     move_used->SetDamageDone(damage_done);
     DoConditionalDamage(defender, attacker->MoveUsed()->MoveName(),
-                        damage_done);
+                        damage_done, is_called_by_ai);
   }
 
-  DoSideEffect(attacker, defender, damage_done, move_hit, is_charge_or_vanish);
+  DoSideEffect(attacker, defender, damage_done, move_hit, is_charge_or_vanish,
+               is_called_by_ai);
 }
 
 void UseMoveThatAlwaysHitsTwice(const std::shared_ptr<Pokemon> &attacker,
                                 const std::shared_ptr<Pokemon> &defender,
-                                const bool &move_hit) {
-  ExecuteMove(attacker, defender, move_hit);
-  ExecuteMove(attacker, defender, move_hit);
+                                const bool &move_hit,
+                                const bool &is_called_by_ai) {
+  ExecuteMove(attacker, defender, move_hit, is_called_by_ai);
+  ExecuteMove(attacker, defender, move_hit, is_called_by_ai);
 }
 
 void UseMoveThatHitsTwoToFiveTimes(const std::shared_ptr<Pokemon> &attacker,
                                    const std::shared_ptr<Pokemon> &defender,
-                                   const bool &move_hit) {
+                                   const bool &move_hit,
+                                   const bool &is_called_by_ai) {
   for (int i = 0; i < 5; i++) {
     switch (i) {
       case 0:
       case 1:
-        ExecuteMove(attacker, defender, move_hit);
+        ExecuteMove(attacker, defender, move_hit, is_called_by_ai);
         break;
       case 2:
         if (RandomRealDistribution(0.0, 100.0) > 37.5) {
           return;
         }
 
-        ExecuteMove(attacker, defender, move_hit);
+        ExecuteMove(attacker, defender, move_hit, is_called_by_ai);
         break;
       case 3:
       case 4:
@@ -1056,7 +1345,7 @@ void UseMoveThatHitsTwoToFiveTimes(const std::shared_ptr<Pokemon> &attacker,
           return;
         }
 
-        ExecuteMove(attacker, defender, move_hit);
+        ExecuteMove(attacker, defender, move_hit, is_called_by_ai);
         break;
       default:
         assert(false);
@@ -1066,17 +1355,17 @@ void UseMoveThatHitsTwoToFiveTimes(const std::shared_ptr<Pokemon> &attacker,
 
 } //namespace
 
-void UseMove(Team &attacker, Team &defender) {
+void UseMove(Team &attacker, Team &defender, const bool &is_called_by_ai) {
   std::shared_ptr<Pokemon> attacking_member = attacker.ActiveMember();
   std::shared_ptr<Pokemon> defending_member = defender.ActiveMember();
   std::shared_ptr<Move> move_used = attacking_member->MoveUsed();
 
   if (IsSwitch(attacking_member->MoveUsed()->MoveName())) {
-    HardSwitch(attacker);
+    HardSwitch(attacker, is_called_by_ai);
     return;
   }
 
-  if (!IsGoodToMove(attacking_member, defending_member)) {
+  if (!IsGoodToMove(attacking_member, defending_member, is_called_by_ai)) {
     return;
   }
 
@@ -1085,7 +1374,7 @@ void UseMove(Team &attacker, Team &defender) {
   if (attacking_member->HasMoveDisabled()) {
     attacking_member->HandleDisable();
 
-    if (!attacking_member->HasMoveDisabled()) {
+    if (!attacking_member->HasMoveDisabled() && !is_called_by_ai) {
       Gui::DisplayDisableEndedMessage(attacking_member->SpeciesName());
     }
   }
@@ -1093,16 +1382,17 @@ void UseMove(Team &attacker, Team &defender) {
   if (defending_member->HasMoveDisabled()) {
     defending_member->HandleDisable();
 
-    if (!defending_member->HasMoveDisabled()) {
+    if (!defending_member->HasMoveDisabled() && !is_called_by_ai) {
       Gui::DisplayDisableEndedMessage(defending_member->SpeciesName());
     }
   }
 
-  Gui::DisplayPokemonUsedMoveMessage(attacking_member->SpeciesName(),
-                                     move_used->MoveName());
+  if (!is_called_by_ai) {
+    Gui::DisplayPokemonUsedMoveMessage(attacking_member->SpeciesName(),
+                                       move_used->MoveName());
+  }
 
-  if (move_used->MoveName() == MoveNames::kPass &&
-      !attacking_member->BideIsActive()) {
+  if (move_used_name == MoveNames::kPass && !attacking_member->BideIsActive()) {
     attacking_member->SetRecharging(false);
     return;
   }
@@ -1112,13 +1402,16 @@ void UseMove(Team &attacker, Team &defender) {
           IsDraining(move_used_name))) ||
       (defending_member->IsVanished() && !WorksIfDefenderIsVanished(
           move_used_name))) {
-    Gui::DisplayMoveFailedMessage();
+    if (!is_called_by_ai) {
+      Gui::DisplayMoveFailedMessage();
+    }
+
     return;
   }
 
   bool move_hit = MoveHit(ChanceToHit(attacking_member, defending_member));
 
-  if (!move_hit) {
+  if (!move_hit && !is_called_by_ai) {
     Gui::DisplayMoveMissedMessage();
   }
 
@@ -1128,28 +1421,42 @@ void UseMove(Team &attacker, Team &defender) {
   // Pokemon->UseMetronome() for a reference.
   if (move_used->MoveName() == MoveNames::kMetronome) {
     attacking_member->UseMetronome();
-    Gui::DisplayPokemonUsedMoveMessage(
-        attacking_member->SpeciesName(),
-        attacking_member->MoveUsed()->MoveName());
+
+    if (!is_called_by_ai) {
+      Gui::DisplayPokemonUsedMoveMessage(
+          attacking_member->SpeciesName(),
+          attacking_member->MoveUsed()->MoveName());
+    }
   }
 
   // Mirror move must be handled separately for the same reason. The attacker
   // essentially is going to be executing two moves.
   if (move_used->MoveName() == MoveNames::kMirrorMove) {
-    UseMirrorMove(attacking_member, defending_member);
+    UseMirrorMove(attacking_member, defending_member, is_called_by_ai);
   }
 
   if (AlwaysHitsTwice(move_used->MoveName())) {
-    UseMoveThatAlwaysHitsTwice(attacking_member, defending_member, move_hit);
+    UseMoveThatAlwaysHitsTwice(attacking_member,
+                               defending_member,
+                               move_hit,
+                               is_called_by_ai);
   } else if (HitsTwoToFiveTimes(move_used->MoveName())) {
-    UseMoveThatHitsTwoToFiveTimes(attacking_member, defending_member, move_hit);
+    UseMoveThatHitsTwoToFiveTimes(attacking_member,
+                                  defending_member,
+                                  move_hit,
+                                  is_called_by_ai);
   } else {
-    ExecuteMove(attacking_member, defending_member, move_hit);
+    ExecuteMove(attacking_member, defending_member, move_hit, is_called_by_ai);
   }
 
   if (attacking_member->BideWillEnd()) {
-    Gui::DisplayBideEndedMessage(attacking_member->SpeciesName());
-    DoDirectDamage(defending_member, attacking_member->BideDamage() << 1);
+    if (!is_called_by_ai) {
+      Gui::DisplayBideEndedMessage(attacking_member->SpeciesName());
+    }
+
+    DoDirectDamage(defending_member,
+                   attacking_member->BideDamage() << 1,
+                   is_called_by_ai);
     attacking_member->ResetBide();
   }
 

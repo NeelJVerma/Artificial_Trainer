@@ -36,7 +36,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Artificial_Trainer.dir/src/ailogic/typesum.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/ailogic/pickforcedswitch.cc.o"
   "CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o"
-  "CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.o"
+  "CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.o"
   "Artificial_Trainer.pdb"
   "Artificial_Trainer"
 )

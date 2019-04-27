@@ -49,6 +49,41 @@ struct InGameFlags {
   BeforeTransformState before_transform_state{};
   Bide bide{};
   StatusNames status = StatusNames::kClear;
+
+  InGameFlags DeepCopy() const {
+    InGameFlags copy;
+    copy.vanished = vanished;
+    copy.used_focus_energy = used_focus_energy;
+    copy.flinched = flinched;
+    copy.used_mimic = used_mimic;
+    copy.under_mist = under_mist;
+    copy.behind_light_screen = behind_light_screen;
+    copy.behind_reflect = behind_reflect;
+    copy.executed_move = executed_move;
+    copy.seeded = seeded;
+    copy.charging_up = charging_up;
+    copy.recharging = recharging;
+    copy.raging = raging;
+    copy.used_trap_move = used_trap_move;
+    copy.trapped = trapped;
+    copy.num_turns_locked_in = num_turns_locked_in;
+    copy.old_attack_numerator = old_attack_numerator;
+    copy.old_attack_denominator = old_attack_denominator;
+    copy.old_speed_numerator = old_speed_numerator;
+    copy.old_speed_denominator = old_speed_denominator;
+    copy.mimic_index = mimic_index;
+    copy.toxic_n_factor = toxic_n_factor;
+    copy.rest_counter = rest_counter;
+    copy.turns_asleep = turns_asleep;
+    copy.num_turns_trapped = num_turns_trapped;
+    copy.confusion = confusion;
+    copy.disable = disable;
+    copy.substitute = substitute;
+    copy.before_transform_state = before_transform_state.DeepCopy();
+    copy.bide = bide;
+    copy.status = status;
+    return copy;
+  }
 };
 
 class Pokemon {
@@ -63,114 +98,108 @@ class Pokemon {
           const MovesContainer &moves_container,
           const TypeContainer &type_container, const int &level,
           const std::shared_ptr<Hp> &hp_stat);
-  Pokemon(const SpeciesNames &species_name,
-          const NormalStatsContainer &stats_container,
-          const ExclusiveInGameStatsContainer
-          &exclusive_in_game_stats_container,
-          const MovesContainer &moves_container,
-          const TypeContainer &type_container, const int &level,
-          const std::shared_ptr<Hp> &hp_stat,
-          const std::shared_ptr<Move> &move_used,
-          const InGameFlags &in_game_flags, const bool &is_active);
+  std::shared_ptr<Hp> HpStat() const;
   NormalStatsContainer GetNormalStatsContainer() const;
   ExclusiveInGameStatsContainer GetExclusiveInGameStatsContainer() const;
   MovesContainer GetMovesContainer() const;
   TypeContainer GetTypeContainer() const;
+  std::shared_ptr<Move> MoveUsed() const;
   SpeciesNames SpeciesName() const;
   int Level() const;
   bool IsActive() const;
-  void SetIsActive(const bool &is_active);
   void SetMoveUsed(const int &index);
   void SetMoveUsed(const std::shared_ptr<Move> &move);
-  std::shared_ptr<Move> MoveUsed() const;
+  void SetIsActive(const bool &is_active);
   void ChangeStat(const StatNames &stat_name, const int &num_stages);
-  void UseFocusEnergy();
-  bool UsedFocusEnergy() const;
-  void Flinch();
-  bool IsFlinched() const;
-  void Confuse();
-  bool IsConfused() const;
-  void DisableMove(const int &disable_index);
-  bool HasMoveDisabled() const;
-  void UseVanishMove();
+  bool MustUseStruggle() const;
+
   bool IsVanished() const;
+  bool UsedFocusEnergy() const;
+  bool IsFlinched() const;
+  bool UsedMimic() const;
+  bool IsUnderMist() const;
+  bool IsBehindLightScreen() const;
+  bool IsBehindReflect() const;
+  bool ExecutedMove() const;
+  bool IsSeeded() const;
+  bool IsChargingUp() const;
+  bool IsRecharging() const;
+  bool IsRaging() const;
+  bool UsedTrapMove() const;
+  bool IsTrapped() const;
+  bool IsUsingLockInMove() const;
+  bool IsResting() const;
+  bool IsAsleep() const;
+  bool IsConfused() const;
+  bool HasMoveDisabled() const;
+  bool SubstituteIsActive() const;
+  bool BideIsActive() const;
+  int BideDamage() const;
+  bool IsFrozen() const;
+  bool IsParalyzed() const;
+  bool IsFullyParalyzed() const;
+  bool IsPoisoned() const;
+  bool IsUnderToxic() const;
+  bool IsBurned() const;
+  bool HasStatus() const;
+  bool CanHaveMoveDisabled() const;
+  bool IsFainted() const;
+  bool IsType(const TypeNames &type_name) const;
+
+  void UseVanishMove();
+  void UseFocusEnergy();
+  void Flinch();
+  void UseMimic();
+  void UseMist();
+  void UseLightScreen();
+  void UseReflect();
+  void SetExecutedMove(const bool &executed_move);
+  void ApplyLeechSeed();
+  void UseChargeUpMove();
+  void SetRecharging(const bool &recharging);
+  void UseRage();
+  void Trap(const bool &user, const int &random_threshold);
+  void UseLockInMove();
+  void SetMimicIndex(const int &index_in_move_container);
+  void AdvanceToxicFactor();
+  void AdvanceRestCounter();
+  void AdvanceRegularSleepCounter();
+  void Confuse();
   bool HandleConfusion();
   void DoConfusionDamage(const int &damage_done);
+  MoveNames DisableMove();
   void HandleDisable();
+  void UseSubstitute();
+  void DoDamageToSubstitute(const int &damage_done);
+  void Transform(const std::shared_ptr<Pokemon> &target);
+  void UseBide();
+  bool BideWillEnd();
+  void ResetBide();
+  void SetBideDamage(const int &damage);
+  void AddDamageToBide();
+  void ApplyStatus(const StatusNames &status_name);
+  int DoStatusDamage();
   void UseConversion();
   void AbsorbHp(const int &absorbed);
   void TakeRecoilDamage(const int &recoil);
   void AutoFaint();
   void UseMetronome();
-  bool IsType(const TypeNames &type_name) const;
-  void UseMimic();
-  void SetMimicIndex(const int &index_in_move_container);
-  void SetExecutedMove(const bool &executed_move);
-  bool ExecutedMove() const;
-  void UseMist();
-  bool IsUnderMist() const;
-  void UseLightScreen();
-  bool IsBehindLightScreen() const;
-  void UseReflect();
-  bool IsBehindReflect() const;
-  void UseSubstitute();
-  bool SubstituteIsActive() const;
-  void DoDamageToSubstitute(const int &damage_done);
   void RecoverHp();
-  bool IsBurned() const;
-  void ApplyStatus(const StatusNames &status_name);
-  void ApplyLeechSeed();
-  bool IsSeeded() const;
-  bool IsFrozen() const;
-  bool HasStatus() const;
-  bool IsParalyzed() const;
-  bool IsFullyParalyzed() const;
-  bool IsPoisoned() const;
-  bool IsUnderToxic() const;
-  void AdvanceToxicFactor();
-  bool IsAsleep() const;
-  bool IsResting() const;
-  void AdvanceRestCounter();
-  void AdvanceRegularSleepCounter();
-  void UseChargeUpMove();
-  bool IsChargingUp() const;
-  void SetRecharging(const bool &recharging);
-  bool IsRecharging() const;
-  void UseLockInMove();
-  bool IsUsingLockInMove() const;
-  void UseRage();
-  bool IsRaging() const;
-  void Trap(const bool &user, const int &random_threshold);
-  bool UsedTrapMove() const;
-  bool IsTrapped() const;
-  void Transform(const std::shared_ptr<Pokemon> &target);
-  std::shared_ptr<Hp> HpStat() const;
-  void UseBide();
-  bool BideWillEnd();
-  bool BideIsActive() const;
-  int BideDamage() const;
-  void ResetBide();
-  void SetBideDamage(const int &damage);
-  void AddDamageToBide();
-  bool MustUseStruggle() const;
-  bool CanHaveMoveDisabled() const;
-  bool IsFainted() const;
   void ResetFaintFlags();
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
-  int DoStatusDamage();
-  InGameFlags Flags() const;
+  Pokemon DeepCopy() const;
 
  private:
-  NormalStatsContainer normal_stats_container_;
   std::shared_ptr<Hp> hp_stat_;
+  NormalStatsContainer normal_stats_container_;
   ExclusiveInGameStatsContainer exclusive_in_game_stats_container_;
   MovesContainer moves_container_;
-  std::shared_ptr<Move> move_used_;
   TypeContainer type_container_;
-  SpeciesNames species_name_;
+  std::shared_ptr<Move> move_used_;
   InGameFlags flags_;
+  SpeciesNames species_name_;
   int level_;
   bool is_active_;
   void LowerStat(const StatNames &stat_name, const int &num_stages,
@@ -188,6 +217,17 @@ class Pokemon {
   void ApplyRestSleep();
   void RestoreStatsFromStatuses();
   void RestoreStateFromTransform();
+  void SetSpeciesName(const SpeciesNames &species_name);
+  void SetLevel(const int &level);
+  void SetHpStat(const Hp &hp_stat);
+  void SetNormalStatsContainer(
+      const NormalStatsContainer &normal_stats_container);
+  void SetExclusiveInGameStatsContainer(
+      const ExclusiveInGameStatsContainer &exclusive_in_game_stats_container);
+  void SetMovesContainer(const MovesContainer &moves_container);
+  void SetTypeContainer(const TypeContainer &type_container);
+  void SetMoveUsed(const Move &move_used);
+  void SetFlags(const InGameFlags &flags);
 };
 
 } //namespace artificialtrainer

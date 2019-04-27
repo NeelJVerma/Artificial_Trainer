@@ -24,8 +24,4 @@ void Substitute::TakeDamage(const int &damage_done) {
   }
 }
 
-int Substitute::CurrentHp() const {
-  return current_hp_;
-}
-
 } //namespace artificialtrainer

@@ -19,7 +19,7 @@
 #include "../ailogic/pickleadingpokemon.h"
 #include "../ailogic/pickforcedswitch.h"
 #include "../battlemanager/battlemanager.h"
-#include "../ailogic/expectdfs.h"
+#include "../ailogic/expectimax.h"
 
 namespace artificialtrainer {
 namespace {
@@ -91,6 +91,13 @@ void PickRandomTeam(Team &team) {
 
 } //namespace
 
+Battle::Battle() {
+  human_team_ = Team{};
+  ai_team_ = Team{};
+  human_team_.SetIsHuman(true);
+  ai_team_.SetIsHuman(false);
+}
+
 bool Battle::BattleOver() const {
   return human_team_.ActiveTeam().empty() || ai_team_.ActiveTeam().empty();
 }
@@ -103,16 +110,16 @@ void Battle::HandleTurn() {
   std::shared_ptr<Pokemon> active_pokemon_ai = ai_team_.ActiveMember();
   Gui::DisplayActivePokemonData(active_pokemon_ai, false);
   BattleManager::HumanPicksMove(human_team_);
-  BattleManager::HumanPicksMove(ai_team_); // WILL CHANGE WHEN DONE WITH
-  // MINIMAX
+  ai_team_.ActiveMember()->SetMoveUsed(
+      ExpectiMax(human_team_, ai_team_).MoveIndex());
   bool human_moves_first = BattleManager::HumanMovesFirst(human_team_,
                                                           ai_team_);
-  ExpectDfs(human_team_, ai_team_, 0);
-  /*BattleManager::HandleBothTeamsMoves(human_moves_first, human_team_,
-      ai_team_);
-  BattleManager::HandleFainting(human_moves_first, human_team_, ai_team_);
+  BattleManager::HandleBothTeamsMoves(human_moves_first, human_team_,
+      ai_team_, false);
+  BattleManager::HandleFainting(human_moves_first, human_team_, ai_team_,
+   false);
   active_pokemon_human->ResetEndOfTurnFlags();
-  active_pokemon_ai->ResetEndOfTurnFlags();*/
+  active_pokemon_ai->ResetEndOfTurnFlags();
 }
 
 void Battle::StartBattle() {

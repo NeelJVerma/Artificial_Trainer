@@ -18,6 +18,8 @@ class ExclusiveInGameStatsContainer {
   ExclusiveInGameStatsContainer &operator=(
       const ExclusiveInGameStatsContainer &stats_container) = default;
   std::shared_ptr<ExclusiveInGameStat> operator[](const StatNames &stat_name);
+  void AddStat(const ExclusiveInGameStat &stat, const int &index);
+  ExclusiveInGameStatsContainer DeepCopy() const;
 
  private:
   std::shared_ptr<ExclusiveInGameStat>

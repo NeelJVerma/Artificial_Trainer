@@ -538,18 +538,18 @@ CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.s: cmake_fo
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/battlemanager/battlemanager.cc -o CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.s
 
-CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.o: CMakeFiles/Artificial_Trainer.dir/flags.make
-CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.o: ../src/ailogic/expectdfs.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.o -c /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/expectdfs.cc
+CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.o: CMakeFiles/Artificial_Trainer.dir/flags.make
+CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.o: ../src/ailogic/expectimax.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.o -c /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/expectimax.cc
 
-CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/expectdfs.cc > CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.i
+CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/expectimax.cc > CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.i
 
-CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/expectdfs.cc -o CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.s
+CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/ailogic/expectimax.cc -o CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.s
 
 # Object files for target Artificial_Trainer
 Artificial_Trainer_OBJECTS = \
@@ -590,7 +590,7 @@ Artificial_Trainer_OBJECTS = \
 "CMakeFiles/Artificial_Trainer.dir/src/ailogic/typesum.cc.o" \
 "CMakeFiles/Artificial_Trainer.dir/src/ailogic/pickforcedswitch.cc.o" \
 "CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o" \
-"CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.o"
+"CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.o"
 
 # External object files for target Artificial_Trainer
 Artificial_Trainer_EXTERNAL_OBJECTS =
@@ -632,7 +632,7 @@ Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/ailogic/pickleadingpok
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/ailogic/typesum.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/ailogic/pickforcedswitch.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o
-Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.o
+Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.o
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/build.make
 Artificial_Trainer: CMakeFiles/Artificial_Trainer.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Linking CXX executable Artificial_Trainer"

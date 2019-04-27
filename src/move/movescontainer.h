@@ -25,9 +25,11 @@ class MovesContainer {
                         const int &move_pp);
   int EndOfNormalMovesIndex() const;
   std::shared_ptr<Move> operator[](const int &index) const;
+  MovesContainer DeepCopy() const;
 
  private:
   std::vector<std::shared_ptr<Move>> current_moves_;
+  void AddMove(const Move &move);
 };
 
 } //namespace artificialtrainer

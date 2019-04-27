@@ -14,7 +14,6 @@ class Substitute {
   void Activate(const int &current_hp);
   bool IsActive() const;
   void TakeDamage(const int &damage_done);
-  int CurrentHp() const;
 
  private:
   int current_hp_;

@@ -12,13 +12,13 @@ class MoveNode {
   MoveNode(const MoveNode &move_node) = default;
   MoveNode &operator=(const MoveNode &move_node) = default;
   explicit MoveNode(const int &move_index);
-  void SetHeuristicValue(const int &heuristic_value);
+  void SetHeuristicValue(const double &heuristic_value);
   int MoveIndex() const;
-  int HeuristicValue() const;
+  double HeuristicValue() const;
 
  private:
   int move_index_;
-  int heuristic_value_;
+  double heuristic_value_;
 };
 
 } //namespace artificialtrainer

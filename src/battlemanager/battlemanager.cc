@@ -189,21 +189,11 @@ bool BattleManager::HumanMovesFirst(const Team &human_team,
 }
 
 bool BattleManager::HandleMove(Team &attacker, Team &defender) {
-  UseMove(attacker, defender);
+  UseMove(attacker, defender, false);
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
   std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
+  return !(active_attacker->IsFainted() || active_defender->IsFainted());
 
-  if (active_attacker->IsFainted() || active_defender->IsFainted()) {
-    if (active_attacker->IsRaging() || active_defender->IsRaging()) {
-      Gui::DisplayRageEndedMessage();
-    }
-
-    active_attacker->ResetFaintFlags();
-    active_defender->ResetFaintFlags();
-    return false;
-  }
-
-  return true;
 }
 
 bool BattleManager::IsValidSwitchChoice(const Team &team, const int &index) {
@@ -235,7 +225,8 @@ void BattleManager::HumanPicksForcedSwitch(Team &human_team) {
 
 void BattleManager::HandleEndOfTurnStatuses(
     const std::shared_ptr<Pokemon> &attacker,
-    const std::shared_ptr<Pokemon> &defender) {
+    const std::shared_ptr<Pokemon> &defender,
+    const bool &is_called_by_ai) {
   if (attacker->IsFainted() || defender->IsFainted()) {
     return;
   }
@@ -243,76 +234,162 @@ void BattleManager::HandleEndOfTurnStatuses(
   SpeciesNames attacker_species_name = attacker->SpeciesName();
 
   if (attacker->IsBurned()) {
-    Gui::DisplayIsBurnedMessage(attacker_species_name);
-    Gui::DisplayTookBurnDamageMessage(attacker_species_name,
-                                      attacker->DoStatusDamage());
+    int status_damage = attacker->DoStatusDamage();
+
+    if (!is_called_by_ai) {
+      Gui::DisplayIsBurnedMessage(attacker_species_name);
+      Gui::DisplayTookBurnDamageMessage(attacker_species_name,
+                                        status_damage);
+    }
   } else if (attacker->IsPoisoned()) {
-    Gui::DisplayIsPoisonedMessage(attacker_species_name, false);
-    Gui::DisplayTookPoisonDamageMessage(attacker_species_name,
-                                        attacker->DoStatusDamage());
+    int status_damage = attacker->DoStatusDamage();
+
+    if (!is_called_by_ai) {
+      Gui::DisplayIsPoisonedMessage(attacker_species_name, false);
+      Gui::DisplayTookPoisonDamageMessage(attacker_species_name,
+                                          status_damage);
+    }
   } else if (attacker->IsUnderToxic()) {
-    Gui::DisplayIsPoisonedMessage(attacker_species_name, true);
-    Gui::DisplayTookPoisonDamageMessage(attacker_species_name,
-                                        attacker->DoStatusDamage());
+    int status_damage = attacker->DoStatusDamage();
+
+    if (!is_called_by_ai) {
+      Gui::DisplayIsPoisonedMessage(attacker_species_name, true);
+      Gui::DisplayTookPoisonDamageMessage(attacker_species_name,
+                                          status_damage);
+    }
+
     attacker->AdvanceToxicFactor();
   }
 
   if (attacker->IsSeeded()) {
-    Gui::DisplayIsSeededMessage(attacker_species_name);
     int sapped = attacker->DoStatusDamage();
-    Gui::DisplayHadHpSappedMessage(attacker_species_name, sapped);
     defender->AbsorbHp(sapped);
-    Gui::DisplayHpAbsorbedMessage(defender->SpeciesName(), sapped);
+
+    if (!is_called_by_ai) {
+      Gui::DisplayIsSeededMessage(attacker_species_name);
+      Gui::DisplayHadHpSappedMessage(attacker_species_name, sapped);
+      Gui::DisplayHpAbsorbedMessage(defender->SpeciesName(), sapped);
+    }
   }
 }
 
+bool BattleManager::CanSwitch(const Team &team) {
+  return team.ActiveTeam().size() > 1;
+}
+
 void BattleManager::HandleFainting(const bool &human_moves_first,
-                                   Team &human_team, Team &ai_team) {
+                                   Team &human_team, Team &ai_team,
+                                   const bool &is_called_by_ai) {
   std::shared_ptr<Pokemon> active_pokemon_human = human_team.ActiveMember();
   std::shared_ptr<Pokemon> active_pokemon_ai = ai_team.ActiveMember();
 
   if (human_moves_first) {
-    if (active_pokemon_human->IsFainted()) {
-      Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+    if (active_pokemon_human->IsFainted() && CanSwitch(human_team)) {
+      if ((active_pokemon_human->IsRaging() || active_pokemon_ai->IsRaging()) &&
+          !is_called_by_ai) {
+        Gui::DisplayRageEndedMessage();
+      }
+
+      active_pokemon_human->ResetFaintFlags();
+      active_pokemon_ai->ResetFaintFlags();
+
+      if (!is_called_by_ai) {
+        Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+      }
+
       human_team.FaintActivePokemon();
-      HumanPicksForcedSwitch(human_team);
+
+      if (is_called_by_ai) {
+        PickForcedSwitch(human_team, active_pokemon_ai);
+      } else {
+        HumanPicksForcedSwitch(human_team);
+      }
     }
 
-    if (active_pokemon_ai->IsFainted()) {
-      Gui::DisplayPokemonFaintedMessage(active_pokemon_ai->SpeciesName());
+    if (active_pokemon_ai->IsFainted() && CanSwitch(ai_team)) {
+      if ((active_pokemon_human->IsRaging() || active_pokemon_ai->IsRaging()) &&
+          !is_called_by_ai) {
+        Gui::DisplayRageEndedMessage();
+      }
+
+      active_pokemon_human->ResetFaintFlags();
+      active_pokemon_ai->ResetFaintFlags();
+
+      if (!is_called_by_ai) {
+        Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+      }
+
       ai_team.FaintActivePokemon();
       PickForcedSwitch(ai_team, active_pokemon_human);
-      Gui::DisplayAiForceSwitchMessage(ai_team.ActiveMember()->SpeciesName());
+
+      if (!is_called_by_ai) {
+        Gui::DisplayAiForceSwitchMessage(ai_team.ActiveMember()->SpeciesName());
+      }
     }
   } else {
-    if (active_pokemon_ai->IsFainted()) {
-      Gui::DisplayPokemonFaintedMessage(active_pokemon_ai->SpeciesName());
+    if (active_pokemon_ai->IsFainted() && CanSwitch(ai_team)) {
+      if ((active_pokemon_human->IsRaging() || active_pokemon_ai->IsRaging()) &&
+          !is_called_by_ai) {
+        Gui::DisplayRageEndedMessage();
+      }
+
+      active_pokemon_human->ResetFaintFlags();
+      active_pokemon_ai->ResetFaintFlags();
+
+      if (!is_called_by_ai) {
+        Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+      }
+
       ai_team.FaintActivePokemon();
       PickForcedSwitch(ai_team, active_pokemon_human);
-      Gui::DisplayAiForceSwitchMessage(ai_team.ActiveMember()->SpeciesName());
+
+      if (!is_called_by_ai) {
+        Gui::DisplayAiForceSwitchMessage(ai_team.ActiveMember()->SpeciesName());
+      }
     }
 
-    if (active_pokemon_human->IsFainted()) {
-      Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+    if (active_pokemon_human->IsFainted() && CanSwitch(human_team)) {
+      if ((active_pokemon_human->IsRaging() || active_pokemon_ai->IsRaging()) &&
+          !is_called_by_ai) {
+        Gui::DisplayRageEndedMessage();
+      }
+
+      active_pokemon_human->ResetFaintFlags();
+      active_pokemon_ai->ResetFaintFlags();
+
+      if (!is_called_by_ai) {
+        Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+      }
+
       human_team.FaintActivePokemon();
-      HumanPicksForcedSwitch(human_team);
+
+      if (is_called_by_ai) {
+        PickForcedSwitch(human_team, active_pokemon_ai);
+      } else {
+        HumanPicksForcedSwitch(human_team);
+      }
     }
   }
 }
 
 void BattleManager::HandleBothTeamsMoves(const bool &human_moves_first,
-                                         Team &human_team, Team &ai_team) {
+                                         Team &human_team, Team &ai_team,
+                                         const bool &is_called_by_ai) {
   std::shared_ptr<Pokemon> active_pokemon_human = human_team.ActiveMember();
   std::shared_ptr<Pokemon> active_pokemon_ai = ai_team.ActiveMember();
 
   if (human_moves_first && HandleMove(human_team, ai_team) &&
       HandleMove(ai_team, human_team)) {
-    HandleEndOfTurnStatuses(active_pokemon_human, active_pokemon_ai);
-    HandleEndOfTurnStatuses(active_pokemon_ai, active_pokemon_human);
+    HandleEndOfTurnStatuses(
+        active_pokemon_human, active_pokemon_ai, is_called_by_ai);
+    HandleEndOfTurnStatuses(
+        active_pokemon_ai, active_pokemon_human, is_called_by_ai);
   } else if (HandleMove(ai_team, human_team) &&
       HandleMove(human_team, ai_team)) {
-    HandleEndOfTurnStatuses(active_pokemon_ai, active_pokemon_human);
-    HandleEndOfTurnStatuses(active_pokemon_human, active_pokemon_ai);
+    HandleEndOfTurnStatuses(
+        active_pokemon_ai, active_pokemon_human, is_called_by_ai);
+    HandleEndOfTurnStatuses(
+        active_pokemon_human, active_pokemon_ai, is_called_by_ai);
   }
 }
 

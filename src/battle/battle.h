@@ -10,7 +10,7 @@
 namespace artificialtrainer {
 class Battle {
  public:
-  Battle() = default;
+  Battle();
   void Play();
 
  private:

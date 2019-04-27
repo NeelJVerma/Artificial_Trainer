@@ -24,4 +24,18 @@ std::shared_ptr<NormalStat> NormalStatsContainer::operator[](
   return normal_stats_[loc_stat_name];
 }
 
+void NormalStatsContainer::AddStat(const NormalStat &stat, const int &index) {
+  normal_stats_[index] = std::make_shared<NormalStat>(stat);
+}
+
+NormalStatsContainer NormalStatsContainer::DeepCopy() const {
+  NormalStatsContainer copy;
+
+  for (int i = 0; i < kNumNormalStats; i++) {
+    copy.AddStat(*normal_stats_[i], i);
+  }
+
+  return copy;
+}
+
 } //namespace artificialtrainer

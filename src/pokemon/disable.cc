@@ -23,7 +23,7 @@ void Disable::Activate() {
   num_turns_disabled_ = 1;
 }
 
-bool Disable::WillReEnable() const {
+bool Disable::WillEnd() const {
   if (num_turns_disabled_ == 1) {
     return false;
   }
@@ -36,7 +36,7 @@ void Disable::AdvanceOneTurn() {
     return;
   }
 
-  if (num_turns_disabled_ == kMaxTurns || WillReEnable()) {
+  if (num_turns_disabled_ == kMaxTurns || WillEnd()) {
     num_turns_disabled_ = 0;
   } else {
     num_turns_disabled_++;

@@ -18,7 +18,7 @@ class Disable {
  private:
   static const int kMaxTurns;
   int num_turns_disabled_;
-  bool WillReEnable() const;
+  bool WillEnd() const;
 };
 
 } //namespace artificialtrainer

@@ -18,7 +18,7 @@ class Confusion {
  private:
   static const int kMaxTurns;
   int num_turns_confused_;
-  bool WillBreakOut() const;
+  bool WillEnd() const;
 };
 
 } //namespace artificialtrainer

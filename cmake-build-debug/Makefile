@@ -123,32 +123,32 @@ Artificial_Trainer/fast:
 	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/build
 .PHONY : Artificial_Trainer/fast
 
-src/ailogic/expectdfs.o: src/ailogic/expectdfs.cc.o
+src/ailogic/expectimax.o: src/ailogic/expectimax.cc.o
 
-.PHONY : src/ailogic/expectdfs.o
+.PHONY : src/ailogic/expectimax.o
 
 # target to build an object file
-src/ailogic/expectdfs.cc.o:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.o
-.PHONY : src/ailogic/expectdfs.cc.o
+src/ailogic/expectimax.cc.o:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.o
+.PHONY : src/ailogic/expectimax.cc.o
 
-src/ailogic/expectdfs.i: src/ailogic/expectdfs.cc.i
+src/ailogic/expectimax.i: src/ailogic/expectimax.cc.i
 
-.PHONY : src/ailogic/expectdfs.i
+.PHONY : src/ailogic/expectimax.i
 
 # target to preprocess a source file
-src/ailogic/expectdfs.cc.i:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.i
-.PHONY : src/ailogic/expectdfs.cc.i
+src/ailogic/expectimax.cc.i:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.i
+.PHONY : src/ailogic/expectimax.cc.i
 
-src/ailogic/expectdfs.s: src/ailogic/expectdfs.cc.s
+src/ailogic/expectimax.s: src/ailogic/expectimax.cc.s
 
-.PHONY : src/ailogic/expectdfs.s
+.PHONY : src/ailogic/expectimax.s
 
 # target to generate assembly for a file
-src/ailogic/expectdfs.cc.s:
-	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectdfs.cc.s
-.PHONY : src/ailogic/expectdfs.cc.s
+src/ailogic/expectimax.cc.s:
+	$(MAKE) -f CMakeFiles/Artificial_Trainer.dir/build.make CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.s
+.PHONY : src/ailogic/expectimax.cc.s
 
 src/ailogic/movenode.o: src/ailogic/movenode.cc.o
 
@@ -1158,9 +1158,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Artificial_Trainer"
 	@echo "... edit_cache"
-	@echo "... src/ailogic/expectdfs.o"
-	@echo "... src/ailogic/expectdfs.i"
-	@echo "... src/ailogic/expectdfs.s"
+	@echo "... src/ailogic/expectimax.o"
+	@echo "... src/ailogic/expectimax.i"
+	@echo "... src/ailogic/expectimax.s"
 	@echo "... src/ailogic/movenode.o"
 	@echo "... src/ailogic/movenode.i"
 	@echo "... src/ailogic/movenode.s"

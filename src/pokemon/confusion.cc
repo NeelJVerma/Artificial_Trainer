@@ -23,7 +23,7 @@ void Confusion::Activate() {
   num_turns_confused_ = 1;
 }
 
-bool Confusion::WillBreakOut() const {
+bool Confusion::WillEnd() const {
   if (num_turns_confused_ == 1) {
     return false;
   }
@@ -36,7 +36,7 @@ void Confusion::AdvanceOneTurn() {
     return;
   }
 
-  if (num_turns_confused_ == kMaxTurns || WillBreakOut()) {
+  if (num_turns_confused_ == kMaxTurns || WillEnd()) {
     num_turns_confused_ = 0;
   } else {
     num_turns_confused_++;

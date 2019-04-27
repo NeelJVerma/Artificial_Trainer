@@ -15,8 +15,8 @@ class Bide {
   void Activate();
   bool AdvanceOneTurn();
   void SetDamageAdded(const int &damage_added);
-  int TotalDamage() const;
   void AddDamage();
+  int TotalDamage() const;
 
  private:
   static const int kMaxTurns = 3;

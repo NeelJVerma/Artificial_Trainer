@@ -19,6 +19,8 @@ class NormalStatsContainer {
   NormalStatsContainer &operator=(
       const NormalStatsContainer &stats_container) = default;
   std::shared_ptr<NormalStat> operator[](const StatNames &stat_name) const;
+  void AddStat(const NormalStat &stat, const int &index);
+  NormalStatsContainer DeepCopy() const;
 
  private:
   std::shared_ptr<NormalStat> normal_stats_[kNumNormalStats];

@@ -47,4 +47,40 @@ SpeciesNames BeforeTransformState::SpeciesName() const {
   return species_name_;
 }
 
+void BeforeTransformState::SetNormalStatsContainer(
+    const NormalStatsContainer &normal_stats_container) {
+  normal_stats_container_ = normal_stats_container;
+}
+
+void BeforeTransformState::SetExclusiveInGameStatsContainer(
+    const ExclusiveInGameStatsContainer &exclusive_in_game_stats_container) {
+  exclusive_in_game_stats_container_ =
+      exclusive_in_game_stats_container.DeepCopy();
+}
+
+void BeforeTransformState::SetMovesContainer(
+    const MovesContainer &moves_container) {
+  moves_container_ = moves_container.DeepCopy();
+}
+
+void BeforeTransformState::SetTypeContainer(
+    const TypeContainer &type_container) {
+  type_container_ = type_container;
+}
+
+void BeforeTransformState::SetSpeciesName(const SpeciesNames &species_name) {
+  species_name_ = species_name;
+}
+
+BeforeTransformState BeforeTransformState::DeepCopy() const {
+  BeforeTransformState copy;
+  copy.SetNormalStatsContainer(normal_stats_container_.DeepCopy());
+  copy.SetExclusiveInGameStatsContainer(
+      exclusive_in_game_stats_container_.DeepCopy());
+  copy.SetMovesContainer(moves_container_.DeepCopy());
+  copy.SetTypeContainer(type_container_);
+  copy.SetSpeciesName(species_name_);
+  return copy;
+}
+
 } //namespace artificialtrainer
