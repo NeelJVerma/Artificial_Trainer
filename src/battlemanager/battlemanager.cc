@@ -9,12 +9,9 @@
 #include "../random/randomgenerator.h"
 #include "../move/usemove.h"
 #include "../ailogic/pickforcedswitch.h"
+#include "../stringconverter/stringconverter.h"
 
 namespace artificialtrainer {
-namespace {
-
-} //namespace
-
 bool BattleManager::IsValidMoveChoice(const Team &team,
                                       const std::shared_ptr<Move> &move,
                                       const bool &is_called_by_ai) {
@@ -140,7 +137,7 @@ bool BattleManager::IsValidMoveChoice(const Team &team,
 void BattleManager::HumanPicksMove(Team &team) {
   Gui::DisplayPickInBattleMoveMessage();
   std::shared_ptr<Pokemon> pokemon = team.ActiveMember();
-  MovesContainer moves = team.ActiveMember()->GetMovesContainer();
+  MovesContainer moves = pokemon->GetMovesContainer();
   int move_choice;
 
   while (true) {
@@ -153,7 +150,8 @@ void BattleManager::HumanPicksMove(Team &team) {
     Gui::DisplayInvalidMoveChoiceMessage();
   }
 
-  pokemon->SetMoveUsed(move_choice - 1);
+  team.ActiveMember()->SetMoveUsed(
+      pokemon->GetMovesContainer()[move_choice - 1]);
 }
 
 bool BattleManager::HumanMovesFirst(const Team &human_team,
@@ -193,7 +191,6 @@ bool BattleManager::HandleMove(Team &attacker, Team &defender) {
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
   std::shared_ptr<Pokemon> active_defender = defender.ActiveMember();
   return !(active_attacker->IsFainted() || active_defender->IsFainted());
-
 }
 
 bool BattleManager::IsValidSwitchChoice(const Team &team, const int &index) {
@@ -316,7 +313,7 @@ void BattleManager::HandleFainting(const bool &human_moves_first,
       active_pokemon_ai->ResetFaintFlags();
 
       if (!is_called_by_ai) {
-        Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+        Gui::DisplayPokemonFaintedMessage(active_pokemon_ai->SpeciesName());
       }
 
       ai_team.FaintActivePokemon();
@@ -337,7 +334,7 @@ void BattleManager::HandleFainting(const bool &human_moves_first,
       active_pokemon_ai->ResetFaintFlags();
 
       if (!is_called_by_ai) {
-        Gui::DisplayPokemonFaintedMessage(active_pokemon_human->SpeciesName());
+        Gui::DisplayPokemonFaintedMessage(active_pokemon_ai->SpeciesName());
       }
 
       ai_team.FaintActivePokemon();

@@ -490,6 +490,7 @@ void Pokemon::Transform(const std::shared_ptr<Pokemon> &target) {
   type_container_ = target->GetTypeContainer();
   moves_container_ = target->GetMovesContainer();
   species_name_ = target->SpeciesName();
+  flags_.used_transform = true;
 }
 
 void Pokemon::UseBide() {
@@ -633,7 +634,11 @@ void Pokemon::RecoverHp() {
 }
 
 void Pokemon::ResetFaintFlags() {
-  RestoreStateFromTransform();
+  if (flags_.used_transform) {
+    RestoreStateFromTransform();
+  }
+
+  flags_.used_transform = false;
   flags_.num_turns_trapped = 0;
   flags_.trapped = false;
   flags_.used_trap_move = false;
@@ -654,7 +659,12 @@ void Pokemon::ResetFlagsFromHaze() {
 void Pokemon::ResetSwitchFlags() {
   ResetStats();
   RestoreMimic();
-  RestoreStateFromTransform();
+
+  if (flags_.used_transform) {
+    RestoreStateFromTransform();
+  }
+
+  flags_.used_transform = false;
   flags_.confusion = Confusion{};
   flags_.disable = Disable{};
   flags_.substitute = Substitute{};
@@ -674,6 +684,14 @@ void Pokemon::ResetEndOfTurnFlags() {
 
   if (move_used_) {
     move_used_->SetDamageDone(0);
+  }
+}
+
+void Pokemon::DecrementPpOfMoveUsed(const MoveNames &move_name) {
+  for (int i = 0; i < moves_container_.Size(); i++) {
+    if (moves_container_[i]->MoveName() == move_name) {
+      moves_container_[i]->DecrementPp(1);
+    }
   }
 }
 

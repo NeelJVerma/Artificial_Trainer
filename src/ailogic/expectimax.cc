@@ -5,6 +5,7 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
+#include <cassert>
 #include "expectimax.h"
 #include "../battlemanager/battlemanager.h"
 #include "../stringconverter/stringconverter.h"
@@ -13,6 +14,8 @@
 
 namespace artificialtrainer {
 namespace {
+const int kMaxDepth = 7;
+
 std::vector<MoveNode> AllValidMoves(const Team &team) {
   MovesContainer moves_container = team.ActiveMember()->GetMovesContainer();
   std::vector<MoveNode> valid_moves;
@@ -20,7 +23,8 @@ std::vector<MoveNode> AllValidMoves(const Team &team) {
   for (int i = 0; i < moves_container.Size(); i++) {
     std::shared_ptr<Move> move = moves_container[i];
 
-    if (BattleManager::IsValidMoveChoice(team, move, true)) {
+    if (BattleManager::IsValidMoveChoice(team, move, true) &&
+        !IsSwitch(move->MoveName())) {
       valid_moves.emplace_back(MoveNode(i));
     }
   }
@@ -28,13 +32,14 @@ std::vector<MoveNode> AllValidMoves(const Team &team) {
   return valid_moves;
 }
 
-double Heuristic(const Team &human_team, const Team &ai_team,
+double Heuristic(const Team &attacking_team, const Team &defending_team,
                  const int &depth) {
-  std::shared_ptr<Hp> human_hp = human_team.ActiveMember()->HpStat();
-  std::shared_ptr<Hp> ai_hp = ai_team.ActiveMember()->HpStat();
-  return ((static_cast<double>(ai_hp->CurrentHp()) / ai_hp->MaxHp()) - 3 *
-      (static_cast<double>(human_hp->CurrentHp()) / human_hp->MaxHp()) - 0.3 *
-      depth);
+  std::shared_ptr<Hp> attacker_hp = attacking_team.ActiveMember()->HpStat();
+  std::shared_ptr<Hp> defender_hp = defending_team.ActiveMember()->HpStat();
+  return ((static_cast<double>(
+      attacker_hp->CurrentHp()) / attacker_hp->MaxHp()) -
+      (static_cast<double>(
+          defender_hp->CurrentHp()) / defender_hp->MaxHp()));
 }
 
 double ExpectiMaxHelper(Team &human_team,
@@ -43,13 +48,19 @@ double ExpectiMaxHelper(Team &human_team,
                         double alpha,
                         double beta,
                         std::vector<MoveNode> &root_values) {
-  if (depth > 7 || ai_team.ActiveTeam().empty() ||
+  if (depth > kMaxDepth || ai_team.ActiveTeam().empty() ||
       human_team.ActiveTeam().empty()) {
-    return Heuristic(human_team, ai_team, depth);
+    if (depth & 1) {
+      return Heuristic(human_team, ai_team, depth);
+    }
+
+    return Heuristic(ai_team, human_team, depth);
   }
 
-  Team saved_human(human_team.ActiveTeam(), human_team.FaintedTeam(), true);
-  Team saved_ai(ai_team.ActiveTeam(), ai_team.FaintedTeam(), false);
+  Team saved_human = Team(human_team.ActiveTeam(),
+                          human_team.FaintedTeam(),
+                          true);
+  Team saved_ai = Team(ai_team.ActiveTeam(), ai_team.FaintedTeam(), false);
   std::vector<double> scores;
 
   for (auto &move : (depth & 1 ? AllValidMoves(human_team) : AllValidMoves(
@@ -110,10 +121,33 @@ double ExpectiMaxHelper(Team &human_team,
   }
 
   if (depth & 1) {
+    if (scores.empty()) {
+      return static_cast<double>(std::numeric_limits<int>::max());
+    }
+
     return *std::min_element(scores.begin(), scores.end());
   }
 
+  if (scores.empty()) {
+    return static_cast<double>(std::numeric_limits<int>::max()) * -1;
+  }
+
   return *std::max_element(scores.begin(), scores.end());
+}
+
+MoveNode FindFirstSwitch(const Team &team) {
+  MovesContainer moves_container = team.ActiveMember()->GetMovesContainer();
+
+  for (int i = 0; i < moves_container.Size(); i++) {
+    std::shared_ptr<Move> move = moves_container[i];
+
+    if (BattleManager::IsValidMoveChoice(team, move, true) &&
+        IsSwitch(move->MoveName())) {
+      return MoveNode(i);
+    }
+  }
+
+  assert(false);
 }
 
 } //namespace
@@ -127,10 +161,32 @@ MoveNode ExpectiMax(Team &human_team, Team &ai_team) {
                    max_int * -1.0,
                    max_int,
                    root_values);
+  bool found_good_move = false;
+  bool switching_is_valid = false;
+
+  for (const auto &move : root_values) {
+    if (move.HeuristicValue() > 0.0) {
+      found_good_move = true;
+    }
+
+    std::shared_ptr<Move> move_ptr =
+        ai_team.ActiveMember()->GetMovesContainer()[move.MoveIndex()];
+
+    if (BattleManager::IsValidMoveChoice(ai_team, move_ptr, true) &&
+        IsSwitch(move_ptr->MoveName())) {
+      switching_is_valid = true;
+    }
+  }
+
+  if (!found_good_move && ai_team.ActiveTeam().size() > 1 &&
+      switching_is_valid) {
+    return FindFirstSwitch(ai_team);
+  }
+
   return *std::max_element(root_values.begin(), root_values.end(), [](
       const MoveNode &one,
       const MoveNode &two) {
-    return one.HeuristicValue() > two.HeuristicValue();
+    return one.HeuristicValue() < two.HeuristicValue();
   });
 }
 

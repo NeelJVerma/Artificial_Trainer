@@ -181,7 +181,9 @@ CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o: ../src/s
 CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o: ../src/stat/normalstat.h
 CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o: ../src/stat/normalstatscontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o: ../src/stat/statnames.h
+CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o: ../src/stringconverter/stringconverter.h
 CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o: ../src/team/team.h
+CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o: ../src/type/type.h
 CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o: ../src/type/typecontainer.h
 CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o: ../src/type/typenames.h
 

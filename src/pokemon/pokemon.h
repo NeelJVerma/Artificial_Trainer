@@ -43,6 +43,7 @@ struct InGameFlags {
   int rest_counter = 1;
   int turns_asleep = 1;
   int num_turns_trapped = 0;
+  bool used_transform = false;
   Confusion confusion{};
   Disable disable{};
   Substitute substitute{};
@@ -76,6 +77,7 @@ struct InGameFlags {
     copy.rest_counter = rest_counter;
     copy.turns_asleep = turns_asleep;
     copy.num_turns_trapped = num_turns_trapped;
+    copy.used_transform = used_transform;
     copy.confusion = confusion;
     copy.disable = disable;
     copy.substitute = substitute;
@@ -189,6 +191,7 @@ class Pokemon {
   void ResetFlagsFromHaze();
   void ResetSwitchFlags();
   void ResetEndOfTurnFlags();
+  void DecrementPpOfMoveUsed(const MoveNames &move_name);
   Pokemon DeepCopy() const;
 
  private:

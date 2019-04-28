@@ -396,10 +396,14 @@ void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
 }
 
 void HazeField(const std::shared_ptr<Pokemon> &attacker,
-               const std::shared_ptr<Pokemon> &defender) {
+               const std::shared_ptr<Pokemon> &defender,
+               const bool &is_called_by_ai) {
   attacker->ResetFlagsFromHaze();
   defender->ResetFlagsFromHaze();
-  Gui::DisplayHazeResetMessage();
+
+  if (!is_called_by_ai) {
+    Gui::DisplayHazeResetMessage();
+  }
 }
 
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
@@ -794,7 +798,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
       break;
     case MoveNames::kHaze:
-      HazeField(attacker, defender);
+      HazeField(attacker, defender, is_called_by_ai);
       break;
     case MoveNames::kHighJumpKick:
     case MoveNames::kJumpKick:
@@ -1028,8 +1032,8 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
         attacker->ApplyStatus(StatusNames::kAsleepRest);
 
         if (!is_called_by_ai) {
-          Gui::DisplaySleepStartedMessage(defender->SpeciesName());
-          Gui::DisplayRecoveredAllHpMessage(defender->SpeciesName());
+          Gui::DisplaySleepStartedMessage(attacker->SpeciesName());
+          Gui::DisplayRecoveredAllHpMessage(attacker->SpeciesName());
         }
       }
 
@@ -1464,7 +1468,7 @@ void UseMove(Team &attacker, Team &defender, const bool &is_called_by_ai) {
 
   if (!attacking_member->IsVanished() && !attacking_member->IsChargingUp() &&
       move_used_name != MoveNames::kStruggle) {
-    move_used->DecrementPp(1);
+    attacking_member->DecrementPpOfMoveUsed(move_used_name);
   }
 }
 
