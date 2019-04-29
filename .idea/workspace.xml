@@ -12,20 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f761d81-71cd-48eb-84a4-b5d508f52e87" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Artificial_Trainer" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Artificial_Trainer" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/ailogic/expectimax.cc.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/battle/battle.cc.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/battlemanager/battlemanager.cc.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Artificial_Trainer.dir/src/move/usemove.cc.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ailogic/expectimax.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/ailogic/expectimax.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/battlemanager/battlemanager.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/battlemanager/battlemanager.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/move/usemove.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/move/usemove.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pokemon/pokemon.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/pokemon.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pokemon/pokemon.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/pokemon/pokemon.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,8 +68,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/move/usemove.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="1468" column="77" lean-forward="true" selection-start-line="1468" selection-start-column="77" selection-end-line="1468" selection-end-column="77" />
+            <state relative-caret-position="275">
+              <caret line="158" column="49" lean-forward="true" selection-start-line="158" selection-start-column="49" selection-end-line="158" selection-end-column="49" />
               <folding>
                 <element signature="e#37#53#0" expanded="true" />
               </folding>
@@ -117,8 +104,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="639" lean-forward="true" selection-start-line="639" selection-end-line="639" />
+            <state relative-caret-position="54">
+              <caret line="612" column="26" selection-start-line="612" selection-start-column="14" selection-end-line="612" selection-end-column="26" />
               <folding>
                 <element signature="e#38#56#0" expanded="true" />
               </folding>
@@ -151,8 +138,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hyperbe</find>
-      <find>executem</find>
       <find>handlefa</find>
       <find>gui::</find>
       <find>is_called_</find>
@@ -175,12 +160,14 @@
       <find>handlefaint</find>
       <find>rest</find>
       <find>resetendofturn</find>
-      <find>-&gt;moveused</find>
       <find>seismic toss:</find>
       <find>resetfaint</find>
       <find>resetswitch</find>
       <find>setmoveused</find>
       <find>handleturn</find>
+      <find>-&gt;moveused</find>
+      <find>usemetronome</find>
+      <find>damage_done</find>
     </findStrings>
     <replaceStrings>
       <replace>int</replace>
@@ -422,12 +409,12 @@
       <workItem from="1556231522176" duration="21000" />
       <workItem from="1556297195290" duration="22490000" />
       <workItem from="1556381933356" duration="7054000" />
-      <workItem from="1556394443586" duration="14151000" />
+      <workItem from="1556394443586" duration="16368000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="762034000" />
+    <option name="totallyTimeSpent" value="764251000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -442,13 +429,13 @@
     <frame x="0" y="-5" width="1920" height="1085" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49892932" visible="true" weight="0.319206" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49892932" visible="true" weight="0.319206" />
       <window_info id="Structure" order="1" sideWeight="0.5010707" side_tool="true" weight="0.22263949" />
       <window_info id="Favorites" order="2" sideWeight="0.5008489" side_tool="true" weight="0.17328326" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32224533" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.8503119" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.38877338" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.38877338" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32848233" />
@@ -756,13 +743,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/move/usemove.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ailogic/expectimax.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -800,16 +780,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="639" lean-forward="true" selection-start-line="639" selection-end-line="639" />
-          <folding>
-            <element signature="e#38#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/battlemanager/battlemanager.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
@@ -830,10 +800,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pokemon/pokemon.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="612" column="26" selection-start-line="612" selection-start-column="14" selection-end-line="612" selection-end-column="26" />
+          <folding>
+            <element signature="e#38#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/move/usemove.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/move/usemove.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="1468" column="77" lean-forward="true" selection-start-line="1468" selection-start-column="77" selection-end-line="1468" selection-end-column="77" />
+        <state relative-caret-position="275">
+          <caret line="158" column="49" lean-forward="true" selection-start-line="158" selection-start-column="49" selection-end-line="158" selection-end-column="49" />
           <folding>
             <element signature="e#37#53#0" expanded="true" />
           </folding>

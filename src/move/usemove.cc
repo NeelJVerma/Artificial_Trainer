@@ -152,10 +152,11 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
     Gui::DisplayMoveCritMessage();
   }
 
-  int damage_done = static_cast<int>(floor(((((((((2.0 * (move_crit ? 2 : 1) *
-      attacker->Level() / 5 + 2) * used_stats.first * BasePower(
-      move_used->MoveName()) * (self_ko_move ? 2 : 1) / used_stats.second) /
-      50) + 2) * StabBonus(attacker)) * type_product / 10) *
+  int damage_done = static_cast<int>(floor(((((((((2.0 *
+      (move_crit && !confusion_damage ? 2 : 1) * attacker->Level() / 5 + 2) *
+      used_stats.first * BasePower(move_used->MoveName()) *
+      (self_ko_move ? 2 : 1) / used_stats.second) / 50) + 2) *
+      StabBonus(attacker)) * type_product / 10) *
       DamageRandomFactor()) / 255)));
 
   if (((defender->IsBehindReflect() && IsPhysical(move_used->MoveName())) ||
