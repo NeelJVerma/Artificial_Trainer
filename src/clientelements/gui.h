@@ -1,17 +1,30 @@
-//
-// Created by neel on 1/23/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The Gui class.
+ *
+ * @file gui.h
+ * @author Neel Verma
+ * @date 1/23/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_GUI_H
 #define ARTIFICIAL_TRAINER_GUI_H
 
-#include <iostream>
 #include <vector>
 #include "../stat/statnames.h"
 #include "../move/movenames.h"
 #include "../team/team.h"
 
 namespace artificialtrainer {
+
+/**
+ * @brief The Gui class. This static class is responsible for all console
+ * output.
+ *
+ * @author Neel Verma
+ * @date 1/23/19
+ */
+
 class Gui {
  public:
   static void DisplayWelcomeMessage();

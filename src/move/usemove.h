@@ -1,6 +1,11 @@
-//
-// Created by neel on 2/6/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief A function for the attacking team's Pokemon to use a move.
+ *
+ * @file usemove.h
+ * @author Neel Verma
+ * @date 2/6/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_USEMOVE_H
 #define ARTIFICIAL_TRAINER_USEMOVE_H

@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/25/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The Hp class.
+ *
+ * @file hp.h
+ * @author Neel Verma
+ * @date 1/25/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_HP_H
 #define ARTIFICIAL_TRAINER_HP_H
@@ -11,6 +16,14 @@
 #include "ev.h"
 
 namespace artificialtrainer {
+
+/**
+ * @brief The Hp class. This class acts as a container for a Pokemon's hp stat.
+ *
+ * @author Neel Verma
+ * @date 1/25/19
+ */
+
 class Hp {
  public:
   Hp(const Hp &hp) = default;

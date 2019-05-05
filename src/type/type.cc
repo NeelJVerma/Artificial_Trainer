@@ -1,10 +1,22 @@
-//
-// Created by neel on 1/26/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation of the Type function.
+ *
+ * @file type.cc
+ * @author Neel Verma
+ * @date 1/26/19
+ */
 
 #include "type.h"
 
 namespace artificialtrainer {
+
+/**
+  * @brief: A function to get the type of a given move.
+  * @param const MoveNames &move_name: The move name.
+  * @return TypeNames: The type of the move.
+  */
+
 TypeNames Type(const MoveNames &move_name) {
   switch (move_name) {
     case MoveNames::kBarrage:

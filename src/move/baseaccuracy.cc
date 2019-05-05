@@ -1,12 +1,24 @@
-//
-// Created by neel on 1/26/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation of the BaseAccuracy function.
+ *
+ * @file baseaccuracy.cc
+ * @author Neel Verma
+ * @date 1/26/19
+ */
 
 #include <cassert>
 #include "movenames.h"
 #include "baseaccuracy.h"
 
 namespace artificialtrainer {
+
+/**
+  * @brief: This function gets base accuracy of a given move.
+  * @param const MoveNames &move_name: The name of the move to get the
+  * accuracy of.
+  * @return int: The base accuracy of the move.
+  */
 
 int BaseAccuracy(const MoveNames &move_name) {
   switch (move_name) {

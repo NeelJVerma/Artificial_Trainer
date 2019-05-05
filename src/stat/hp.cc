@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/25/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation of the Hp class.
+ *
+ * @file hp.cc
+ * @author Neel Verma
+ * @date 1/25/19
+ */
 
 #include <cmath>
 #include <cassert>
@@ -8,6 +13,13 @@
 
 namespace artificialtrainer {
 namespace {
+
+/**
+  * @brief: A function to get the base hp stat for a given Pokemon.
+  * @param const SpeciesNames &species: The species name of the Pokemon.
+  * @return int: The base hp stat of the Pokemon.
+  */
+
 int BaseHp(const SpeciesNames &species) {
   switch (species) {
     case SpeciesNames::kBulbasaur:
@@ -317,6 +329,17 @@ int BaseHp(const SpeciesNames &species) {
   }
 }
 
+/**
+  * @brief: A function to calculate the in battle hp stat from the given
+  * parameters. The formula is as follows:
+  * 10 + floor(level / 100 * ((base hp stat * 2) + 2 * IV + EV / 1024)) + level.
+  * @param const int &base_hp: The base hp of the Pokemon.
+  * @param const int &level: The level of the Pokemon.
+  * @param const Ev &ev_stat: The ev of the hp.
+  * @param const Iv &iv_stat: The iv of the hp.
+  * @return int: The in battle hp stat.
+  */
+
 int CalculateInBattleHpStat(const int &base_hp, const int &level,
                             const Ev &ev_stat, const Iv &iv_stat) {
   return static_cast<int>(10 + floor(static_cast<double>(level) /
@@ -325,6 +348,14 @@ int CalculateInBattleHpStat(const int &base_hp, const int &level,
 }
 
 } //namespace
+
+/**
+  * @brief: One constructor for the Hp class.
+  * @param const SpeciesNames &species_name: The species name of the Pokemon.
+  * @param const int &level: The level of the Pokemon.
+  * @param const Ev &ev_stat: The ev of the hp.
+  * @param const Iv &iv_stat: The iv of the hp.
+  */
 
 Hp::Hp(const SpeciesNames &species_name, const int &level, const Ev &ev,
        const Iv &iv) : ev_stat_(ev),
@@ -336,17 +367,37 @@ Hp::Hp(const SpeciesNames &species_name, const int &level, const Ev &ev,
   max_hp_ = current_hp_;
 }
 
+/**
+  * @brief: An accessor for the current hp.
+  * @return int: The current hp.
+  */
+
 int Hp::CurrentHp() const {
   return current_hp_;
 }
+
+/**
+  * @brief: An accessor for the max hp.
+  * @return int: The max hp.
+  */
 
 int Hp::MaxHp() const {
   return max_hp_;
 }
 
+/**
+  * @brief: A fucntion to get the hp as a percent. Used in a GUI function.
+  * @return double: The hp as a percent.
+  */
+
 double Hp::HpAsPercent() const {
   return 100 * (static_cast<double>(current_hp_) / max_hp_);
 }
+
+/**
+  * @brief: A function to subtract hp.
+  * @param const int &amount: The amount of hp to subtract.
+  */
 
 void Hp::SubtractHp(const int &amount) {
   if (current_hp_ - amount < 0) {
@@ -357,6 +408,11 @@ void Hp::SubtractHp(const int &amount) {
   current_hp_ -= amount;
 }
 
+/**
+  * @brief: A function to add hp.
+  * @param const int &amount: The amount of hp to add.
+  */
+
 void Hp::AddHp(const int &amount) {
   if (current_hp_ + amount > max_hp_) {
     current_hp_ = max_hp_;
@@ -365,6 +421,10 @@ void Hp::AddHp(const int &amount) {
 
   current_hp_ += amount;
 }
+
+/**
+  * @brief: A function to subtract all hp.
+  */
 
 void Hp::SubtractAllHp() {
   current_hp_ -= current_hp_;

@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/30/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The TypeContainer class.
+ *
+ * @file typecontainer.h
+ * @author Neel Verma
+ * @date 1/30/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_TYPECONTAINER_H
 #define ARTIFICIAL_TRAINER_TYPECONTAINER_H
@@ -11,6 +16,15 @@
 #include "../move/movenames.h"
 
 namespace artificialtrainer {
+
+/**
+ * @brief The TypeContainer class. This class acts as a container for a
+ * Pokemon's types.
+ *
+ * @author Neel Verma
+ * @date 1/30/19
+ */
+
 class TypeContainer {
  public:
   TypeContainer() = default;

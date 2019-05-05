@@ -1,8 +1,12 @@
-//
-// Created by neel on 1/25/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation of the Battle class.
+ *
+ * @file battle.cc
+ * @author Neel Verma
+ * @date 1/25/19
+ */
 
-#include <ctime>
 #include "battle.h"
 #include "../clientelements/gui.h"
 #include "../clientelements/inputhandler.h"
@@ -23,6 +27,13 @@
 
 namespace artificialtrainer {
 namespace {
+
+/**
+  * @brief: This function is responsible for, given a team, picking the
+  * Pokemon, moves, stats, etc. for that team.
+  * @param Team &team: The team that will be filled.
+  */
+
 void PickRandomTeam(Team &team) {
   for (int i = 0; i < Team::kMaxTeamSize; i++) {
     auto pokemon_species = static_cast<SpeciesNames>(
@@ -91,6 +102,11 @@ void PickRandomTeam(Team &team) {
 
 } //namespace
 
+/**
+  * @brief: The default constructor for the Battle class. Initializes two
+  * empty teams.
+  */
+
 Battle::Battle() {
   human_team_ = Team{};
   ai_team_ = Team{};
@@ -98,9 +114,18 @@ Battle::Battle() {
   ai_team_.SetIsHuman(false);
 }
 
+/**
+  * @brief: Determines if a battle is over or not.
+  * @return bool: Whether or not the battle is over.
+  */
+
 bool Battle::BattleOver() const {
   return human_team_.ActiveTeam().empty() || ai_team_.ActiveTeam().empty();
 }
+
+/**
+  * @brief: Handles a turn sequence in the game.
+  */
 
 void Battle::HandleTurn() {
   Gui::DisplayPlayerTeam(human_team_, true);
@@ -122,6 +147,10 @@ void Battle::HandleTurn() {
   active_pokemon_ai->ResetEndOfTurnFlags();
 }
 
+/**
+  * @brief: Starts the battle.
+  */
+
 void Battle::StartBattle() {
   Gui::DisplayPlayerTeam(human_team_, true);
   Gui::DisplayPlayerTeam(ai_team_, false);
@@ -132,6 +161,10 @@ void Battle::StartBattle() {
   Gui::DisplayAiPickedLeadingPokemonMessage(
       ai_team_.ActiveMember()->SpeciesName());
 }
+
+/**
+  * @brief: Plays the battle in its entirety.
+  */
 
 void Battle::Play() {
   Gui::DisplayWelcomeMessage();

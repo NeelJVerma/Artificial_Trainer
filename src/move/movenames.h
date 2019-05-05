@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/26/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief A file that contains an enum of move names.
+ *
+ * @file movenames.h
+ * @author Neel Verma
+ * @date 1/26/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_MOVES_H
 #define ARTIFICIAL_TRAINER_MOVES_H

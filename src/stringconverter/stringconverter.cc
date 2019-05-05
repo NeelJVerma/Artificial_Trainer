@@ -1,11 +1,24 @@
-//
-// Created by neel on //.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation of the StringConverter class.
+ *
+ * @file stringconverter.cc
+ * @author Neel Verma
+ * @date 1/25/19
+ */
 
 #include <cassert>
 #include "stringconverter.h"
 
 namespace artificialtrainer {
+
+/**
+  * @brief: Converts a species name into a string.
+  * @param const SpeciesNames &species_name: The species name of the Pokemon.
+  * @return std::string: The string representation of the species name of the
+  * Pokemon.
+  */
+
 std::string StringConverter::SpeciesToString(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
@@ -315,6 +328,12 @@ std::string StringConverter::SpeciesToString(const SpeciesNames &species_name) {
   }
 }
 
+/**
+  * @brief: Converts a stat name into a string.
+  * @param const StatNames &stat_name: The stat name.
+  * @return std::string: The string representation of the stat name.
+  */
+
 std::string StringConverter::StatToString(const StatNames &stat_name) {
   switch (stat_name) {
     case StatNames::kAttack:
@@ -335,6 +354,12 @@ std::string StringConverter::StatToString(const StatNames &stat_name) {
       assert(false);
   }
 }
+
+/**
+  * @brief: Converts a move name into a string.
+  * @param const MoveNames &move_name: The move name.
+  * @return std::string: The string representation of the move name.
+  */
 
 std::string StringConverter::MoveToString(const MoveNames &move_name) {
   switch (move_name) {
@@ -688,6 +713,12 @@ std::string StringConverter::MoveToString(const MoveNames &move_name) {
       assert(false);
   }
 }
+
+/**
+  * @brief: Converts a type name into a string.
+  * @param const TypeNames &type_name: The type name.
+  * @return std::string: The string representation of the type name.
+  */
 
 std::string StringConverter::TypeToString(const TypeNames &type_name) {
   switch (type_name) {

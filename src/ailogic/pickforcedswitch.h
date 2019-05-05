@@ -1,6 +1,11 @@
-//
-// Created by neel on 4/6/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The function to pick a forced switch for a given team.
+ *
+ * @file pickforcedswitch.h
+ * @author Neel Verma
+ * @date 4/6/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_PICKFORCEDSWITCH_H
 #define ARTIFICIAL_TRAINER_PICKFORCEDSWITCH_H

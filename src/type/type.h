@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/26/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief A function to get the type of a move.
+ *
+ * @file type.h
+ * @author Neel Verma
+ * @date 1/26/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_TYPE_H
 #define ARTIFICIAL_TRAINER_TYPE_H

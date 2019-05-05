@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/24/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The NormalStat class.
+ *
+ * @file normalstat.h
+ * @author Neel Verma
+ * @date 1/24/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_STAT_H
 #define ARTIFICIAL_TRAINER_STAT_H
@@ -11,6 +16,15 @@
 #include "../pokemon/speciesnames.h"
 
 namespace artificialtrainer {
+
+/**
+ * @brief The NormalStat class. This class tracks the properties of either
+ * the attack, defense, special, or speed stat.
+ *
+ * @author Neel Verma
+ * @date 1/24/19
+ */
+
 class NormalStat {
  public:
   static const int kMaxFactor = 8;

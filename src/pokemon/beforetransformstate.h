@@ -1,6 +1,11 @@
-//
-// Created by neel on 2/22/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The BeforeTransformState class.
+ *
+ * @file beforetransformstate.h
+ * @author Neel Verma
+ * @date 2/22/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_BEFORETRANSFORMSTATE_H
 #define ARTIFICIAL_TRAINER_BEFORETRANSFORMSTATE_H
@@ -11,6 +16,16 @@
 #include "../move/movescontainer.h"
 
 namespace artificialtrainer {
+
+/**
+ * @brief The BeforeTransformState class. This class caches the state of the
+ * Pokemon when it uses transform, so that it can be restored when it either
+ * switches out or faints.
+ *
+ * @author Neel Verma
+ * @date 2/22/19
+ */
+
 class BeforeTransformState {
  public:
   BeforeTransformState(

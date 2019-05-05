@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/neel/Desktop/Ramapo_Computer_Science/Ramapo_Senior_Year/Second_Semester/Senior_Project/Artificial_Trainer/src/clientelements/gui.h
-iostream
--
 vector
 -
 ../stat/statnames.h

@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/23/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The Pokemon class.
+ *
+ * @file pokemon.h
+ * @author Neel Verma
+ * @date 1/23/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_POKEMON_H
 #define ARTIFICIAL_TRAINER_POKEMON_H
@@ -18,6 +23,15 @@
 #include "bide.h"
 
 namespace artificialtrainer {
+
+/**
+ * @brief The InGameFlags struct. This struct tracks the status of all of the
+ * Pokemon's in game attributes.
+ *
+ * @author Neel Verma
+ * @date 1/23/19
+ */
+
 struct InGameFlags {
   bool vanished = false;
   bool used_focus_energy = false;
@@ -50,6 +64,11 @@ struct InGameFlags {
   BeforeTransformState before_transform_state{};
   Bide bide{};
   StatusNames status = StatusNames::kClear;
+
+  /**
+  * @brief: A function makes a deep copy of the object state.
+  * @return InGameFlags: The copy.
+  */
 
   InGameFlags DeepCopy() const {
     InGameFlags copy;
@@ -88,10 +107,17 @@ struct InGameFlags {
   }
 };
 
+/**
+ * @brief The Pokemon class. This class serves as a container for a Pokemon,
+ * as well as a way to manipulate the Pokemon's attributes in game.
+ *
+ * @author Neel Verma
+ * @date 1/23/19
+ */
+
 class Pokemon {
  public:
   static const int kMaxLevel;
-
   Pokemon(const Pokemon &pokemon) = default;
   Pokemon &operator=(const Pokemon &pokemon) = default;
   Pokemon();
@@ -114,7 +140,6 @@ class Pokemon {
   void SetIsActive(const bool &is_active);
   void ChangeStat(const StatNames &stat_name, const int &num_stages);
   bool MustUseStruggle() const;
-
   bool IsVanished() const;
   bool UsedFocusEnergy() const;
   bool IsFlinched() const;
@@ -147,7 +172,6 @@ class Pokemon {
   bool CanHaveMoveDisabled() const;
   bool IsFainted() const;
   bool IsType(const TypeNames &type_name) const;
-
   void UseVanishMove();
   void UseFocusEnergy();
   void Flinch();

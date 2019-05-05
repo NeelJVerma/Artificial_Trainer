@@ -1,12 +1,27 @@
-//
-// Created by neel on 4/6/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation for the TypeSum function.
+ *
+ * @file typesum.cc
+ * @author Neel Verma
+ * @date 4/6/19
+ */
 
 #include "typesum.h"
 #include "../type/effectiveness.h"
 
 namespace artificialtrainer {
 namespace {
+
+/**
+  * @brief: Translate the effectiveness of one type against another into an
+  * integer. This isn't really necessary to do, it just made results a bit
+  * easier to read.
+  * @param const TypeNames &type_one: The first type.
+  * @param const TypeNames &type_two: The second type.
+  * @return: The integer conversion of effectiveness.
+  */
+
 int CheckTypes(const TypeNames &type_one, const TypeNames &type_two) {
   double effectiveness = Effectiveness(type_one, type_two);
 
@@ -26,6 +41,16 @@ int CheckTypes(const TypeNames &type_one, const TypeNames &type_two) {
 }
 
 } //namespace
+
+/**
+  * @brief: Adds up all type conversion results to a single value. This is
+  * used in the ai picking forced switches or leading Pokemon.
+  * @param const std::shared_ptr<Pokemon> &pokemon_one: The first Pokmeon in
+  * the type effectiveness checking process.
+  * @param const std::shared_ptr<Pokemon> &pokemon_two: The second Pokmeon in
+  * the type effectiveness checking process.
+  * @return int: The result of adding all type effectiveness results.
+  */
 
 int TypeSum(const std::shared_ptr<Pokemon> &pokemon_one,
             const std::shared_ptr<Pokemon> &pokemon_two) {

@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/31/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief A file that contains an enum of type names.
+ *
+ * @file typenames.h
+ * @author Neel Verma
+ * @date 1/31/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_TYPENAMES_H
 #define ARTIFICIAL_TRAINER_TYPENAMES_H

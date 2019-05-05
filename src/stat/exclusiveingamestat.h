@@ -1,11 +1,25 @@
-//
-// Created by neel on 2/6/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The ExclusiveInGameStat class.
+ *
+ * @file exclusiveingamestat.h
+ * @author Neel Verma
+ * @date 2/6/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_EXCLUSIVEINGAMESTAT_H
 #define ARTIFICIAL_TRAINER_EXCLUSIVEINGAMESTAT_H
 
 namespace artificialtrainer {
+
+/**
+ * @brief The ExclusiveInGameStat class. This class tracks the properties of
+ * the accuracy or evasion stat.
+ *
+ * @author Neel Verma
+ * @date 2/6/19
+ */
+
 class ExclusiveInGameStat {
  public:
   static const int kMaxFactor = 9;

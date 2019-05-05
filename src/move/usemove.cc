@@ -1,6 +1,11 @@
-//
-// Created by neel on 2/6/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief An implementation of the UseMove function.
+ *
+ * @file usemove.cc
+ * @author Neel Verma
+ * @date 2/6/19
+ */
 
 #include <cmath>
 #include <cassert>
@@ -15,6 +20,17 @@
 
 namespace artificialtrainer {
 namespace {
+
+/**
+  * @brief: This function gets the chance that a move will hit. The chance to
+  * hit is defined as (ba * (aa / de)), where ba is the base accuracy of the
+  * attacker's move and aa and de are attacker accuracy and defender evasion,
+  * respectively.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @return double: The chance to hit.
+  */
+
 double ChanceToHit(const std::shared_ptr<Pokemon> &attacker,
                    const std::shared_ptr<Pokemon> &defender) {
   std::shared_ptr<Move> move_used = attacker->MoveUsed();
@@ -35,6 +51,15 @@ double ChanceToHit(const std::shared_ptr<Pokemon> &attacker,
   return chance > 100.0 ? 100.0 : chance;
 }
 
+/**
+  * @brief: This function gets the type product of a move, i.e. what its
+  * effectiveness multiplier will be.
+  * @param const std::shared_ptr<Move> &move_used: The attacking Pokemon's
+  * move that it used.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @return double: The type product.
+  */
+
 double TypeProduct(const std::shared_ptr<Move> &move_used,
                    const std::shared_ptr<Pokemon> &defender) {
   TypeNames move_type = Type(move_used->MoveName());
@@ -43,26 +68,63 @@ double TypeProduct(const std::shared_ptr<Move> &move_used,
       Effectiveness(move_type, defender_types.SecondType()) * 10;
 }
 
+/**
+  * @brief: This function returns whether or not a move crit.
+  * @param const double &crit_chance: The chance to crit for a move.
+  * @return bool: If the move crit or not.
+  */
+
 bool MoveCrit(const double &crit_chance) {
   return RandomRealDistribution(0.0, 1.0) <= crit_chance;
 }
+
+/**
+  * @brief: This function returns whether or not a move hit.
+  * @param const double &chance_to_hit: The chance to hit for a move.
+  * @return bool: If the move hit or not.
+  */
 
 bool MoveHit(const double &chance_to_hit) {
   return RandomRealDistribution(1.0, 100.0) <= chance_to_hit;
 }
 
+/**
+  * @brief: This function returns whether or not a move's variable effect
+  * activated.
+  * @param const MoveNames &move_name: The name of the move to check.
+  * @return bool: If the move's variable effect activated or not.
+  */
+
 bool VariableEffectActivates(const MoveNames &move_name) {
   return RandomIntDistribution(1, 100) <= VariableEffectChance(move_name);
 }
+
+/**
+  * @brief: This function returns the random damage factor for moves.
+  * @return int: The random damaage factor.
+  */
 
 int DamageRandomFactor() {
   return RandomIntDistribution(217, 255);
 }
 
+/**
+  * @brief: This function gets the same type attack bonus (STAB) for a given
+  * attacker.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @return double: The stab bonus.
+  */
+
 double StabBonus(const std::shared_ptr<Pokemon> &attacker) {
   return ((attacker->GetTypeContainer().MoveMatchesType(
       attacker->MoveUsed()->MoveName())) ? 1.5 : 1.0);
 }
+
+/**
+  * @brief: This function gets the critical hit chance for a given attacker.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @return double: The critical hit chance.
+  */
 
 double CriticalHitChance(const std::shared_ptr<Pokemon> &attacker) {
   MoveNames move_used_name = attacker->MoveUsed()->MoveName();
@@ -83,6 +145,15 @@ double CriticalHitChance(const std::shared_ptr<Pokemon> &attacker) {
 
   return attacker_base_speed / 512;
 }
+
+/**
+  * @brief: This function gets the attack and defense used in damage
+  * calculation for a given attacking and defending Pokemon.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &move_crit: Whether or not the move crit.
+  * @return std::pair<int, int>: The attack and defense used, respectively.
+  */
 
 std::pair<int, int> AttackAndDefenseUsed(
     const std::shared_ptr<Pokemon> &attacker,
@@ -108,6 +179,25 @@ std::pair<int, int> AttackAndDefenseUsed(
 
   return std::make_pair(attack->InGameStat(), defense->InGameStat());
 }
+
+/**
+  * @brief: This function gets the damage done for a given attacker and
+  * defender. Damage is calculated as such:
+  * -----> floor(((((((((2 * CH * attacker level / 5 + 2) * attack of attacker *
+  * base power of move) / defense of defender) / 50) + 2) * STAB) *
+  * type product / 10) * random factor) / 255) <-----
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &self_ko_move: Whether or not the move used was self ko.
+  * @param const bool &move_hit: Whether or not the move hit.
+  * @param const bool &confusion_damage: Whether or not the damage to
+  * calculate is done due to confusion.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  * @return int: The damage done.
+  */
 
 int DamageDone(const std::shared_ptr<Pokemon> &attacker,
                const std::shared_ptr<Pokemon> &defender,
@@ -168,6 +258,16 @@ int DamageDone(const std::shared_ptr<Pokemon> &attacker,
   return !damage_done ? 1 : damage_done;
 }
 
+/**
+  * @brief: This function uses counter for a given attacker and defender.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
+
 void UseCounter(const std::shared_ptr<Pokemon> &attacker,
                 const std::shared_ptr<Pokemon> &defender,
                 const bool &is_called_by_ai) {
@@ -200,6 +300,17 @@ void UseCounter(const std::shared_ptr<Pokemon> &attacker,
     Gui::DisplayDamageDoneMessage(damage_done);
   }
 }
+
+/**
+  * @brief: This function uses a one hit ko move for a given attacker and
+  * defender.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
                      const std::shared_ptr<Pokemon> &defender,
@@ -239,6 +350,13 @@ void UseOneHitKoMove(const std::shared_ptr<Pokemon> &attacker,
   }
 }
 
+/**
+  * @brief: This function determines whether or not mimic will succeed.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @return: Whether or not mimic will succeed.
+  */
+
 bool MimicWillSucceed(const std::shared_ptr<Pokemon> &attacker,
                       const std::shared_ptr<Pokemon> &defender) {
   if (attacker->UsedMimic()) {
@@ -256,6 +374,13 @@ bool MimicWillSucceed(const std::shared_ptr<Pokemon> &attacker,
 
   return false;
 }
+
+/**
+  * @brief: This function gets the move that was selected by mimic.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @return MoveNames: The name of the move selected by mimic.
+  */
 
 MoveNames MoveFromMimic(const std::shared_ptr<Pokemon> &attacker,
                         const std::shared_ptr<Pokemon> &defender) {
@@ -277,6 +402,16 @@ MoveNames MoveFromMimic(const std::shared_ptr<Pokemon> &attacker,
   return random_move;
 }
 
+/**
+  * @brief: This function uses mimic for a given attacker and defender.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
+
 void UseMimic(const std::shared_ptr<Pokemon> &attacker,
               const std::shared_ptr<Pokemon> &defender,
               const bool &is_called_by_ai) {
@@ -293,10 +428,19 @@ void UseMimic(const std::shared_ptr<Pokemon> &attacker,
   }
 }
 
-void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
-                         const MoveNames &attacker_move,
-                         const int &damage_done,
-                         const bool &is_called_by_ai) {
+/**
+  * @brief: This function does damage for the given parameters.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const int &damage_done: The amount of damage done.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
+
+void DoDamage(const std::shared_ptr<Pokemon> &defender,
+              const int &damage_done,
+              const bool &is_called_by_ai) {
   if (defender->SubstituteIsActive()) {
     if (!is_called_by_ai) {
       Gui::DisplaySubstituteTookDamageMessage(damage_done);
@@ -330,41 +474,15 @@ void DoConditionalDamage(const std::shared_ptr<Pokemon> &defender,
   }
 }
 
-void DoDirectDamage(const std::shared_ptr<Pokemon> &defender,
-                    const int &damage_done,
-                    const bool &is_called_by_ai) {
-  if (defender->SubstituteIsActive()) {
-    if (!is_called_by_ai) {
-      Gui::DisplaySubstituteTookDamageMessage(damage_done);
-    }
-
-    defender->DoDamageToSubstitute(damage_done);
-
-    if (!defender->SubstituteIsActive() && !is_called_by_ai) {
-      Gui::DisplaySubstituteFadedMessage(defender->SpeciesName());
-    }
-  } else {
-    if (defender->IsRaging()) {
-      defender->ChangeStat(StatNames::kAttack, 1);
-
-      if (!is_called_by_ai) {
-        Gui::DisplayStatChangeMessage(defender->SpeciesName(),
-                                      StatNames::kAttack, 1);
-      }
-    }
-
-    defender->HpStat()->SubtractHp(damage_done);
-
-    if (!is_called_by_ai) {
-      Gui::DisplayDamageDoneMessage(damage_done);
-    }
-  }
-
-  if (defender->BideIsActive() && !defender->BideDamage()) {
-    defender->SetBideDamage(damage_done);
-    defender->AddDamageToBide();
-  }
-}
+/**
+  * @brief: This function does damage equal to the attacker's level.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void DoDamageEqualToAttackerLevel(const std::shared_ptr<Pokemon> &attacker,
                                   const std::shared_ptr<Pokemon> &defender,
@@ -374,15 +492,35 @@ void DoDamageEqualToAttackerLevel(const std::shared_ptr<Pokemon> &attacker,
     defender->AddDamageToBide();
   }
 
-  DoDirectDamage(defender, attacker->Level(), is_called_by_ai);
+  DoDamage(defender, attacker->Level(), is_called_by_ai);
 }
+
+/**
+  * @brief: This function uses a psywave.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void UsePsywave(const std::shared_ptr<Pokemon> &attacker,
                 const std::shared_ptr<Pokemon> &defender,
                 const bool &is_called_by_ai) {
-  DoDirectDamage(defender, RandomIntDistribution(1, static_cast<int>(
+  DoDamage(defender, RandomIntDistribution(1, static_cast<int>(
       1.5 * attacker->Level())), is_called_by_ai);
 }
+
+/**
+  * @brief: This function uses super fang.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
@@ -391,10 +529,20 @@ void UseSuperFang(const std::shared_ptr<Pokemon> &attacker,
       !is_called_by_ai) {
     Gui::DisplayMoveHadNoEffectMessage();
   } else {
-    DoDirectDamage(
+    DoDamage(
         defender, defender->HpStat()->CurrentHp() >> 1, is_called_by_ai);
   }
 }
+
+/**
+  * @brief: This function hazes the field.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void HazeField(const std::shared_ptr<Pokemon> &attacker,
                const std::shared_ptr<Pokemon> &defender,
@@ -406,6 +554,20 @@ void HazeField(const std::shared_ptr<Pokemon> &attacker,
     Gui::DisplayHazeResetMessage();
   }
 }
+
+/**
+  * @brief: This function does a move's side effect, if it has one.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const int &damage_done: The damage done by the move.
+  * @param const bool &move_hit: Whether or not the move landed.
+  * @param const bool &is_charge_or_vanish: Whether or not the move is charge
+  * or vanish.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
@@ -660,7 +822,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
     }
     case MoveNames::kDragonRage:
-      DoDirectDamage(defender, 40, is_called_by_ai);
+      DoDamage(defender, 40, is_called_by_ai);
       break;
     case MoveNames::kDreamEater: {
       if (defender->IsAsleep() || defender->IsResting()) {
@@ -1060,7 +1222,7 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
 
       break;
     case MoveNames::kSonicBoom:
-      DoDirectDamage(defender, 20, is_called_by_ai);
+      DoDamage(defender, 20, is_called_by_ai);
       break;
     case MoveNames::kStringShot:
       if (defender->SubstituteIsActive()) {
@@ -1136,6 +1298,18 @@ void DoSideEffect(const std::shared_ptr<Pokemon> &attacker,
       break;
   }
 }
+
+/**
+  * @brief: This function returns whether or not the attacking Pokemon will
+  * be able to execute its move.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  * @return bool: Whether or not the attacker can move.
+  */
 
 bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
                   const std::shared_ptr<Pokemon> &defender,
@@ -1244,6 +1418,15 @@ bool IsGoodToMove(const std::shared_ptr<Pokemon> &attacker,
   return true;
 }
 
+/**
+  * @brief: This function hard switches for a given team.
+  * @param Team &attacker: The team to switch for.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
+
 void HardSwitch(Team &attacker, const bool &is_called_by_ai) {
   std::shared_ptr<Pokemon> old_active_member = attacker.ActiveMember();
   attacker.HardSwitch();
@@ -1254,11 +1437,29 @@ void HardSwitch(Team &attacker, const bool &is_called_by_ai) {
   }
 }
 
+/**
+  * @brief: This function returns whether or not mirror move will fail.
+  * @param const MoveNames &defender_move: The name of the move that the
+  * defending Pokemon used.
+  * @return: Whether or not mirror move will fail.
+  */
+
 bool MirrorMoveWillFail(const MoveNames &defender_move) {
   return !(defender_move != MoveNames::kStruggle && !IsLockIn(defender_move) &&
       !IsChargeUp(defender_move) && !IsVanish(defender_move) &&
       !IsBinding(defender_move) && defender_move != MoveNames::kMimic);
 }
+
+/**
+  * @brief: This function uses mirror move for a given attacker and
+  * defender.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void UseMirrorMove(const std::shared_ptr<Pokemon> &attacker,
                    const std::shared_ptr<Pokemon> &defender,
@@ -1281,6 +1482,18 @@ void UseMirrorMove(const std::shared_ptr<Pokemon> &attacker,
     }
   }
 }
+
+/**
+  * @brief: This function executes a single move for a given attacker and
+  * defender.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &move_hit: Whether or not the move landed.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
                  const std::shared_ptr<Pokemon> &defender,
@@ -1311,13 +1524,24 @@ void ExecuteMove(const std::shared_ptr<Pokemon> &attacker,
 
   if (damage_done && move_hit) {
     move_used->SetDamageDone(damage_done);
-    DoConditionalDamage(defender, attacker->MoveUsed()->MoveName(),
-                        damage_done, is_called_by_ai);
+    DoDamage(defender, damage_done, is_called_by_ai);
   }
 
   DoSideEffect(attacker, defender, damage_done, move_hit, is_charge_or_vanish,
                is_called_by_ai);
 }
+
+/**
+  * @brief: This function uses a move that always hits twice for a given
+  * attacker and defender.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &move_hit: Whether or not the move landed.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void UseMoveThatAlwaysHitsTwice(const std::shared_ptr<Pokemon> &attacker,
                                 const std::shared_ptr<Pokemon> &defender,
@@ -1326,6 +1550,18 @@ void UseMoveThatAlwaysHitsTwice(const std::shared_ptr<Pokemon> &attacker,
   ExecuteMove(attacker, defender, move_hit, is_called_by_ai);
   ExecuteMove(attacker, defender, move_hit, is_called_by_ai);
 }
+
+/**
+  * @brief: This function uses a move that hits two to five times for a given
+  * attacker and defender.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &move_hit: Whether or not the move landed.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void UseMoveThatHitsTwoToFiveTimes(const std::shared_ptr<Pokemon> &attacker,
                                    const std::shared_ptr<Pokemon> &defender,
@@ -1359,6 +1595,16 @@ void UseMoveThatHitsTwoToFiveTimes(const std::shared_ptr<Pokemon> &attacker,
 }
 
 } //namespace
+
+/**
+  * @brief: This function uses a move for a given attacking and defending team.
+  * @param Team &attacker: The attacking team.
+  * @param Team &defender: The defending team.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void UseMove(Team &attacker, Team &defender, const bool &is_called_by_ai) {
   std::shared_ptr<Pokemon> attacking_member = attacker.ActiveMember();
@@ -1459,9 +1705,9 @@ void UseMove(Team &attacker, Team &defender, const bool &is_called_by_ai) {
       Gui::DisplayBideEndedMessage(attacking_member->SpeciesName());
     }
 
-    DoDirectDamage(defending_member,
-                   attacking_member->BideDamage() << 1,
-                   is_called_by_ai);
+    DoDamage(defending_member,
+             attacking_member->BideDamage() << 1,
+             is_called_by_ai);
     attacking_member->ResetBide();
   }
 

@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/26/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief A function to get the base power of a given move.
+ *
+ * @file basepower.h
+ * @author Neel Verma
+ * @date 1/26/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_BASEPOWER_H
 #define ARTIFICIAL_TRAINER_BASEPOWER_H

@@ -1,6 +1,11 @@
-//
-// Created by neel on 4/20/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation of the BattleManager class.
+ *
+ * @file battlemanager.cc
+ * @author Neel Verma
+ * @date 4/20/19
+ */
 
 #include "battlemanager.h"
 #include "../clientelements/gui.h"
@@ -12,6 +17,19 @@
 #include "../stringconverter/stringconverter.h"
 
 namespace artificialtrainer {
+
+/**
+  * @brief: This function determines whether or not a given move is valid for
+  * the given Pokemon.
+  * @param const Team &team: The team that the Pokemon checking is on.
+  * @param const std::shared_ptr<Move> &move: The move which is getting its
+  * validity checked.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
+
 bool BattleManager::IsValidMoveChoice(const Team &team,
                                       const std::shared_ptr<Move> &move,
                                       const bool &is_called_by_ai) {
@@ -134,6 +152,11 @@ bool BattleManager::IsValidMoveChoice(const Team &team,
   return static_cast<bool>(move->CurrentPp());
 }
 
+/**
+  * @brief: This function lets the human pick a move for a given Pokemon.
+  * @param Team &team: The team that has the current active human Pokemon.
+  */
+
 void BattleManager::HumanPicksMove(Team &team) {
   Gui::DisplayPickInBattleMoveMessage();
   std::shared_ptr<Pokemon> pokemon = team.ActiveMember();
@@ -153,6 +176,15 @@ void BattleManager::HumanPicksMove(Team &team) {
   team.ActiveMember()->SetMoveUsed(
       pokemon->GetMovesContainer()[move_choice - 1]);
 }
+
+/**
+  * @brief: This function decides whether or not the human will move first.
+  * Moving first is based on who has the higher soeed stat. In the case of a
+  * speed tie, a random chance happens to see who moves first.
+  * @param const Team &human_team: The human's team.
+  * @param const Team &ai_team: The ai's team.
+  * @return bool: Whether or not the human will move first.
+  */
 
 bool BattleManager::HumanMovesFirst(const Team &human_team,
                                     const Team &ai_team) {
@@ -186,6 +218,16 @@ bool BattleManager::HumanMovesFirst(const Team &human_team,
   return human_moves_first;
 }
 
+/**
+  * @brief: This function handles a move for a given attacking and defending
+  * Pokemon.
+  * @param Team &attacker: The attacking team.
+  * @param Team &defender: The defending team.
+  * @return bool: If the move was successful. This is used because in order
+  * for a Pokemon who has not moved yet, the attacking Pokemon must have
+  * finished its move without it or the defending Pokemon fainting.
+  */
+
 bool BattleManager::HandleMove(Team &attacker, Team &defender) {
   UseMove(attacker, defender, false);
   std::shared_ptr<Pokemon> active_attacker = attacker.ActiveMember();
@@ -193,9 +235,24 @@ bool BattleManager::HandleMove(Team &attacker, Team &defender) {
   return !(active_attacker->IsFainted() || active_defender->IsFainted());
 }
 
+/**
+  * @brief: This function determines whether or not a switch move is valid for
+  * the given team.
+  * @param const Team &team: The team that is being checked.
+  * @param const int &index: The index of the move from the active Pokemon's
+  * moveset.
+  * @return bool: Whether or not the move selected is a valid switch.
+  */
+
 bool BattleManager::IsValidSwitchChoice(const Team &team, const int &index) {
   return index >= 0 && index < team.ActiveTeam().size();
 }
+
+/**
+  * @brief: This function lets the human player pick its switch in for when
+  * its active Pokemon fainted.
+  * @param Team &human_team: The human's team.
+  */
 
 void BattleManager::HumanPicksForcedSwitch(Team &human_team) {
   if (human_team.ActiveTeam().empty()) {
@@ -219,6 +276,17 @@ void BattleManager::HumanPicksForcedSwitch(Team &human_team) {
 
   human_team.SetActiveMember(switch_choice - 1);
 }
+
+/**
+  * @brief: This function handles all of the statuses that must be handled at
+  * the end of a turn sequence.
+  * @param const std::shared_ptr<Pokemon> &attacker: The attacking Pokemon.
+  * @param const std::shared_ptr<Pokemon> &defender: The defending Pokemon.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void BattleManager::HandleEndOfTurnStatuses(
     const std::shared_ptr<Pokemon> &attacker,
@@ -270,9 +338,29 @@ void BattleManager::HandleEndOfTurnStatuses(
   }
 }
 
+/**
+  * @brief: This function determines whether or not a given team has the
+  * ability to switch Pokemon.
+  * @param const Team &team: The team that is being checked.
+  * @return bool: Whether or not the given team has the ability to switch.
+  */
+
 bool BattleManager::CanSwitch(const Team &team) {
   return team.ActiveTeam().size() > 1;
 }
+
+/**
+  * @brief: This function handles fainting for both teams.
+  * @param const bool &human_moves_first: Whether or not the human moved
+  * first in that turn sequence. This is important because whoever moved
+  * first faints first in the case when both Pokemon fainted at the same time.
+  * @param Team &human_team: The human's team.
+  * @param Team &ai_team: The ai's team.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void BattleManager::HandleFainting(const bool &human_moves_first,
                                    Team &human_team, Team &ai_team,
@@ -368,6 +456,18 @@ void BattleManager::HandleFainting(const bool &human_moves_first,
     }
   }
 }
+
+/**
+  * @brief: This function handles moves for both teams.
+  * @param const bool &human_moves_first: Whether or not the human moved
+  * first in that turn sequence.
+  * @param Team &human_team: The human's team.
+  * @param Team &ai_team: The ai's team.
+  * @param const bool &is_called_by_ai: Whether or not this function is used
+  * in the minimax simulation. The reason this is passed is because there is
+  * GUI output in here, which should not be shown when the minimax is
+  * simulating the game.
+  */
 
 void BattleManager::HandleBothTeamsMoves(const bool &human_moves_first,
                                          Team &human_team, Team &ai_team,

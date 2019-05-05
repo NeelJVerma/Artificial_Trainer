@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/25/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation of the InputHandler class.
+ *
+ * @file inputhandler.cc
+ * @author Neel Verma
+ * @date 1/25/19
+ */
 
 #include <string>
 #include <iostream>
@@ -11,6 +16,14 @@
 #include "gui.h"
 
 namespace artificialtrainer {
+
+/**
+  * @brief: This function gets int input from the user.
+  * @param const int lower: The lower bound of the input range.
+  * @param const int upper: The upper bound of the input range.
+  * @return int: The int input, which is validated.
+  */
+
 int InputHandler::GetIntInput(const int lower, const int upper) {
   int return_int;
 

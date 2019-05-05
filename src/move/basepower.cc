@@ -1,15 +1,27 @@
-//
-// Created by neel on 1/26/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief An implementation of the BasePower function.
+ *
+ * @file basepower.cc
+ * @author Neel Verma
+ * @date 1/26/19
+ */
 
 #include <cassert>
 #include "basepower.h"
 
 namespace artificialtrainer {
 namespace {
-const int kNone= 0;
+const int kNone = 0;
 
 } //namespace
+
+/**
+  * @brief: This function gets base power of a given move.
+  * @param const MoveNames &move_name: The name of the move to get the
+  * power of.
+  * @return int: The base power of the move.
+  */
 
 int BasePower(const MoveNames &move_name) {
   switch (move_name) {

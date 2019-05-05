@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/24/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation of the NormalStat class.
+ *
+ * @file normalstat.cc
+ * @author Neel Verma
+ * @date 1/24/19
+ */
 
 #include <cassert>
 #include <cmath>
@@ -8,6 +13,13 @@
 
 namespace artificialtrainer {
 namespace {
+
+/**
+  * @brief: A function to get the base attack stat for a given Pokemon.
+  * @param const SpeciesNames &species: The species name of the Pokemon.
+  * @return int: The base attack stat of the Pokemon.
+  */
+
 int GetAttackFromSpecies(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
@@ -316,6 +328,12 @@ int GetAttackFromSpecies(const SpeciesNames &species_name) {
       assert(false);
   }
 }
+
+/**
+  * @brief: A function to get the base defense stat for a given Pokemon.
+  * @param const SpeciesNames &species: The species name of the Pokemon.
+  * @return int: The base defense stat of the Pokemon.
+  */
 
 int GetDefenseFromSpecies(const SpeciesNames &species_name) {
   switch (species_name) {
@@ -626,6 +644,12 @@ int GetDefenseFromSpecies(const SpeciesNames &species_name) {
   }
 }
 
+/**
+  * @brief: A function to get the base special stat for a given Pokemon.
+  * @param const SpeciesNames &species: The species name of the Pokemon.
+  * @return int: The base special stat of the Pokemon.
+  */
+
 int GetSpecialFromSpecies(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
@@ -934,6 +958,12 @@ int GetSpecialFromSpecies(const SpeciesNames &species_name) {
       assert(false);
   }
 }
+
+/**
+  * @brief: A function to get the base speed stat for a given Pokemon.
+  * @param const SpeciesNames &species: The species name of the Pokemon.
+  * @return int: The base speed stat of the Pokemon.
+  */
 
 int GetSpeedFromSpecies(const SpeciesNames &species_name) {
   switch (species_name) {
@@ -1244,6 +1274,13 @@ int GetSpeedFromSpecies(const SpeciesNames &species_name) {
   }
 }
 
+/**
+  * @brief: A function to get the base stat for a given Pokemon.
+  * @param const SpeciesNames &species: The species name of the Pokemon.
+  * @param const StatNames &stat_name: The name of the stat.
+  * @return int: The base stat of the Pokemon.
+  */
+
 int GetBase(const SpeciesNames &species_name,
             const StatNames &stat_name) {
   switch (stat_name) {
@@ -1262,6 +1299,14 @@ int GetBase(const SpeciesNames &species_name,
 
 } //namespace
 
+/**
+  * @brief: One constructor for the NormalStat class.
+  * @param const SpeciesNames &species_name: The species name of the Pokemon.
+  * @param const int &level: The level of the Pokemon.
+  * @param const Ev &ev_stat: The ev of the hp.
+  * @param const Iv &iv_stat: The iv of the hp.
+  */
+
 NormalStat::NormalStat(const SpeciesNames &species_name, const int &level,
                        const StatNames &stat_name, const Ev &ev, const Iv &iv)
     : base_stat_(GetBase(species_name,
@@ -1273,42 +1318,92 @@ NormalStat::NormalStat(const SpeciesNames &species_name, const int &level,
       iv_stat_(iv) {
 }
 
+/**
+  * @brief: An accessor for the base stat.
+  * @return int: The base stat.
+  */
+
 int NormalStat::BaseStat() const {
   return base_stat_;
 }
+
+/**
+  * @brief: A function to get the in game stat.
+  * @return double: The in game stat.
+  */
 
 double NormalStat::CalculatedStat() const {
   return static_cast<double>(numerator_) / denominator_;
 }
 
+/**
+  * @brief: A function to raise the numerator of the stat.
+  * @param const int &num_stages: The number of stages to raise.
+  */
+
 void NormalStat::RaiseNumerator(const int &num_stages) {
   numerator_ += num_stages;
 }
+
+/**
+  * @brief: A function to raise the denominator of the stat.
+  * @param const int &num_stages: The number of stages to raise.
+  */
 
 void NormalStat::RaiseDenominator(const int &num_stages) {
   denominator_ += num_stages;
 }
 
+/**
+  * @brief: A function to lower the numerator of the stat.
+  * @param const int &num_stages: The number of stages to lower.
+  */
+
 void NormalStat::LowerNumerator(const int &num_stages) {
   numerator_ -= num_stages;
 }
+
+/**
+  * @brief: A function to lower the denominator of the stat.
+  * @param const int &num_stages: The number of stages to lower.
+  */
 
 void NormalStat::LowerDenominator(const int &num_stages) {
   denominator_ -= num_stages;
 }
 
+/**
+  * @brief: An accessor for the numerator.
+  * @return int: The numerator.
+  */
+
 int NormalStat::Numerator() const {
   return numerator_;
 }
+
+/**
+  * @brief: An accessor for the denominator.
+  * @return int: The denominator.
+  */
 
 int NormalStat::Denominator() const {
   return denominator_;
 }
 
+/**
+  * @brief: A function to reset the stat.
+  */
+
 void NormalStat::ResetStat() {
   numerator_ = kMinFactor;
   denominator_ = kMinFactor;
 }
+
+/**
+  * @brief: A function to calculate the in game stat. The formula is as
+  * follows: 5 + floor(level / 100 * ((base stat * 2) + 2 * IV + EV / 1024)).
+  * @return int: The in game stat.
+  */
 
 int NormalStat::InGameStat() const {
   int initial_stat = static_cast<int>(5 + floor(static_cast<double>(level_) /
@@ -1318,11 +1413,24 @@ int NormalStat::InGameStat() const {
       static_cast<double>(numerator_) / denominator_)));
 }
 
+/**
+  * @brief: A function to reset the stat with the given parameters.
+  * @param const int &new_numerator: The new numerator of the stat.
+  * @param const int &new_denominator: The new denominator of the stat.
+  */
+
 void NormalStat::ResetStat(const int &new_numerator,
                            const int &new_denominator) {
   numerator_ = new_numerator;
   denominator_ = new_denominator;
 }
+
+/**
+  * @brief: A function to get the initial stat (before any modifiers). This
+  * is needed because if a move crits, the original attack and defense
+  * (special or regular)  are used.
+  * @return int: The initial stat.
+  */
 
 int NormalStat::InitialStat() {
   int old_numerator = numerator_;

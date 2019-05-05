@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/23/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief A file containing an enum of species names.
+ *
+ * @file speciesnames.h
+ * @author Neel Verma
+ * @date 1/23/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_SPECIES_H
 #define ARTIFICIAL_TRAINER_SPECIES_H

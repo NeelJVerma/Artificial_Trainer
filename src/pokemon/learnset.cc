@@ -1,11 +1,25 @@
-//
-// Created by neel on 1/27/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation of the Learnset function.
+ *
+ * @file learnset.cc
+ * @author Neel Verma
+ * @date 1/27/19
+ */
 
 #include <cassert>
 #include "learnset.h"
 
 namespace artificialtrainer {
+
+/**
+  * @brief: This function gets learnset of a given Pokemon.
+  * @param const SpeciesNames &species_name: The species name of a Pokemon to
+  * get the learnset of.
+  * @return std::vector<MoveNames>: A vector of the names of all moves the
+  * Pokemon can learn.
+  */
+
 std::vector<MoveNames> Learnset(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:

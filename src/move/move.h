@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/27/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The Move class.
+ *
+ * @file move.h
+ * @author Neel Verma
+ * @date 1/27/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_MOVE_H
 #define ARTIFICIAL_TRAINER_MOVE_H
@@ -8,6 +13,15 @@
 #include "movenames.h"
 
 namespace artificialtrainer {
+
+/**
+ * @brief The Move class. This class is essentially a container for a move
+ * and everything associated with it.
+ *
+ * @author Neel Verma
+ * @date 1/27/19
+ */
+
 class Move {
  public:
   Move(const Move &move) = default;

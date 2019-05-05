@@ -1,11 +1,25 @@
-//
-// Created by neel on 2/16/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The Disable class.
+ *
+ * @file disable.h
+ * @author Neel Verma
+ * @date 2/16/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_DISABLE_H
 #define ARTIFICIAL_TRAINER_DISABLE_H
 
 namespace artificialtrainer {
+
+/**
+ * @brief The Disable class. This class is responsible for keeping track of
+ * the state of a Pokemon's disable, it it gets a move disabled.
+ *
+ * @author Neel Verma
+ * @date 2/16/19
+ */
+
 class Disable {
  public:
   Disable(const Disable &disable) = default;

@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/26/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief An implementation of the Pp function..
+ *
+ * @file pp.cc
+ * @author Neel Verma
+ * @date 1/26/19
+ */
 
 #include <cassert>
 #include <limits>
@@ -11,6 +16,13 @@ namespace {
 const int kUnlimited = std::numeric_limits<int>::max();
 
 } //namespace
+
+/**
+  * @brief: This function gets the pp of a given move.
+  * @param const MoveNames &move_name: The name of the move to get the
+  * pp of.
+  * @return int: The pp of the move.
+  */
 
 int Pp(const MoveNames &move_name) {
   switch (move_name) {

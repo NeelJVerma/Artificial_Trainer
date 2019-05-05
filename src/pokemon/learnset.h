@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/27/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief A function to get the entire learnset of a given Pokemon.
+ *
+ * @file learnset.h
+ * @author Neel Verma
+ * @date 1/27/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_LEARNSET_H
 #define ARTIFICIAL_TRAINER_LEARNSET_H

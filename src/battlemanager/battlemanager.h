@@ -1,6 +1,11 @@
-//
-// Created by neel on 4/20/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The BattleManager class.
+ *
+ * @file battlemanager.h
+ * @author Neel Verma
+ * @date 4/20/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_BATTLEMANAGER_H
 #define ARTIFICIAL_TRAINER_BATTLEMANAGER_H
@@ -8,6 +13,16 @@
 #include "../team/team.h"
 
 namespace artificialtrainer {
+
+/**
+ * @brief The BattleManager class. This static class handles all of the logic
+ * that occurs during the battle, except for handling both teams' moves,
+ * which is handled in the Battle class.
+ *
+ * @author Neel Verma
+ * @date 4/20/19
+ */
+
 class BattleManager {
  public:
   static void HumanPicksMove(Team &team);

@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/26/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementation of the Effectiveness function.
+ *
+ * @file effectiveness.cc
+ * @author Neel Verma
+ * @date 1/26/19
+ */
 
 #include "effectiveness.h"
 
@@ -26,6 +31,15 @@ const double kEffectivenessMatrix[kNumTypes][kNumTypes] = {
 };
 
 } //namespace
+
+/**
+  * @brief: A function to get the effectiveness of a type matchup.
+  * @param const TypeNames &attacking: The attacking type (The row in the
+  * above matrix.
+  * @param const TypeNames &defending: The defending type (The column in the
+  * above matrix.
+  * @double: The effectiveness.
+  */
 
 double Effectiveness(const TypeNames &attacking, const TypeNames &defending) {
   return kEffectivenessMatrix[static_cast<int>(attacking)][static_cast<int>(

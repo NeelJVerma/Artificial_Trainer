@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/30/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The implementaion of the TypeContainer class.
+ *
+ * @file typecontainer.cc
+ * @author Neel Verma
+ * @date 1/30/19
+ */
 
 #include <cassert>
 #include "typecontainer.h"
@@ -8,6 +13,13 @@
 
 namespace artificialtrainer {
 namespace {
+
+/**
+  * @brief: A function to get the types of a given Pokemon.
+  * @param const SpeciesNames &species_name: The species name of the Pokemon.
+  * @return std::pair<TypeNames, TypeNames>: The types of the Pokemon.
+  */
+
 std::pair<TypeNames, TypeNames> TypePair(const SpeciesNames &species_name) {
   switch (species_name) {
     case SpeciesNames::kBulbasaur:
@@ -319,17 +331,40 @@ std::pair<TypeNames, TypeNames> TypePair(const SpeciesNames &species_name) {
 
 } //namespace
 
+/**
+  * @brief: A constructor for the TypeContainer class.
+  * @param const SpeciesNames &species_name: The species name of the Pokemon
+  * whose types we are storing.
+  */
+
 TypeContainer::TypeContainer(const SpeciesNames &species_name)
     : types_(TypePair(species_name)) {
 }
+
+/**
+  * @brief: A function to get the first type.
+  * @return TypeNames: The first type.
+  */
 
 TypeNames TypeContainer::FirstType() const {
   return types_.first;
 }
 
+/**
+  * @brief: A function to get the second type.
+  * @return TypeNames: The second type.
+  */
+
 TypeNames TypeContainer::SecondType() const {
   return types_.second;
 }
+
+/**
+  * @brief: A function to check if a move has one of the two types in the
+  * container.
+  * @param const MoveNames &move_name: The move to check.
+  * @return bool: Whether or not there is a type match.
+  */
 
 bool TypeContainer::MoveMatchesType(const MoveNames &move_name) const {
   bool matches_first = Type(move_name) == types_.first &&
@@ -338,6 +373,11 @@ bool TypeContainer::MoveMatchesType(const MoveNames &move_name) const {
       types_.second != TypeNames::kNoType;
   return matches_first || matches_second;
 }
+
+/**
+  * @brief: A function to reset the type, for when a Pokemon uses conversion.
+  * @param const TypeNames &type_name: The type to set.
+  */
 
 void TypeContainer::ResetTypeFromConversion(const TypeNames &type_name) {
   types_.first = type_name;

@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/29/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The MovesContainer class.
+ *
+ * @file movescontainer.h
+ * @author Neel Verma
+ * @date 1/29/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_MOVESCONTAINER_H
 #define ARTIFICIAL_TRAINER_MOVESCONTAINER_H
@@ -11,6 +16,15 @@
 #include "move.h"
 
 namespace artificialtrainer {
+
+/**
+ * @brief The MovesContainer class. This class is essentially a container for
+ * all the moves a Pokemon has.
+ *
+ * @author Neel Verma
+ * @date 1/29/19
+ */
+
 class MovesContainer {
  public:
   static const int kMaxMoves = 4;

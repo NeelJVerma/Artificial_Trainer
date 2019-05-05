@@ -1,6 +1,11 @@
-//
-// Created by neel on 4/20/19.
-//
+/**
+ * @project Artificial Trainer
+ * @brief The function that calls the expect minimax.
+ *
+ * @file expectimax.h
+ * @author Neel Verma
+ * @date 4/20/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_EXPECTIMAX_H
 #define ARTIFICIAL_TRAINER_EXPECTIMAX_H

@@ -1,6 +1,11 @@
-//
-// Created by neel on 1/24/19.
-//
+/**
+ * @project Artifical Trainer
+ * @brief The Team class.
+ *
+ * @file team.h
+ * @author Neel Verma
+ * @date 1/24/19
+ */
 
 #ifndef ARTIFICIAL_TRAINER_TEAM_H
 #define ARTIFICIAL_TRAINER_TEAM_H
@@ -10,6 +15,15 @@
 #include "../pokemon/pokemon.h"
 
 namespace artificialtrainer {
+
+/**
+ * @brief The Team class. This class acts as a container for one player's
+ * team of Pokemon. It tracks an active and fainted team.
+ *
+ * @author Neel Verma
+ * @date 1/24/19
+ */
+
 class Team {
  public:
   static const int kMaxTeamSize = 6;
